@@ -159,7 +159,7 @@ new THREE.GLTFLoader().load('resources/models/zhanguan.glb', (gltf) => {
 
         if (child.name === '2023') {
             const video = document.createElement('video');
-            video.src = "../resources/yanhua.mp4";
+            video.src = "./resources/yanhua.mp4";
             video.muted = true;
             video.autoplay = "autoplay";
             video.loop = true;
@@ -172,7 +172,7 @@ new THREE.GLTFLoader().load('resources/models/zhanguan.glb', (gltf) => {
         }
         if (child.name === '大屏幕01' || child.name === '大屏幕02' || child.name === '操作台屏幕' || child.name === '环形屏幕2') {
             const video = document.createElement('video');
-            video.src = "../resources/video01.mp4";
+            video.src = "./resources/video01.mp4";
             video.muted = true;
             video.autoplay = "autoplay";
             video.loop = true;
@@ -185,7 +185,7 @@ new THREE.GLTFLoader().load('resources/models/zhanguan.glb', (gltf) => {
         }
         if (child.name === '环形屏幕') {
             const video = document.createElement('video');
-            video.src = "../resources/video02.mp4";
+            video.src = "./resources/video02.mp4";
             video.muted = true;
             video.autoplay = "autoplay";
             video.loop = true;
@@ -198,7 +198,7 @@ new THREE.GLTFLoader().load('resources/models/zhanguan.glb', (gltf) => {
         }
         if (child.name === '柱子屏幕') {
             const video = document.createElement('video');
-            video.src = "../resources/yanhua.mp4";
+            video.src = "./resources/yanhua.mp4";
             video.muted = true;
             video.autoplay = "autoplay";
             video.loop = true;

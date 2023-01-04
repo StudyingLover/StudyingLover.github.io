@@ -111,7 +111,7 @@ window.addEventListener('keydown', (e) => {
         const raycasterFront = new THREE.Raycaster(playerMesh.position.clone().add(playerHalfHeight), frontVector3);
         const collisionResultsFrontObjs = raycasterFront.intersectObjects(scene.children);
 
-        console.log(collisionResultsFrontObjs);
+        // console.log(collisionResultsFrontObjs);
 
 
         if (collisionResultsFrontObjs && collisionResultsFrontObjs[0] && collisionResultsFrontObjs[0].distance > 1) {

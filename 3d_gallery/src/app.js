@@ -54,7 +54,7 @@ directionLight.shadow.bias = -0.001;
 let playerMesh;
 let actionWalk, actionIdle;
 const lookTarget = new THREE.Vector3(0, 2, 0);
-new THREE.GLTFLoader().load('resources/models/player.glb', (gltf) => {
+new THREE.GLTFLoader().load('../resources/models/player.glb', (gltf) => {
     playerMesh = gltf.scene;
     scene.add(gltf.scene);
 

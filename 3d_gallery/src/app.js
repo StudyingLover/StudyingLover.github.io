@@ -146,7 +146,7 @@ window.addEventListener('mousemove', (e) => {
     preClientX = e.clientX;
 });
 
-new THREE.GLTFLoader().load('/3d_gallery/resources/models/zhanguan.glb', (gltf) => {
+new THREE.GLTFLoader().load('/resources/models/zhanguan.glb', (gltf) => {
 
     // console.log(gltf);
     scene.add(gltf.scene);

@@ -1,7 +1,7 @@
 ---
 title: test
 commentable: flase
-Edit: 2023-1-12
+Edit: 2023-01-12
 mathjax: true
 mermaid: true
 tags: tag1 tag2 tag3

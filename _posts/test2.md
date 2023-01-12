@@ -1,7 +1,7 @@
 ---
-title: Sample Post - Markdown Syntax
+title: test
 commentable: flase
-Edit: 2012-11-14
+Edit: 2023-1-12
 mathjax: true
 mermaid: true
 tags: tag1 tag2 tag3

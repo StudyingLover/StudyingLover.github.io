@@ -1,5 +1,5 @@
 ---
-title: test - test
+title: Sample Post - Markdown Syntax
 commentable: flase
 Edit: 2023-01-12
 mathjax: true

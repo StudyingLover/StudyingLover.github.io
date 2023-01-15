@@ -49,7 +49,7 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
   
-permalink: z3prm0klVPVLzbc-KFklxFzHLqFZiXtR_OrQb4DtgGs
+permalink: none
 
 defaults:
   -

@@ -88,7 +88,18 @@ You can mix them as well, like
 This is horizontal line
 
 ------
-
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475"
+     crossorigin="anonymous"></script>
+<!-- ad1 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6818277566173475"
+     data-ad-slot="4025700878"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 # Math Blocks
 
 This is inline math $\sum_{i=1}^{N} i $. This is display math.

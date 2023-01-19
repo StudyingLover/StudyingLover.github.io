@@ -10,7 +10,7 @@ mathjax: true
 
 # Me
 
-I'm zhao jiahao,a freshman at Xi’an University of Posts & Telecommunications in computer science and technology.
+I'm a freshman at Xi’an University of Posts & Telecommunications in computer science and technology.
 I'm interested in Meaching Learning and Deeping Learning.And my team is working in website and metaverse.
 
 # This Site

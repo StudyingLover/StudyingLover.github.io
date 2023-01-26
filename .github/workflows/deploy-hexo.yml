@@ -24,6 +24,8 @@ jobs:
       run: |
         npm install -g hexo-cli
         npm install
+        npm install hexo-generator-sitemap --save
+        npm install hexo-generator-baidu-sitemap --save
         hexo clean
         hexo generate
 

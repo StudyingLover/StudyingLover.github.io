@@ -41,5 +41,24 @@
   
   
   
+  <entry>
+    <title>jsdelivr加速Github文件</title>
+    <link href="/2023/01/26/jsdelivr%E5%8A%A0%E9%80%9FGithub%E6%96%87%E4%BB%B6/"/>
+    <url>/2023/01/26/jsdelivr%E5%8A%A0%E9%80%9FGithub%E6%96%87%E4%BB%B6/</url>
+    
+    <content type="html"><![CDATA[<p>假设GitHub路径为<code>https://github.com/username/repo-name/path/to/file</code> ,用jsdelivr可以加速或者在html中引用，路径为<code>https://cdn.jsdelivr.net/gh/username/repo-name/path/to/file</code> </p>]]></content>
+    
+    
+    <categories>
+      
+      <category>工具</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
   
 </search>

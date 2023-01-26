@@ -38,5 +38,6 @@ jobs:
     - name: Install google search file 🔧 
       with:
         BRANCH: gh-pages
+        BASE_BRANCH: main
       run: |
         wget https://cdn.jsdelivr.net/gh/StudyingLover/StudyingLover.github.io/google22e70b1e2925e4e9.html

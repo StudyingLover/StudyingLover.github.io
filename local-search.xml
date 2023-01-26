@@ -60,5 +60,30 @@
   
   
   
+  <entry>
+    <title>在网页或博客中嵌入ppt</title>
+    <link href="/2023/01/26/%E5%9C%A8%E7%BD%91%E9%A1%B5%E6%88%96%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%B5%8C%E5%85%A5ppt/"/>
+    <url>/2023/01/26/%E5%9C%A8%E7%BD%91%E9%A1%B5%E6%88%96%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%B5%8C%E5%85%A5ppt/</url>
+    
+    <content type="html"><![CDATA[<p>当我们想要与他人共享ppt时，除了传统的展示方式外，还将其保存到 OneDrive，然后就可以将其嵌入到网页或博客中。</p><p>嵌入ppt的代码<strong>必须</strong>从PowerPoint <strong>网页版</strong> 获取。</p><p>网页版地址为<a href="https://office.live.com/start/PowerPoint.aspx">https://office.live.com/start/PowerPoint.aspx</a></p><p>在网页版打开ppt后，点击右上角的文件按钮<br><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20230126203458.png"></p><p>选择共享，然后点击嵌入<br><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20230126203758.png"></p><p>可以自由调整大小，然后点击复制，插入你想插入位置即可<br><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20230126203942.png"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>工具</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Microsoft</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
   
 </search>

@@ -2,13 +2,13 @@ name: Build and Deploy Hexo
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout 🛎️
-      uses: actions/checkout@master
+      uses: actions/checkout@main
       
     - name: Use Node.js 12
       uses: actions/setup-node@v2-beta

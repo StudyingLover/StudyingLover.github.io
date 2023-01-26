@@ -15,6 +15,10 @@ jobs:
       with:
         node-version: '12'
 
+    - name: Install google search file 🔧 
+      run: |
+        wget https://cdn.jsdelivr.net/gh/StudyingLover/StudyingLover.github.io/google22e70b1e2925e4e9.html
+
     - name: Install Pandoc
       run: |
         sudo apt-get install pandoc

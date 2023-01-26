@@ -1,7 +1,10 @@
 ---
 title: ThreeJS导入失败
-index_img: https://raw.githubusercontent.com/StudyingLover/anything/main/favicon.ico
 banner_img: https://raw.githubusercontent.com/StudyingLover/anything/main/background.png
+categories:
+- 踩坑
+tags:
+- ThreeJS
 ---
 ## 问题描述
 ```

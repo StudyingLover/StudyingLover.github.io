@@ -15,9 +15,6 @@ jobs:
       with:
         node-version: '12'
 
-    - name: Install google search file 🔧 
-      run: |
-        wget https://cdn.jsdelivr.net/gh/StudyingLover/StudyingLover.github.io/google22e70b1e2925e4e9.html
 
     - name: Install Pandoc
       run: |
@@ -37,3 +34,7 @@ jobs:
         BRANCH: gh-pages
         FOLDER: public
         BASE_BRANCH: main
+        
+    - name: Install google search file 🔧 
+      run: |
+        wget https://cdn.jsdelivr.net/gh/StudyingLover/StudyingLover.github.io/google22e70b1e2925e4e9.html

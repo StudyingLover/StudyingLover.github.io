@@ -26,6 +26,11 @@ jobs:
         npm install
         hexo clean
         hexo generate
+    - name: Install and Build 🔧 
+      run: |
+        cd ./public
+        wget https://cdn.jsdelivr.net/gh/StudyingLover/StudyingLover.github.io/google22e70b1e2925e4e9.html
+        cd ..
 
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@3.7.1

@@ -26,10 +26,12 @@ jobs:
         npm install
         hexo clean
         hexo generate
-    - name: Install and Build 🔧 
+
+    - name: Install google,baidu 🔧 
       run: |
         cd ./public
         wget https://cdn.jsdelivr.net/gh/StudyingLover/StudyingLover.github.io/google22e70b1e2925e4e9.html
+        wget https://cdn.jsdelivr.net/gh/StudyingLover/StudyingLover.github.io/baidu_verify_codeva-gP1rScGJ1a.html
         cd ..
 
     - name: Deploy 🚀

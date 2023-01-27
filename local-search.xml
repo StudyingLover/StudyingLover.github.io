@@ -61,6 +61,25 @@
   
   
   <entry>
+    <title>在fluid主题中加入Google广告</title>
+    <link href="/2023/01/27/%E5%9C%A8fluid%E4%B8%BB%E9%A2%98%E4%B8%AD%E5%8A%A0%E5%85%A5Google%E5%B9%BF%E5%91%8A/"/>
+    <url>/2023/01/27/%E5%9C%A8fluid%E4%B8%BB%E9%A2%98%E4%B8%AD%E5%8A%A0%E5%85%A5Google%E5%B9%BF%E5%91%8A/</url>
+    
+    <content type="html"><![CDATA[<h1 id="在fluid主题中加入Google广告"><a href="#在fluid主题中加入Google广告" class="headerlink" title="在fluid主题中加入Google广告"></a>在fluid主题中加入Google广告</h1><p>在fluid的<a href="https://hexo.fluid-dev.com/posts/fluid-adsense/">官方文档</a>中，提供了在fluid主题中加入Google广告的方法，但是其中提到的参数<code>data-ad-slot</code>并没有说清怎么获取，所以我决定详细写一下如何获取。</p><h2 id="注册Google-Adsense"><a href="#注册Google-Adsense" class="headerlink" title="注册Google Adsense"></a>注册Google Adsense</h2><p>访问<a href="https://www.google.com/adsense/start/">Google Adsense</a>，注册一个账号，然后点击右侧的广告。<br><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20230127100353.png"></p><h2 id="创建一个广告单元"><a href="#创建一个广告单元" class="headerlink" title="创建一个广告单元"></a>创建一个广告单元</h2><p>选择上方的按广告单元<br><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20230127100502.png"></p><p>这里我选择了推荐的展示广告<br><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20230127100605.png"></p><p>接着自定义广告单元，自定义广告<br><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20230127100808.png"></p><p>接着就能看到广告代码了，其中就有我们需要的<code>data-ad-client</code>和<code>data-ad-slot</code>参数</p><p>例如，我的代码是这样的红框中的就是我们需要的参数<br><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20230127101239.png"></p><h2 id="嵌入到fluid主题中"><a href="#嵌入到fluid主题中" class="headerlink" title="嵌入到fluid主题中"></a>嵌入到fluid主题中</h2><p>在博客根目录下找到 scripts 文件夹（不存在就创建一个），进入后任意创建一个 js 文件，比如 <code>inject.js</code>，复制以下内容：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript">hexo.<span class="hljs-property">extend</span>.<span class="hljs-property">filter</span>.<span class="hljs-title function_">register</span>(<span class="hljs-string">&#x27;theme_inject&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params">injects</span>) &#123;<br>injects.<span class="hljs-property">bodyEnd</span>.<span class="hljs-title function_">raw</span>(<span class="hljs-string">&#x27;adsense&#x27;</span>, <span class="hljs-string">&#x27;&lt;script async src=&quot;https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxx&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;&#x27;</span>);<br>injects.<span class="hljs-property">head</span>.<span class="hljs-title function_">raw</span>(<span class="hljs-string">&#x27;adsense&#x27;</span>, <span class="hljs-string">&#x27;&lt;style&gt;ins.adsbygoogle[data-ad-status=&quot;unfilled&quot;] &#123; display: none !important; &#125;&lt;/style&gt;&#x27;</span>);<br>injects.<span class="hljs-property">postLeft</span>.<span class="hljs-title function_">raw</span>(<span class="hljs-string">&#x27;adsense&#x27;</span>, <span class="hljs-string">&#x27;&lt;aside class=&quot;sidebar d-none d-xl-block&quot; style=&quot;margin-right:-1rem;z-index:-1&quot;&gt;&lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:flex;justify-content:center;min-width:160px;max-width:300px;width:100%;height:600px;position:sticky;top:2rem&quot; data-ad-client=&quot;ca-pub-xxxxxx&quot; data-ad-slot=&quot;yyyyyy&quot;&gt;&lt;/ins&gt;&lt;script&gt; (adsbygoogle = window.adsbygoogle || []).push(&#123;&#125;); &lt;/script&gt;&lt;/aside&gt;&#x27;</span>);<br>injects.<span class="hljs-property">postCopyright</span>.<span class="hljs-title function_">raw</span>(<span class="hljs-string">&#x27;adsense&#x27;</span>, <span class="hljs-string">&#x27;&lt;div style=&quot;width:100%;display:flex;justify-content:center;margin-bottom:1.5rem&quot;&gt;&lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:flex;justify-content:center;max-width:845px;width:100%;height:90px&quot; data-ad-client=&quot;ca-pub-xxxxxx&quot; data-ad-slot=&quot;yyyyyy&quot;&gt;&lt;/ins&gt;&lt;script&gt; (adsbygoogle = window.adsbygoogle || []).push(&#123;&#125;); &lt;/script&gt;&lt;/div&gt;&#x27;</span>);<br>&#125;);<br></code></pre></td></tr></table></figure><p>复制之后，把其中 <code>ca-pub-xxxxxx</code> 和 <code>data-ad-slot=&quot;yyyyyy&quot;</code> 换成我们上面获取到的参数即可。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>工具</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>在网页或博客中嵌入ppt</title>
     <link href="/2023/01/27/%E5%9C%A8%E7%BD%91%E9%A1%B5%E6%88%96%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%B5%8C%E5%85%A5ppt/"/>
     <url>/2023/01/27/%E5%9C%A8%E7%BD%91%E9%A1%B5%E6%88%96%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%B5%8C%E5%85%A5ppt/</url>

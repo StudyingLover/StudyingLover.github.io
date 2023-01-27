@@ -23,19 +23,3 @@ def gh_path2jsdelivr(path):
 print(gh_path2jsdelivr(""))
 
 ```
-
-<script src="https://giscus.app/client.js"
-        data-repo="StudyingLover/StudyingLover.github.io"
-        data-repo-id="R_kgDOIQbc2w"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOIQbc284CT0AH"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
-</script>

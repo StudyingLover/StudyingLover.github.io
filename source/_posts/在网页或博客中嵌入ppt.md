@@ -1,6 +1,7 @@
 ---
 title: 在网页或博客中嵌入ppt
-banner_img: https://raw.githubusercontent.com/StudyingLover/anything/main/background.png
+banner_img: https://raw.githubusercontent.com/StudyingLover/anything/main/746857def55b5281fd828a05897bf15.png
+date: 2023-1-26 21:00:00
 categories:
 - 工具
 tags:

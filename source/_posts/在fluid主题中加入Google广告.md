@@ -1,8 +1,9 @@
 ---
 title: 在fluid主题中加入Google广告
-banner_img: https://raw.githubusercontent.com/StudyingLover/anything/main/background.png
+banner_img: https://raw.githubusercontent.com/StudyingLover/anything/main/8592ed575a242368611755f5529c28e.png
+date: 2023-1-27 10:00:00
 categories:
-- 工具
+- 踩坑
 ---
 # 在fluid主题中加入Google广告
 

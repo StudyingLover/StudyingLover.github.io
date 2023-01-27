@@ -1,6 +1,7 @@
 ---
 title: ThreeJS导入失败
-banner_img: https://raw.githubusercontent.com/StudyingLover/anything/main/background.png
+banner_img: https://raw.githubusercontent.com/StudyingLover/anything/main/aadc0c1c0eb1c7f5e57ab3b42256cb0.jpg
+date: 2023-1-13 10:00:00
 categories:
 - 踩坑
 tags:

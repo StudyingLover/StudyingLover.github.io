@@ -546,7 +546,7 @@ post:
     # 作者，优先根据 front-matter 里 author 字段，其次是 hexo 配置中 author 值
     # Author, based on `author` field in front-matter, if not set, based on `author` value in hexo config
     author:
-      enable: false
+      enable: true
 
     # 文章日期，优先根据 front-matter 里 date 字段，其次是 md 文件日期
     # Post date, based on `date` field in front-matter, if not set, based on create date of .md file
@@ -755,12 +755,13 @@ utterances:
 # Based on third-party service
 # See: https://disqus.com
 disqus:
-  shortname:
+  shortname: studyinglover-1
   # 以下为 Disqusjs 支持, 国内用户如果想使用 Disqus 建议配合使用
   # The following are Disqusjs configurations, please ignore if DisqusJS is not required
   # See: https://github.com/SukkaW/DisqusJS
-  disqusjs: false
-  apikey:
+  disqusjs: true
+  apikey: Qen4wXmwuDpRSSM6J93PysT7SxAnJNANbATNuVOMt0KOOgLQDlRP3a84DLxdbA4W
+
 
 # Gitalk
 # 基于 GitHub Issues
@@ -810,7 +811,7 @@ valine:
 # Derived from Valine, with self-hosted service and new features
 # See: https://waline.js.org/
 waline:
-  serverURL: ''
+  serverURL: 'https://waline-one-swart.vercel.app'
   path: window.location.pathname
   meta: ['nick', 'mail', 'link']
   requiredMeta: ['nick']

@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/StudyingLover/anything/main/favicon.ico">
-  <link rel="icon" href="https://raw.githubusercontent.com/StudyingLover/anything/main/favicon.ico">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/StudyingLover/anything/favicon.ico">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/StudyingLover/anything/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="plus studio">
 <meta property="og:description" content="问题描述12345-index.html -src.js-node_modules -three  -...  在src.js 中用如下方式导入ThreeJS 1import * as THREE from &amp;#x27;three&amp;#x27;; index.html body如下 123&lt;body&gt;    &lt;script type&#x3D;&quot;module&quot; src&#x3D;&amp;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/StudyingLover/anything/main/20230103172514.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/StudyingLover/anything/main/20230103172625.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230103172514.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230103172625.png">
 <meta property="article:published_time" content="2023-01-13T10:00:00.000Z">
-<meta property="article:modified_time" content="2023-01-27T11:25:23.245Z">
+<meta property="article:modified_time" content="2023-01-28T06:31:02.644Z">
 <meta property="article:author" content="StudyingLover">
 <meta property="article:tag" content="ThreeJS">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/StudyingLover/anything/main/20230103172514.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230103172514.png">
   
   
   
@@ -233,7 +233,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://raw.githubusercontent.com/StudyingLover/anything/main/aadc0c1c0eb1c7f5e57ab3b42256cb0.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('https://cdn.jsdelivr.net/gh/StudyingLover/anything/aadc0c1c0eb1c7f5e57ab3b42256cb0.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -324,9 +324,9 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;module&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/src/day01_a.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <p>出现报错</p>
 <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">Uncaught TypeError: Failed <span class="hljs-built_in">to</span> <span class="hljs-built_in">resolve</span> module specifier <span class="hljs-string">&quot;three&quot;</span>. Relative references must <span class="hljs-built_in">start</span> <span class="hljs-keyword">with</span> either <span class="hljs-string">&quot;/&quot;</span>, <span class="hljs-string">&quot;./&quot;</span>, <span class="hljs-keyword">or</span> <span class="hljs-string">&quot;../&quot;</span>.<br></code></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20230103172514.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230103172514.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>stackoverflow给出了解决方案<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/65697410/not-using-node-js-uncaught-typeerror-failed-to-resolve-module-specifier-thre">https://stackoverflow.com/questions/65697410/not-using-node-js-uncaught-typeerror-failed-to-resolve-module-specifier-thre</a></p>
-<p><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20230103172625.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230103172625.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>删除<code>src.js</code>的导入，将<code>index.html</code> body改为</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/node_modules/three/build/three.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;module&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/src/day01_a.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br></code></pre></td></tr></table></figure>
 

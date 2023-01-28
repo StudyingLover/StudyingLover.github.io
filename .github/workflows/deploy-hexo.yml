@@ -37,6 +37,20 @@ jobs:
         wget https://cdn.jsdelivr.net/gh/StudyingLover/StudyingLover.github.io/CNAME
         cd ..
 
+    - name: Create download floder 🔧 
+    run: |
+      cd ./public
+      mkdir download 
+      cd ./download
+      wget https://cdn.jsdelivr.net/gh/StudyingLover/StudyingLover.github.io/download/red-flag-apk.html
+      mkdir assets
+      cd ./assets
+      wget https://cdn.jsdelivr.net/gh/StudyingLover/StudyingLover.github.io/download/assets/red-flag.apk
+      cd ..
+      cd ..
+      cd ..
+
+
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:

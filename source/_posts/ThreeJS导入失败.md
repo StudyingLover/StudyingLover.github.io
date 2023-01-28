@@ -1,6 +1,6 @@
 ---
 title: ThreeJS导入失败
-banner_img: https://raw.githubusercontent.com/StudyingLover/anything/main/aadc0c1c0eb1c7f5e57ab3b42256cb0.jpg
+banner_img: https://cdn.jsdelivr.net/gh/StudyingLover/anything/aadc0c1c0eb1c7f5e57ab3b42256cb0.jpg
 date: 2023-1-13 10:00:00
 categories:
 - 踩坑
@@ -30,11 +30,11 @@ import * as THREE from 'three';
 ```
 Uncaught TypeError: Failed to resolve module specifier "three". Relative references must start with either "/", "./", or "../".
 ```
-![image.png](https://raw.githubusercontent.com/StudyingLover/anything/main/20230103172514.png)
+![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230103172514.png)
 ## 解决方案
 stackoverflow给出了解决方案https://stackoverflow.com/questions/65697410/not-using-node-js-uncaught-typeerror-failed-to-resolve-module-specifier-thre
 
-![image.png](https://raw.githubusercontent.com/StudyingLover/anything/main/20230103172625.png)
+![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230103172625.png)
 
 删除`src.js`的导入，将`index.html` body改为
 ```

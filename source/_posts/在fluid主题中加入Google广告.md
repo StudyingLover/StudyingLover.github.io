@@ -1,6 +1,6 @@
 ---
 title: 在fluid主题中加入Google广告
-banner_img: https://raw.githubusercontent.com/StudyingLover/anything/main/8592ed575a242368611755f5529c28e.png
+banner_img: https://cdn.jsdelivr.net/gh/StudyingLover/anything/8592ed575a242368611755f5529c28e.png
 date: 2023-1-27 10:00:00
 categories:
 - 踩坑
@@ -11,22 +11,22 @@ categories:
 
 ## 注册Google Adsense
 访问[Google Adsense](https://www.google.com/adsense/start/)，注册一个账号，然后点击右侧的广告。
-![](https://raw.githubusercontent.com/StudyingLover/anything/main/20230127100353.png)
+![](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230127100353.png)
 
 ## 创建一个广告单元
 选择上方的按广告单元
-![](https://raw.githubusercontent.com/StudyingLover/anything/main/20230127100502.png)
+![](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230127100502.png)
 
 这里我选择了推荐的展示广告
-![](https://raw.githubusercontent.com/StudyingLover/anything/main/20230127100605.png)
+![](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230127100605.png)
 
 接着自定义广告单元，自定义广告
-![](https://raw.githubusercontent.com/StudyingLover/anything/main/20230127100808.png)
+![](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230127100808.png)
 
 接着就能看到广告代码了，其中就有我们需要的`data-ad-client`和`data-ad-slot`参数
 
 例如，我的代码是这样的红框中的就是我们需要的参数
-![](https://raw.githubusercontent.com/StudyingLover/anything/main/20230127101239.png)
+![](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230127101239.png)
 
 ## 嵌入到fluid主题中
 在博客根目录下找到 scripts 文件夹（不存在就创建一个），进入后任意创建一个 js 文件，比如 `inject.js`，复制以下内容：

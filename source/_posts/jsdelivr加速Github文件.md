@@ -1,6 +1,6 @@
 ---
 title: jsdelivr加速Github文件
-banner_img: https://raw.githubusercontent.com/StudyingLover/anything/main/f057ee81b5a9141d222fe12f55b7dfc.jpg
+banner_img: https://cdn.jsdelivr.net/gh//StudyingLover/anything/f057ee81b5a9141d222fe12f55b7dfc.jpg
 date: 2023-1-20 10:00:00
 categories:
 - 工具

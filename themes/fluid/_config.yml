@@ -1026,6 +1026,12 @@ links:
       link: "https://github.com/fluid-dev/hexo-theme-fluid",
       avatar: "/img/favicon.png"
     }
+    - {
+      title: "Pluto’s Blog",
+      intro: "记录我的生活，分享一些经历与心得。",
+      link: "https://blog.aoaostar.com",
+      avatar: "https://avatars.githubusercontent.com/u/86001674"
+    }
 
   # 当成员头像加载失败时，替换为指定图片
   # When the member avatar fails to load, replace the specified image

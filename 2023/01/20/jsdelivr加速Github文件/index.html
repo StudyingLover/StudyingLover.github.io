@@ -16,15 +16,15 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="假设GitHub路径为https:&#x2F;&#x2F;github.com&#x2F;username&#x2F;repo-name&#x2F;path&#x2F;to&#x2F;file ,用jsdelivr可以加速或者在html中引用，路径为https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;username&#x2F;repo-name&#x2F;path&#x2F;to&#x2F;file  这里实现了一个简单的链接转换函数，可以将GitHub路径转换为jsdelivr路径 1234567">
+    <meta name="description" content="假设GitHub路径为https:&#x2F;&#x2F;github.com&#x2F;username&#x2F;repo-name&#x2F;path&#x2F;to&#x2F;file ,用jsdelivr可以加速或者在html中引用，路径为https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;username&#x2F;repo-name&#x2F;path&#x2F;to&#x2F;file 这里实现了一个简单的链接转换函数，可以将GitHub路径转换为jsdelivr路径 12345678">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jsdelivr加速Github文件">
 <meta property="og:url" content="https://studyinglover.github.io/2023/01/20/jsdelivr%E5%8A%A0%E9%80%9FGithub%E6%96%87%E4%BB%B6/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="假设GitHub路径为https:&#x2F;&#x2F;github.com&#x2F;username&#x2F;repo-name&#x2F;path&#x2F;to&#x2F;file ,用jsdelivr可以加速或者在html中引用，路径为https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;username&#x2F;repo-name&#x2F;path&#x2F;to&#x2F;file  这里实现了一个简单的链接转换函数，可以将GitHub路径转换为jsdelivr路径 1234567">
+<meta property="og:description" content="假设GitHub路径为https:&#x2F;&#x2F;github.com&#x2F;username&#x2F;repo-name&#x2F;path&#x2F;to&#x2F;file ,用jsdelivr可以加速或者在html中引用，路径为https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;username&#x2F;repo-name&#x2F;path&#x2F;to&#x2F;file 这里实现了一个简单的链接转换函数，可以将GitHub路径转换为jsdelivr路径 12345678">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-01-20T10:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-04T14:15:00.477Z">
+<meta property="article:modified_time" content="2023-02-04T14:55:15.468Z">
 <meta property="article:author" content="StudyingLover">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -319,9 +319,8 @@
             
               <div class="markdown-body">
                 
-                <p>假设GitHub路径为<code>https://github.com/username/repo-name/path/to/file</code> ,用jsdelivr可以加速或者在html中引用，路径为<code>https://cdn.jsdelivr.net/gh/username/repo-name/path/to/file</code> </p>
-<p>这里实现了一个简单的链接转换函数，可以将GitHub路径转换为jsdelivr路径</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">find_first_occurrence</span>(<span class="hljs-params">string, substring</span>):<br>    <span class="hljs-keyword">return</span> string.find(substring)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">gh_path2jsdelivr</span>(<span class="hljs-params">path</span>):<br>    <span class="hljs-keyword">if</span>(find_first_occurrence(path,<span class="hljs-string">&quot;/blob/&quot;</span>) != -<span class="hljs-number">1</span>):<br>        path = path.replace(<span class="hljs-string">&quot;/blob/&quot;</span>, <span class="hljs-string">&quot;/&quot;</span>)<br>    <span class="hljs-keyword">if</span>(find_first_occurrence(path,<span class="hljs-string">&quot;/main/&quot;</span>) != -<span class="hljs-number">1</span>):<br>        path = path.replace(<span class="hljs-string">&quot;/main/&quot;</span>, <span class="hljs-string">&quot;/&quot;</span>)<br>    <span class="hljs-keyword">if</span>(find_first_occurrence(path,<span class="hljs-string">&quot;/master/&quot;</span>) != -<span class="hljs-number">1</span>):<br>        path = path.replace(<span class="hljs-string">&quot;/master/&quot;</span>, <span class="hljs-string">&quot;/&quot;</span>)<br>    <span class="hljs-keyword">return</span> path.replace(<span class="hljs-string">&quot;github.com&quot;</span>, <span class="hljs-string">&quot;cdn.jsdelivr.net/gh&quot;</span>, <span class="hljs-number">1</span>)<br><br><span class="hljs-built_in">print</span>(gh_path2jsdelivr(<span class="hljs-string">&quot;&quot;</span>))<br><br></code></pre></td></tr></table></figure>
+                <p>假设GitHub路径为<code>https://github.com/username/repo-name/path/to/file</code> ,用jsdelivr可以加速或者在html中引用，路径为<code>https://cdn.jsdelivr.net/gh/username/repo-name/path/to/file</code></p>
+<p>这里实现了一个简单的链接转换函数，可以将GitHub路径转换为jsdelivr路径 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">find_first_occurrence</span>(<span class="hljs-params">string, substring</span>):<br>    <span class="hljs-keyword">return</span> string.find(substring)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">gh_path2jsdelivr</span>(<span class="hljs-params">path</span>):<br>    <span class="hljs-keyword">if</span>(find_first_occurrence(path,<span class="hljs-string">&quot;/blob/&quot;</span>) != -<span class="hljs-number">1</span>):<br>        path = path.replace(<span class="hljs-string">&quot;/blob/&quot;</span>, <span class="hljs-string">&quot;/&quot;</span>)<br>    <span class="hljs-keyword">if</span>(find_first_occurrence(path,<span class="hljs-string">&quot;/main/&quot;</span>) != -<span class="hljs-number">1</span>):<br>        path = path.replace(<span class="hljs-string">&quot;/main/&quot;</span>, <span class="hljs-string">&quot;/&quot;</span>)<br>    <span class="hljs-keyword">if</span>(find_first_occurrence(path,<span class="hljs-string">&quot;/master/&quot;</span>) != -<span class="hljs-number">1</span>):<br>        path = path.replace(<span class="hljs-string">&quot;/master/&quot;</span>, <span class="hljs-string">&quot;/&quot;</span>)<br>    <span class="hljs-keyword">return</span> path.replace(<span class="hljs-string">&quot;github.com&quot;</span>, <span class="hljs-string">&quot;cdn.jsdelivr.net/gh&quot;</span>, <span class="hljs-number">1</span>)<br><br><span class="hljs-built_in">print</span>(gh_path2jsdelivr(<span class="hljs-string">&quot;&quot;</span>))<br><br></code></pre></td></tr></table></figure></p>
 
                 
               </div>
@@ -519,6 +518,12 @@
   
 
 
+  
+  
+
+
+
+
 
 
 
@@ -710,6 +715,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

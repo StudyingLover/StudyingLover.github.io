@@ -1109,3 +1109,7 @@ static_prefix:
   twikoo: https://lib.baomitu.com/twikoo/1.6.8/
 
   hint: https://lib.baomitu.com/hint.css/2.7.0/
+
+rss: 
+  - /atom.xml
+  - /rss2.xml

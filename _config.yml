@@ -107,3 +107,12 @@ deploy:
  type: git
  repo: git@github.com:StudyingLover/StudyingLover.github.io.git
  branch: gh-pages
+
+feed:
+  # Generate both atom and rss2 feeds
+  type:
+    - atom
+    - rss2
+  path:
+    - atom.xml
+    - rss2.xml

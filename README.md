@@ -17,7 +17,7 @@
 
 </pre> 
 
-<img width="100%" alt="game gif" src="`https://cdn.jsdelivr.net/gh/StudyingLover/StudyingLover/assets/github-contribution-grid-snake.gif` "/>
+<img width="100%" alt="game gif" src="https://cdn.jsdelivr.net/gh/StudyingLover/StudyingLover/assets/github-contribution-grid-snake.gif"/>
 
 ### :mailbox: How to reach me:
 

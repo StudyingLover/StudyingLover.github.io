@@ -10,7 +10,7 @@ tags:
 # yolov5常见踩坑
 ##  not enough values to unpack (expected 2, got 0)
 如图
-![](https://cloud.studyinglover.com/api/raw/?path=/photos/blog/93bbd4d663cd589dfdd522e0479bb46.png)
+![](https://cdn.jsdelivr.net/gh/StudyingLover/anything/93bbd4d663cd589dfdd522e0479bb46.png)
 
 我们需要检查一下我们标记的txt文件
 举个例子

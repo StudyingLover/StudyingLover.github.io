@@ -9,8 +9,31 @@
     <atom:link href="https://studyinglover.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 07 Feb 2023 09:07:55 GMT</pubDate>
+    <pubDate>Thu, 09 Feb 2023 08:38:02 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Windows下yolov5环境搭建</title>
+      <link>https://studyinglover.github.io/2023/02/09/Windows%E4%B8%8Byolov5%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <guid>https://studyinglover.github.io/2023/02/09/Windows%E4%B8%8Byolov5%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <pubDate>Thu, 09 Feb 2023 15:00:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;windows下yolov5环境搭建&quot;&gt;Windows下yolov5环境搭建&lt;/h1&gt;
+&lt;p&gt;在随便那新建一个&lt;code&gt;requirements.txt&lt;/code&gt;文件 内容是 &lt;figure class=&quot;highlight txt&quot;&gt;&lt;table&gt;&lt;tr&gt;</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="windows下yolov5环境搭建">Windows下yolov5环境搭建</h1><p>在随便那新建一个<code>requirements.txt</code>文件 内容是 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs txt"># YOLOv5 requirements<br># Usage: pip install -r requirements.txt<br><br># Base ----------------------------------------<br>matplotlib&gt;=3.2.2<br>numpy&gt;=1.18.5<br>opencv-python&gt;=4.1.1<br>Pillow&gt;=7.1.2<br>PyYAML&gt;=5.3.1<br>requests&gt;=2.23.0<br>scipy&gt;=1.4.1<br>torch&gt;=1.7.0<br>torchvision&gt;=0.8.1<br>tqdm&gt;=4.64.0<br>protobuf&lt;=3.20.1  # https://github.com/ultralytics/yolov5/issues/8012<br><br># Logging -------------------------------------<br>tensorboard&gt;=2.4.1<br># wandb<br># clearml<br><br># Plotting ------------------------------------<br>pandas&gt;=1.1.4<br>seaborn&gt;=0.11.0<br><br># Export --------------------------------------<br># coremltools&gt;=5.2  # CoreML export<br># onnx&gt;=1.9.0  # ONNX export<br># onnx-simplifier&gt;=0.4.1  # ONNX simplifier<br># nvidia-pyindex  # TensorRT export<br># nvidia-tensorrt  # TensorRT export<br># scikit-learn==0.19.2  # CoreML quantization<br># tensorflow&gt;=2.4.1  # TFLite export (or tensorflow-cpu, tensorflow-aarch64)<br># tensorflowjs&gt;=3.9.0  # TF.js export<br># openvino-dev  # OpenVINO export<br><br># Extras --------------------------------------<br>ipython  # interactive notebook<br>psutil  # system utilization<br>thop&gt;=0.1.1  # FLOPs computation<br># albumentations&gt;=1.0.3<br># pycocotools&gt;=2.0  # COCO mAP<br># roboflow<br><br></code></pre></td></tr></table></figure> 然后在当前目录下打开命令行，创建一个环境 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda create -n yolov5 python<br></code></pre></td></tr></table></figure> 创建好环境之后，激活环境 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda activate yolov5<br></code></pre></td></tr></table></figure> 然后安装依赖 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install -r requirements.txt<br></code></pre></td></tr></table></figure> 代码就可以运行了</p>]]></content:encoded>
+      
+      
+      
+      
+      <comments>https://studyinglover.github.io/2023/02/09/Windows%E4%B8%8Byolov5%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>yolov5和yolov5-face常见踩坑</title>

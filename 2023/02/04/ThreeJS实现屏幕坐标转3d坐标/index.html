@@ -19,12 +19,12 @@
     <meta name="description" content="ThreeJS实现屏幕坐标转3d坐标 本文使用chatGPT辅助完成 在虚拟世界中，3D坐标与屏幕坐标之间的转换是一个重要的问题。使用ThreeJS开发3D场景时，经常需要将屏幕坐标转换为3D坐标。在本文中，我们将介绍如何使用ThreeJS实现屏幕坐标转3D坐标的两种方法 根据相机的投影矩阵和射线拾取 在我的笔记摄像机模型中详细推导了相机的投影矩阵。 在ThreeJS中，相机的投影矩阵是一个4x4">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ThreeJS实现屏幕坐标转3d坐标">
-<meta property="og:url" content="https://studyinglover.github.io/2023/02/04/ThreeJS%E5%AE%9E%E7%8E%B0%E5%B1%8F%E5%B9%95%E5%9D%90%E6%A0%87%E8%BD%AC3d%E5%9D%90%E6%A0%87/index.html">
+<meta property="og:url" content="https://studyinglover.com/2023/02/04/ThreeJS%E5%AE%9E%E7%8E%B0%E5%B1%8F%E5%B9%95%E5%9D%90%E6%A0%87%E8%BD%AC3d%E5%9D%90%E6%A0%87/index.html">
 <meta property="og:site_name" content="plus studio">
 <meta property="og:description" content="ThreeJS实现屏幕坐标转3d坐标 本文使用chatGPT辅助完成 在虚拟世界中，3D坐标与屏幕坐标之间的转换是一个重要的问题。使用ThreeJS开发3D场景时，经常需要将屏幕坐标转换为3D坐标。在本文中，我们将介绍如何使用ThreeJS实现屏幕坐标转3D坐标的两种方法 根据相机的投影矩阵和射线拾取 在我的笔记摄像机模型中详细推导了相机的投影矩阵。 在ThreeJS中，相机的投影矩阵是一个4x4">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-04T20:30:00.000Z">
-<meta property="article:modified_time" content="2023-02-09T08:38:02.721Z">
+<meta property="article:modified_time" content="2023-02-10T03:23:58.342Z">
 <meta property="article:author" content="StudyingLover">
 <meta property="article:tag" content="ThreeJS">
 <meta name="twitter:card" content="summary_large_image">
@@ -71,7 +71,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"studyinglover.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"G-80B5GDZWVG","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"studyinglover.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"G-80B5GDZWVG","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -326,7 +326,7 @@
 <p>本文使用chatGPT辅助完成</p>
 <p>在虚拟世界中，3D坐标与屏幕坐标之间的转换是一个重要的问题。使用ThreeJS开发3D场景时，经常需要将屏幕坐标转换为3D坐标。在本文中，我们将介绍如何使用ThreeJS实现屏幕坐标转3D坐标的两种方法</p>
 <h2 id="根据相机的投影矩阵和射线拾取">根据相机的投影矩阵和射线拾取</h2>
-<p>在我的笔记<a target="_blank" rel="noopener" href="https://studyinglover.com/2022/12/29/%E6%91%84%E5%83%8F%E6%9C%BA%E6%A8%A1%E5%9E%8B/">摄像机模型</a>中详细推导了相机的投影矩阵。</p>
+<p>在我的笔记<a href="https://studyinglover.com/2022/12/29/%E6%91%84%E5%83%8F%E6%9C%BA%E6%A8%A1%E5%9E%8B/">摄像机模型</a>中详细推导了相机的投影矩阵。</p>
 <p>在ThreeJS中，相机的投影矩阵是一个4x4的矩阵，它将3D坐标转换为屏幕坐标。我们可以使用这个矩阵将屏幕坐标转换为3D坐标。 官方为我们提供了一个接口<code>vector.unproject(camera)</code>,它可以将屏幕坐标转换为3D坐标。但是这个接口只能将屏幕坐标转换为相机坐标系下的3D坐标，如果我们需要将屏幕坐标转换为世界坐标系下的3D坐标，我们需要使用<code>vector.applyMatrix4(camera.matrixWorldInverse)</code>将相机坐标系下的3D坐标转换为世界坐标系下的3D坐标。(这里代码本来不是这么写的，但是copilot给了我好多提示，我就照着他的提示改了改，如果你发现代码有问题，问问chatGPT吧)</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">screenToWorld</span>(<span class="hljs-params">screenX, screenY, camera，hyper_z</span>) &#123;<br>    <span class="hljs-keyword">const</span> vector = <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">Vector3</span>();<br>    vector.<span class="hljs-title function_">set</span>(<br>        (screenX / <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerWidth</span>) * <span class="hljs-number">2</span> - <span class="hljs-number">1</span>,<br>        -(screenY / <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerHeight</span>) * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>,<br>        hyper_z<br>    );<br>    vector.<span class="hljs-title function_">unproject</span>(camera);<br>    vector.<span class="hljs-title function_">applyMatrix4</span>(camera.<span class="hljs-property">matrixWorldInverse</span>);<br>    <span class="hljs-keyword">return</span> vector;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>这里的<code>hyper_z</code>网上很多教程认为是写0.5,但是我实际试了一下，发现效果很差，就把他改成了一个超参数。后来在一位不能透露姓名的大佬的帮助下，得知这个参数的值应该写成1。我试了下，勉强可以得到预期的效果</p>
@@ -379,7 +379,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>ThreeJS实现屏幕坐标转3d坐标</div>
-      <div>https://studyinglover.github.io/2023/02/04/ThreeJS实现屏幕坐标转3d坐标/</div>
+      <div>https://studyinglover.com/2023/02/04/ThreeJS实现屏幕坐标转3d坐标/</div>
     </div>
     <div class="license-meta">
       

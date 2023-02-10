@@ -16,24 +16,34 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="ThreeJS实现屏幕坐标转3d坐标 本文使用chatGPT辅助完成 在虚拟世界中，3D坐标与屏幕坐标之间的转换是一个重要的问题。使用ThreeJS开发3D场景时，经常需要将屏幕坐标转换为3D坐标。在本文中，我们将介绍如何使用ThreeJS实现屏幕坐标转3D坐标的两种方法 根据相机的投影矩阵和射线拾取 在我的笔记摄像机模型中详细推导了相机的投影矩阵。 在ThreeJS中，相机的投影矩阵是一个4x4">
+    <meta name="description" content="DALLE2笔记   Abstract graph LR; 文本--CLIP模型--&gt;文本特征; 文本特征--prior生成图像特征--&gt;两阶段模型; 两阶段模型--decoder--&gt;图像; 文本--ground truth--&gt;两阶段模型;  基于扩散模型的解码器能够通过给定信息的解码器，生成很多不一样的图片 ，语义信息和风格比较接近，只是细节不一样。 可以直接修改和编">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ThreeJS实现屏幕坐标转3d坐标">
-<meta property="og:url" content="https://studyinglover.com/2023/02/04/ThreeJS%E5%AE%9E%E7%8E%B0%E5%B1%8F%E5%B9%95%E5%9D%90%E6%A0%87%E8%BD%AC3d%E5%9D%90%E6%A0%87/index.html">
+<meta property="og:title" content="DALLE2笔记">
+<meta property="og:url" content="https://studyinglover.com/2023/02/09/DALLE2%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="ThreeJS实现屏幕坐标转3d坐标 本文使用chatGPT辅助完成 在虚拟世界中，3D坐标与屏幕坐标之间的转换是一个重要的问题。使用ThreeJS开发3D场景时，经常需要将屏幕坐标转换为3D坐标。在本文中，我们将介绍如何使用ThreeJS实现屏幕坐标转3D坐标的两种方法 根据相机的投影矩阵和射线拾取 在我的笔记摄像机模型中详细推导了相机的投影矩阵。 在ThreeJS中，相机的投影矩阵是一个4x4">
+<meta property="og:description" content="DALLE2笔记   Abstract graph LR; 文本--CLIP模型--&gt;文本特征; 文本特征--prior生成图像特征--&gt;两阶段模型; 两阶段模型--decoder--&gt;图像; 文本--ground truth--&gt;两阶段模型;  基于扩散模型的解码器能够通过给定信息的解码器，生成很多不一样的图片 ，语义信息和风格比较接近，只是细节不一样。 可以直接修改和编">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-04T20:30:00.000Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230209161230.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171156.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171228.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171318.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171503.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171524.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171634.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230209180240.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210172229.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230209181540.png">
+<meta property="article:published_time" content="2023-02-09T15:00:00.000Z">
 <meta property="article:modified_time" content="2023-02-10T09:29:00.221Z">
 <meta property="article:author" content="StudyingLover">
-<meta property="article:tag" content="ThreeJS">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230209161230.png">
   
   
   
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script> 
   
-  <title>ThreeJS实现屏幕坐标转3d坐标 - plus studio</title>
+  <title>DALLE2笔记 - plus studio</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -234,13 +244,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://cloud.studyinglover.com/api/raw/?path=/photos/blog/1930f5e45b0e2da27cdca61d93aa827d.png') no-repeat center center; background-size: cover;">
+     style="background: url('https://cloud.studyinglover.com/api/raw/?path=/photos/blog/2b6e09b241205c9096005705c855453d.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="ThreeJS实现屏幕坐标转3d坐标"></span>
+            <span id="subtitle" data-typed-text="DALLE2笔记"></span>
           
         </div>
 
@@ -256,8 +266,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-04 20:30" pubdate>
-          2023年2月4日 晚上
+        <time datetime="2023-02-09 15:00" pubdate>
+          2023年2月9日 下午
         </time>
       </span>
     
@@ -317,22 +327,72 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ThreeJS实现屏幕坐标转3d坐标</h1>
+            <h1 style="display: none">DALLE2笔记</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="threejs实现屏幕坐标转3d坐标">ThreeJS实现屏幕坐标转3d坐标</h1>
-<p>本文使用chatGPT辅助完成</p>
-<p>在虚拟世界中，3D坐标与屏幕坐标之间的转换是一个重要的问题。使用ThreeJS开发3D场景时，经常需要将屏幕坐标转换为3D坐标。在本文中，我们将介绍如何使用ThreeJS实现屏幕坐标转3D坐标的两种方法</p>
-<h2 id="根据相机的投影矩阵和射线拾取">根据相机的投影矩阵和射线拾取</h2>
-<p>在我的笔记<a href="https://studyinglover.com/2022/12/29/%E6%91%84%E5%83%8F%E6%9C%BA%E6%A8%A1%E5%9E%8B/">摄像机模型</a>中详细推导了相机的投影矩阵。</p>
-<p>在ThreeJS中，相机的投影矩阵是一个4x4的矩阵，它将3D坐标转换为屏幕坐标。我们可以使用这个矩阵将屏幕坐标转换为3D坐标。 官方为我们提供了一个接口<code>vector.unproject(camera)</code>,它可以将屏幕坐标转换为3D坐标。但是这个接口只能将屏幕坐标转换为相机坐标系下的3D坐标，如果我们需要将屏幕坐标转换为世界坐标系下的3D坐标，我们需要使用<code>vector.applyMatrix4(camera.matrixWorldInverse)</code>将相机坐标系下的3D坐标转换为世界坐标系下的3D坐标。(这里代码本来不是这么写的，但是copilot给了我好多提示，我就照着他的提示改了改，如果你发现代码有问题，问问chatGPT吧)</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">screenToWorld</span>(<span class="hljs-params">screenX, screenY, camera，hyper_z</span>) &#123;<br>    <span class="hljs-keyword">const</span> vector = <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">Vector3</span>();<br>    vector.<span class="hljs-title function_">set</span>(<br>        (screenX / <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerWidth</span>) * <span class="hljs-number">2</span> - <span class="hljs-number">1</span>,<br>        -(screenY / <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerHeight</span>) * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>,<br>        hyper_z<br>    );<br>    vector.<span class="hljs-title function_">unproject</span>(camera);<br>    vector.<span class="hljs-title function_">applyMatrix4</span>(camera.<span class="hljs-property">matrixWorldInverse</span>);<br>    <span class="hljs-keyword">return</span> vector;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>这里的<code>hyper_z</code>网上很多教程认为是写0.5,但是我实际试了一下，发现效果很差，就把他改成了一个超参数。后来在一位不能透露姓名的大佬的帮助下，得知这个参数的值应该写成1。我试了下，勉强可以得到预期的效果</p>
-<h2 id="通过深度图采样shader改深度缓冲">通过深度图采样，shader改深度缓冲</h2>
-<p>这种方法是通过深度图采样，shader改深度缓冲，然后再通过深度缓冲得到3D坐标。这种方法的优点是可以得到更精确的3D坐标，但是缺点是需要使用shader，而且需要修改深度缓冲，可能会影响性能。</p>
-<p>感谢chatGPT，我只需要把我需要的内容告诉他，他就会给我写一个完整的代码。 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">convert2Dto3D</span>(<span class="hljs-params">mouseX, mouseY, camera, width, height, scene</span>) &#123;<br>        <span class="hljs-comment">// 构建纹理</span><br>        <span class="hljs-keyword">var</span> depthTarget = <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">WebGLRenderTarget</span>(width, height);<br>        depthTarget.<span class="hljs-property">texture</span>.<span class="hljs-property">minFilter</span> = <span class="hljs-variable constant_">THREE</span>.<span class="hljs-property">LinearFilter</span>;<br><br>        <span class="hljs-comment">// 渲染深度图</span><br>        renderer.<span class="hljs-title function_">render</span>(scene, camera, depthTarget);<br><br>        <span class="hljs-comment">// 创建着色器</span><br>        <span class="hljs-keyword">var</span> material = <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">ShaderMaterial</span>(&#123;<br>            <span class="hljs-attr">uniforms</span>: &#123;<br>                <span class="hljs-attr">mouse</span>: &#123; <span class="hljs-attr">value</span>: <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">Vector2</span>(mouseX, mouseY) &#125;,<br>                <span class="hljs-attr">depthMap</span>: &#123; <span class="hljs-attr">value</span>: depthTarget.<span class="hljs-property">texture</span> &#125;,<br>                <span class="hljs-attr">projectionMatrix</span>: &#123; <span class="hljs-attr">value</span>: camera.<span class="hljs-property">projectionMatrix</span> &#125;,<br>                <span class="hljs-attr">viewMatrix</span>: &#123; <span class="hljs-attr">value</span>: camera.<span class="hljs-property">matrixWorldInverse</span> &#125;<br>            &#125;,<br>            <span class="hljs-attr">vertexShader</span>: <span class="hljs-string">`</span><br><span class="hljs-string">                uniform vec2 mouse;</span><br><span class="hljs-string">                uniform mat4 projectionMatrix;</span><br><span class="hljs-string">                uniform mat4 viewMatrix;</span><br><span class="hljs-string">                uniform sampler2D depthMap;</span><br><span class="hljs-string">                varying vec4 pos;</span><br><span class="hljs-string">                void main() &#123;</span><br><span class="hljs-string">                    pos = vec4(position, 1.0);</span><br><span class="hljs-string">                    gl_Position = projectionMatrix * viewMatrix * pos;</span><br><span class="hljs-string">                &#125;</span><br><span class="hljs-string">            `</span>,<br>            <span class="hljs-attr">fragmentShader</span>: <span class="hljs-string">`</span><br><span class="hljs-string">                uniform vec2 mouse;</span><br><span class="hljs-string">                uniform sampler2D depthMap;</span><br><span class="hljs-string">                varying vec4 pos;</span><br><span class="hljs-string">                void main() &#123;</span><br><span class="hljs-string">                    float depth = texture2D(depthMap, mouse).r;</span><br><span class="hljs-string">                    vec4 viewPos = vec4(mouse * 2.0 - 1.0, depth * 2.0 - 1.0, 1.0);</span><br><span class="hljs-string">                    vec4 worldPos = viewMatrix * viewPos;</span><br><span class="hljs-string">                    worldPos /= worldPos.w;</span><br><span class="hljs-string">                    gl_FragColor = vec4(worldPos.xyz, 1.0);</span><br><span class="hljs-string">                &#125;</span><br><span class="hljs-string">            `</span><br>        &#125;);<br><br>        <span class="hljs-comment">// 创建一个平面作为渲染目标</span><br>        <span class="hljs-keyword">var</span> plane = <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">PlaneBufferGeometry</span>(width, height);<br>        <span class="hljs-keyword">var</span> mesh = <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">Mesh</span>(plane, material);<br>        scene.<span class="hljs-title function_">add</span>(mesh);<br><br>        <span class="hljs-comment">// 渲染一次着色器并获取结果</span><br>        renderer.<span class="hljs-title function_">render</span>(scene, camera);<br>        <span class="hljs-keyword">var</span> pixelBuffer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Uint8Array</span>(<span class="hljs-number">4</span>);<br>        renderer.<span class="hljs-title function_">readRenderTargetPixels</span>(depthTarget, mouseX, height - mouseY, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, pixelBuffer);<br>        <span class="hljs-keyword">var</span> worldPos = <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">Vector3</span>(<br>            (pixelBuffer[<span class="hljs-number">0</span>] / <span class="hljs-number">255</span>) * <span class="hljs-number">2</span> - <span class="hljs-number">1</span>,<br>            (pixelBuffer[<span class="hljs-number">1</span>] / <span class="hljs-number">255</span>) * <span class="hljs-number">2</span> - <span class="hljs-number">1</span>,<br>            (pixelBuffer[<span class="hljs-number">2</span>] / <span class="hljs-number">255</span>) * <span class="hljs-number">2</span> - <span class="hljs-number">1</span><br>        );<br>        worldPos.<span class="hljs-title function_">applyMatrix4</span>(camera.<span class="hljs-property">matrixWorldInverse</span>);<br>        scene.<span class="hljs-title function_">remove</span>(mesh);<br>        <span class="hljs-keyword">return</span> worldPos;<br>    &#125;,<br><br>    <span class="hljs-comment">//获取触摸点的坐标并转换为ThreeJS中的坐标</span><br>    <span class="hljs-attr">touch_crash_detect</span>: <span class="hljs-keyword">function</span> <span class="hljs-title function_">touch_crash_detect</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;touchmove&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> &#123;<br>            <span class="hljs-comment">// screen3D_to_3DCoord(event.touches[0].clientX, event.touches[0].clientY,camera, window.innerWidth, window.innerHeight);</span><br>            <span class="hljs-keyword">let</span> pos = space_pos_convert.<span class="hljs-title function_">get3DPosition</span>(event.<span class="hljs-property">touches</span>[<span class="hljs-number">0</span>].<span class="hljs-property">clientX</span>, event.<span class="hljs-property">touches</span>[<span class="hljs-number">0</span>].<span class="hljs-property">clientY</span>, camera, scene, <span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">if</span> (pos.<span class="hljs-property">y</span> != <span class="hljs-number">0</span>) &#123;<br>                pos.<span class="hljs-property">y</span> = <span class="hljs-number">0</span>;<br>            &#125;<br>            <span class="hljs-keyword">return</span> pos;<br>            <span class="hljs-comment">// playerMesh.position.set(pos.x, pos.y, pos.z);</span><br>        &#125;);<br>    &#125;<br></code></pre></td></tr></table></figure></p>
+                <h1 id="dalle2笔记">DALLE2笔记</h1>
+<iframe src="//player.bilibili.com/player.html?aid=770625648&amp;bvid=BV17r4y1u77B&amp;cid=766807720&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">
+</iframe>
+<h2 id="abstract">Abstract</h2>
+<pre><code class=" mermaid">graph LR;
+文本--CLIP模型--&gt;文本特征;
+文本特征--prior生成图像特征--&gt;两阶段模型;
+两阶段模型--decoder--&gt;图像;
+文本--ground truth--&gt;两阶段模型;
+</code></pre>
+<p>基于扩散模型的解码器能够通过给定信息的解码器，生成很多不一样的图片 ，语义信息和风格比较接近，只是细节不一样。</p>
+<p>可以直接修改和编辑模型，是zero-shot的，不需要重新训练。</p>
+<p>整体上Dalle2都是一个扩散模型 ## Introduction 扩散模型是一种概率分布模型，生成图片是从一个分布中采样，多样性很高，保真度比不过GAN。20年之后有一系列模型改进了这一点。这一系列工作采用了很多技巧，其中一个比较著名的是引导guideance technique，能够牺牲一部分多样性来达到更好的保真度。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230209161230.png" srcset="/img/loading.gif" lazyload /> 上半部分说的是CLIP，下半部分是DALLE2。</p>
+<p>CLIP模型中文本和图像分别通过一个文本编码器和一个图像编码器，得到一个文本特征和一个图像特征。对应的文本特征和图像特征之间就是正样本，不对应的就是负样本。通过这种方式来做对比学习，把文本编码器和图像编码器都学的很好，文本和图像的特征就真的联系在了一起。CLIP模型训练好了之后，文本编码器和图像编码器就锁住了，在Dalle2中就不会再训练了。</p>
+<p>两阶段训练方式最暴力的方式其实是中间有个大模型，中间去学一些融合的特征，直接生成就可以了。但如何像作者在摘要所说的，中间有一个显式的生成过程，先从文本生成文本特征，再生成图像特征再由图像特征生成图片效果就会好很多。</p>
+<p>训练的时候，先用已有图像(CLIP模型中的图片)生成的图像特征作为ground truth去监督，也就是用文本特征来预测ground truth这个图像特征。推理的时候由文本特征就可以直接生成类似CLIP生成的图像特征。</p>
+<h2 id="图像生成">图像生成</h2>
+<h3 id="gan">GAN</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171156.png" srcset="/img/loading.gif" lazyload /> 训练两个网络，一个是生成器，一个是判别器。生成器的目标是生成一个和真实图片尽可能相似的图片，判别器的目标是判断一个图片是真实的还是生成的。两个网络相互竞争，最终生成器生成的图片和真实图片的分布越来越接近。</p>
+<p>有一个缺点就是训练不够稳定，因为需要同时训练两个网络。此外多样性比较差。 ### auto-encoder <img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171228.png" srcset="/img/loading.gif" lazyload /> 给定一个输入x，过一个编码器，然后就能得到一个特征z(特征维度一般会小很多，所以管他叫bottleneck)，再过一个解码器，得到一个图像。训练时的目标函数就是尽可能重建原来输入x</p>
+<h3 id="denoising-auto-encoder">denoising auto-encoder</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171318.png" srcset="/img/loading.gif" lazyload /> 先把原图进行一定的打乱，然后把扰乱之后的特征传给编码器，后续和auto-encoder一样。训练时的目标函数还是尽可能重建原来输入x</p>
+<h3 id="varitional-auto-encoder">varitional auto-encoder</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171503.png" srcset="/img/loading.gif" lazyload /> 中间不在是学习一个特征，而是去学习了一个分布。作者假设了中间是一个高斯分布，就可以用均值和方差来表示。具体来说就是得到编码器出来的特征之后，在后面加一些fc层，预测一个均值和方差，得到对应的均值和方差之后，我们用公式<span class="math inline">\(z=u+\sigma\epsilon\)</span>采样一个z出来,然后给解码器。</p>
+<p>预测的时候，我们可以把编码器去掉，直接用均值和方差来预测。</p>
+<p>从数学角度讲，这个模型是一个概率模型，给定x得到z这一过程就是一个后验概率，学出来的distribution就是一个先验分布，给定z预测x就是likelihood,这里做的就是maximum likelihood。</p>
+<p>图像多样性好得多</p>
+<h3 id="vqvaevector-quantised-vae">VQVAE(vector quantised VAE)</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171524.png" srcset="/img/loading.gif" lazyload /> 将VAE做量化。之前的VAE不好把图片做大，分类也不是很好学，所以取而代之的是不做分布的预测，而是以codebook代替。cookbook可以理解成聚类的中心，cookbook大小一般是<span class="math inline">\(K*D\)</span>,<span class="math inline">\(K\)</span>的大小一般是8192，<span class="math inline">\(D\)</span>的大小一般是512或者768，意思是由8912个长度为D的向量。</p>
+<p>输入x先经过一个编码器，得到一个特征图大小为<span class="math inline">\(h*w\)</span>,将特征图里的向量和cookbook里的特征做对比，看和哪个聚类中心最接近，然后把聚类中心的编码存到矩阵Z中，用矩阵z作为新的特征。</p>
+<p>优化起来相对容易。</p>
+<p>想做生成的话，就需要再训练一个prior网络.论文作者训练了一个pixelCNN，用来生成图片。</p>
+<h3 id="vqvae2">VQVAE2</h3>
+<p>模型变成了层级式的，加入了全局式的建模，加上了attention，表达能力增强。把pixelCNN换成了GPT.</p>
+<h3 id="dall-e">DALL-E</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171634.png" srcset="/img/loading.gif" lazyload /> 文本先通过BPE编码，得到一个256维特征。还有一个图像，256<em>256,经过一个VQ-VAE(来自训练好的cookbook，直接拿过来用),得到图像特征32</em>32,维度下降了很多，一共有1024个token，将文本特征和图像特征连接起来，变成了一个1028的序列，将序列给GPT，训练GPT。</p>
+<p>推理则是提供一个文本，得到文本特征，用GPT从文本特征徐策图片特征，用自回归的方式生成图片。生成出来的图片用CLIP排序，得到最好的图片。</p>
+<h3 id="diffusion-model">Diffusion model</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230209180240.png" srcset="/img/loading.gif" lazyload /> 假设有一个<span class="math inline">\(x_0\)</span>，每次加入一个很小的正态分布噪声，加了很多次之后就会变成一个真正的正态分布的噪声，这就是diffusion的forward过程。</p>
+<p>将过程反转，整个模型都是共享参数的。</p>
+<p>diffusion model采取了一个比较常见的模型结构U-NET,先用一个编码器把图像一点一点压小，再用一个解码器一点点恢复回来，前后尺寸大小一样。中间加上shortcut。 <img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210172229.png" srcset="/img/loading.gif" lazyload /></p>
+<p>不足时训练比较贵，推理也比较慢</p>
+<h3 id="ddpm">DDPM</h3>
+<p>DDPM是对diffusion的改进，不再去预测图片，而是去预测添加的噪声，U-NET的参数除了图像，还加入了一个time embedding用来表示到了反向扩散第几步。</p>
+<p>学习正态分布是只需要学习均值，方差设置成常数也可以表现得很好</p>
+<h3 id="classifier-guidence-diffusion">classifier guidence diffusion</h3>
+<p>反向扩散过程 <img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230209181540.png" srcset="/img/loading.gif" lazyload /></p>
+<p>训练同时训练一个图像分类器(在加了噪声的ImageNET上训练)，当有一个图片，直接扔给图片分类器，可以得到一个交叉熵损失函数，得到一个梯度，用梯度帮助图片生成(暗含了图片是否有物体)</p>
+<h3 id="classifier-free-guidance">classifier-free guidance</h3>
+<p>训练的时候生成了两个输出，一个是有条件时生成输出，一个是没有条件时生成输出。训练的时候随机去掉文本，知道有文本输出和无文本输出的差距，就可以从无条件输出得到有条件输出</p>
+<h2 id="method">method</h2>
+<p>数据集依然是图片文本对 ### decoder 用了CLIP guidence(这个guidence指的是在decoder的过程中，输入是t时刻的一个带噪声的图像，最终输出是一个图像)和classifier-free guidance，guidence信号要么来自CLIP，要么来自文本。训练的时候有10%的时间把CLIP特征设成0，有50%把文本随机丢掉。</p>
+<p>用了级联式生成，训练过程中还加入了噪声。</p>
+<h3 id="prior">prior</h3>
+<ul>
+<li>auto-regressive自回归</li>
+<li>diffusion 扩散模型 不管是auto-regressive还是diffusion，都是用了classifier-free guidance</li>
+</ul>
+<p>auto-regressive效率太低</p>
+<p>对于diffusion prior，作者训练了一个transformer decoder，输入输出是embedding,U-NET就不合适了。模型输入输入有文本，CLIP的文本特征，还有time step (步数的embedding)，还有加过噪声之后的图像特征，transformer本身的embedding(这个embedding被用来预测没有加过噪声的图像特征)。</p>
 
                 
               </div>
@@ -341,34 +401,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%B7%A5%E5%85%B7/" class="category-chain-item">工具</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/ThreeJS/">#ThreeJS</a>
-      
-    </div>
   
 </div>
 
@@ -378,8 +410,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>ThreeJS实现屏幕坐标转3d坐标</div>
-      <div>https://studyinglover.com/2023/02/04/ThreeJS实现屏幕坐标转3d坐标/</div>
+      <div>DALLE2笔记</div>
+      <div>https://studyinglover.com/2023/02/09/DALLE2笔记/</div>
     </div>
     <div class="license-meta">
       
@@ -391,7 +423,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年2月4日</div>
+          <div>2023年2月9日</div>
         </div>
       
       
@@ -423,18 +455,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/04/copliot%E6%89%8D%E6%98%AF%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91%E7%A5%9E%E5%99%A8/" title="copliot才是代码开发神器">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">copliot才是代码开发神器</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/27/%E5%9C%A8fluid%E4%B8%BB%E9%A2%98%E4%B8%AD%E5%8A%A0%E5%85%A5Google%E5%B9%BF%E5%91%8A/" title="在fluid主题中加入Google广告">
-                        <span class="hidden-mobile">在fluid主题中加入Google广告</span>
+                      <a href="/2023/02/09/Windows%E4%B8%8Byolov5%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="Windows下yolov5环境搭建">
+                        <span class="hidden-mobile">Windows下yolov5环境搭建</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

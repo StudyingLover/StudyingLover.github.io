@@ -16,16 +16,16 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="yolov5常见踩坑 not enough values to unpack (expected 2, got 0) 如图  我们需要检查一下我们标记的txt文件 举个例子 这是我们需要的标记格式 10 0.5 0.5 0.5 0.5 这是错误的标注格式 120 0.5 0.5 0.5 0.5 问题就出在了最后一行的\n上，我们删除最后一行就可以了。我用chatGPT写了一个函数来做这件事 123">
+    <meta name="description" content="yolov5环境搭建 在随便哪新建一个requirements.txt文件 内容是 1234567891011121314151617181920212223242526272829303132333435363738394041424344# YOLOv5 requirements# Usage: pip install -r requirements.txt# Base -----------">
 <meta property="og:type" content="article">
-<meta property="og:title" content="yolov5和yolov5-face常见踩坑">
+<meta property="og:title" content="yolov5和yolov5-face环境搭建和常见踩坑">
 <meta property="og:url" content="https://studyinglover.com/2023/02/07/yolov5%E5%B8%B8%E8%A7%81%E8%B8%A9%E5%9D%91/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="yolov5常见踩坑 not enough values to unpack (expected 2, got 0) 如图  我们需要检查一下我们标记的txt文件 举个例子 这是我们需要的标记格式 10 0.5 0.5 0.5 0.5 这是错误的标注格式 120 0.5 0.5 0.5 0.5 问题就出在了最后一行的\n上，我们删除最后一行就可以了。我用chatGPT写了一个函数来做这件事 123">
+<meta property="og:description" content="yolov5环境搭建 在随便哪新建一个requirements.txt文件 内容是 1234567891011121314151617181920212223242526272829303132333435363738394041424344# YOLOv5 requirements# Usage: pip install -r requirements.txt# Base -----------">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/93bbd4d663cd589dfdd522e0479bb46.png">
 <meta property="article:published_time" content="2023-02-07T16:49:00.000Z">
-<meta property="article:modified_time" content="2023-02-10T09:29:00.221Z">
+<meta property="article:modified_time" content="2023-02-13T12:31:13.953Z">
 <meta property="article:author" content="StudyingLover">
 <meta property="article:tag" content="机器视觉">
 <meta name="twitter:card" content="summary_large_image">
@@ -35,7 +35,7 @@
   
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script> 
   
-  <title>yolov5和yolov5-face常见踩坑 - plus studio</title>
+  <title>yolov5和yolov5-face环境搭建和常见踩坑 - plus studio</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -242,7 +242,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="yolov5和yolov5-face常见踩坑"></span>
+            <span id="subtitle" data-typed-text="yolov5和yolov5-face环境搭建和常见踩坑"></span>
           
         </div>
 
@@ -270,7 +270,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          4.7k 字
         
       </span>
     
@@ -281,7 +281,7 @@
         
         
         
-          10 分钟
+          40 分钟
         
       </span>
     
@@ -319,20 +319,24 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">yolov5和yolov5-face常见踩坑</h1>
+            <h1 style="display: none">yolov5和yolov5-face环境搭建和常见踩坑</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="yolov5常见踩坑">yolov5常见踩坑</h1>
-<h2 id="not-enough-values-to-unpack-expected-2-got-0">not enough values to unpack (expected 2, got 0)</h2>
+                <h2 id="yolov5环境搭建">yolov5环境搭建</h2>
+<p>在随便哪新建一个<code>requirements.txt</code>文件 内容是 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs txt"># YOLOv5 requirements<br># Usage: pip install -r requirements.txt<br><br># Base ----------------------------------------<br>matplotlib&gt;=3.2.2<br>numpy&gt;=1.18.5<br>opencv-python&gt;=4.1.1<br>Pillow&gt;=7.1.2<br>PyYAML&gt;=5.3.1<br>requests&gt;=2.23.0<br>scipy&gt;=1.4.1<br>torch&gt;=1.7.0<br>torchvision&gt;=0.8.1<br>tqdm&gt;=4.64.0<br>protobuf&lt;=3.20.1  # https://github.com/ultralytics/yolov5/issues/8012<br><br># Logging -------------------------------------<br>tensorboard&gt;=2.4.1<br># wandb<br># clearml<br><br># Plotting ------------------------------------<br>pandas&gt;=1.1.4<br>seaborn&gt;=0.11.0<br><br># Export --------------------------------------<br># coremltools&gt;=5.2  # CoreML export<br># onnx&gt;=1.9.0  # ONNX export<br># onnx-simplifier&gt;=0.4.1  # ONNX simplifier<br># nvidia-pyindex  # TensorRT export<br># nvidia-tensorrt  # TensorRT export<br># scikit-learn==0.19.2  # CoreML quantization<br># tensorflow&gt;=2.4.1  # TFLite export (or tensorflow-cpu, tensorflow-aarch64)<br># tensorflowjs&gt;=3.9.0  # TF.js export<br># openvino-dev  # OpenVINO export<br><br># Extras --------------------------------------<br>ipython  # interactive notebook<br>psutil  # system utilization<br>thop&gt;=0.1.1  # FLOPs computation<br># albumentations&gt;=1.0.3<br># pycocotools&gt;=2.0  # COCO mAP<br># roboflow<br><br></code></pre></td></tr></table></figure> 然后在当前目录下打开命令行，创建一个环境 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda create -n yolov5 python<br></code></pre></td></tr></table></figure> 创建好环境之后，激活环境 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda activate yolov5<br></code></pre></td></tr></table></figure> 然后安装依赖 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install -r requirements.txt<br></code></pre></td></tr></table></figure> 安装完成后代码就可以运行了</p>
+<h2 id="划分数据集">划分数据集</h2>
+<p>新建一个<code>split_train_val.py</code>文件，内容如下 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> shutil<br><span class="hljs-keyword">import</span> random<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">split_dataset</span>(<span class="hljs-params">src_folder, dest_folder, ratio</span>):<br>    images_folder = os.path.join(src_folder, <span class="hljs-string">&quot;images&quot;</span>)<br>    labels_folder = os.path.join(src_folder, <span class="hljs-string">&quot;labels&quot;</span>)<br><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(images_folder) <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> os.path.exists(labels_folder):<br>        <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">&quot;Source folder doesn&#x27;t exist.&quot;</span>)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(dest_folder):<br>        os.makedirs(dest_folder)<br><br>    train_folder = os.path.join(dest_folder, <span class="hljs-string">&quot;train&quot;</span>)<br>    val_folder = os.path.join(dest_folder, <span class="hljs-string">&quot;val&quot;</span>)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(train_folder):<br>        os.makedirs(train_folder)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(val_folder):<br>        os.makedirs(val_folder)<br><br>    train_images_folder = os.path.join(train_folder, <span class="hljs-string">&quot;images&quot;</span>)<br>    train_labels_folder = os.path.join(train_folder, <span class="hljs-string">&quot;labels&quot;</span>)<br>    val_images_folder = os.path.join(val_folder, <span class="hljs-string">&quot;images&quot;</span>)<br>    val_labels_folder = os.path.join(val_folder, <span class="hljs-string">&quot;labels&quot;</span>)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(train_images_folder):<br>        os.makedirs(train_images_folder)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(train_labels_folder):<br>        os.makedirs(train_labels_folder)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(val_images_folder):<br>        os.makedirs(val_images_folder)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(val_labels_folder):<br>        os.makedirs(val_labels_folder)<br><br>    images = [f <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> os.listdir(images_folder) <span class="hljs-keyword">if</span> f.endswith(<span class="hljs-string">&quot;.bmp&quot;</span>) ]<br>    num_images = <span class="hljs-built_in">len</span>(images)<br><br>    <span class="hljs-keyword">for</span> i, image <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(images):<br>        image_path = os.path.join(images_folder, image)<br>        label_path = os.path.join(labels_folder, os.path.splitext(image)[<span class="hljs-number">0</span>] + <span class="hljs-string">&quot;.txt&quot;</span>)<br>        <span class="hljs-keyword">if</span> random.uniform(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>) &lt; ratio:<br>            dest_images_folder = train_images_folder<br>            dest_labels_folder = train_labels_folder<br>        <span class="hljs-keyword">else</span>:<br>            dest_images_folder = val_images_folder<br>            dest_labels_folder = val_labels_folder<br>        shutil.copy2(image_path, os.path.join(dest_images_folder, image))<br>        shutil.copy2(label_path, os.path.join(dest_labels_folder, os.path.splitext(image)[<span class="hljs-number">0</span>] + <span class="hljs-string">&quot;.txt&quot;</span>))<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Copied &#123;&#125;/&#123;&#125; images&quot;</span>.<span class="hljs-built_in">format</span>(i + <span class="hljs-number">1</span>, num_images))<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    src_folder = <span class="hljs-string">&quot;&quot;</span><span class="hljs-comment"># 原始数据集的路径</span><br>    dest_folder = <span class="hljs-string">&quot;&quot;</span><span class="hljs-comment"># 分割后的数据集的路径</span><br>    ratio = <span class="hljs-number">0.8</span>  <span class="hljs-comment"># 将 80% 的图片分到训练集，20% 的图片分到验证集</span><br><br>    split_dataset(src_folder, dest_folder, ratio)<br><br></code></pre></td></tr></table></figure> 划分训练集和验证集，运行<code>split_train_val.py</code>，传入刚才保存的文件夹路径，会将图片和标签划分到一个新的文件夹 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">-</span> data<br><span class="hljs-bullet">    -</span> train<br><span class="hljs-bullet">        -</span> images<br><span class="hljs-bullet">        -</span> labels<br><span class="hljs-bullet">    -</span> val<br><span class="hljs-bullet">        -</span> images<br><span class="hljs-bullet">        -</span> labels<br></code></pre></td></tr></table></figure></p>
+<h2 id="yolov5常见踩坑">yolov5常见踩坑</h2>
+<h3 id="not-enough-values-to-unpack-expected-2-got-0">not enough values to unpack (expected 2, got 0)</h3>
 <p>如图 <img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/93bbd4d663cd589dfdd522e0479bb46.png" srcset="/img/loading.gif" lazyload /></p>
 <p>我们需要检查一下我们标记的txt文件 举个例子</p>
 <p>这是我们需要的标记格式</p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs txt">0 0.5 0.5 0.5 0.5<br></code></pre></td></tr></table></figure>
 <p>这是错误的标注格式 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs txt">0 0.5 0.5 0.5 0.5<br><br></code></pre></td></tr></table></figure></p>
 <p>问题就出在了最后一行的<code>\n</code>上，我们删除最后一行就可以了。我用chatGPT写了一个函数来做这件事 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 去除txt文件中的空行</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">remove_empty_lines</span>(<span class="hljs-params">file_path</span>):<br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(file_path, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        lines = f.readlines()<br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(file_path, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> lines:<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(line)&gt;<span class="hljs-number">3</span>:<br>                f.write(line)<br></code></pre></td></tr></table></figure></p>
-<h2 id="assertionerror-no-results.txt-files-found-in-contentyolov5-facerunstrainexp-nothing-to-plot.">AssertionError: No results.txt files found in /content/yolov5-face/runs/train/exp, nothing to plot.</h2>
+<h3 id="assertionerror-no-results.txt-files-found-in-contentyolov5-facerunstrainexp-nothing-to-plot.">AssertionError: No results.txt files found in /content/yolov5-face/runs/train/exp, nothing to plot.</h3>
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs stata">Traceback (most recent call last):<br><span class="hljs-keyword">File</span> <span class="hljs-string">&quot;train.py&quot;</span>, <span class="hljs-keyword">line</span> 513, <span class="hljs-keyword">in</span><br>train(hyp, opt, device, tb_writer, wandb)<br><span class="hljs-keyword">File</span> <span class="hljs-string">&quot;train.py&quot;</span>, <span class="hljs-keyword">line</span> 400, <span class="hljs-keyword">in</span> train<br>plot_results(save_dir=save_dir) # <span class="hljs-keyword">save</span> <span class="hljs-keyword">as</span> results.png<br><span class="hljs-keyword">File</span> <span class="hljs-string">&quot;/content/yolov5-face/utils/plots.py&quot;</span>, <span class="hljs-keyword">line</span> 393, <span class="hljs-keyword">in</span> plot_results<br><span class="hljs-keyword">assert</span> len(files), &#x27;<span class="hljs-keyword">No</span> results.txt files found <span class="hljs-keyword">in</span> %s, nothing to <span class="hljs-keyword">plot</span>.&#x27; % os.path.abspath(save_dir)<br>AssertionError: <span class="hljs-keyword">No</span> results.txt files found <span class="hljs-keyword">in</span> /content/yolov5-face/runs/train/exp, nothing to <span class="hljs-keyword">plot</span>.<br></code></pre></td></tr></table></figure>
 <p>出现这个问题的原因是此代码块未运行 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Results</span><br>       <span class="hljs-keyword">if</span> ckpt.get(<span class="hljs-string">&#x27;training_results&#x27;</span>) <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>           <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(results_file, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> file:<br>               file.write(ckpt[<span class="hljs-string">&#x27;training_results&#x27;</span>])  <span class="hljs-comment"># write results.txt</span><br></code></pre></td></tr></table></figure> 如果你只使用单 GPU 并设置 epoch &lt;20，这个块将不起作用。解决方案是设置epoch&gt;20。</p>
 
@@ -380,7 +384,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>yolov5和yolov5-face常见踩坑</div>
+      <div>yolov5和yolov5-face环境搭建和常见踩坑</div>
       <div>https://studyinglover.com/2023/02/07/yolov5常见踩坑/</div>
     </div>
     <div class="license-meta">
@@ -425,9 +429,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/09/Windows%E4%B8%8Byolov5%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="Windows下yolov5环境搭建">
+                      <a href="/2023/02/09/DALLE2%E7%AC%94%E8%AE%B0/" title="DALLE2笔记">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Windows下yolov5环境搭建</span>
+                        <span class="hidden-mobile">DALLE2笔记</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

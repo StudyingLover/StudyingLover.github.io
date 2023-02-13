@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210172229.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230209181540.png">
 <meta property="article:published_time" content="2023-02-09T15:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-10T09:29:00.221Z">
+<meta property="article:modified_time" content="2023-02-13T12:31:13.953Z">
 <meta property="article:author" content="StudyingLover">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230209161230.png">
@@ -344,7 +344,8 @@
 </code></pre>
 <p>基于扩散模型的解码器能够通过给定信息的解码器，生成很多不一样的图片 ，语义信息和风格比较接近，只是细节不一样。</p>
 <p>可以直接修改和编辑模型，是zero-shot的，不需要重新训练。</p>
-<p>整体上Dalle2都是一个扩散模型 ## Introduction 扩散模型是一种概率分布模型，生成图片是从一个分布中采样，多样性很高，保真度比不过GAN。20年之后有一系列模型改进了这一点。这一系列工作采用了很多技巧，其中一个比较著名的是引导guideance technique，能够牺牲一部分多样性来达到更好的保真度。</p>
+<p>整体上Dalle2都是一个扩散模型 ## Introduction</p>
+<p>扩散模型是一种概率分布模型，生成图片是从一个分布中采样，多样性很高，保真度比不过GAN。20年之后有一系列模型改进了这一点。这一系列工作采用了很多技巧，其中一个比较著名的是引导guideance technique，能够牺牲一部分多样性来达到更好的保真度。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230209161230.png" srcset="/img/loading.gif" lazyload /> 上半部分说的是CLIP，下半部分是DALLE2。</p>
 <p>CLIP模型中文本和图像分别通过一个文本编码器和一个图像编码器，得到一个文本特征和一个图像特征。对应的文本特征和图像特征之间就是正样本，不对应的就是负样本。通过这种方式来做对比学习，把文本编码器和图像编码器都学的很好，文本和图像的特征就真的联系在了一起。CLIP模型训练好了之后，文本编码器和图像编码器就锁住了，在Dalle2中就不会再训练了。</p>
 <p>两阶段训练方式最暴力的方式其实是中间有个大模型，中间去学一些融合的特征，直接生成就可以了。但如何像作者在摘要所说的，中间有一个显式的生成过程，先从文本生成文本特征，再生成图像特征再由图像特征生成图片效果就会好很多。</p>
@@ -352,7 +353,8 @@
 <h2 id="图像生成">图像生成</h2>
 <h3 id="gan">GAN</h3>
 <p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171156.png" srcset="/img/loading.gif" lazyload /> 训练两个网络，一个是生成器，一个是判别器。生成器的目标是生成一个和真实图片尽可能相似的图片，判别器的目标是判断一个图片是真实的还是生成的。两个网络相互竞争，最终生成器生成的图片和真实图片的分布越来越接近。</p>
-<p>有一个缺点就是训练不够稳定，因为需要同时训练两个网络。此外多样性比较差。 ### auto-encoder <img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171228.png" srcset="/img/loading.gif" lazyload /> 给定一个输入x，过一个编码器，然后就能得到一个特征z(特征维度一般会小很多，所以管他叫bottleneck)，再过一个解码器，得到一个图像。训练时的目标函数就是尽可能重建原来输入x</p>
+<p>有一个缺点就是训练不够稳定，因为需要同时训练两个网络。此外多样性比较差。 ### auto-encoder</p>
+<p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171228.png" srcset="/img/loading.gif" lazyload /> 给定一个输入x，过一个编码器，然后就能得到一个特征z(特征维度一般会小很多，所以管他叫bottleneck)，再过一个解码器，得到一个图像。训练时的目标函数就是尽可能重建原来输入x</p>
 <h3 id="denoising-auto-encoder">denoising auto-encoder</h3>
 <p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171318.png" srcset="/img/loading.gif" lazyload /> 先把原图进行一定的打乱，然后把扰乱之后的特征传给编码器，后续和auto-encoder一样。训练时的目标函数还是尽可能重建原来输入x</p>
 <h3 id="varitional-auto-encoder">varitional auto-encoder</h3>
@@ -384,7 +386,8 @@
 <h3 id="classifier-free-guidance">classifier-free guidance</h3>
 <p>训练的时候生成了两个输出，一个是有条件时生成输出，一个是没有条件时生成输出。训练的时候随机去掉文本，知道有文本输出和无文本输出的差距，就可以从无条件输出得到有条件输出</p>
 <h2 id="method">method</h2>
-<p>数据集依然是图片文本对 ### decoder 用了CLIP guidence(这个guidence指的是在decoder的过程中，输入是t时刻的一个带噪声的图像，最终输出是一个图像)和classifier-free guidance，guidence信号要么来自CLIP，要么来自文本。训练的时候有10%的时间把CLIP特征设成0，有50%把文本随机丢掉。</p>
+<p>数据集依然是图片文本对 ### decoder</p>
+<p>用了CLIP guidence(这个guidence指的是在decoder的过程中，输入是t时刻的一个带噪声的图像，最终输出是一个图像)和classifier-free guidance，guidence信号要么来自CLIP，要么来自文本。训练的时候有10%的时间把CLIP特征设成0，有50%把文本随机丢掉。</p>
 <p>用了级联式生成，训练过程中还加入了噪声。</p>
 <h3 id="prior">prior</h3>
 <ul>
@@ -459,8 +462,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/09/Windows%E4%B8%8Byolov5%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="Windows下yolov5环境搭建">
-                        <span class="hidden-mobile">Windows下yolov5环境搭建</span>
+                      <a href="/2023/02/07/yolov5%E5%B8%B8%E8%A7%81%E8%B8%A9%E5%9D%91/" title="yolov5和yolov5-face环境搭建和常见踩坑">
+                        <span class="hidden-mobile">yolov5和yolov5-face环境搭建和常见踩坑</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

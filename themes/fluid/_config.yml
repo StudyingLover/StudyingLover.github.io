@@ -1050,6 +1050,12 @@ links:
       link: "https://blog.aoaostar.com",
       avatar: "https://avatars.githubusercontent.com/u/86001674"
     }
+    - {
+      title: "瑞奇",
+      intro: "一个心怀浪漫的少年",
+      link: "https://rich-blog.cn",
+      avatar: "https://cdn.jsdelivr.net/gh/StudyingLover/anything/pearl.jpg"
+    }
 
   # 当成员头像加载失败时，替换为指定图片
   # When the member avatar fails to load, replace the specified image

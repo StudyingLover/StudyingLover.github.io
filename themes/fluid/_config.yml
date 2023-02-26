@@ -33,9 +33,9 @@ tab_title_separator: " - "
 force_https: false
 
 # 自定义html头
-custom_head: '
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script>
-     '
+# custom_head: '
+# <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script>
+#      '
 
 # 代码块的增强配置
 # Enhancements to code blocks

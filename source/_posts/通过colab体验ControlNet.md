@@ -1,11 +1,11 @@
 ---
-title: 通过coalb体验ControlNet
+title: 通过colab体验ControlNet
 banner_img: https://i.imgtg.com/2023/01/29/S2miD.jpg
 date: 2023-3-20 15:50:00
 tags:
 - 图像生成
 ---
-# 通过coalb体验ControlNet
+# 通过colab体验ControlNet
 首先，我们要会xxxx并且有一个Google账号。这是一句废话。
 
 访问[https://colab.research.google.com/](https://colab.research.google.com/) 然后登陆自己的谷歌账号，

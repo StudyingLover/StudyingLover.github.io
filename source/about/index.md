@@ -24,5 +24,5 @@ date: 2023-01-26 10:49:25
 <img width="100%" alt="game gif" src="https://cdn.jsdelivr.net/gh/StudyingLover/StudyingLover/assets/github-contribution-grid-snake.gif"/>
 
 ## How to reach me:
-- GitHub: [https://github.com/StudyingLover][github] (Why not follow me? :eyes:)
-- Email: [studyinglover@outlook.com][e-mail]
+- GitHub: [github](https://github.com/StudyingLover) (Why not follow me? :eyes:)
+- Email: [e-mail](studyinglover@outlook.com)

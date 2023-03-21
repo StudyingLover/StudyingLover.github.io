@@ -1,6 +1,6 @@
 ---
 title: Everybody Dance Now笔记
-banner_img: https://drive.studyinglover.com/api/raw/?path=/photos/blog/1930f5e45b0e2da27cdca61d93aa827d.png
+banner_img: https://drive.studyinglover.com/api/raw/?path=/photos/blog/background/1679397019134.png
 date: 2023-03-11 16:38:00
 categories:
 - 笔记

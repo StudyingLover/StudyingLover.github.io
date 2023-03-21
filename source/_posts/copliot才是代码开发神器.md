@@ -1,6 +1,6 @@
 ---
 title: copliot才是代码开发神器
-banner_img: https://cloud.studyinglover.com/api/raw/?path=/photos/blog/d72965259b2c152ec5b59f33d3895a3c.png
+banner_img: https://drive.studyinglover.com/api/raw/?path=/photos/blog/background/d72965259b2c152ec5b59f33d3895a3c.png
 date: 2023-2-4 21:45:00
 categories:
 - 工具

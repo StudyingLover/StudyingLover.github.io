@@ -1,6 +1,6 @@
 ---
 title: DALLE2笔记
-banner_img: https://cloud.studyinglover.com/api/raw/?path=/photos/blog/2b6e09b241205c9096005705c855453d.jpg
+banner_img: https://drive.studyinglover.com/api/raw/?path=/photos/blog/background/1930f5e45b0e2da27cdca61d93aa827d.png
 date: 2023-2-9 15:00:00
 
 ---

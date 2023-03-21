@@ -1,6 +1,6 @@
 ---
 title: Cascade EF-GAN笔记
-banner_img: https://drive.studyinglover.com/api/raw/?path=/photos/blog/2b6e09b241205c9096005705c855453d.jpg
+banner_img: https://drive.studyinglover.com/api/raw/?path=/photos/blog/background/2b6e09b241205c9096005705c855453d.jpg
 date: 2023-03-12 16:25:00
 categories:
 - 笔记

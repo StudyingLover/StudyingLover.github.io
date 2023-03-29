@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Imagic笔记</title>
+    <link href="/2023/03/29/Imagic%E7%AC%94%E8%AE%B0/"/>
+    <url>/2023/03/29/Imagic%E7%AC%94%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="imagic笔记">Imagic笔记</h1><p>先前的工作大多数方法目前仅限于以下一种:特定的编辑类型(例如，对象叠加，样式转换)，合成生成的图像，或需要一个共同对象的多个输入图像。文章作者展示了将复杂的基于文本的语义编辑应用于单个真实图像的能力。与之前的工作相反，这篇文章提出的方法只需要一个输入图像和一个目标文本(所需的编辑)。它生成一个与输入图像和目标文本一致的文本嵌入，同时微调扩散模型以捕获特定于图像的外观。</p><p>扩散模型是一种强大的最先进的生成模型，能够进行高质量的图像合成。在自然语言文本提示的条件下，它们能够生成与所请求的文本很好地对齐的图像。在工作中使用它们来编辑真实的图像，而不是合成新的图像。文章作者通过一个简单的3步过程来实现这一点，如图所示:首先优化文本嵌入，使其生成与输入图像相似的图像。然后，对预训练的生成扩散模型(以优化的嵌入为条件)进行微调，以更好地重建输入图像。最后，在目标文本嵌入和优化后的文本之间进行线性插值，得到一个结合了输入图像和目标文本的表示。然后将这种表示传递给带有微调模型的生成扩散过程，输出最终编辑的图像。 <img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230312151044.png" alt="image.png" /></p><p>作者这进一步得到了一项人类感知评估研究的支持，在一项名为TEdBench -文本编辑基准的新基准测试中，评分者强烈倾向于图像而不是其他方法。</p><h2 id="方法">方法</h2><p>作者将整个过程分成三个部分</p><ul><li>优化文本嵌入，以在目标文本嵌入附近找到与给定图像最匹配的文本嵌入</li><li>微调扩散模型，以更好地匹配给定的图像</li><li>在优化的嵌入和目标文本嵌入之间进行线性插值，以找到一个既能达到输入图像的保真度又能达到目标文本对齐的点。</li></ul><h3 id="text-embedding-optimization">Text embedding optimization</h3><p>目标文本首先通过文本编码器，它输出其对应的文本嵌入<span class="math inline">\(\textbf{e}_{tgt}\in\mathbb{R}^{T\times d}\)</span> ，其中<span class="math inline">\(T\)</span>是给定目标文本中的标记数，<span class="math inline">\(d\)</span>是标记嵌入维数。然后冻结生成扩散模型<span class="math inline">\(f_\theta\)</span>的 参数，并使用[[DDPM]]目标<span class="math display">\[\mathcal{L}(\mathbf{x},\mathbf{e},\theta)=\mathbb{E}_{t,\epsilon}\left[\left\|\epsilon-f_{\theta}(\mathbf{x}_{t},t,\mathbf{e})\right\|_{2}^{2}\right]\]</span>优化目标文本嵌入<span class="math inline">\(E_{tgt}\)</span>.其中<span class="math inline">\(t\sim Uniform[1,T]\)</span> , <span class="math inline">\(x_t\)</span>是使用<span class="math inline">\(\boldsymbol{\epsilon}{\sim}\mathcal{N}(0,\text{I})\)</span>和方程1获得的x(输入图像)的噪声版本，<span class="math inline">\(\theta\)</span>是预训练的扩散模型权重。这将产生与输入图像尽可能匹配的文本嵌入。作者运行这个过程的步骤相对较少，以保持接近最初的目标文本嵌入，获得<span class="math inline">\(E_{opt}\)</span>。这种接近性在嵌入空间中实现了有意义的线性插值，而对于遥远的嵌入不表现出线性行为。</p><figure><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230312163802.png" alt="" /><figcaption>image.png</figcaption></figure><h3 id="model-fine-tuning">Model fine-tuning</h3><p>请注意，当经过生成扩散过程时，得到的优化嵌入<span class="math inline">\(E_{opt}\)</span>并不一定会导致输入图像<span class="math inline">\(X_{exactly}\)</span>，因为作者的方法优化运行了少量步骤(见图7中的左上角图像)。因此，在方法的第二阶段，通过使用公式2中所示的相同损失函数优化模型参数<span class="math inline">\(\theta\)</span>来缩小这一差距，同时冻结优化的嵌入。这个过程移动模型以适应输入图像<span class="math inline">\(x\)</span>在点<span class="math inline">\(E_{opt}\)</span>处的位置。同时，微调底层生成方法中出现的任何辅助扩散模型，例如超分辨率模型。作者用相同的重构损失对它们进行微调，但以<span class="math inline">\(E_{tgt}\)</span>为条件，因为<span class="math inline">\(E_{opt}\)</span>仅针对基本模型进行了优化。这些辅助模型的优化确保了保留基本分辨率中不存在的<span class="math inline">\(x\)</span>的高频细节 <img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230312164454.png" alt="image.png" /></p><h3 id="text-embedding-interpolation">Text embedding interpolation</h3><p>由于生成扩散模型被训练为在优化的嵌入<span class="math inline">\(E_{opt}\)</span>处完全重建输入图像，作者使用它来应用所需的编辑，从而沿着目标文本嵌入的方向前进。更正式地说，第三阶段是<span class="math inline">\(E_{tgt}\)</span>和<span class="math inline">\(E_{opt}\)</span>之间的简单线性插值。对于给定的超参数<span class="math inline">\(\eta\in[0,1]\)</span>，就得到了<span class="math display">\[\bar{\mathbf{e}}=\eta\cdot\mathbf{e}_{tgt}+(1-\eta)\cdot\mathbf{e}_{opt}\]</span> 这是表示期望编辑图像的嵌入。然后，应用基础生成扩散过程使用微调模型，条件是<span class="math inline">\(\bar{\mathbf{e}}\)</span>。这将导致低分辨率的编辑图像，然后使用微调辅助模型，以目标文本为条件进行超分辨。这个生成过程输出最终的高分辨率编辑图像<span class="math inline">\(x\)</span>。</p><h2 id="实验">实验</h2><h3 id="消融实验">消融实验</h3><p>作者在消融研究中发现微调会强制引入来自输入图像的细节，超出了仅优化的嵌入，使他们的方案能够保留这些细节用于中间的η值，从而实现语义上有意义的线性插值。因此作者得出结论，模型微调对其方法的成功至关重要。</p><p>作者尝试了尝试了文本嵌入优化步骤的数量。作者通过实验表明通过较少的步骤优化文本嵌入将限制模型的编辑能力，而通过超过100步的优化几乎没有额外的价值。</p><h3 id="局限性">局限性</h3><p>作者在研究中发现了两种方法失败的情况：一种是所需编辑的效果非常微弱（如果有的话），因此与目标文本不太匹配；另一种是编辑效果很好，但会影响到外部图像细节，如缩放或摄像机角度。作者在第10张图中分别展示了这两种失败情况的示例。当编辑效果不够强烈时，增加η通常可以实现期望的结果，但在少数情况下会导致原始图像细节的显著丢失（对于所有测试的随机种子）。至于缩放和摄像机角度的变化，这通常发生在我们从低η值逐渐增加到较大值时，因此很难避免。作者在附录中展示了这一点，并在TEdBench中包含了额外的失败案例。这些局限性可能可以通过不同的方式优化文本嵌入或扩散模型来缓解，或者类似于<a href="https://arxiv.org/abs/2208.01626">Hertz etal.</a>的交叉关注控制。作者将这些选项留给未来的工作。</p><figure><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230329195843.png" alt="" /><figcaption>image.png</figcaption></figure><p>此外，由于该方法依赖于预训练的文本到图像扩散模型，因此继承了模型的生成限制和偏见。因此，当所需编辑涉及生成底层模型的失败案例时，会产生不必要的伪像。例如，Imagen在人脸方面的生成性能不佳</p><h2 id="结论和未来的工作">结论和未来的工作</h2><p>作者认为下一步的工作主要有两个方面 - 一是进一步提高算法对输入图像的准确性和对身份的保护，同时增强对随机种子和插值参数 η 的敏感性； - 二是开发自动选择每个请求编辑的 η 值的方法</p><p>社会影响方面作者则认为模型容易受到基于文本的生成模型的社会偏见的影响，这些技术可能被恶意方用于合成虚假的图像以误导观众。为了缓解这种情况，需要进一步研究如何识别合成编辑或生成内容</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>笔记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>图像生成</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>UE,Unity和WebGL技术对比</title>
     <link href="/2023/03/21/UE,Unity%E5%92%8CWebGL%E6%8A%80%E6%9C%AF%E5%AF%B9%E6%AF%94/"/>
     <url>/2023/03/21/UE,Unity%E5%92%8CWebGL%E6%8A%80%E6%9C%AF%E5%AF%B9%E6%AF%94/</url>

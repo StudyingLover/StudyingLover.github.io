@@ -16,34 +16,29 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="DALLE2笔记   Abstract graph LR; 文本--CLIP模型--&gt;文本特征; 文本特征--prior生成图像特征--&gt;两阶段模型; 两阶段模型--decoder--&gt;图像; 文本--ground truth--&gt;两阶段模型;  基于扩散模型的解码器能够通过给定信息的解码器，生成很多不一样的图片 ，语义信息和风格比较接近，只是细节不一样。 可以直接修改和编">
+    <meta name="description" content="Segment Anything笔记 Segment Anything project是一个用于图像分割的新任务、模型和数据集。在他刚出来的那一天，知乎等平台就已经高呼CV已死。为了这个项目，作者创建了迄今为止最大的分割数据集，1100万张在10亿次授权且尊重隐私的图像上的数据集。模型也被设计和训练成了promptable,就是说可以给他一些提示。作者在多个数据集测试了他的结果并认为结果令人满意。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DALLE2笔记">
-<meta property="og:url" content="https://studyinglover.com/2023/02/09/DALLE2%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="Segment Anything笔记">
+<meta property="og:url" content="https://studyinglover.com/2023/04/07/Segment%20Anything%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="DALLE2笔记   Abstract graph LR; 文本--CLIP模型--&gt;文本特征; 文本特征--prior生成图像特征--&gt;两阶段模型; 两阶段模型--decoder--&gt;图像; 文本--ground truth--&gt;两阶段模型;  基于扩散模型的解码器能够通过给定信息的解码器，生成很多不一样的图片 ，语义信息和风格比较接近，只是细节不一样。 可以直接修改和编">
+<meta property="og:description" content="Segment Anything笔记 Segment Anything project是一个用于图像分割的新任务、模型和数据集。在他刚出来的那一天，知乎等平台就已经高呼CV已死。为了这个项目，作者创建了迄今为止最大的分割数据集，1100万张在10亿次授权且尊重隐私的图像上的数据集。模型也被设计和训练成了promptable,就是说可以给他一些提示。作者在多个数据集测试了他的结果并认为结果令人满意。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230209161230.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171156.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171228.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171318.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171503.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171524.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171634.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230209180240.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210172229.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230209181540.png">
-<meta property="article:published_time" content="2023-02-09T15:00:00.000Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230407073917.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230407194759.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230407203046.png">
+<meta property="article:published_time" content="2023-04-07T21:40:00.000Z">
 <meta property="article:modified_time" content="2023-04-09T12:17:12.097Z">
 <meta property="article:author" content="StudyingLover">
+<meta property="article:tag" content="图像分割">
+<meta property="article:tag" content="多模态">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230209161230.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230407073917.png">
   
   
   
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script>     
   
-  <title>DALLE2笔记 - plus studio</title>
+  <title>Segment Anything笔记 - plus studio</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -244,13 +239,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://drive.studyinglover.com/api/raw/?path=/photos/blog/background/1930f5e45b0e2da27cdca61d93aa827d.png') no-repeat center center; background-size: cover;">
+     style="background: url('https://drive.studyinglover.com/api/raw/?path=/photos/blog/background/1679396994125.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="DALLE2笔记"></span>
+            <span id="subtitle" data-typed-text="Segment Anything笔记"></span>
           
         </div>
 
@@ -266,8 +261,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-09 15:00" pubdate>
-          2023年2月9日 下午
+        <time datetime="2023-04-07 21:40" pubdate>
+          2023年4月7日 晚上
         </time>
       </span>
     
@@ -278,7 +273,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.1k 字
+          5.3k 字
         
       </span>
     
@@ -289,7 +284,7 @@
         
         
         
-          26 分钟
+          45 分钟
         
       </span>
     
@@ -327,75 +322,62 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">DALLE2笔记</h1>
+            <h1 style="display: none">Segment Anything笔记</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="dalle2笔记">DALLE2笔记</h1>
-<iframe src="//player.bilibili.com/player.html?aid=770625648&amp;bvid=BV17r4y1u77B&amp;cid=766807720&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">
-</iframe>
-<h2 id="abstract">Abstract</h2>
-<pre><code class=" mermaid">graph LR;
-文本--CLIP模型--&gt;文本特征;
-文本特征--prior生成图像特征--&gt;两阶段模型;
-两阶段模型--decoder--&gt;图像;
-文本--ground truth--&gt;两阶段模型;
-</code></pre>
-<p>基于扩散模型的解码器能够通过给定信息的解码器，生成很多不一样的图片 ，语义信息和风格比较接近，只是细节不一样。</p>
-<p>可以直接修改和编辑模型，是zero-shot的，不需要重新训练。</p>
-<p>整体上Dalle2都是一个扩散模型 ## Introduction</p>
-<p>扩散模型是一种概率分布模型，生成图片是从一个分布中采样，多样性很高，保真度比不过GAN。20年之后有一系列模型改进了这一点。这一系列工作采用了很多技巧，其中一个比较著名的是引导guideance technique，能够牺牲一部分多样性来达到更好的保真度。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230209161230.png" srcset="/img/loading.gif" lazyload /> 上半部分说的是CLIP，下半部分是DALLE2。</p>
-<p>CLIP模型中文本和图像分别通过一个文本编码器和一个图像编码器，得到一个文本特征和一个图像特征。对应的文本特征和图像特征之间就是正样本，不对应的就是负样本。通过这种方式来做对比学习，把文本编码器和图像编码器都学的很好，文本和图像的特征就真的联系在了一起。CLIP模型训练好了之后，文本编码器和图像编码器就锁住了，在Dalle2中就不会再训练了。</p>
-<p>两阶段训练方式最暴力的方式其实是中间有个大模型，中间去学一些融合的特征，直接生成就可以了。但如何像作者在摘要所说的，中间有一个显式的生成过程，先从文本生成文本特征，再生成图像特征再由图像特征生成图片效果就会好很多。</p>
-<p>训练的时候，先用已有图像(CLIP模型中的图片)生成的图像特征作为ground truth去监督，也就是用文本特征来预测ground truth这个图像特征。推理的时候由文本特征就可以直接生成类似CLIP生成的图像特征。</p>
-<h2 id="图像生成">图像生成</h2>
-<h3 id="gan">GAN</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171156.png" srcset="/img/loading.gif" lazyload /> 训练两个网络，一个是生成器，一个是判别器。生成器的目标是生成一个和真实图片尽可能相似的图片，判别器的目标是判断一个图片是真实的还是生成的。两个网络相互竞争，最终生成器生成的图片和真实图片的分布越来越接近。</p>
-<p>有一个缺点就是训练不够稳定，因为需要同时训练两个网络。此外多样性比较差。 ### auto-encoder</p>
-<p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171228.png" srcset="/img/loading.gif" lazyload /> 给定一个输入x，过一个编码器，然后就能得到一个特征z(特征维度一般会小很多，所以管他叫bottleneck)，再过一个解码器，得到一个图像。训练时的目标函数就是尽可能重建原来输入x</p>
-<h3 id="denoising-auto-encoder">denoising auto-encoder</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171318.png" srcset="/img/loading.gif" lazyload /> 先把原图进行一定的打乱，然后把扰乱之后的特征传给编码器，后续和auto-encoder一样。训练时的目标函数还是尽可能重建原来输入x</p>
-<h3 id="varitional-auto-encoder">varitional auto-encoder</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171503.png" srcset="/img/loading.gif" lazyload /> 中间不在是学习一个特征，而是去学习了一个分布。作者假设了中间是一个高斯分布，就可以用均值和方差来表示。具体来说就是得到编码器出来的特征之后，在后面加一些fc层，预测一个均值和方差，得到对应的均值和方差之后，我们用公式<span class="math inline">\(z=u+\sigma\epsilon\)</span>采样一个z出来,然后给解码器。</p>
-<p>预测的时候，我们可以把编码器去掉，直接用均值和方差来预测。</p>
-<p>从数学角度讲，这个模型是一个概率模型，给定x得到z这一过程就是一个后验概率，学出来的distribution就是一个先验分布，给定z预测x就是likelihood,这里做的就是maximum likelihood。</p>
-<p>图像多样性好得多</p>
-<h3 id="vqvaevector-quantised-vae">VQVAE(vector quantised VAE)</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171524.png" srcset="/img/loading.gif" lazyload /> 将VAE做量化。之前的VAE不好把图片做大，分类也不是很好学，所以取而代之的是不做分布的预测，而是以codebook代替。cookbook可以理解成聚类的中心，cookbook大小一般是<span class="math inline">\(K*D\)</span>,<span class="math inline">\(K\)</span>的大小一般是8192，<span class="math inline">\(D\)</span>的大小一般是512或者768，意思是由8912个长度为D的向量。</p>
-<p>输入x先经过一个编码器，得到一个特征图大小为<span class="math inline">\(h*w\)</span>,将特征图里的向量和cookbook里的特征做对比，看和哪个聚类中心最接近，然后把聚类中心的编码存到矩阵Z中，用矩阵z作为新的特征。</p>
-<p>优化起来相对容易。</p>
-<p>想做生成的话，就需要再训练一个prior网络.论文作者训练了一个pixelCNN，用来生成图片。</p>
-<h3 id="vqvae2">VQVAE2</h3>
-<p>模型变成了层级式的，加入了全局式的建模，加上了attention，表达能力增强。把pixelCNN换成了GPT.</p>
-<h3 id="dall-e">DALL-E</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210171634.png" srcset="/img/loading.gif" lazyload /> 文本先通过BPE编码，得到一个256维特征。还有一个图像，256<em>256,经过一个VQ-VAE(来自训练好的cookbook，直接拿过来用),得到图像特征32</em>32,维度下降了很多，一共有1024个token，将文本特征和图像特征连接起来，变成了一个1028的序列，将序列给GPT，训练GPT。</p>
-<p>推理则是提供一个文本，得到文本特征，用GPT从文本特征徐策图片特征，用自回归的方式生成图片。生成出来的图片用CLIP排序，得到最好的图片。</p>
-<h3 id="diffusion-model">Diffusion model</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230209180240.png" srcset="/img/loading.gif" lazyload /> 假设有一个<span class="math inline">\(x_0\)</span>，每次加入一个很小的正态分布噪声，加了很多次之后就会变成一个真正的正态分布的噪声，这就是diffusion的forward过程。</p>
-<p>将过程反转，整个模型都是共享参数的。</p>
-<p>diffusion model采取了一个比较常见的模型结构U-NET,先用一个编码器把图像一点一点压小，再用一个解码器一点点恢复回来，前后尺寸大小一样。中间加上shortcut。 <img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230210172229.png" srcset="/img/loading.gif" lazyload /></p>
-<p>不足时训练比较贵，推理也比较慢</p>
-<h3 id="ddpm">DDPM</h3>
-<p>DDPM是对diffusion的改进，不再去预测图片，而是去预测添加的噪声，U-NET的参数除了图像，还加入了一个time embedding用来表示到了反向扩散第几步。</p>
-<p>学习正态分布是只需要学习均值，方差设置成常数也可以表现得很好</p>
-<h3 id="classifier-guidence-diffusion">classifier guidence diffusion</h3>
-<p>反向扩散过程 <img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230209181540.png" srcset="/img/loading.gif" lazyload /></p>
-<p>训练同时训练一个图像分类器(在加了噪声的ImageNET上训练)，当有一个图片，直接扔给图片分类器，可以得到一个交叉熵损失函数，得到一个梯度，用梯度帮助图片生成(暗含了图片是否有物体)</p>
-<h3 id="classifier-free-guidance">classifier-free guidance</h3>
-<p>训练的时候生成了两个输出，一个是有条件时生成输出，一个是没有条件时生成输出。训练的时候随机去掉文本，知道有文本输出和无文本输出的差距，就可以从无条件输出得到有条件输出</p>
-<h2 id="method">method</h2>
-<p>数据集依然是图片文本对 ### decoder</p>
-<p>用了CLIP guidence(这个guidence指的是在decoder的过程中，输入是t时刻的一个带噪声的图像，最终输出是一个图像)和classifier-free guidance，guidence信号要么来自CLIP，要么来自文本。训练的时候有10%的时间把CLIP特征设成0，有50%把文本随机丢掉。</p>
-<p>用了级联式生成，训练过程中还加入了噪声。</p>
-<h3 id="prior">prior</h3>
-<ul>
-<li>auto-regressive自回归</li>
-<li>diffusion 扩散模型 不管是auto-regressive还是diffusion，都是用了classifier-free guidance</li>
-</ul>
-<p>auto-regressive效率太低</p>
-<p>对于diffusion prior，作者训练了一个transformer decoder，输入输出是embedding,U-NET就不合适了。模型输入输入有文本，CLIP的文本特征，还有time step (步数的embedding)，还有加过噪声之后的图像特征，transformer本身的embedding(这个embedding被用来预测没有加过噪声的图像特征)。</p>
+                <h1 id="segment-anything笔记">Segment Anything笔记</h1>
+<p>Segment Anything project是一个用于图像分割的新任务、模型和数据集。在他刚出来的那一天，知乎等平台就已经高呼CV已死。为了这个项目，作者创建了迄今为止最大的分割数据集，1100万张在10亿次授权且尊重隐私的图像上的数据集。模型也被设计和训练成了promptable,就是说可以给他一些提示。作者在多个数据集测试了他的结果并认为结果令人满意。</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230407073917.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image.png</figcaption>
+</figure>
+<p>代码开源<a target="_blank" rel="noopener" href="https://github.com/facebookresearch/segment-anything">GitHub</a></p>
+<p>项目地址<a target="_blank" rel="noopener" href="https://segment-anything.com/">https://segment-anything.com/</a></p>
+<h2 id="引言">引言</h2>
+<p>作者在引言中讨论了NLP工作中prompt的巨大作用，并回顾了视觉领域多模态的重要工作CLIP和ALIGN，最后说明了他们的目标和工作。</p>
+<p>首先，在网络上经过预训练的大型语言模型凭借其强大的zero-shot和few-shot能力革新NLP，prompt的引入使得这些模型zero-shot和few-shot性能与微调模型出奇的好。经验趋势表明，这种行为随着模型规模、数据集大小和总训练计算的增加而改善。</p>
+<p>CLIP和ALIGN使用对比学习来训练对齐两种模态的文本和图像编码器。经过训练后，prompt可以实现对新视觉概念和数据分布的zero-shot概括。这种编码器还与其他模块有效组合，以实现下游任务，如图像生成（例如，DALL·E）。虽然在视觉和语言编码器方面已经取得了很大进展，但计算机视觉包括了超出这一范围的广泛问题，而且对于其中许多问题，还不存在丰富的训练数据。</p>
+<p>作者提到在这项工作中，他们的目标是建立一个图像分割的基础模型。也就是说，他们在寻求开发一个可提示的模型，并使用能够实现强大泛化的任务在广泛的数据集上对其进行预训练。有了这个模型，他们的目标是使用即时工程解决新数据分布上的一系列下游分割问题。</p>
+<p>这个计划的成功取决于三个组成部分：任务、模型和数据。为了开发它们，作者解决了以下关于图像分割的问题： 1. 什么样的样本可以实现零样本泛化 2. 相应的模型架构是什么 3. 什么样的数据可以支撑这个人物和模型</p>
+<p>这些问题错综复杂，作者首先定义了一个promptable的分割任务，这可以提供强大的预训练目标，并且有广泛的下游任务可以应用。这个任务需要一个支持灵活的prompt的模型并且可以输出分割结果。为了训练这个模型，作者需要一个多样性的，大型的数据集，因此作者构建了一个数据引擎，使用高效的模型进行迭代。作者介绍了每个组件然后是创建的数据集和有效性的实验。</p>
+<h2 id="任务">任务</h2>
+<p>作者从NLP领域获得灵感，在NLP的任务中，预测下一个token用于基础模型的训练，并通过prompt engineering 解决不同的下游任务。为了建立这样一个分割的基础模型，作者的目标书建立一个具有类似能力的任务 ### Task promptable的分割任务是给定任何prompt都能返回有效的分割掩码。有效的mask意味着即使prompt是不准确的或者涉及到多个对象的也应该的能够输出正确的或者合理的掩码。如图所示，每列显示SAM从单个不明确的点提示生成的3个有效掩码。 <img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230407194759.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
+<h3 id="预训练">预训练</h3>
+<p>promptable segmentation task 提出了一种自然的预训练算法，该算法模拟每个训练样本的提示序列（例如，点、框、掩码），并将模型的掩码预测与基本事实进行比较。作者将这种方法从交互式分割中改编出来，尽管与交互式分割不同，交互式分割的目的是在足够的用户输入后最终预测有效的掩码，但promptable segmentation task 的目的是始终预测任何提示的有效掩码，即使提示不明确的/错误的/荒谬的。</p>
+<h3 id="zero-shot-推理">Zero-shot 推理</h3>
+<p>直观地说，预训练任务赋予了模型在推理时对任何提示做出适当响应的能力，因此下游任务可以通过设计适当的提示来解决。一般来说，一系列实用的分割任务可以作为提示。除了自动数据集标记外，作者还在第7部分中的实验中探索了五个不同的示例任务。 ## 模型 SAM包括了三个部分 一个 image encoder, 一个 flexible prompt encoder, 和一个 fast mask decoder. <img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230407203046.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
+<h3 id="image-encoder">image encoder</h3>
+<p>受可扩展性和强大的预训练方法的启发，作者使用了MAE预训练的视觉转换器（ViT），该转换器至少适用于处理高分辨率输入。图像编码器每个图像运行一次，并且在prompt运行之前运行</p>
+<h3 id="prompt-encoder">prompt encoder</h3>
+<p>作者考虑了两组提示：稀疏(sparse)（点、框、文本）和密集(dense)（掩码）。MAE通过位置编码来表示点和框，这些位置编码与每个使用CLIP的现成文本编码器来编码过的prompt的学习嵌入相加。dense prompt（即掩码）使用卷积嵌入，并与图像嵌入逐元素求和。</p>
+<h3 id="mask-decoder">mask decoder</h3>
+<p>掩码解码器有效地将图像嵌入、提示嵌入和输出标记映射到掩码。这种设计受到的启发，对 Transformer decoder 进行了修改，然后是动态掩码预测头。修改后的解码器块在两个方向上使用提示自注意力和交叉注意力（(prompt-to-image embedding，反之亦然）来更新所有嵌入。在运行两个块后，对图像嵌入进行上采样，MLP将输出标记映射到动态线性分类器，然后计算每个图像位置的mask foreground 概率。</p>
+<h2 id="data-engine">Data engine</h2>
+<p>由于分割掩码在互联网上并不丰富，作者构建了一个数据引擎来实现1.1B 掩码数据集 SA-1B 的集合。</p>
+<p>数据引擎分为三个阶段：（1）模型辅助手动注释阶段，（2）混合自动预测掩码和模型辅助注释的半自动阶段，以及（3）全自动阶段，</p>
+<h3 id="手动阶段">手动阶段</h3>
+<p>在第一阶段，类似于经典的交互式分割，一组专业注释者通过使用由 SAM 驱动的基于浏览器的交互分割工具点击前景/背景对象点来标记掩码。可以使用像素精确的“刷”和“擦除”工具来细化掩码。模型辅助注释直接在浏览器内实时运行（使用预先计算的图像嵌入），从而实现真正的交互体验。标注不受语义约束，可以自由地标注"stuff" and "things"</p>
+<p><strong>注释者被要求按突出顺序标记对象，一旦掩码需要超过 30 秒进行注释，便鼓励继续下一个图像。</strong></p>
+<p>在SOTA之后，SAM就开始使用公共数据集进行训练，在经过了足够多的数据标注后，就用新标注的数据重新训练。随着收集更多的掩码，图像使用了ViT-H作为编码器。这样的模型训练一共进行了六次。随着模型的改进，每个掩码的平均注释时间从 34 秒减少到 14 秒。随着SAM的改进，每张图像的平均掩码数从20个掩码增加到44个掩码。总体而言，作者在这个阶段从 120k 张图像收集了 4.3M 掩码。</p>
+<h3 id="半自动化阶段">半自动化阶段</h3>
+<p>这个阶段的目标是增加mask的多样性。为了将标记集中在不太突出的对象上，首先自动检测confident masks。然后向注释者展示了用这些掩码预先填充的图像，并要求他们注释任何额外的未注释对象。为了检测confident masks，作者使用通用的“对象”类别在所有第一阶段掩码上训练了一个边界框检测器。在这个阶段，作者在 180k 图像中收集了一个额外的 5.9M 掩码（总共 10.2M 掩码）。在第一阶段，在新收集的数据（5 次）上定期重新训练模型。每个掩码的平均注释时间可以回到了到 34 秒（不包括自动掩码），因为这些对象对标签更具挑战性。每张图像的平均掩码数从 44 个掩码到 72 个掩码（包括自动掩码）。</p>
+<h3 id="全自动化阶段">全自动化阶段</h3>
+<p>在最后的阶段，注释是全自动的。由于模型已经获得两个主要的增强，所以这是可行的。首先，在这个阶段的开始，作者收集了足够的掩码来极大地改进模型，包括来自前一阶段的不同掩码。其次，在这个阶段，作者开发了歧义感知模型，它允许即使在模棱两可的情况下预测有效的掩码。具体来说，作者使用32×32规则网格点提示模型，对于每个点预测一组可能对应于有效对象的掩码。使用歧义感知模型，如果一个点位于部分或子部分，模型将返回子部分、部分和整个对象。模型的 IoU 预测模块用于选择自信的掩码；此外，模型识别和只选择稳定的掩码（如果阈值 0.5 - δ 的概率图和 0.5 + δ 会导致相似的掩码，就认为掩码是稳定的）。最后，在选择自信稳定的掩码后，会应用非最大抑制 (NMS) 来过滤重复项。为了进一步提高较小掩模的质量，作者还处理了多个重叠的放大图像作物。全自动掩码生成应用于数据集中的所有 11M 图像，总共产生了 1.1B 的高质量掩码。</p>
+<h2 id="数据集">数据集</h2>
+<p>SA的数据集使用data engine 构建的多样的高分辨率的有隐私保护的图像和1.1B个掩码组成。作者发布了这个这个数据集来帮助未来计算机视觉基础模型。SA-1B 将在某些研究用途的有利许可协议下发布，并为研究人员保护。 ### 图像 作者团队从直接与摄影师一起工作的提供商那里获得了一组新的高分辨率的11M图像。即使在下采样之后，这些图像的分辨率也明显高于许多现有的视觉数据集</p>
+<h3 id="掩码">掩码</h3>
+<p>数据引擎产生了 1.1B 掩码，其中 99.1% 是全自动生成的。因此，自动掩码的质量至关重要。作者团队将这些mask与专业标记的数据集进行标记，发现自动掩码对于训练模型是高质量和有效的。受这些发现的启发，SA-1B 仅包含自动生成的掩码。</p>
+<blockquote>
+<p>To estimate mask quality, we randomly sampled 500 images (∼50k masks) and asked our professional annotators to improve the quality of all masks in these images. Annotators did so using our model and pixel-precise "brush" and "eraser" editing tools. This procedure resulted in pairs of automatically predicted and professionally corrected masks. We computed IoU between each pair and found that 94% of pairs have greater than 90% IoU (and 97% of pairs have greater than 75% IoU). For comparison, prior work estimates inter-annotator consistency at 85-91% IoU [44, 60]. Our experiments in §7 confirm by human ratings that mask quality is high relative to a variety of datasets and that training our model on automatic masks is nearly as good as using all masks produced by the data engine. ## Responsible AI</p>
+</blockquote>
+<h2 id="zero-shot推理实验">Zero-Shot推理实验</h2>
+<p>作者在这里讨论了五个任务，其中四个与训练数据完全不同。这也避免了模型训练过程中能够看到答案。这几个任务分别是 1. zero-shot单点有效掩码评估 2. 执行边缘检测 3. 分割所有内容，即对象提议生成 4. 分割检测到的对象，即实例分割， 5. 作为概念验证，从自由形式的文本中分割对象。</p>
+<h2 id="讨论">讨论</h2>
+<p>自机器学习的早期以来，预训练模型已经适应下游任务。近年来，随着对规模的日益重视，这种范式变得越来越重要，并且此类模型最近被称为为“基础模型”，即"大规模在广泛的数据上训练并适应广泛的下游任务"</p>
+<p>作者的工作是与此高度相关的，尽管分割只是计算机视觉任务的一个子集。作者还将他们的方法的一个方面与另一项工作进行了对比<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2108.07258">Rishi Bommasani, Drew A Hudson, Ehsan Adeli, Russ Altman, Simran Arora, Sydney von Arx, Michael S Bernstein, Jeannette Bohg, Antoine Bosselut, Emma Brunskill, et al. On the opportunities and risks of foundation models. arXiv:2108.07258, 2021. 1, 12</a>，# On the Opportunities and Risks of Foundation Models强调了自监督学习在基础模型中的作用。虽然SA模型是用自监督技术(MAE)初始化的，但它的绝大多数能力来自于大规模的监督训练。在数据引擎可以扩展可用注释的情况下，监督训练提供了一种有效的解决方案。</p>
+<p>SA不可避免地也有一些局限性，SAM是为通用性和使用广度而设计的，不同于以往的很多工作，它不是高IoU交互式分割。虽然SAM可以执行许多任务，但目前尚不清楚如何设计简单的提示符来实现语义和全景分割。最后，还有一些领域特定的工具，它们在各自的领域中依然有希望优于SAM。</p>
+<p>总而言之，Segment Anything项目是将图像分割提升到基础模型时代的一种尝试。这项工作的主要贡献是一个新的任务(提示分割)，模型(SAM)和数据集(SA-1B)，使这一飞跃成为可能。SAM是否达到了基础模型的地位，仍然要看它在社区中是如何使用的，但这项工作的前景，超过1B个掩模的发布，以及作者的快速分割模型将有助于铺平前进的道路。</p>
 
                 
               </div>
@@ -404,6 +386,36 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/">#图像分割</a>
+      
+        <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/">#多模态</a>
+      
+    </div>
   
 </div>
 
@@ -413,8 +425,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>DALLE2笔记</div>
-      <div>https://studyinglover.com/2023/02/09/DALLE2笔记/</div>
+      <div>Segment Anything笔记</div>
+      <div>https://studyinglover.com/2023/04/07/Segment Anything笔记/</div>
     </div>
     <div class="license-meta">
       
@@ -426,7 +438,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年2月9日</div>
+          <div>2023年4月7日</div>
         </div>
       
       
@@ -458,18 +470,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/03/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%86%99c%E8%AF%AD%E8%A8%80%E8%AF%BE%E8%AE%BE/" title="从0开始写c语言课设">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">从0开始写c语言课设</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/07/yolov5%E5%B8%B8%E8%A7%81%E8%B8%A9%E5%9D%91/" title="yolov5和yolov5-face环境搭建和常见踩坑">
-                        <span class="hidden-mobile">yolov5和yolov5-face环境搭建和常见踩坑</span>
+                      <a href="/2023/03/29/Imagic%E7%AC%94%E8%AE%B0/" title="Imagic笔记">
+                        <span class="hidden-mobile">Imagic笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

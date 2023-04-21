@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230421105906.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230421110144.png">
 <meta property="article:published_time" content="2023-04-21T11:30:00.000Z">
-<meta property="article:modified_time" content="2023-04-21T08:32:46.121Z">
+<meta property="article:modified_time" content="2023-04-21T13:31:10.669Z">
 <meta property="article:author" content="StudyingLover">
 <meta property="article:tag" content="图像生成">
 <meta name="twitter:card" content="summary_large_image">
@@ -354,6 +354,7 @@
 <p>先下载 clip_interrogator <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install clip-interrogator==0.5.4<br></code></pre></td></tr></table></figure></p>
 <p>接下来调用 clip_interrogator <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> clip_interrogator <span class="hljs-keyword">import</span> Config, Interrogator<br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image<br><br>img=cv.imread(<span class="hljs-string">&#x27;/content/src/test.png&#x27;</span>)<br>img = cv.cvtColor(img,cv.COLOR_BGR2RGB)<br>img = Image.fromarray(img)<br><br>ci = Interrogator(Config(clip_model_name=<span class="hljs-string">&quot;ViT-L-14/openai&quot;</span>))<br><br>describe=ci.interrogate(img)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;\n&#x27;</span>+describe)<br></code></pre></td></tr></table></figure></p>
 <p>我们将他封装成函数 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">app</span>(<span class="hljs-params">numpy_img</span>):<br>    img = cv.cvtColor(numpy_img,cv.COLOR_BGR2RGB)<br>    img = Image.fromarray(img)<br>    ci = Interrogator(Config(clip_model_name=<span class="hljs-string">&quot;ViT-L-14/openai&quot;</span>))<br>    describe=ci.interrogate(img)<br>    <span class="hljs-keyword">return</span> describe<br></code></pre></td></tr></table></figure></p>
+<p>在<a target="_blank" rel="noopener" href="https://colab.research.google.com/github/StudyingLover/cmd_ControlNet/blob/master/fix_ControlNet_and_CLIPinterrogator.ipynb">colab</a> 可以体验 ControlNet和CLIPinterrogator 混合使用，两张图片都从url引入，一张图获取描述，另一张图和描述输入canny2image</p>
 
                 
               </div>

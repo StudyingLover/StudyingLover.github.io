@@ -16,17 +16,17 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="虽然现在webui已经支持了ControlNet，但是如果我们需要单独抽出来ControlNet做一些项目就需要对ControlNet进行改造。 项目开源在GitHub 下载源码和模型 ControlNet项目主页 github huggingface 先下载源码 1git clone https:&#x2F;&#x2F;github.com&#x2F;lllyasviel&#x2F;ControlNet.git  接下来下载需要的模型">
+    <meta name="description" content="虽然现在webui已经支持了ControlNet，但是如果我们需要单独抽出来ControlNet做一些项目就需要对ControlNet进行改造。同时我也想假如一些开源的工具让ControlNet更加有趣，例如clip_interrogator. 关于什么是Canny，Hough，可以看北邮鲁鹏老师的课程计算机视觉（本科）北京邮电大学 鲁鹏 如果你想在webui使用ControlNet，可以看我之前">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ControlNet代码改造计划">
 <meta property="og:url" content="https://studyinglover.com/2023/04/21/ControlNet%E4%BB%A3%E7%A0%81%E6%94%B9%E9%80%A0/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="虽然现在webui已经支持了ControlNet，但是如果我们需要单独抽出来ControlNet做一些项目就需要对ControlNet进行改造。 项目开源在GitHub 下载源码和模型 ControlNet项目主页 github huggingface 先下载源码 1git clone https:&#x2F;&#x2F;github.com&#x2F;lllyasviel&#x2F;ControlNet.git  接下来下载需要的模型">
+<meta property="og:description" content="虽然现在webui已经支持了ControlNet，但是如果我们需要单独抽出来ControlNet做一些项目就需要对ControlNet进行改造。同时我也想假如一些开源的工具让ControlNet更加有趣，例如clip_interrogator. 关于什么是Canny，Hough，可以看北邮鲁鹏老师的课程计算机视觉（本科）北京邮电大学 鲁鹏 如果你想在webui使用ControlNet，可以看我之前">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230421105906.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230421110144.png">
 <meta property="article:published_time" content="2023-04-21T11:30:00.000Z">
-<meta property="article:modified_time" content="2023-04-21T06:19:30.850Z">
+<meta property="article:modified_time" content="2023-04-21T06:34:57.718Z">
 <meta property="article:author" content="StudyingLover">
 <meta property="article:tag" content="图像生成">
 <meta name="twitter:card" content="summary_large_image">
@@ -271,7 +271,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.9k 字
+          6k 字
         
       </span>
     
@@ -282,7 +282,7 @@
         
         
         
-          49 分钟
+          51 分钟
         
       </span>
     
@@ -325,8 +325,10 @@
             
               <div class="markdown-body">
                 
-                <p>虽然现在webui已经支持了ControlNet，但是如果我们需要单独抽出来ControlNet做一些项目就需要对ControlNet进行改造。</p>
-<p>项目开源在<a target="_blank" rel="noopener" href="https://github.com/StudyingLover/cmd_ControlNet">GitHub</a></p>
+                <p>虽然现在webui已经支持了ControlNet，但是如果我们需要单独抽出来ControlNet做一些项目就需要对ControlNet进行改造。同时我也想假如一些开源的工具让ControlNet更加有趣，例如<a target="_blank" rel="noopener" href="https://github.com/pharmapsychotic/clip-interrogator">clip_interrogator</a>.</p>
+<p>关于什么是Canny，Hough，可以看北邮鲁鹏老师的课程<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1nz4y197Qv/?spm_id_from=333.999.0.0&amp;vd_source=e8f062c423dc7ce759a573dd732735a0">计算机视觉（本科）北京邮电大学 鲁鹏</a></p>
+<p>如果你想在webui使用ControlNet，可以看我之前的<a href="https://studyinglover.com/2023/03/20/%E9%80%9A%E8%BF%87colab%E4%BD%93%E9%AA%8CControlNet/">文章</a> ，或者直接查看<a target="_blank" rel="noopener" href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">webui</a></p>
+<p>项目开源在<a target="_blank" rel="noopener" href="https://github.com/StudyingLover/cmd_ControlNet">GitHub</a> 我的博客<a href="https://studyinglover.com/2023/04/21/ControlNet%E4%BB%A3%E7%A0%81%E6%94%B9%E9%80%A0/">https://studyinglover.com</a></p>
 <h2 id="下载源码和模型">下载源码和模型</h2>
 <p>ControlNet项目主页 <a target="_blank" rel="noopener" href="https://github.com/lllyasviel/ControlNet">github</a> <a target="_blank" rel="noopener" href="https://huggingface.co/lllyasviel/ControlNet">huggingface</a></p>
 <p>先下载源码 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/lllyasviel/ControlNet.git <br></code></pre></td></tr></table></figure></p>

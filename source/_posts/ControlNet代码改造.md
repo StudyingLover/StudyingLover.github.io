@@ -7,9 +7,11 @@ tags:
 ---
 虽然现在webui已经支持了ControlNet，但是如果我们需要单独抽出来ControlNet做一些项目就需要对ControlNet进行改造。
 
+项目开源在[GitHub](https://github.com/StudyingLover/cmd_ControlNet)
+
 ## 下载源码和模型
 
-项目主页
+ControlNet项目主页
 [github](https://github.com/lllyasviel/ControlNet)
 [huggingface](https://huggingface.co/lllyasviel/ControlNet)
 
@@ -115,29 +117,45 @@ def process(input_image, prompt, a_prompt, n_prompt, num_samples, image_resoluti
 
 
 if '__main__' == __name__:
-    img=cv2.imread('test.png')# 写你的图片路径
-    prompt='1girl,beautiful background,beautiful face,beazutiful clothes'# prompt
-    a_prompt='best quality, extremely detailed' # 额外的prompt，例如best quality, extremely detailed这样的
-    n_prompt='longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality' # negative prompt反向promote
-    num_samples=1# 生成几张图
-    image_resolution=512# 图片分辨率
-    ddim_steps=30# DDIP采样次数
-    guess_mode=False
-    strength=1.0
-    scale=9.0
-    seed=-1
-    eta=0.0
-    low_threshold=100
-    high_threshold=200
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--image_path', type=str, default='test.png', help='original image path')
+    parser.add_argument('--prompt', type=str, default='1people', help='prompt')
+    parser.add_argument('--a_prompt', type=str, default='best quality, extremely detailed', help='added prompt')
+    parser.add_argument('--n_prompt', type=str, default='longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality', help='negative prompt')
+    parser.add_argument('--num_samples', type=int, default=1, help='number of samples')
+    parser.add_argument('--image_resolution', type=int, default=512, help='image resolution')
+    parser.add_argument('--ddim_steps', type=int, default=30, help='ddim steps')
+    parser.add_argument('--is_saved', type=bool, default=True, help='is saved?')
+    parser.add_argument('--is_show', type=bool, default=False, help='is show?')
+    parser.add_argument('--guess_mode', type=bool, default=False, help='guess mode')
+    parser.add_argument('--strength', type=float, default=1.0, help='strength')
+    parser.add_argument('--scale', type=float, default=9.0, help='scale')
+    parser.add_argument('--seed', type=int, default=-1, help='seed')
+    parser.add_argument('--eta', type=float, default=0.0, help='eta')
+    parser.add_argument('--low_threshold', type=int, default=100, help='low threshold')
+    parser.add_argument('--high_threshold', type=int, default=200, help='high threshold')
+  
 
-    out=process(img, prompt, a_prompt, n_prompt, num_samples, image_resolution, ddim_steps, guess_mode, strength, scale, seed, eta, low_threshold, high_threshold)
+    opt = parser.parse_args()
+    
+    img=cv2.imread(opt.image_path)
+    out=process(img, opt.prompt, opt.a_prompt, opt.n_prompt, opt.num_samples, opt.image_resolution, opt.ddim_steps, opt.guess_mode, opt.strength, opt.scale, opt.seed, opt.eta, opt.low_threshold, opt.high_threshold)
 
-    cv2.imwrite('out.png',out[1])# 保存生成的图像
-    cv2.imwrite('canny.png',out[0])# 保存canny图
+    if(opt.is_show):
+        cv2.imshow('out',out[1])
+    if(opt.is_saved):
+        cv2.imwrite('out.png',out[1])
+        print('saved to out.png')
 ```
 
+用法就是parser的用法，例如
+```bash
+python cmd_canny2image.py --image_path ./test_imgs/man.png --prompt bule_hair,color_clothes 
+```
+输出的图片会被保存到当前目录下的out.png文件
 
 ## clip_interrogator
+你可以在[huggingface](https://huggingface.co/spaces/fffiloni/CLIP-Interrogator-2) 直接体验，这里是代码调用相应接口。
 
 先下载 clip_interrogator
 ```bash
@@ -157,5 +175,5 @@ img = Image.fromarray(img)
 ci = Interrogator(Config(clip_model_name="ViT-L-14/openai"))
 
 describe=ci.interrogate(img)
-print(describe)
+print('\n'+describe)
 ```

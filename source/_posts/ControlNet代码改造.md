@@ -137,3 +137,25 @@ if '__main__' == __name__:
 ```
 
 
+## clip_interrogator
+
+先下载 clip_interrogator
+```bash
+pip install clip-interrogator==0.5.4
+```
+
+接下来调用 clip_interrogator
+```python
+from clip_interrogator import Config, Interrogator
+import cv2 as cv
+from PIL import Image
+
+img=cv.imread('/content/src/test.png')
+img = cv.cvtColor(img,cv.COLOR_BGR2RGB)
+img = Image.fromarray(img)
+
+ci = Interrogator(Config(clip_model_name="ViT-L-14/openai"))
+
+describe=ci.interrogate(img)
+print(describe)
+```

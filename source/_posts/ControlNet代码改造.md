@@ -28,10 +28,10 @@ git clone https://github.com/lllyasviel/ControlNet.git
 ```
 
 接下来下载需要的模型，进入huggingface 页面，选择`files and versions` 
-![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230421105906.png)
+![image.png](https://proxy.thisis.plus/20230421105906.png)
 
 先下载所有的annotator,进入`annotator/ckpts`文件夹,可以看到我们需要的ckpts文件，进入一个，右键download，选择复制下载链接
-![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230421110144.png)
+![image.png](https://proxy.thisis.plus/20230421110144.png)
 
 执行命令，就会将模型下载下来
 ```bash

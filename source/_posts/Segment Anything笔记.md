@@ -11,7 +11,7 @@ tags:
 # Segment Anything笔记
 Segment Anything project是一个用于图像分割的新任务、模型和数据集。在他刚出来的那一天，知乎等平台就已经高呼CV已死。为了这个项目，作者创建了迄今为止最大的分割数据集，1100万张在10亿次授权且尊重隐私的图像上的数据集。模型也被设计和训练成了promptable,就是说可以给他一些提示。作者在多个数据集测试了他的结果并认为结果令人满意。
 
-![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230407073917.png)
+![image.png](https://proxy.thisis.plus/20230407073917.png)
 
 
 代码开源[GitHub](https://github.com/facebookresearch/segment-anything)
@@ -38,7 +38,7 @@ CLIP和ALIGN使用对比学习来训练对齐两种模态的文本和图像编�
 作者从NLP领域获得灵感，在NLP的任务中，预测下一个token用于基础模型的训练，并通过prompt engineering 解决不同的下游任务。为了建立这样一个分割的基础模型，作者的目标书建立一个具有类似能力的任务
 ### Task 
 promptable的分割任务是给定任何prompt都能返回有效的分割掩码。有效的mask意味着即使prompt是不准确的或者涉及到多个对象的也应该的能够输出正确的或者合理的掩码。如图所示，每列显示SAM从单个不明确的点提示生成的3个有效掩码。
-![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230407194759.png)
+![image.png](https://proxy.thisis.plus/20230407194759.png)
 
 ### 预训练
 promptable segmentation task 提出了一种自然的预训练算法，该算法模拟每个训练样本的提示序列（例如，点、框、掩码），并将模型的掩码预测与基本事实进行比较。作者将这种方法从交互式分割中改编出来，尽管与交互式分割不同，交互式分割的目的是在足够的用户输入后最终预测有效的掩码，但promptable segmentation task 的目的是始终预测任何提示的有效掩码，即使提示不明确的/错误的/荒谬的。
@@ -47,7 +47,7 @@ promptable segmentation task 提出了一种自然的预训练算法，该算法
 直观地说，预训练任务赋予了模型在推理时对任何提示做出适当响应的能力，因此下游任务可以通过设计适当的提示来解决。一般来说，一系列实用的分割任务可以作为提示。除了自动数据集标记外，作者还在第7部分中的实验中探索了五个不同的示例任务。
 ## 模型
 SAM包括了三个部分 一个 image encoder, 一个 flexible prompt encoder, 和一个 fast mask decoder.
-![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230407203046.png)
+![image.png](https://proxy.thisis.plus/20230407203046.png)
 
 ### image encoder 
 受可扩展性和强大的预训练方法的启发，作者使用了MAE预训练的视觉转换器（ViT），该转换器至少适用于处理高分辨率输入。图像编码器每个图像运行一次，并且在prompt运行之前运行

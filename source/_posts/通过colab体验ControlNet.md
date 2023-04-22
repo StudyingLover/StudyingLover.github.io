@@ -15,7 +15,7 @@ tags:
 
 然后访问[https://github.com/camenduru/stable-diffusion-webui-colab](https://github.com/camenduru/stable-diffusion-webui-colab)
 
-![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230324163856.png)
+![image.png](https://proxy.thisis.plus/20230324163856.png)
 
 可以看到这里有很多的colab可以使用。
 
@@ -24,21 +24,21 @@ tags:
 >`nightly` has ControlNet, the latest WebUI, and daily installed extension updates
 
 为了稳定的使用并且能使用ControlNet,这里我们使用*stable* 版本，我选了第一个如下图
-![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230324164312.png)
+![image.png](https://proxy.thisis.plus/20230324164312.png)
 
 
 点击进入后我们就能看到这样的界面了
-![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230320150108.png)
+![image.png](https://proxy.thisis.plus/20230320150108.png)
 
 
-如图，点击我画出来的，运行这个notebook。经过一番耐心的等待，你在控制台的最下面会看到这么几行![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230324164418.png)
+如图，点击我画出来的，运行这个notebook。经过一番耐心的等待，你在控制台的最下面会看到这么几行![image.png](https://proxy.thisis.plus/20230324164418.png)
 
 点击最下面的两个链接中的任意一个，会跳转到webui的页面，我们主要用到的是`text2img`和`img2img`. 
 
 我们以`text2img`为例，这里只说常用的功能，如图所示。
 
 这里的prompt就是提示词，假如你想让他画一只猫猫，你就在prompt的位置写上`cat`,negative prompt就是说排除掉那些词语，例如我们不想要红色的猫猫，我们可以写`red_cat`
-![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230320151053.png)
+![image.png](https://proxy.thisis.plus/20230320151053.png)
 
 这里需要解释一堆东西
 
@@ -52,30 +52,30 @@ tags:
 
 ### 启用ControlNet
 滑到最下面，打开ControlNet功能(可能布局有所不同)
-![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230320151223.png)
+![image.png](https://proxy.thisis.plus/20230320151223.png)
 
 打开之后如图
-![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230320151404.png)
-![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230320151648.png)
+![image.png](https://proxy.thisis.plus/20230320151404.png)
+![image.png](https://proxy.thisis.plus/20230320151648.png)
 
 如果你想先看一下controlnet会按照什么来绘画，你可以通过创建画布下面的Preview来查看。
 
 这里推荐一个网站[https://prompthero.com/search?model=Stable+Diffusion&q=video+game+concept+art&source=f7591caf953](https://prompthero.com/search?model=Stable+Diffusion&q=video+game+concept+art&source=f7591caf953) ,里面有各种各样的prompt，也是游戏风格的。
 
 我们随便选一个prompt来生成一张图
-![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230320153127.png)
+![image.png](https://proxy.thisis.plus/20230320153127.png)
 
 我们可以把图片放到`img2img`继续体验，使用方法和`text2img`基本一样。
 
 ## Q&A
 ### posex
 在新版本的stable diffusion webui中你会发现这个插件
-![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230324173639.png)
+![image.png](https://proxy.thisis.plus/20230324173639.png)
 
 这是一个open pose编辑器，你可以在这里编辑openpose，然后把编辑好的图片发给ControlNet
 
 ### Additional Networks 
-![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230324174228.png)
+![image.png](https://proxy.thisis.plus/20230324174228.png)
 
 一般在ControlNet上面，这个的作用的加入一些自己找的模型。
 

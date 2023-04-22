@@ -1,7 +1,7 @@
 ---
 title: Hello World
-index_img: https://cdn.jsdelivr.net/gh/StudyingLover/anything/favicon.ico
-banner_img: https://cdn.jsdelivr.net/gh/StudyingLover/anything/background.png
+index_img: https://proxy.thisis.plus/favicon.ico
+banner_img: https://proxy.thisis.plus/background.png
 date: 2020-1-20 10:00:00
 hide: true
 ---

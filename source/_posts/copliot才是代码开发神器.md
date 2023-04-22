@@ -60,7 +60,7 @@ function screenToWorld(screenX, screenY, camera，hyper_z) {
 > 这里的`hyper_z`网上很多教程认为是写0.5,
 
 copilot又给我一段代码提示，，这次的提示是这样的
-![](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230204214713.png)
+![](https://proxy.thisis.plus/20230204214713.png)
 还好还好，这次代码的目的没搞错，只是整个代码都可能写错了而已……
 
 经过一番思考，我决定继续按照原先的代码写，因为我已经尝试了代码的效果，勉强可以达到我们的要求。

@@ -43,10 +43,10 @@ ControlNet 操纵神经网络块的输入条件，以进一步控制整个神经
 以2D图像为例，给定一张图像(特征图)$\boldsymbol{x}\in\mathbb{R}^{h\times w\times c}$ ,$h,w,c$ 分别代表高度，宽度，深度。一个将x转换为y的神经网络我们可以以将他记作$\mathcal{F(\cdot;\Theta)}$ 
 
 $$\boldsymbol{y}=\mathcal{F}(\boldsymbol{x};\Theta)$$
-![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230311152613.png)
+![image.png](https://proxy.thisis.plus/20230311152613.png)
 
 我们把zero convolution记作$\mathcal{Z}(\cdot;\cdot)$ ,那么ControlNet就可以记作$$\begin{matrix}\boldsymbol{y_c}=\mathcal{F}(\boldsymbol{x};\Theta)+\mathcal{Z}(\boldsymbol{F}(\boldsymbol{x}+\mathcal{Z}(\boldsymbol{c};\Theta_{\text{z1}});\Theta_{\text{z2}})\end{matrix}$$
-![image.png](https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230311152920.png)
+![image.png](https://proxy.thisis.plus/20230311152920.png)
 
 由于zero convolution的权重初始为0，那么就有$$\begin{cases}\mathcal{Z}(c;\Theta_{\text{z1}})=\mathbf{0}\\ \mathcal{F}(\boldsymbol{x}+\mathcal{Z}(\boldsymbol{c};\Theta_{\text{z1}});\Theta_{\text{c}})=\mathcal{F}(\boldsymbol{x};\Theta_{\text{c}})=\mathcal{F}(\boldsymbol{x};\Theta_{\text{c}})\\ \mathcal{Z}(\mathcal{F}(\boldsymbol{x}+\mathcal{Z}(\boldsymbol{c};\Theta_{\text{z1}});\Theta_{\text{c}});\Theta_{\text{z2}})=\mathcal{Z}(\mathcal{F}(\boldsymbol{x};\Theta_{\text{c}});\Theta_{\text{z2}})=\mathbf{0}\end{cases}$$
 可以得出$y_c=y$,即当ControlNet被应用到任何一个网络上时，不会对这个网络的效果产生任何影响。它完美保留了任何神经网络块的能力、功能和结果质量，任何进一步优化都将随着微调而变得快速

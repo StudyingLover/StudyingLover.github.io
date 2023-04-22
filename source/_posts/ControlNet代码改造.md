@@ -164,6 +164,8 @@ python cmd_canny2image.py --image_path ./test_imgs/main.png --prompt bule_hair,c
 ## clip_interrogator
 你可以在[huggingface](https://huggingface.co/spaces/fffiloni/CLIP-Interrogator-2) 直接体验，这里是代码调用相应接口。
 
+[clip_interrogator教程](https://studyinglover.com/2023/04/22/clip_interrogator教程/)
+
 先下载 clip_interrogator
 ```bash
 pip install clip-interrogator==0.5.4
@@ -195,4 +197,4 @@ def app(numpy_img):
     return describe
 ```
 
-在 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/StudyingLover/cmd_ControlNet/blob/master/fix_ControlNet_and_CLIPinterrogator.ipynb) 可以体验 ControlNet和CLIPinterrogator 混合使用，两张图片都从url引入，一张图获取prompt，ptompt和另一张图一起输入输入canny2image，生成的图片展示在输出框底部
+在 [![Open In Colab](https://proxy.thisis.plus/colab-badge.svg)](https://colab.research.google.com/github/StudyingLover/cmd_ControlNet/blob/master/fix_ControlNet_and_CLIPinterrogator.ipynb) 可以体验 ControlNet和CLIPinterrogator 混合使用，两张图片都从url引入，一张图获取prompt，ptompt和另一张图一起输入输入canny2image，生成的图片展示在输出框底部

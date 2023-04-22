@@ -195,4 +195,4 @@ def app(numpy_img):
     return describe
 ```
 
-在[colab](https://colab.research.google.com/github/StudyingLover/cmd_ControlNet/blob/master/fix_ControlNet_and_CLIPinterrogator.ipynb) 可以体验 ControlNet和CLIPinterrogator 混合使用，两张图片都从url引入，一张图获取描述，另一张图和描述输入canny2image
+在 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/StudyingLover/cmd_ControlNet/blob/master/fix_ControlNet_and_CLIPinterrogator.ipynb) 可以体验 ControlNet和CLIPinterrogator 混合使用，两张图片都从url引入，一张图获取prompt，ptompt和另一张图一起输入输入canny2image，生成的图片展示在输出框底部

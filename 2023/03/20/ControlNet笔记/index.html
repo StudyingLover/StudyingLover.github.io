@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="plus studio">
 <meta property="og:description" content="ControlNet笔记 作者的代码开源在GitHub。 想要体验ControlNet看我的文章 介绍 作者在文章开头先对当前大型text-to-image model提出了疑问：这种基于提示的控制是否满足我们的需求？例如在图像处理中，考虑许多具有明确问题公式的长期任务，这些大型模型能否被应用于促进这些特定任务？我们应该建立什么样的框架来处理广泛的问题条件和用户控制？在特定任务中，大型模型能否保持">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230311152613.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230311152920.png">
+<meta property="og:image" content="https://proxy.thisis.plus/20230311152613.png">
+<meta property="og:image" content="https://proxy.thisis.plus/20230311152920.png">
 <meta property="article:published_time" content="2023-03-20T15:50:00.000Z">
-<meta property="article:modified_time" content="2023-04-22T01:09:47.348Z">
+<meta property="article:modified_time" content="2023-04-22T04:29:16.304Z">
 <meta property="article:author" content="StudyingLover">
 <meta property="article:tag" content="图像生成">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230311152613.png">
+<meta name="twitter:image" content="https://proxy.thisis.plus/20230311152613.png">
   
   
   
@@ -347,8 +347,8 @@
 <h3 id="网络架构">网络架构</h3>
 <p>ControlNet 操纵神经网络块的输入条件，以进一步控制整个神经网络的整体行为。</p>
 <p>以2D图像为例，给定一张图像(特征图)<span class="math inline">\(\boldsymbol{x}\in\mathbb{R}^{h\times w\times c}\)</span> ,<span class="math inline">\(h,w,c\)</span> 分别代表高度，宽度，深度。一个将x转换为y的神经网络我们可以以将他记作<span class="math inline">\(\mathcal{F(\cdot;\Theta)}\)</span></p>
-<p><span class="math display">\[\boldsymbol{y}=\mathcal{F}(\boldsymbol{x};\Theta)\]</span> <img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230311152613.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
-<p>我们把zero convolution记作<span class="math inline">\(\mathcal{Z}(\cdot;\cdot)\)</span> ,那么ControlNet就可以记作<span class="math display">\[\begin{matrix}\boldsymbol{y_c}=\mathcal{F}(\boldsymbol{x};\Theta)+\mathcal{Z}(\boldsymbol{F}(\boldsymbol{x}+\mathcal{Z}(\boldsymbol{c};\Theta_{\text{z1}});\Theta_{\text{z2}})\end{matrix}\]</span> <img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230311152920.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
+<p><span class="math display">\[\boldsymbol{y}=\mathcal{F}(\boldsymbol{x};\Theta)\]</span> <img src="https://proxy.thisis.plus/20230311152613.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
+<p>我们把zero convolution记作<span class="math inline">\(\mathcal{Z}(\cdot;\cdot)\)</span> ,那么ControlNet就可以记作<span class="math display">\[\begin{matrix}\boldsymbol{y_c}=\mathcal{F}(\boldsymbol{x};\Theta)+\mathcal{Z}(\boldsymbol{F}(\boldsymbol{x}+\mathcal{Z}(\boldsymbol{c};\Theta_{\text{z1}});\Theta_{\text{z2}})\end{matrix}\]</span> <img src="https://proxy.thisis.plus/20230311152920.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
 <p>由于zero convolution的权重初始为0，那么就有<span class="math display">\[\begin{cases}\mathcal{Z}(c;\Theta_{\text{z1}})=\mathbf{0}\\ \mathcal{F}(\boldsymbol{x}+\mathcal{Z}(\boldsymbol{c};\Theta_{\text{z1}});\Theta_{\text{c}})=\mathcal{F}(\boldsymbol{x};\Theta_{\text{c}})=\mathcal{F}(\boldsymbol{x};\Theta_{\text{c}})\\ \mathcal{Z}(\mathcal{F}(\boldsymbol{x}+\mathcal{Z}(\boldsymbol{c};\Theta_{\text{z1}});\Theta_{\text{c}});\Theta_{\text{z2}})=\mathcal{Z}(\mathcal{F}(\boldsymbol{x};\Theta_{\text{c}});\Theta_{\text{z2}})=\mathbf{0}\end{cases}\]</span> 可以得出<span class="math inline">\(y_c=y\)</span>,即当ControlNet被应用到任何一个网络上时，不会对这个网络的效果产生任何影响。它完美保留了任何神经网络块的能力、功能和结果质量，任何进一步优化都将随着微调而变得快速</p>
 <p>作者也推导了zero convolution的梯度。网络的前向过程可以写成<span class="math display">\[\mathcal{Z}(\boldsymbol{I};\{\boldsymbol{W},\boldsymbol{B}\})_{p,i}=\boldsymbol{B}_{i}+\sum_{j}^{c}\boldsymbol{I}_{p,i}\boldsymbol{W}_{i,j}\]</span> 在最开始，zero convolution 的参数<span class="math inline">\(W\)</span>和<span class="math inline">\(B\)</span> 都是0，只要输入<span class="math inline">\(I\)</span>不为0，那么就有 <span class="math display">\[\begin{cases}\dfrac{\partial\mathcal{Z}(\textbf{I};\{\textbf{W},\textbf{B}\})_{p,i}}{\partial\textbf{B}_i}=1\quad\\ \frac{\partial\mathcal{Z}(\mathbf{I};\{\mathbf{W},\mathbf{B}\})_{p,i}}{\partial\mathbf{I}_{p,i}}=\sum_{j}^{c}\mathbf{W}_{i,j}=0 \\ \frac{\partial\mathcal{Z}(\mathbf{I};\{W,\mathbf{B}\})_{p,i}}{\partial W_{i,j}}=\mathbf{I}_{p,i}\neq\mathbf{0} \end{cases}\]</span> 我们可以看到，虽然zero convolution会导致<span class="math inline">\(I\)</span> 上的梯度变为零，但权重和偏差的梯度不受影响。只要特征 <span class="math inline">\(I\)</span> 非零，权重 <span class="math inline">\(W\)</span> 将在第一个梯度下降迭代中优化为非零矩阵.考虑经典的梯度下降<span class="math display">\[W^*=W-\beta_{\mathbb{If}}\cdot\dfrac{\partial\mathcal{L}}{\partial\mathcal{Z}(\mathbf{I};\{W,B\})}\odot\dfrac{\partial\mathcal{Z}(\mathbf{I};\{W,B\})}{\partial W}\neq\mathbf{0}\]</span> <span class="math inline">\(W*\)</span> 代表了第一次梯度下降之后的权重，<span class="math inline">\(\odot\)</span> 是Hadamard product，即对应的各个元素相乘(<span class="math inline">\(c_{ij}=a_{ij}×b_{ij}\)</span>) 。</p>
 <p>在这一步之后，我们可以得到<span class="math display">\[\dfrac{\partial\mathcal{Z}(\mathbf{I};\{\mathbf{W}^*,\mathbf{B}\})_{p,i}}{\partial\mathbf{I}_{p,i}}=\sum\limits_j^c\mathbf{W}_{i,j}^*\neq\mathbf{0}\]</span> 这里包含了非零的梯度并且神经网络开始学习。这样，零卷积就变成了一种独特的连接层，它以学习的方式从零逐步增长到优化的参数。</p>

@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>I3D笔记</title>
+    <link href="/2023/04/23/I3D%E7%AC%94%E8%AE%B0/"/>
+    <url>/2023/04/23/I3D%E7%AC%94%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="i3d笔记">I3D笔记</h1><p>I3D是一个视频理解模型，采用双流网络的架构，他的核心贡献是提出了如何对2d网络进行膨胀操作，同时提出了一个新的数据集 Kinetics</p><h2 id="工作回顾">工作回顾</h2><figure><img src="https://proxy.thisis.plus/20230423215707.png" alt="" /><figcaption>image.png</figcaption></figure><p>在以前，视频理解有三种做法 1. LSTM 2. 3D ConvNets 3. Two-Stream Networks（双流网络）</p><h2 id="two-stream-inflated-3d-convnets">Two-Stream Inflated 3D ConvNets</h2><p>这篇文章提出的模型被称为 Two-Stream Inflated 3D ConvNets</p><p>Inflate 是模型的核心操作，含义是将一个2d模型"膨胀"成3d模型，做法很简单，就是把一个<span class="math inline">\(N*N\)</span> 的层变成<span class="math inline">\(N*N*N\)</span> ,同时也将参数复制了<span class="math inline">\(N\)</span> 遍。</p><h2 id="kinetics">Kinetics</h2><p>在视频领域，在一个足够大的数据集上训练一个动作分类网络，当应用于不同的时间任务或数据集时，是否会有类似的性能提升是一个悬而未决的问题。构建视频数据集的挑战意味着大多数流行的动作识别基准。</p><p>Kinetics 有400个人体动作类，每个类有400多个例子，每个都来自一个独特的 YouTube 视频</p><h3 id="整体架构">整体架构</h3><p>作者选择了 Inception-v1 构建整个神经网络(作者当时不适用Inception-v1是因为当时认为Inception在视频理解更合适，但架不住ResNet 太棒了，作者在18年也换成了ResNet) <img src="https://proxy.thisis.plus/20230423220521.png" alt="image.png" /></p><p>图中的Inc. 就是经典的Inception-v1 块了，只是做了Inflating 操作</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>图像生成</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>clip_interrogator教程</title>
     <link href="/2023/04/22/clip_interrogator%E6%95%99%E7%A8%8B/"/>
     <url>/2023/04/22/clip_interrogator%E6%95%99%E7%A8%8B/</url>

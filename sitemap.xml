@@ -2,42 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://studyinglover.com/2023/04/22/clip_interrogator%E6%95%99%E7%A8%8B/</loc>
-    
-    <lastmod>2023-04-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://studyinglover.com/2023/02/04/copliot%E6%89%8D%E6%98%AF%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91%E7%A5%9E%E5%99%A8/</loc>
-    
-    <lastmod>2023-04-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://studyinglover.com/2023/01/20/jsdelivr%E5%8A%A0%E9%80%9FGithub%E6%96%87%E4%BB%B6/</loc>
-    
-    <lastmod>2023-04-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://studyinglover.com/2023/02/07/yolov5%E5%B8%B8%E8%A7%81%E8%B8%A9%E5%9D%91/</loc>
-    
-    <lastmod>2023-04-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://studyinglover.com/2023/01/27/%E5%9C%A8fluid%E4%B8%BB%E9%A2%98%E4%B8%AD%E5%8A%A0%E5%85%A5Google%E5%B9%BF%E5%91%8A/</loc>
     
     <lastmod>2023-04-23</lastmod>
@@ -146,6 +110,15 @@
   </url>
   
   <url>
+    <loc>https://studyinglover.com/2023/04/23/I3D%E7%AC%94%E8%AE%B0/</loc>
+    
+    <lastmod>2023-04-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://studyinglover.com/2023/03/29/Imagic%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2023-04-23</lastmod>
@@ -183,6 +156,42 @@
   
   <url>
     <loc>https://studyinglover.com/2023/03/21/UE,Unity%E5%92%8CWebGL%E6%8A%80%E6%9C%AF%E5%AF%B9%E6%AF%94/</loc>
+    
+    <lastmod>2023-04-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://studyinglover.com/2023/04/22/clip_interrogator%E6%95%99%E7%A8%8B/</loc>
+    
+    <lastmod>2023-04-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://studyinglover.com/2023/02/04/copliot%E6%89%8D%E6%98%AF%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91%E7%A5%9E%E5%99%A8/</loc>
+    
+    <lastmod>2023-04-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://studyinglover.com/2023/01/20/jsdelivr%E5%8A%A0%E9%80%9FGithub%E6%96%87%E4%BB%B6/</loc>
+    
+    <lastmod>2023-04-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://studyinglover.com/2023/02/07/yolov5%E5%B8%B8%E8%A7%81%E8%B8%A9%E5%9D%91/</loc>
     
     <lastmod>2023-04-23</lastmod>
     

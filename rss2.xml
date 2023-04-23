@@ -9,8 +9,36 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sun, 23 Apr 2023 04:11:36 GMT</pubDate>
+    <pubDate>Sun, 23 Apr 2023 14:16:23 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>I3D笔记</title>
+      <link>https://studyinglover.com/2023/04/23/I3D%E7%AC%94%E8%AE%B0/</link>
+      <guid>https://studyinglover.com/2023/04/23/I3D%E7%AC%94%E8%AE%B0/</guid>
+      <pubDate>Sun, 23 Apr 2023 22:14:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;i3d笔记&quot;&gt;I3D笔记&lt;/h1&gt;
+&lt;p&gt;I3D是一个视频理解模型，采用双流网络的架构，他的核心贡献是提出了如何对2d网络进行膨胀操作，同时提出了一个新的数据集 Kinetics&lt;/p&gt;
+&lt;h2 id=&quot;工作回顾&quot;&gt;工作回顾&lt;/h2&gt;
+&lt;figure&gt;
+&lt;img </description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="i3d笔记">I3D笔记</h1><p>I3D是一个视频理解模型，采用双流网络的架构，他的核心贡献是提出了如何对2d网络进行膨胀操作，同时提出了一个新的数据集 Kinetics</p><h2 id="工作回顾">工作回顾</h2><figure><img src="https://proxy.thisis.plus/20230423215707.png" alt="" /><figcaption>image.png</figcaption></figure><p>在以前，视频理解有三种做法 1. LSTM 2. 3D ConvNets 3. Two-Stream Networks（双流网络）</p><h2 id="two-stream-inflated-3d-convnets">Two-Stream Inflated 3D ConvNets</h2><p>这篇文章提出的模型被称为 Two-Stream Inflated 3D ConvNets</p><p>Inflate 是模型的核心操作，含义是将一个2d模型"膨胀"成3d模型，做法很简单，就是把一个<span class="math inline">\(N*N\)</span> 的层变成<span class="math inline">\(N*N*N\)</span> ,同时也将参数复制了<span class="math inline">\(N\)</span> 遍。</p><h2 id="kinetics">Kinetics</h2><p>在视频领域，在一个足够大的数据集上训练一个动作分类网络，当应用于不同的时间任务或数据集时，是否会有类似的性能提升是一个悬而未决的问题。构建视频数据集的挑战意味着大多数流行的动作识别基准。</p><p>Kinetics 有400个人体动作类，每个类有400多个例子，每个都来自一个独特的 YouTube 视频</p><h3 id="整体架构">整体架构</h3><p>作者选择了 Inception-v1 构建整个神经网络(作者当时不适用Inception-v1是因为当时认为Inception在视频理解更合适，但架不住ResNet 太棒了，作者在18年也换成了ResNet) <img src="https://proxy.thisis.plus/20230423220521.png" alt="image.png" /></p><p>图中的Inc. 就是经典的Inception-v1 块了，只是做了Inflating 操作</p>]]></content:encoded>
+      
+      
+      
+      <category domain="https://studyinglover.com/tags/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/">图像生成</category>
+      
+      
+      <comments>https://studyinglover.com/2023/04/23/I3D%E7%AC%94%E8%AE%B0/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>clip_interrogator教程</title>
@@ -520,36 +548,6 @@
       
       
       <comments>https://studyinglover.com/2023/01/13/ThreeJS%E5%AF%BC%E5%85%A5%E5%A4%B1%E8%B4%A5/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>摄像机模型</title>
-      <link>https://studyinglover.com/2022/12/29/%E6%91%84%E5%83%8F%E6%9C%BA%E6%A8%A1%E5%9E%8B/</link>
-      <guid>https://studyinglover.com/2022/12/29/%E6%91%84%E5%83%8F%E6%9C%BA%E6%A8%A1%E5%9E%8B/</guid>
-      <pubDate>Thu, 29 Dec 2022 21:47:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;摄像机模型&quot;&gt;摄像机模型&lt;/h1&gt;
-&lt;p&gt;本文是鲁鹏老师机器视觉课程的笔记&lt;/p&gt;
-&lt;h2 id=&quot;针孔模型与透镜&quot;&gt;针孔模型与透镜&lt;/h2&gt;
-&lt;figure&gt;
-&lt;img src=&quot;https://raw.githubusercontent.com/Studyin</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="摄像机模型">摄像机模型</h1><p>本文是鲁鹏老师机器视觉课程的笔记</p><h2 id="针孔模型与透镜">针孔模型与透镜</h2><figure><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20221222201922.png" alt="" /><figcaption>image.png</figcaption></figure><figure><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20221222201951.png" alt="" /><figcaption>image.png</figcaption></figure><p>虚拟像平面是倒着的</p><figure><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20221222202148.png" alt="" /><figcaption>image.png</figcaption></figure><figure><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20221222202224.png" alt="" /><figcaption>image.png</figcaption></figure><p><span class="math inline">\(\dfrac{y&#39;}{f}=\dfrac{y}{z}\quad\implies y&#39;=f\dfrac{y}{z}\)</span></p><p><span class="math inline">\(\dfrac{x&#39;}{f}=\dfrac{x}{z}\quad\implies x&#39;=f\dfrac{x}{z}\)</span> <span class="math inline">\(P=\begin{bmatrix}x\\ y\\ z\end{bmatrix}\to P&#39;=\begin{bmatrix}x&#39;\\ y&#39;\end{bmatrix}\quad\quad\)</span></p><p><span class="math inline">\(\begin{cases}x&#39;=f\dfrac{x}{Z}\\ y&#39;=f\dfrac{y}{Z}\end{cases}\)</span></p><h3 id="光圈尺寸">光圈尺寸</h3><p>光圈偏大会导致场景模糊</p><p>光圈偏小会场景清晰，但偏暗 <img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20221222203219.png" alt="image.png" /></p><p><strong>增加透镜</strong> - 透镜将多条光线聚焦到胶片上，增加了照片的亮度： - 所有平行于光轴的光线都会会聚到焦点，焦点到透镜中心的距离称为焦距 - 穿过中心的光线的方向不发生改变</p><p><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20221222203452.png" alt="image.png" /> 根据折射定律： <span class="math inline">\(f=\frac{ {R} }{ {2}({n}-1)}\)</span> ,<span class="math inline">\(R\)</span> 是透镜球面半径，<span class="math inline">\(n\)</span>是透镜折射系数</p><p><span class="math inline">\(z&#39;=f+z_0\quad\begin{cases}x&#39;=z&#39;\dfrac{x}{z}\\ y&#39;=z&#39;\dfrac{y}{z}\end{cases}\)</span></p><p>要是透镜不合适，则会发生失焦 <img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20221222203756.png" alt="image.png" /></p><p>透镜将光线聚焦到胶片上 - 物体“聚焦”有特定距离 - 景深</p><h3 id="径向畸变">径向畸变</h3><p>图像中所成的像发生形变</p><p>径向畸变:图像像素点以畸变中心为中心点,沿着径向产生的位置偏差,从而导致</p><figure><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20221222204142.png" alt="" /><figcaption>image.png</figcaption></figure><p>枕形畸变：畸变像点相对于理想像点沿径向向外偏移,远离中心 桶形畸变：畸变像点相对于理想点沿径向向中心靠拢</p><h2 id="摄像机几何">摄像机几何</h2><h3 id="齐次坐标">齐次坐标</h3><p><span class="math inline">\(E\to H\)</span> 图像点的齐次坐标<span class="math inline">\(\text{}(x,y)\Rightarrow\left[\begin{array}{c}x\\ y\\ 1\end{array}\right]\)</span></p><p>空间点的齐次坐标<span class="math inline">\((x,y,z)\Rightarrow\left[\begin{array}{c}x\\ y\\ z\\ 1\end{array}\right]\)</span></p><p><span class="math inline">\(H \to E\)</span> <span class="math inline">\(\left[\begin{array}{c}x\\ y\\ w\end{array}\right]\Rightarrow\left(x/w,y/w\right)\)</span></p><p><span class="math inline">\(\left[\begin{array}{c}x\\ y\\ z\\ w\end{array}\right]\Rightarrow\left(x/w,y/w,z/w\right)\)</span></p><p><span class="math inline">\(H \to E\)</span> 的转变不是唯一的，但<span class="math inline">\(E \to H\)</span> 的转变是唯一的</p><h3 id="像素坐标系">像素坐标系</h3><p>建立像平面到像素平面关系</p><ol type="1"><li>偏置</li></ol><figure><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20221222204440.png" alt="" /><figcaption>image.png</figcaption></figure><figure><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20221222204450.png" alt="" /><figcaption>image.png</figcaption></figure><p><span class="math inline">\((x,y,z)\to(f\dfrac{x}{z}+c_x,f\dfrac{y}{z}+c_y)\)</span></p><ol start="2" type="1"><li>单位变换 <span class="math inline">\((x,y,z)\to({fk}\frac{x}{z}+c_x,{fl}\frac{y}{z}+c_y)\)</span> 单位：k.l：pixel/m , f:m k表示竖直方向上多少米表示一个像素，l表示水平方向上多少米表示一个像素</li></ol><p>记<span class="math inline">\(fk\)</span>为<span class="math inline">\(\alpha\)</span> ,<span class="math inline">\(fl\)</span>为<span class="math inline">\(\beta\)</span> <span class="math inline">\(P=(x,y,z)\rightarrow P^{\prime}=\left(\alpha{\frac{x}{z} }+c_{x},\beta{\frac{y}{z} }+c_{y}\right)\)</span> ，这里的<span class="math inline">\(c_x,c_y\)</span>是像素上的偏置</p><p><span class="math inline">\(P=(x,y,z)\rightarrow P^{\prime}=\left(\alpha{\frac{x}{z} }+c_{x},\beta{\frac{y}{z} }+c_{y}\right)\)</span>是非线性变换</p><p>在齐次坐标系下 <span class="math inline">\(P_h&#39;=\begin{bmatrix}\alpha x+c_x z\\ \beta y+c_yz\\ z\end{bmatrix}=\begin{bmatrix}\alpha&amp;0&amp;c_x&amp;0\\ 0&amp;\beta&amp;c_y&amp;0\\ 0&amp;0&amp;1&amp;0\end{bmatrix}\begin{bmatrix}x\\y\\z\\1\end{bmatrix}\)</span></p><p><span class="math inline">\(P&#39;_h\to P&#39;=(\alpha\dfrac{x}{z}+c_x,\beta\dfrac{y}{z}+c_y)\)</span></p><p><span class="math inline">\(P&#39;_h\)</span>是齐次，<span class="math inline">\(P&#39;\)</span> 是欧式</p><h3 id="摄像机的投影矩阵">摄像机的投影矩阵</h3><figure><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20221222210401.png" alt="" /><figcaption>image.png</figcaption></figure><p><span class="math inline">\(P&#39;=\begin{bmatrix}\alpha&amp;0&amp;c_x&amp;0\\ 0&amp;\beta&amp;c_y&amp;0\\ 0&amp;0&amp;1&amp;0\end{bmatrix}\begin{bmatrix}x\\ y\\ z\\ 1\end{bmatrix}=MP\)</span></p><p>其中<span class="math inline">\(M=\begin{bmatrix}\alpha&amp;-\alpha\cot\theta&amp;c_x&amp;0\\ 0&amp;\dfrac{\beta}{sin\theta}&amp;c_y&amp;0\\ 0&amp;0&amp;1&amp;0\end{bmatrix}\)</span></p><p>此时<span class="math inline">\(P\)</span>和<span class="math inline">\(P&#39;\)</span> 是线性表示 <span class="math inline">\(P&#39;\)</span>是<span class="math inline">\(3*1\)</span>矩阵，<span class="math inline">\(P\)</span> 是<span class="math inline">\(4*1\)</span>矩阵</p><h3 id="摄像机偏斜">摄像机偏斜</h3><p><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20221222210931.png" alt="image.png" /> <span class="math inline">\(P&#39;=\begin{bmatrix}\alpha&amp;-\alpha\cot\theta&amp;c_x&amp;0\\ 0&amp;\frac{\beta}{sin\theta}&amp;c_y&amp;0\\ 0&amp;0&amp;1&amp;0\end{bmatrix}\begin{bmatrix}x\\ y\\ z\\ 1\end{bmatrix}\)</span></p><h3 id="摄像机坐标系下的摄像机模型">摄像机坐标系下的摄像机模型</h3><p><span class="math inline">\(P&#39;=\begin{bmatrix}\alpha&amp;-\alpha\cot\theta&amp;c_x&amp;0\\ 0&amp;\frac{\beta}{sin\theta}&amp;c_y&amp;0\\ 0&amp;0&amp;1&amp;0\end{bmatrix}\begin{bmatrix}x\\ y\\ z\\ 1\end{bmatrix}=MP\)</span></p><p><span class="math inline">\(M=\begin{bmatrix}\alpha&amp;-\alpha\cot\theta&amp;c_x&amp;0\\ 0&amp;\frac{\beta}{sin\theta}&amp;c_y&amp;0\\ 0&amp;0&amp;1&amp;0\end{bmatrix}\)</span>被称为投影矩阵，</p><p><span class="math inline">\(K=\begin{bmatrix}\alpha&amp;-\alpha\cot\theta&amp;c_x\\ 0&amp;\frac{\beta}{sin\theta}&amp;c_y\\ 0&amp;0&amp;1\end{bmatrix}\)</span> 被称为摄像机内参数矩阵，内参数矩阵决定了摄像机坐标系下空间点到图像点的映射</p><p>摄像机内参数为<span class="math inline">\(\alpha,\beta,c_x,c_y,\theta\)</span>，K有五个自由度</p><h3 id="规范化投影变换">规范化投影变换</h3><p><span class="math inline">\(P&#39;=\begin{bmatrix}x\\ y\\ z\end{bmatrix}=\begin{bmatrix}1&amp;0&amp;0&amp;0\\ 0&amp;1&amp;0&amp;0\\ 0&amp;0&amp;1&amp;0\end{bmatrix}\begin{bmatrix}x\\ y\\ z\\ 1\end{bmatrix}\)</span></p><p>已知摄像机矩阵<span class="math inline">\(M\)</span> , <span class="math inline">\(P&#39;=I(MP)\)</span>,<span class="math inline">\(I=\begin{bmatrix}1&amp;0&amp;0\\ 0&amp;1&amp;0\\ 0&amp;0&amp;1\end{bmatrix}\)</span></p><p><span class="math inline">\(\begin{array}{c}\Re^4\xrightarrow{H}\Re^3\\ \boldsymbol{P&#39;}=M\boldsymbol{P}\end{array}\)</span></p><p><span class="math inline">\(P\)</span> 的欧式坐标<span class="math inline">\(\left[\begin{array}{c}{ {\frac{x}{z} }}\\ { {\frac{y}{z} }}\\ \end{array}\right]\)</span></p><h3 id="世界坐标系">世界坐标系</h3><figure><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20221222212628.png" alt="" /><figcaption>image.png</figcaption></figure><p><span class="math inline">\(O_w\)</span> 为世界坐标系 <span class="math inline">\(O\)</span>摄像机坐标系,<span class="math inline">\(C&#39;\)</span>像平面坐标系</p><p>齐次坐标系<span class="math inline">\(P=\left[\begin{matrix}{R}&amp;{T}\\ {0}&amp;{1}\\ \end{matrix}\right]\boldsymbol{P}_{w}\)</span> , <span class="math inline">\(\begin{bmatrix}x_w\\ y_w\\ z_w\\ 1\end{bmatrix}\)</span> ，即摄像机坐标系是世界坐标系经过一个旋转，再经过一个平移得到的</p><p>世界坐标系下<span class="math inline">\(P_w=R^T(P-T)\)</span></p><p>从世界坐标系到像素坐标系<span class="math inline">\(P&#39;=K[I\quad0]P=K[I\quad0]\begin{bmatrix}R&amp;T\\ 0&amp;1\end{bmatrix}P_w=K[R\quad T]P_w=MP_w=\left[{\begin{matrix}{m_{1} }\\ {m_{2} }\\ {m_{3} }\end{matrix} }\right]P_{\mathrm{w} }\)</span> <span class="math inline">\(\begin{bmatrix}R &amp; T\end{bmatrix}\)</span>称为外参数矩阵，K是内参数，这就是完整的摄像机模型</p><p><span class="math inline">\(M\)</span> 称为投影矩阵，有11个自由度</p><p>摄像机O点坐标为<span class="math inline">\(-R^TT\)</span></p><p><span class="math inline">\(\left[{\begin{matrix}{m_{1} }\\ {m_{2} }\\ {m_{3} }\end{matrix} }\right]P_{\mathrm{w} }\)</span> 是转换为欧式坐标系的写法，<span class="math inline">\(m_i\)</span> 是一个<span class="math inline">\(1*4\)</span> 的矩阵</p><figure><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20221222215030.png" alt="" /><figcaption>image.png</figcaption></figure><h3 id="投影变化的性质">投影变化的性质</h3><ol type="1"><li>点投影为点</li><li>线投影为线</li><li>近大远小</li><li>角度不再保持</li><li>平行线相交</li></ol><h2 id="其他摄像机模型">其他摄像机模型</h2><h3 id="透视投影摄像机">透视投影摄像机</h3><p>^b240bc</p><figure><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20221222220419.png" alt="" /><figcaption>image.png</figcaption></figure><p><span class="math inline">\(P&#39;_{3\times1}=MP_W=K_{3\times3}[R\quad T]_{3\times4}P_{W4\times1}=\begin{bmatrix}m_1\\ m_2\\ m_3\end{bmatrix}P_w=\begin{bmatrix}m_1P_w\\ m_2P_w\\ m_3P_w\end{bmatrix}\stackrel{E}{\longrightarrow}(\dfrac{m_1P_w}{m_3P_w},\dfrac{m_2P_w}{m_3P_w})\quad,M=\begin{bmatrix}m_1\\ m_2\\ m_3\end{bmatrix}\)</span><br />### 弱透视投影摄像机</p><figure><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20221222220925.png" alt="" /><figcaption>image.png</figcaption></figure><p><span class="math inline">\(\begin{cases}x&#39;=\dfrac{f&#39;}{z}x\\ y&#39;=\dfrac{f&#39;}{z}y\end{cases}\rightarrow\begin{cases}x&#39;=\dfrac{f&#39;}{z_0}x\\ y&#39;=\dfrac{f}{z_0}y\end{cases}\)</span></p><p>从投影（透视）到弱透视<span class="math inline">\(M=K[RT]=\begin{bmatrix}A_{2\times3}&amp;b_{2\times1}\\ v_{1\times2}&amp;1\end{bmatrix}\quad\to M=\begin{bmatrix}A&amp;b\\ 0&amp;1\end{bmatrix}\quad\)</span></p><p><span class="math inline">\(P&#39;=MP_w=\begin{bmatrix}m_1\\ m_2\\ m_3\end{bmatrix}P_w=\begin{bmatrix}m_1P_w\\ m_2P_w\\ 1\end{bmatrix}\stackrel{E}{\longrightarrow}\left(m_{1}P_{W},m_{2}P_{w}\right)\)</span> ,<span class="math inline">\(m_1,m_2\)</span> 为放大率</p><p><span class="math inline">\(M=\begin{bmatrix}A&amp;b\\ v&amp;1\end{bmatrix}=\begin{bmatrix}m_1\\ m_2\\ m_3\end{bmatrix}=\begin{bmatrix}&amp;m_1&amp;\\ &amp;m_2&amp;\\ 0&amp;0&amp;0&amp;1\end{bmatrix}\)</span></p><h3 id="正交投影摄像机">正交投影摄像机</h3><figure><img src="https://raw.githubusercontent.com/StudyingLover/anything/main/20221222222006.png" alt="" /><figcaption>image.png</figcaption></figure><p><span class="math inline">\(\begin{cases}x&#39;=\dfrac{f&#39;}{z}x\\ y&#39;=\dfrac{f&#39;}{z}y\end{cases}\quad\to\quad\begin{cases}x&#39;=x\\ y&#39;=y\end{cases}\)</span></p><h3 id="各种摄像机模型的应用场合">各种摄像机模型的应用场合</h3><ul><li>正交投影<ul><li>更多应用在建筑设计(AUTOCAD)或者工业设计行业</li></ul></li><li>弱透视投影在数学方面更简单<ul><li>当物体较小且较远时准确，常用于图像识别任务</li></ul></li><li>透视投影对于3D到2D映射的建模更为准确<ul><li>用于运动恢复结构或SLAM</li></ul></li></ul>]]></content:encoded>
-      
-      
-      <category domain="https://studyinglover.com/categories/%E5%B7%A5%E5%85%B7/">工具</category>
-      
-      
-      <category domain="https://studyinglover.com/tags/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89/">机器视觉</category>
-      
-      
-      <comments>https://studyinglover.com/2022/12/29/%E6%91%84%E5%83%8F%E6%9C%BA%E6%A8%A1%E5%9E%8B/#disqus_thread</comments>
       
     </item>
     

@@ -124,3 +124,127 @@ def on_train_batch_end(self, trainer, pl_module, outputs, batch, batch_idx, data
 def on_train_batch_end(self, trainer, pl_module, outputs, batch, batch_idx):
 ```
 
+## Diffusers 训练
+[Diffusers](https://github.com/huggingface/diffusers) 是一个huggingface 推出的扩散模型的封装库,同时也对ControlNet做了封装，https://github.com/huggingface/diffusers/tree/main/examples/controlnet
+
+### 训练
+代码跑起来其实也非常简单，首先下载diffusers整个仓库,然后安装依赖
+```bash
+git clone https://github.com/huggingface/diffusers
+cd diffusers
+pip install -r requirements.txt
+```
+你可能会发现这样的报错
+![image.png](https://proxy.thisis.plus/202304272229714.png)
+```
+  WARNING: The scripts accelerate, accelerate-config and accelerate-launch are installed in '/home/ubuntu/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+  WARNING: The script transformers-cli is installed in '/home/ubuntu/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+  WARNING: The script ftfy is installed in '/home/ubuntu/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+  WARNING: The script tensorboard is installed in '/home/ubuntu/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+  WARNING: The script datasets-cli is installed in '/home/ubuntu/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+```
+别慌，依赖已经下载成功了，只是下载到了一个不在PATH的路径，接下来如果要使用这些被提到的库就需要指明路径，例如下面我们要使用accelerate，正常的用法是
+```bash
+accelerate 你要执行的东西
+```
+我们只需要改成
+```
+/home/ubuntu/.local/bin/accelerate 你要执行的东西
+```
+
+接下来运行tutorial_train 
+```bash
+accelerate config
+```
+全部选NO就好，如果你有多卡什么的可以参考[官方文档](https://huggingface.co/docs/accelerate/index)
+
+我们需要测试数据集
+```bash
+wget https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/controlnet_training/conditioning_image_1.png
+
+wget https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/controlnet_training/conditioning_image_2.png
+```
+
+接着运行，设置基础模型和模型输出目录
+```bash
+export OUTPUT_DIR="./out_models"
+export MODEL_DIR="runwayml/stable-diffusion-v1-5"
+```
+
+运行代码，这里epoch=1，steps=1
+```bash
+/home/ubuntu/.local/bin/accelerate launch train_controlnet.py   --pretrained_model_name_or_path=$MODEL_DIR  --output_dir=$OUTPUT_DIR   --dataset_name=fusing/fill50k   --resolution=512   --learning_rate=1e-5   --validation_image "./conditioning_image_1.png" "./conditioning_image_2.png"   --validation_prompt "red circle with blue background" "cyan circle with brown floral background"   --train_batch_size=4 --num_train_epochs=1 --max_train_steps=1
+```
+
+### 推理
+
+新建一个文件`inference.py`
+```python
+from diffusers import StableDiffusionControlNetPipeline, ControlNetModel, UniPCMultistepScheduler
+from diffusers.utils import load_image
+import torch
+
+base_model_path = "path to model"
+controlnet_path = "path to controlnet"
+
+controlnet = ControlNetModel.from_pretrained(controlnet_path, torch_dtype=torch.float16)
+pipe = StableDiffusionControlNetPipeline.from_pretrained(
+    base_model_path, controlnet=controlnet, torch_dtype=torch.float16
+)
+
+# speed up diffusion process with faster scheduler and memory optimization
+pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
+# remove following line if xformers is not installed
+pipe.enable_xformers_memory_efficient_attention()
+
+pipe.enable_model_cpu_offload()
+
+control_image = load_image("./conditioning_image_1.png")
+prompt = "pale golden rod circle with old lace background"
+
+# generate image
+generator = torch.manual_seed(0)
+image = pipe(
+     prompt, num_inference_steps=20, generator=generator, image=control_image
+).images[0]
+
+image.save("./output.png")
+```
+
+这里的base_model_path 和 controlnet_path 改成之前设置的MODEL_DIR和OUTPUT_DIR(注意顺序)
+
+接下来运行就可
+```bash
+python inference.py
+```
+
+结果会被保存到`output.png` 
+
+### 踩坑解决
+#### WARNING: The scripts accelerate, accelerate-config and accelerate-launch are installed in '/home/ubuntu/.local/bin' which is not on PATH.Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+
+```
+  WARNING: The scripts accelerate, accelerate-config and accelerate-launch are installed in '/home/ubuntu/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+  WARNING: The script transformers-cli is installed in '/home/ubuntu/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+  WARNING: The script ftfy is installed in '/home/ubuntu/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+  WARNING: The script tensorboard is installed in '/home/ubuntu/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+  WARNING: The script datasets-cli is installed in '/home/ubuntu/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+```
+类似的问题，这里的依赖已经安装成功了，只是被安装到了未被添加到PATH的目录，接下来运行的时候只需要指明目录即可。例如下面我们要使用accelerate，正常的用法是
+```bash
+accelerate 你要执行的东西
+```
+我们只需要改成
+```
+/home/ubuntu/.local/bin/accelerate 你要执行的东西
+```

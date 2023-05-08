@@ -9,8 +9,32 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 27 Apr 2023 14:46:53 GMT</pubDate>
+    <pubDate>Mon, 08 May 2023 13:30:39 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>MXnet-arcface数据集准备</title>
+      <link>https://studyinglover.com/2023/05/08/MXnet-arcface%E6%95%B0%E6%8D%AE%E9%9B%86%E5%87%86%E5%A4%87/</link>
+      <guid>https://studyinglover.com/2023/05/08/MXnet-arcface%E6%95%B0%E6%8D%AE%E9%9B%86%E5%87%86%E5%A4%87/</guid>
+      <pubDate>Mon, 08 May 2023 21:28:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;众所周知，mxnet是一个沐神主导开发的一个深度学习框架，之前听李沐的讲论文时也听他说过很多次，但是已知没有机会使用，最近接触了一个项目，有机会感受了一些mxnet，但是也踩了很多坑。所有需要的脚本文件可以在&lt;a href=&quot;https://github.com/Study</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>众所周知，mxnet是一个沐神主导开发的一个深度学习框架，之前听李沐的讲论文时也听他说过很多次，但是已知没有机会使用，最近接触了一个项目，有机会感受了一些mxnet，但是也踩了很多坑。所有需要的脚本文件可以在<a href="https://github.com/StudyingLover/menet-Arcface-tools">https://github.com/StudyingLover/menet-Arcface-tools</a>下载</p><figure><img src="https://proxy.thisis.plus/202305082129080.png" alt="" /><figcaption>image.png</figcaption></figure><p>mxnet 的数据与别处的是不同的，他的训练集是两个文件，分别以<code>.idx</code> 和 <code>.rec</code> 结尾， 测试集是以<code>.bin</code> 结尾的一个二进制文件。</p><h3 id="创建lstidxrec">创建lst,idx,rec</h3><p>我们需要按照特定方式放置图片,首先创建一个大的文件夹，里面创建一个个子文件夹，每个文件夹放置相同类别的图片 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs stylus">/image_folder<br>├── <span class="hljs-number">0</span>_0_0000000<br>│   ├── <span class="hljs-number">0</span>_0<span class="hljs-selector-class">.jpg</span><br>│   ├── <span class="hljs-number">0</span>_1<span class="hljs-selector-class">.jpg</span><br>│   ├── <span class="hljs-number">0</span>_2<span class="hljs-selector-class">.jpg</span><br>│   ├── <span class="hljs-number">0</span>_3<span class="hljs-selector-class">.jpg</span><br>│   └── <span class="hljs-number">0</span>_4<span class="hljs-selector-class">.jpg</span><br>├── <span class="hljs-number">0</span>_0_0000001<br>│   ├── <span class="hljs-number">0</span>_5<span class="hljs-selector-class">.jpg</span><br>│   ├── <span class="hljs-number">0</span>_6<span class="hljs-selector-class">.jpg</span><br>│   ├── <span class="hljs-number">0</span>_7<span class="hljs-selector-class">.jpg</span><br>│   ├── <span class="hljs-number">0</span>_8<span class="hljs-selector-class">.jpg</span><br>│   └── <span class="hljs-number">0</span>_9<span class="hljs-selector-class">.jpg</span><br>├── <span class="hljs-number">0</span>_0_0000002<br>│   ├── <span class="hljs-number">0</span>_10<span class="hljs-selector-class">.jpg</span><br>│   ├── <span class="hljs-number">0</span>_11<span class="hljs-selector-class">.jpg</span><br>│   ├── <span class="hljs-number">0</span>_12<span class="hljs-selector-class">.jpg</span><br>│   ├── <span class="hljs-number">0</span>_13<span class="hljs-selector-class">.jpg</span><br>│   ├── <span class="hljs-number">0</span>_14<span class="hljs-selector-class">.jpg</span><br>│   ├── <span class="hljs-number">0</span>_15<span class="hljs-selector-class">.jpg</span><br>│   ├── <span class="hljs-number">0</span>_16<span class="hljs-selector-class">.jpg</span><br>│   └── <span class="hljs-number">0</span>_17<span class="hljs-selector-class">.jpg</span><br>├── <span class="hljs-number">0</span>_0_0000003<br>│   ├── <span class="hljs-number">0</span>_18<span class="hljs-selector-class">.jpg</span><br>│   ├── <span class="hljs-number">0</span>_19<span class="hljs-selector-class">.jpg</span><br>│   └── <span class="hljs-number">0</span>_20<span class="hljs-selector-class">.jpg</span><br>├── <span class="hljs-number">0</span>_0_0000004<br><br></code></pre></td></tr></table></figure></p><p>接下来先生成一个<code>.lst</code> 文件，这个文件包含了所有的文件,训练集和测试集按照8：2划分 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python -m mxnet.tools.im2rec --list --recursive train 图片文件夹 –test-ratio 0.8<br></code></pre></td></tr></table></figure></p><p>这段代码会生成两个文件夹<code>train_train.lst</code> 和<code>train_test.lst</code></p><h3 id="生成训练集文件">生成训练集文件</h3><p>接下来生成训练集文件 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python -m mxnet.tools.im2rec train_train.lst --quality 100 图片文件夹<br></code></pre></td></tr></table></figure></p><p>需要给生成的文件改个名字 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mv</span> train_train.idx train.idx<br><span class="hljs-built_in">mv</span> train_train.rec train.rec<br></code></pre></td></tr></table></figure></p><p>下面创建property配置文件 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">训练集图片数量 图片大小 图片大小<br></code></pre></td></tr></table></figure></p><p>例如 <figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">10000 </span><span class="hljs-number">112</span> <span class="hljs-number">112</span><br></code></pre></td></tr></table></figure></p><h3 id="创建pair文件">创建pair文件</h3><p>这一步多少有点奇怪，pair文件里面的结构是 <figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gcode">im<span class="hljs-name">g1</span>_path im<span class="hljs-name">g2</span>_path <span class="hljs-number">0</span><br>im<span class="hljs-name">g3</span>_path im<span class="hljs-name">g4</span>_path <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure> 生成方式也很简单啦，运行 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 generate_image_pairs.py --data-dir 图片文件夹路径 --outputtxt train.txt --num-samepairs 3000<br></code></pre></td></tr></table></figure> <code>num-samepairs</code> 是个魔数，看心情写吧，这里我为了大量生成，我又写了个脚本，重复执行 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">python repeat_cmd.py<br>python detele_empty.py<br><span class="hljs-built_in">cp</span> train.txt 图片文件夹<br></code></pre></td></tr></table></figure></p><h3 id="生成验证集bin">生成验证集bin</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python lfw2pack.py --data-dir 图片文件夹 --output test.bin --num-samepairs 300<br></code></pre></td></tr></table></figure><p>ok就这样，我们生成了需要的<code>train.idx</code> <code>train.rec</code>,<code>test.bin</code></p>]]></content:encoded>
+      
+      
+      <category domain="https://studyinglover.com/categories/%E5%B7%A5%E5%85%B7/">工具</category>
+      
+      
+      
+      <comments>https://studyinglover.com/2023/05/08/MXnet-arcface%E6%95%B0%E6%8D%AE%E9%9B%86%E5%87%86%E5%A4%87/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>ControlNet训练自己数据集</title>
@@ -523,30 +547,6 @@
       
       
       <comments>https://studyinglover.com/2023/01/26/%E5%9C%A8%E7%BD%91%E9%A1%B5%E6%88%96%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%B5%8C%E5%85%A5ppt/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>jsdelivr加速Github文件</title>
-      <link>https://studyinglover.com/2023/01/20/jsdelivr%E5%8A%A0%E9%80%9FGithub%E6%96%87%E4%BB%B6/</link>
-      <guid>https://studyinglover.com/2023/01/20/jsdelivr%E5%8A%A0%E9%80%9FGithub%E6%96%87%E4%BB%B6/</guid>
-      <pubDate>Fri, 20 Jan 2023 10:00:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;假设GitHub路径为&lt;code&gt;https://github.com/username/repo-name/path/to/file&lt;/code&gt; ,用jsdelivr可以加速或者在html中引用，路径为&lt;code&gt;https://cdn.jsdelivr.net/gh/</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<p>假设GitHub路径为<code>https://github.com/username/repo-name/path/to/file</code> ,用jsdelivr可以加速或者在html中引用，路径为<code>https://cdn.jsdelivr.net/gh/username/repo-name/path/to/file</code></p><p>这里实现了一个简单的链接转换函数，可以将GitHub路径转换为jsdelivr路径 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">find_first_occurrence</span>(<span class="hljs-params">string, substring</span>):<br>    <span class="hljs-keyword">return</span> string.find(substring)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">gh_path2jsdelivr</span>(<span class="hljs-params">path</span>):<br>    <span class="hljs-keyword">if</span>(find_first_occurrence(path,<span class="hljs-string">&quot;/blob/&quot;</span>) != -<span class="hljs-number">1</span>):<br>        path = path.replace(<span class="hljs-string">&quot;/blob/&quot;</span>, <span class="hljs-string">&quot;/&quot;</span>)<br>    <span class="hljs-keyword">if</span>(find_first_occurrence(path,<span class="hljs-string">&quot;/main/&quot;</span>) != -<span class="hljs-number">1</span>):<br>        path = path.replace(<span class="hljs-string">&quot;/main/&quot;</span>, <span class="hljs-string">&quot;/&quot;</span>)<br>    <span class="hljs-keyword">if</span>(find_first_occurrence(path,<span class="hljs-string">&quot;/master/&quot;</span>) != -<span class="hljs-number">1</span>):<br>        path = path.replace(<span class="hljs-string">&quot;/master/&quot;</span>, <span class="hljs-string">&quot;/&quot;</span>)<br>    <span class="hljs-keyword">return</span> path.replace(<span class="hljs-string">&quot;github.com&quot;</span>, <span class="hljs-string">&quot;cdn.jsdelivr.net/gh&quot;</span>, <span class="hljs-number">1</span>)<br><br><span class="hljs-built_in">print</span>(gh_path2jsdelivr(<span class="hljs-string">&quot;&quot;</span>))<br><br></code></pre></td></tr></table></figure></p>]]></content:encoded>
-      
-      
-      <category domain="https://studyinglover.com/categories/%E5%B7%A5%E5%85%B7/">工具</category>
-      
-      
-      
-      <comments>https://studyinglover.com/2023/01/20/jsdelivr%E5%8A%A0%E9%80%9FGithub%E6%96%87%E4%BB%B6/#disqus_thread</comments>
       
     </item>
     

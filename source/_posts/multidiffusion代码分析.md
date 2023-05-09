@@ -5,12 +5,18 @@ date: 2023-5-9 12:35:00
 tags:
 - 图像生成
 ---
+# Multidiffusion代码分析
+
+## 前言
+当我们使用计算机生成图像时，经常会遇到一些困难，例如如何生成高质量、高分辨率的图像，如何控制图像的风格和内容等。近年来，深度学习技术在图像生成领域取得了很大的进展，其中一种流行的方法是使用变分自编码器（VAE）和生成对抗网络（GAN）等模型。然而，这些方法通常需要大量的训练数据和计算资源，而且生成的图像可能会出现一些问题，例如模糊、失真和不连续等。
+
+为了解决这些问题，一些研究人员提出了一种新的合成全景图的方法，称为MultiDiffusion。该方法使用了一种多步推理的策略，将全景图像的生成过程分解成多个步骤，并在每个步骤中对潜变量向量进行微调，从而生成高质量、高分辨率的全景图像。MultiDiffusion方法不需要大量的训练数据和计算资源，而且能够生成具有良好视觉效果的全景图像。本文将介绍MultiDiffusion方法的实现细节，并提供相应的代码和解释。(chatgpt写的，大家凑活着看)
 
 [官方主页](https://multidiffusion.github.io/)
 [代码](https://github.com/omerbt/MultiDiffusion)
 [在线体验](https://huggingface.co/spaces/weizmannscience/MultiDiffusion)
 
-
+## 分析
 ```python
 from transformers import CLIPTextModel, CLIPTokenizer, logging
 from diffusers import AutoencoderKL, UNet2DConditionModel, DDIMScheduler
@@ -30,7 +36,7 @@ def seed_everything(seed):
     # torch.backends.cudnn.deterministic = True
     # torch.backends.cudnn.benchmark = True
 ```
-常规操作，设置随机数，实际上还有另一种写法[^1]
+常规操作，设置随机数，实际上还有另一种写法[^1] . 这里是设置了torch 在CPU 和 GPU 的随机数
 ```python
 def seed_torch(seed=1029):
     random.seed(seed)   # Python的随机性
@@ -63,8 +69,7 @@ def get_views(panorama_height, panorama_width, window_size=64, stride=8):
 
 这段代码的作用是将一个全景图像分成多个小块，每个块的大小为$window_{size} * window_{size}$，步长为$stride$，返回每个小块的位置信息。
 
-
-接下来的这个类定义了整个multidiffusion的所有操作
+下面类定义了整个multidiffusion的所有操作
 ```python
 self.device = device
 self.sd_version = sd_version
@@ -97,7 +102,16 @@ else:
 	self.scheduler = DDIMScheduler.from_pretrained(model_key, subfolder="scheduler")
 	print(f'[INFO] loaded stable diffusion!')
 ```
-这里是从预训练模型加载并创建模型
+这里是从预训练模型加载并创建模型，分别加载了VAE，tokenizer，text_encoder
+
+|模型|内容|
+|-|-|
+|VAE|变分自动编码器|
+|tokenizer|分词器,负责将一句话分割成一个一个词，这里是CLIPTokenizer|
+|text_encoder|文本编码器|
+|UNet2DConditionModel|Unet，负责重建和预测|
+|DDIMScheduler|DDIM采样器|
+
 
 ```python
 def get_text_embeds(self, prompt, negative_prompt):
@@ -124,7 +138,9 @@ def decode_latents(self, latents):
         imgs = (imgs / 2 + 0.5).clamp(0, 1)
         return imgs
 ```
-这段代码作用是将一个向量从latent space 解码成一个图像
+这段代码作用是将一个向量从latent space 解码成一个图像。
+
+它接收一个潜变量向量集合作为输入，并使用变分自编码器（VAE）将其解码成图像。他将输入的潜变量向量集合除以0.18215进行缩放(魔数，不知原因)，然后调用VAE的decode方法来生成一组图像同时使用sample方法产生一些随机性，从而增加输出图像的多样性。最后缩放到$[0,1]$ 范围内。
 
 ```python
 def text2panorama(self, prompts, negative_prompts='', height=512, width=2048, num_inference_steps=50, guidance_scale=7.5):
@@ -177,7 +193,7 @@ def text2panorama(self, prompts, negative_prompts='', height=512, width=2048, nu
         img = T.ToPILImage()(imgs[0].cpu())
         return img
 ```
-作用是根据给定的文本提示(prompts)，将其合成成全景图像
+作用是根据给定的文本提示(prompts)，将其合成成全景图像。它接收一组提示(prompt)作为输入，将其转换为列表类型。然后，定义全景图像的网格，并获取一个一个图像。接下来，使用随机噪声向量作为输入，通过多步推理生成全景图像的潜变量向量。在推理过程中，使用UNet模型对潜变量向量进行多步推理，并根据提示进行引导，生成不同的全景图像，最后横向拼接所有图像。
 
 ```python
 if __name__ == '__main__':
@@ -202,7 +218,6 @@ if __name__ == '__main__':
     img.save('out.png')
 ```
 这个是从命令行启动的方式，按照argparse的使用方法使用
-
 |参数|含义|
 |-|-|
 |prompt|提示|
@@ -215,5 +230,5 @@ if __name__ == '__main__':
 最后的结果会保存为out.png
 
 
-
+## 参考文献
 [^1]: 关注 R. 却没能成为自己​. (n.d.). _pytorch如何确保 可重复性/每次训练结果相同(固定了随机种子，为什么还不行)？_. 知乎. Retrieved May 9, 2023, from http://zhihu.com/question/345043149/answer/2940838756  

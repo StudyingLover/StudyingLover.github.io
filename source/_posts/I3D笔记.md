@@ -2,8 +2,6 @@
 title: I3D笔记
 banner_img: https://drive.studyinglover.com/api/raw/?path=/photos/blog/background/1679397045791.jpg
 date: 2023-4-23 22:14:00
-tags:
-- 图像生成
 ---
 # I3D笔记
 I3D是一个视频理解模型，采用双流网络的架构，他的核心贡献是提出了如何对2d网络进行膨胀操作，同时提出了一个新的数据集 Kinetics

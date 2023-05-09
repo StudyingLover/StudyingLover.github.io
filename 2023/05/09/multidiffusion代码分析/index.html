@@ -1,0 +1,806 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://drive.studyinglover.com/api/raw/?path=/photos/blog/setting/favicon.ico">
+  <link rel="icon" href="https://drive.studyinglover.com/api/raw/?path=/photos/blog/setting/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="StudyingLover">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="官方主页 代码 在线体验 12345678from transformers import CLIPTextModel, CLIPTokenizer, loggingfrom diffusers import AutoencoderKL, UNet2DConditionModel, DDIMScheduler# suppress partial model loading warningloggi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="multidiffusion代码分析">
+<meta property="og:url" content="https://studyinglover.com/2023/05/09/multidiffusion%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="plus studio">
+<meta property="og:description" content="官方主页 代码 在线体验 12345678from transformers import CLIPTextModel, CLIPTokenizer, loggingfrom diffusers import AutoencoderKL, UNet2DConditionModel, DDIMScheduler# suppress partial model loading warningloggi">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-09T12:35:00.000Z">
+<meta property="article:modified_time" content="2023-05-09T04:41:41.808Z">
+<meta property="article:author" content="StudyingLover">
+<meta property="article:tag" content="图像生成">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script>     
+  
+  <title>multidiffusion代码分析 - plus studio</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"studyinglover.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"G-80B5GDZWVG","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'G-80B5GDZWVG', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  <style>ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }</style>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="plus studio" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="plus studio" type="application/rss+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>plus studio</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://proxy.thisis.plus/202305091237913.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="multidiffusion代码分析"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        StudyingLover
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-09 12:35" pubdate>
+          2023年5月9日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          57 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+<aside class="sidebar d-none d-xl-block" style="margin-right:-1rem;z-index:-1"><ins class="adsbygoogle" style="display:flex;justify-content:center;min-width:160px;max-width:300px;width:100%;height:600px;position:sticky;top:2rem" data-ad-client="ca-pub-6818277566173475" data-ad-slot="7216148023"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></aside>
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">multidiffusion代码分析</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><a target="_blank" rel="noopener" href="https://multidiffusion.github.io/">官方主页</a> <a target="_blank" rel="noopener" href="https://github.com/omerbt/MultiDiffusion">代码</a> <a target="_blank" rel="noopener" href="https://huggingface.co/spaces/weizmannscience/MultiDiffusion">在线体验</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> transformers <span class="hljs-keyword">import</span> CLIPTextModel, CLIPTokenizer, logging<br><span class="hljs-keyword">from</span> diffusers <span class="hljs-keyword">import</span> AutoencoderKL, UNet2DConditionModel, DDIMScheduler<br><span class="hljs-comment"># suppress partial model loading warning</span><br>logging.set_verbosity_error()<br><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">import</span> torch.nn <span class="hljs-keyword">as</span> nn<br><span class="hljs-keyword">import</span> torchvision.transforms <span class="hljs-keyword">as</span> T<br><span class="hljs-keyword">import</span> argparse<br></code></pre></td></tr></table></figure>
+<p>这里导入了所有的库，包括huggingface推出的transformers 和 diffusers。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">seed_everything</span>(<span class="hljs-params">seed</span>):<br>    torch.manual_seed(seed)<br>    torch.cuda.manual_seed(seed)<br>    <span class="hljs-comment"># torch.backends.cudnn.deterministic = True</span><br>    <span class="hljs-comment"># torch.backends.cudnn.benchmark = True</span><br></code></pre></td></tr></table></figure>
+<p>常规操作，设置随机数，实际上还有另一种写法<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="关注 R. 却没能成为自己​. (n.d.). _pytorch如何确保 可重复性/每次训练结果相同(固定了随机种子，为什么还不行)？_. 知乎. Retrieved May 9, 2023, from http://zhihu.com/question/345043149/answer/2940838756">[1]</span></a></sup> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">seed_torch</span>(<span class="hljs-params">seed=<span class="hljs-number">1029</span></span>):<br>    random.seed(seed)   <span class="hljs-comment"># Python的随机性</span><br>    os.environ[<span class="hljs-string">&#x27;PYTHONHASHSEED&#x27;</span>] = <span class="hljs-built_in">str</span>(seed)    <span class="hljs-comment"># 设置Python哈希种子，为了禁止hash随机化，使得实验可复现</span><br>    np.random.seed(seed)   <span class="hljs-comment"># numpy的随机性</span><br>    torch.manual_seed(seed)   <span class="hljs-comment"># torch的CPU随机性，为CPU设置随机种子</span><br>    torch.cuda.manual_seed(seed)   <span class="hljs-comment"># torch的GPU随机性，为当前GPU设置随机种子</span><br>    torch.cuda.manual_seed_all(seed)  <span class="hljs-comment"># if you are using multi-GPU.   torch的GPU随机性，为所有GPU设置随机种子</span><br>    torch.backends.cudnn.benchmark = <span class="hljs-literal">False</span>   <span class="hljs-comment"># if benchmark=True, deterministic will be False</span><br>    torch.backends.cudnn.deterministic = <span class="hljs-literal">True</span>   <span class="hljs-comment"># 选择确定性算法</span><br></code></pre></td></tr></table></figure> 事实上，涉及到一些类似upsample 的层，因为原子加操作带来的浮点误差，永远也对不齐。 <code>a + b） + c != a + (b + c)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_views</span>(<span class="hljs-params">panorama_height, panorama_width, window_size=<span class="hljs-number">64</span>, stride=<span class="hljs-number">8</span></span>):<br>    panorama_height /= <span class="hljs-number">8</span><br>    panorama_width /= <span class="hljs-number">8</span><br>    num_blocks_height = (panorama_height - window_size) // stride + <span class="hljs-number">1</span><br>    num_blocks_width = (panorama_width - window_size) // stride + <span class="hljs-number">1</span><br>    total_num_blocks = <span class="hljs-built_in">int</span>(num_blocks_height * num_blocks_width)<br>    views = []<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(total_num_blocks):<br>        h_start = <span class="hljs-built_in">int</span>((i // num_blocks_width) * stride)<br>        h_end = h_start + window_size<br>        w_start = <span class="hljs-built_in">int</span>((i % num_blocks_width) * stride)<br>        w_end = w_start + window_size<br>        views.append((h_start, h_end, w_start, w_end))<br>    <span class="hljs-keyword">return</span> views<br></code></pre></td></tr></table></figure>
+<p>这段代码的作用是将一个全景图像分成多个小块，每个块的大小为<span class="math inline">\(window_{size} * window_{size}\)</span>，步长为<span class="math inline">\(stride\)</span>，返回每个小块的位置信息。</p>
+<p>接下来的这个类定义了整个multidiffusion的所有操作 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">self.device = device<br>self.sd_version = sd_version<br></code></pre></td></tr></table></figure> 定义了设备(CPU/GPU)和stable diffusion的版本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;[INFO] loading stable diffusion...&#x27;</span>)<br><br><span class="hljs-keyword">if</span> hf_key <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;[INFO] using hugging face custom model key: <span class="hljs-subst">&#123;hf_key&#125;</span>&#x27;</span>)<br>	model_key = hf_key<br><span class="hljs-keyword">elif</span> self.sd_version == <span class="hljs-string">&#x27;2.1&#x27;</span>:<br>	model_key = <span class="hljs-string">&quot;stabilityai/stable-diffusion-2-1-base&quot;</span><br><span class="hljs-keyword">elif</span> self.sd_version == <span class="hljs-string">&#x27;2.0&#x27;</span>:<br>	model_key = <span class="hljs-string">&quot;stabilityai/stable-diffusion-2-base&quot;</span><br><span class="hljs-keyword">elif</span> self.sd_version == <span class="hljs-string">&#x27;1.5&#x27;</span>:<br>	model_key = <span class="hljs-string">&quot;runwayml/stable-diffusion-v1-5&quot;</span><br><span class="hljs-keyword">else</span>:<br>	<span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">f&#x27;Stable-diffusion version <span class="hljs-subst">&#123;self.sd_version&#125;</span> not supported.&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p>加载了stable diffusion的版本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Create model</span><br>	self.vae = AutoencoderKL.from_pretrained(model_key, subfolder=<span class="hljs-string">&quot;vae&quot;</span>).to(self.device)<br>	self.tokenizer = CLIPTokenizer.from_pretrained(model_key, subfolder=<span class="hljs-string">&quot;tokenizer&quot;</span>)<br>	self.text_encoder = CLIPTextModel.from_pretrained(model_key, subfolder=<span class="hljs-string">&quot;text_encoder&quot;</span>).to(self.device)<br>	self.unet = UNet2DConditionModel.from_pretrained(model_key, subfolder=<span class="hljs-string">&quot;unet&quot;</span>).to(self.device)<br>	self.scheduler = DDIMScheduler.from_pretrained(model_key, subfolder=<span class="hljs-string">&quot;scheduler&quot;</span>)<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;[INFO] loaded stable diffusion!&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p>这里是从预训练模型加载并创建模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_text_embeds</span>(<span class="hljs-params">self, prompt, negative_prompt</span>):<br>	<span class="hljs-comment"># prompt, negative_prompt: [str]</span><br>	<span class="hljs-comment"># Tokenize text and get embeddings</span><br>	text_input = self.tokenizer(prompt, padding=<span class="hljs-string">&#x27;max_length&#x27;</span>, max_length=self.tokenizer.model_max_length,<br>								truncation=<span class="hljs-literal">True</span>, return_tensors=<span class="hljs-string">&#x27;pt&#x27;</span>)<br>	text_embeddings = self.text_encoder(text_input.input_ids.to(self.device))[<span class="hljs-number">0</span>]<br><br>	<span class="hljs-comment"># Do the same for unconditional embeddings</span><br>	uncond_input = self.tokenizer(negative_prompt, padding=<span class="hljs-string">&#x27;max_length&#x27;</span>, max_length=self.tokenizer.model_max_length, return_tensors=<span class="hljs-string">&#x27;pt&#x27;</span>)<br>	uncond_embeddings = self.text_encoder(uncond_input.input_ids.to(self.device))[<span class="hljs-number">0</span>]<br><br>	<span class="hljs-comment"># Cat for final embeddings</span><br>	text_embeddings = torch.cat([uncond_embeddings, text_embeddings])<br>	<span class="hljs-keyword">return</span> text_embeddings<br></code></pre></td></tr></table></figure>
+<p>这里是将提示(prompt) 转换成了text_embeddings、</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">decode_latents</span>(<span class="hljs-params">self, latents</span>):<br>        latents = <span class="hljs-number">1</span> / <span class="hljs-number">0.18215</span> * latents<br>        imgs = self.vae.decode(latents).sample<br>        imgs = (imgs / <span class="hljs-number">2</span> + <span class="hljs-number">0.5</span>).clamp(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">return</span> imgs<br></code></pre></td></tr></table></figure>
+<p>这段代码作用是将一个向量从latent space 解码成一个图像</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">text2panorama</span>(<span class="hljs-params">self, prompts, negative_prompts=<span class="hljs-string">&#x27;&#x27;</span>, height=<span class="hljs-number">512</span>, width=<span class="hljs-number">2048</span>, num_inference_steps=<span class="hljs-number">50</span>, guidance_scale=<span class="hljs-number">7.5</span></span>):<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(prompts, <span class="hljs-built_in">str</span>):<br>            prompts = [prompts]<br>  <br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(negative_prompts, <span class="hljs-built_in">str</span>):<br>            negative_prompts = [negative_prompts]<br>  <br>        <span class="hljs-comment"># Prompts -&gt; text embeds</span><br>        text_embeds = self.get_text_embeds(prompts, negative_prompts)  <span class="hljs-comment"># [2, 77, 768]</span><br>  <br>        <span class="hljs-comment"># Define panorama grid and get views</span><br>        latent = torch.randn((<span class="hljs-number">1</span>, self.unet.in_channels, height // <span class="hljs-number">8</span>, width // <span class="hljs-number">8</span>), device=self.device)<br>        views = get_views(height, width)<br>        count = torch.zeros_like(latent)<br>        value = torch.zeros_like(latent)<br>  <br>        self.scheduler.set_timesteps(num_inference_steps)<br>  <br>        <span class="hljs-keyword">with</span> torch.autocast(<span class="hljs-string">&#x27;cuda&#x27;</span>):<br>            <span class="hljs-keyword">for</span> i, t <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(self.scheduler.timesteps):<br>                count.zero_()<br>                value.zero_()<br>  <br>                <span class="hljs-keyword">for</span> h_start, h_end, w_start, w_end <span class="hljs-keyword">in</span> views:<br>                    <span class="hljs-comment"># TODO we can support batches, and pass multiple views at once to the unet</span><br>                    latent_view = latent[:, :, h_start:h_end, w_start:w_end]<br>  <br>                    <span class="hljs-comment"># expand the latents if we are doing classifier-free guidance to avoid doing two forward passes.</span><br>                    latent_model_input = torch.cat([latent_view] * <span class="hljs-number">2</span>)<br>  <br>                    <span class="hljs-comment"># predict the noise residual</span><br>                    noise_pred = self.unet(latent_model_input, t, encoder_hidden_states=text_embeds)[<span class="hljs-string">&#x27;sample&#x27;</span>]<br>  <br>                    <span class="hljs-comment"># perform guidance</span><br>                    noise_pred_uncond, noise_pred_cond = noise_pred.chunk(<span class="hljs-number">2</span>)<br>                    noise_pred = noise_pred_uncond + guidance_scale * (noise_pred_cond - noise_pred_uncond)<br>  <br>                    <span class="hljs-comment"># compute the denoising step with the reference model</span><br>                    latents_view_denoised = self.scheduler.step(noise_pred, t, latent_view)[<span class="hljs-string">&#x27;prev_sample&#x27;</span>]<br>                    value[:, :, h_start:h_end, w_start:w_end] += latents_view_denoised<br>                    count[:, :, h_start:h_end, w_start:w_end] += <span class="hljs-number">1</span><br>  <br>                <span class="hljs-comment"># take the MultiDiffusion step</span><br>                latent = torch.where(count &gt; <span class="hljs-number">0</span>, value / count, value)<br>  <br>        <span class="hljs-comment"># Img latents -&gt; imgs</span><br>        imgs = self.decode_latents(latent)  <span class="hljs-comment"># [1, 3, 512, 512]</span><br>        img = T.ToPILImage()(imgs[<span class="hljs-number">0</span>].cpu())<br>        <span class="hljs-keyword">return</span> img<br></code></pre></td></tr></table></figure>
+<p>作用是根据给定的文本提示(prompts)，将其合成成全景图像</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    parser = argparse.ArgumentParser()<br>    parser.add_argument(<span class="hljs-string">&#x27;--prompt&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">str</span>, default=<span class="hljs-string">&#x27;a photo of the dolomites&#x27;</span>)<br>    parser.add_argument(<span class="hljs-string">&#x27;--negative&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">str</span>, default=<span class="hljs-string">&#x27;&#x27;</span>)<br>    parser.add_argument(<span class="hljs-string">&#x27;--sd_version&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">str</span>, default=<span class="hljs-string">&#x27;2.0&#x27;</span>, choices=[<span class="hljs-string">&#x27;1.5&#x27;</span>, <span class="hljs-string">&#x27;2.0&#x27;</span>],                       <span class="hljs-built_in">help</span>=<span class="hljs-string">&quot;stable diffusion version&quot;</span>)<br>    parser.add_argument(<span class="hljs-string">&#x27;--H&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>, default=<span class="hljs-number">512</span>)<br>    parser.add_argument(<span class="hljs-string">&#x27;--W&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>, default=<span class="hljs-number">4096</span>)<br>    parser.add_argument(<span class="hljs-string">&#x27;--seed&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>, default=<span class="hljs-number">0</span>)<br>    parser.add_argument(<span class="hljs-string">&#x27;--steps&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>, default=<span class="hljs-number">50</span>)<br>    opt = parser.parse_args()<br>    seed_everything(opt.seed)<br>  <br>    device = torch.device(<span class="hljs-string">&#x27;cuda&#x27;</span>)<br>  <br>    sd = MultiDiffusion(device, opt.sd_version)<br><br>    img = sd.text2panorama(opt.prompt, opt.negative, opt.H, opt.W, opt.steps)<br>  <br>    <span class="hljs-comment"># save image</span><br>    img.save(<span class="hljs-string">&#x27;out.png&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p>这个是从命令行启动的方式，按照argparse的使用方法使用 |参数|含义| |-|-| |prompt|提示| |negative|反面提示| |sd_version|stable diffusion的版本| |H|图像的高度| |W|图像的宽度| |seed|随机数种子| |steps|采样步数| 最后的结果会保存为out.png</p>
+<section class="footnotes">
+<div class="footnote-list">
+<ol>
+<li>
+<span id="fn:1" class="footnote-text"><span>关注 R. 却没能成为自己​. (n.d.). <em>pytorch如何确保 可重复性/每次训练结果相同(固定了随机种子，为什么还不行)？</em>. 知乎. Retrieved May 9, 2023, from http://zhihu.com/question/345043149/answer/2940838756 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
+</li>
+</ol>
+</div>
+</section>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/">#图像生成</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>multidiffusion代码分析</div>
+      <div>https://studyinglover.com/2023/05/09/multidiffusion代码分析/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>StudyingLover</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年5月9日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+<div style="width:100%;display:flex;justify-content:center;margin-bottom:1.5rem"><ins class="adsbygoogle" style="display:flex;justify-content:center;max-width:845px;width:100%;height:90px" data-ad-client="ca-pub-6818277566173475" data-ad-slot="7216148023"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></div>
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/08/MXnet-arcface%E6%95%B0%E6%8D%AE%E9%9B%86%E5%87%86%E5%A4%87/" title="MXnet-arcface数据集准备">
+                        <span class="hidden-mobile">MXnet-arcface数据集准备</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"StudyingLover/StudyingLover.github.io","repo-id":"R_kgDOIQbc2w","category":"Announcements","category-id":"DIC_kwDOIQbc284CT0AH","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('mermaid' in window) {
+        mermaid.init();
+      }
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> <div style="width: 20vw; height: 15vh; margin: 0 auto; text-align: center;"> <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=bLcIH0Eh5s3UeoICvFfbZ3tHKvl8FJUjfBLHkJp-6sc&cl=ffffff&w=a"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475"crossorigin="anonymous"></script>
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

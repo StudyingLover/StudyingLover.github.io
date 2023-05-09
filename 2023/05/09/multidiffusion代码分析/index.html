@@ -24,14 +24,14 @@
 <meta property="og:description" content="官方主页 代码 在线体验 12345678from transformers import CLIPTextModel, CLIPTokenizer, loggingfrom diffusers import AutoencoderKL, UNet2DConditionModel, DDIMScheduler# suppress partial model loading warningloggi">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-09T12:35:00.000Z">
-<meta property="article:modified_time" content="2023-05-09T04:41:41.808Z">
+<meta property="article:modified_time" content="2023-05-09T10:47:58.423Z">
 <meta property="article:author" content="StudyingLover">
 <meta property="article:tag" content="图像生成">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script>     
+     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> 
   
   <title>multidiffusion代码分析 - plus studio</title>
 
@@ -268,7 +268,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.8k 字
+          6.7k 字
         
       </span>
     
@@ -341,7 +341,46 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">text2panorama</span>(<span class="hljs-params">self, prompts, negative_prompts=<span class="hljs-string">&#x27;&#x27;</span>, height=<span class="hljs-number">512</span>, width=<span class="hljs-number">2048</span>, num_inference_steps=<span class="hljs-number">50</span>, guidance_scale=<span class="hljs-number">7.5</span></span>):<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(prompts, <span class="hljs-built_in">str</span>):<br>            prompts = [prompts]<br>  <br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(negative_prompts, <span class="hljs-built_in">str</span>):<br>            negative_prompts = [negative_prompts]<br>  <br>        <span class="hljs-comment"># Prompts -&gt; text embeds</span><br>        text_embeds = self.get_text_embeds(prompts, negative_prompts)  <span class="hljs-comment"># [2, 77, 768]</span><br>  <br>        <span class="hljs-comment"># Define panorama grid and get views</span><br>        latent = torch.randn((<span class="hljs-number">1</span>, self.unet.in_channels, height // <span class="hljs-number">8</span>, width // <span class="hljs-number">8</span>), device=self.device)<br>        views = get_views(height, width)<br>        count = torch.zeros_like(latent)<br>        value = torch.zeros_like(latent)<br>  <br>        self.scheduler.set_timesteps(num_inference_steps)<br>  <br>        <span class="hljs-keyword">with</span> torch.autocast(<span class="hljs-string">&#x27;cuda&#x27;</span>):<br>            <span class="hljs-keyword">for</span> i, t <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(self.scheduler.timesteps):<br>                count.zero_()<br>                value.zero_()<br>  <br>                <span class="hljs-keyword">for</span> h_start, h_end, w_start, w_end <span class="hljs-keyword">in</span> views:<br>                    <span class="hljs-comment"># TODO we can support batches, and pass multiple views at once to the unet</span><br>                    latent_view = latent[:, :, h_start:h_end, w_start:w_end]<br>  <br>                    <span class="hljs-comment"># expand the latents if we are doing classifier-free guidance to avoid doing two forward passes.</span><br>                    latent_model_input = torch.cat([latent_view] * <span class="hljs-number">2</span>)<br>  <br>                    <span class="hljs-comment"># predict the noise residual</span><br>                    noise_pred = self.unet(latent_model_input, t, encoder_hidden_states=text_embeds)[<span class="hljs-string">&#x27;sample&#x27;</span>]<br>  <br>                    <span class="hljs-comment"># perform guidance</span><br>                    noise_pred_uncond, noise_pred_cond = noise_pred.chunk(<span class="hljs-number">2</span>)<br>                    noise_pred = noise_pred_uncond + guidance_scale * (noise_pred_cond - noise_pred_uncond)<br>  <br>                    <span class="hljs-comment"># compute the denoising step with the reference model</span><br>                    latents_view_denoised = self.scheduler.step(noise_pred, t, latent_view)[<span class="hljs-string">&#x27;prev_sample&#x27;</span>]<br>                    value[:, :, h_start:h_end, w_start:w_end] += latents_view_denoised<br>                    count[:, :, h_start:h_end, w_start:w_end] += <span class="hljs-number">1</span><br>  <br>                <span class="hljs-comment"># take the MultiDiffusion step</span><br>                latent = torch.where(count &gt; <span class="hljs-number">0</span>, value / count, value)<br>  <br>        <span class="hljs-comment"># Img latents -&gt; imgs</span><br>        imgs = self.decode_latents(latent)  <span class="hljs-comment"># [1, 3, 512, 512]</span><br>        img = T.ToPILImage()(imgs[<span class="hljs-number">0</span>].cpu())<br>        <span class="hljs-keyword">return</span> img<br></code></pre></td></tr></table></figure>
 <p>作用是根据给定的文本提示(prompts)，将其合成成全景图像</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    parser = argparse.ArgumentParser()<br>    parser.add_argument(<span class="hljs-string">&#x27;--prompt&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">str</span>, default=<span class="hljs-string">&#x27;a photo of the dolomites&#x27;</span>)<br>    parser.add_argument(<span class="hljs-string">&#x27;--negative&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">str</span>, default=<span class="hljs-string">&#x27;&#x27;</span>)<br>    parser.add_argument(<span class="hljs-string">&#x27;--sd_version&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">str</span>, default=<span class="hljs-string">&#x27;2.0&#x27;</span>, choices=[<span class="hljs-string">&#x27;1.5&#x27;</span>, <span class="hljs-string">&#x27;2.0&#x27;</span>],                       <span class="hljs-built_in">help</span>=<span class="hljs-string">&quot;stable diffusion version&quot;</span>)<br>    parser.add_argument(<span class="hljs-string">&#x27;--H&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>, default=<span class="hljs-number">512</span>)<br>    parser.add_argument(<span class="hljs-string">&#x27;--W&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>, default=<span class="hljs-number">4096</span>)<br>    parser.add_argument(<span class="hljs-string">&#x27;--seed&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>, default=<span class="hljs-number">0</span>)<br>    parser.add_argument(<span class="hljs-string">&#x27;--steps&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>, default=<span class="hljs-number">50</span>)<br>    opt = parser.parse_args()<br>    seed_everything(opt.seed)<br>  <br>    device = torch.device(<span class="hljs-string">&#x27;cuda&#x27;</span>)<br>  <br>    sd = MultiDiffusion(device, opt.sd_version)<br><br>    img = sd.text2panorama(opt.prompt, opt.negative, opt.H, opt.W, opt.steps)<br>  <br>    <span class="hljs-comment"># save image</span><br>    img.save(<span class="hljs-string">&#x27;out.png&#x27;</span>)<br></code></pre></td></tr></table></figure>
-<p>这个是从命令行启动的方式，按照argparse的使用方法使用 |参数|含义| |-|-| |prompt|提示| |negative|反面提示| |sd_version|stable diffusion的版本| |H|图像的高度| |W|图像的宽度| |seed|随机数种子| |steps|采样步数| 最后的结果会保存为out.png</p>
+<p>这个是从命令行启动的方式，按照argparse的使用方法使用</p>
+<table>
+<thead>
+<tr class="header">
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>prompt</td>
+<td>提示</td>
+</tr>
+<tr class="even">
+<td>negative</td>
+<td>反面提示</td>
+</tr>
+<tr class="odd">
+<td>sd_version</td>
+<td>stable diffusion的版本</td>
+</tr>
+<tr class="even">
+<td>H</td>
+<td>图像的高度</td>
+</tr>
+<tr class="odd">
+<td>W</td>
+<td>图像的宽度</td>
+</tr>
+<tr class="even">
+<td>seed</td>
+<td>随机数种子</td>
+</tr>
+<tr class="odd">
+<td>steps</td>
+<td>采样步数</td>
+</tr>
+</tbody>
+</table>
+<p>最后的结果会保存为out.png</p>
 <section class="footnotes">
 <div class="footnote-list">
 <ol>

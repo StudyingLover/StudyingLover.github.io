@@ -218,6 +218,7 @@ if __name__ == '__main__':
     img.save('out.png')
 ```
 这个是从命令行启动的方式，按照argparse的使用方法使用
+
 |参数|含义|
 |-|-|
 |prompt|提示|

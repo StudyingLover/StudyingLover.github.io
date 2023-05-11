@@ -9,13 +9,13 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 11 May 2023 12:17:37 GMT</pubDate>
+    <pubDate>Thu, 11 May 2023 12:30:31 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title>huggingface 和相关库</title>
-      <link>https://studyinglover.com/2023/05/09/huggingface%20%E5%92%8C%E7%9B%B8%E5%85%B3%E5%BA%93/</link>
-      <guid>https://studyinglover.com/2023/05/09/huggingface%20%E5%92%8C%E7%9B%B8%E5%85%B3%E5%BA%93/</guid>
+      <link>https://studyinglover.com/2023/05/09/huggingface%E5%92%8C%E7%9B%B8%E5%85%B3%E5%BA%93/</link>
+      <guid>https://studyinglover.com/2023/05/09/huggingface%E5%92%8C%E7%9B%B8%E5%85%B3%E5%BA%93/</guid>
       <pubDate>Tue, 09 May 2023 12:35:00 GMT</pubDate>
       
         
@@ -34,7 +34,7 @@
       <category domain="https://studyinglover.com/tags/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/">图像生成</category>
       
       
-      <comments>https://studyinglover.com/2023/05/09/huggingface%20%E5%92%8C%E7%9B%B8%E5%85%B3%E5%BA%93/#disqus_thread</comments>
+      <comments>https://studyinglover.com/2023/05/09/huggingface%E5%92%8C%E7%9B%B8%E5%85%B3%E5%BA%93/#disqus_thread</comments>
       
     </item>
     

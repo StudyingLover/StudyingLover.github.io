@@ -16,24 +16,27 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="ThreeJS实现屏幕坐标转3d坐标 本文使用chatGPT辅助完成 在虚拟世界中，3D坐标与屏幕坐标之间的转换是一个重要的问题。使用ThreeJS开发3D场景时，经常需要将屏幕坐标转换为3D坐标。在本文中，我们将介绍如何使用ThreeJS实现屏幕坐标转3D坐标的两种方法 根据相机的投影矩阵和射线拾取 在我的笔记摄像机模型中详细推导了相机的投影矩阵。 在ThreeJS中，相机的投影矩阵是一个4x4">
+    <meta name="description" content="huggingface 和相关库 huggingface Hugging Face是一个专注于自然语言处理（NLP）的开源平台，它旨在让NLP变得更加易用和普及。Hugging Face推出了多个库，例如Transformers，Datasets，Tokenizers和Accelerate，它们分别提供了预训练的模型，大规模的数据集，高效的分词器和分布式训练的工具。Hugging Face还拥有一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ThreeJS实现屏幕坐标转3d坐标">
-<meta property="og:url" content="https://studyinglover.com/2023/02/04/ThreeJS%E5%AE%9E%E7%8E%B0%E5%B1%8F%E5%B9%95%E5%9D%90%E6%A0%87%E8%BD%AC3d%E5%9D%90%E6%A0%87/index.html">
+<meta property="og:title" content="huggingface 和相关库">
+<meta property="og:url" content="https://studyinglover.com/2023/05/09/huggingface%20%E5%92%8C%E7%9B%B8%E5%85%B3%E5%BA%93/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="ThreeJS实现屏幕坐标转3d坐标 本文使用chatGPT辅助完成 在虚拟世界中，3D坐标与屏幕坐标之间的转换是一个重要的问题。使用ThreeJS开发3D场景时，经常需要将屏幕坐标转换为3D坐标。在本文中，我们将介绍如何使用ThreeJS实现屏幕坐标转3D坐标的两种方法 根据相机的投影矩阵和射线拾取 在我的笔记摄像机模型中详细推导了相机的投影矩阵。 在ThreeJS中，相机的投影矩阵是一个4x4">
+<meta property="og:description" content="huggingface 和相关库 huggingface Hugging Face是一个专注于自然语言处理（NLP）的开源平台，它旨在让NLP变得更加易用和普及。Hugging Face推出了多个库，例如Transformers，Datasets，Tokenizers和Accelerate，它们分别提供了预训练的模型，大规模的数据集，高效的分词器和分布式训练的工具。Hugging Face还拥有一">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-04T20:30:00.000Z">
+<meta property="og:image" content="https://proxy.thisis.plus/202305092233241.png">
+<meta property="og:image" content="https://proxy.thisis.plus/202305092235498.png">
+<meta property="article:published_time" content="2023-05-09T12:35:00.000Z">
 <meta property="article:modified_time" content="2023-05-11T12:17:37.474Z">
 <meta property="article:author" content="StudyingLover">
-<meta property="article:tag" content="ThreeJS">
+<meta property="article:tag" content="图像生成">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://proxy.thisis.plus/202305092233241.png">
   
   
   
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> 
   
-  <title>ThreeJS实现屏幕坐标转3d坐标 - plus studio</title>
+  <title>huggingface 和相关库 - plus studio</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -234,13 +237,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://drive.studyinglover.com/api/raw/?path=/photos/blog/background/e4127f10a90d5f6fd4f77b0225a19878.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('https://proxy.thisis.plus/202305091237913.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="ThreeJS实现屏幕坐标转3d坐标"></span>
+            <span id="subtitle" data-typed-text="huggingface 和相关库"></span>
           
         </div>
 
@@ -256,8 +259,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-04 20:30" pubdate>
-          2023年2月4日 晚上
+        <time datetime="2023-05-09 12:35" pubdate>
+          2023年5月9日 下午
         </time>
       </span>
     
@@ -268,7 +271,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.1k 字
+          5k 字
         
       </span>
     
@@ -279,7 +282,7 @@
         
         
         
-          26 分钟
+          42 分钟
         
       </span>
     
@@ -317,22 +320,48 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ThreeJS实现屏幕坐标转3d坐标</h1>
+            <h1 style="display: none">huggingface 和相关库</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="threejs实现屏幕坐标转3d坐标">ThreeJS实现屏幕坐标转3d坐标</h1>
-<p>本文使用chatGPT辅助完成</p>
-<p>在虚拟世界中，3D坐标与屏幕坐标之间的转换是一个重要的问题。使用ThreeJS开发3D场景时，经常需要将屏幕坐标转换为3D坐标。在本文中，我们将介绍如何使用ThreeJS实现屏幕坐标转3D坐标的两种方法</p>
-<h2 id="根据相机的投影矩阵和射线拾取">根据相机的投影矩阵和射线拾取</h2>
-<p>在我的笔记<a href="https://studyinglover.com/2022/12/29/%E6%91%84%E5%83%8F%E6%9C%BA%E6%A8%A1%E5%9E%8B/">摄像机模型</a>中详细推导了相机的投影矩阵。</p>
-<p>在ThreeJS中，相机的投影矩阵是一个4x4的矩阵，它将3D坐标转换为屏幕坐标。我们可以使用这个矩阵将屏幕坐标转换为3D坐标。 官方为我们提供了一个接口<code>vector.unproject(camera)</code>,它可以将屏幕坐标转换为3D坐标。但是这个接口只能将屏幕坐标转换为相机坐标系下的3D坐标，如果我们需要将屏幕坐标转换为世界坐标系下的3D坐标，我们需要使用<code>vector.applyMatrix4(camera.matrixWorldInverse)</code>将相机坐标系下的3D坐标转换为世界坐标系下的3D坐标。(这里代码本来不是这么写的，但是copilot给了我好多提示，我就照着他的提示改了改，如果你发现代码有问题，问问chatGPT吧)</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">screenToWorld</span>(<span class="hljs-params">screenX, screenY, camera，hyper_z</span>) &#123;<br>    <span class="hljs-keyword">const</span> vector = <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">Vector3</span>();<br>    vector.<span class="hljs-title function_">set</span>(<br>        (screenX / <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerWidth</span>) * <span class="hljs-number">2</span> - <span class="hljs-number">1</span>,<br>        -(screenY / <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerHeight</span>) * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>,<br>        hyper_z<br>    );<br>    vector.<span class="hljs-title function_">unproject</span>(camera);<br>    vector.<span class="hljs-title function_">applyMatrix4</span>(camera.<span class="hljs-property">matrixWorldInverse</span>);<br>    <span class="hljs-keyword">return</span> vector;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>这里的<code>hyper_z</code>网上很多教程认为是写0.5,但是我实际试了一下，发现效果很差，就把他改成了一个超参数。后来在一位不能透露姓名的大佬的帮助下，得知这个参数的值应该写成1。我试了下，勉强可以得到预期的效果</p>
-<h2 id="通过深度图采样shader改深度缓冲">通过深度图采样，shader改深度缓冲</h2>
-<p>这种方法是通过深度图采样，shader改深度缓冲，然后再通过深度缓冲得到3D坐标。这种方法的优点是可以得到更精确的3D坐标，但是缺点是需要使用shader，而且需要修改深度缓冲，可能会影响性能。</p>
-<p>感谢chatGPT，我只需要把我需要的内容告诉他，他就会给我写一个完整的代码。 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">convert2Dto3D</span>(<span class="hljs-params">mouseX, mouseY, camera, width, height, scene</span>) &#123;<br>        <span class="hljs-comment">// 构建纹理</span><br>        <span class="hljs-keyword">var</span> depthTarget = <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">WebGLRenderTarget</span>(width, height);<br>        depthTarget.<span class="hljs-property">texture</span>.<span class="hljs-property">minFilter</span> = <span class="hljs-variable constant_">THREE</span>.<span class="hljs-property">LinearFilter</span>;<br><br>        <span class="hljs-comment">// 渲染深度图</span><br>        renderer.<span class="hljs-title function_">render</span>(scene, camera, depthTarget);<br><br>        <span class="hljs-comment">// 创建着色器</span><br>        <span class="hljs-keyword">var</span> material = <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">ShaderMaterial</span>(&#123;<br>            <span class="hljs-attr">uniforms</span>: &#123;<br>                <span class="hljs-attr">mouse</span>: &#123; <span class="hljs-attr">value</span>: <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">Vector2</span>(mouseX, mouseY) &#125;,<br>                <span class="hljs-attr">depthMap</span>: &#123; <span class="hljs-attr">value</span>: depthTarget.<span class="hljs-property">texture</span> &#125;,<br>                <span class="hljs-attr">projectionMatrix</span>: &#123; <span class="hljs-attr">value</span>: camera.<span class="hljs-property">projectionMatrix</span> &#125;,<br>                <span class="hljs-attr">viewMatrix</span>: &#123; <span class="hljs-attr">value</span>: camera.<span class="hljs-property">matrixWorldInverse</span> &#125;<br>            &#125;,<br>            <span class="hljs-attr">vertexShader</span>: <span class="hljs-string">`</span><br><span class="hljs-string">                uniform vec2 mouse;</span><br><span class="hljs-string">                uniform mat4 projectionMatrix;</span><br><span class="hljs-string">                uniform mat4 viewMatrix;</span><br><span class="hljs-string">                uniform sampler2D depthMap;</span><br><span class="hljs-string">                varying vec4 pos;</span><br><span class="hljs-string">                void main() &#123;</span><br><span class="hljs-string">                    pos = vec4(position, 1.0);</span><br><span class="hljs-string">                    gl_Position = projectionMatrix * viewMatrix * pos;</span><br><span class="hljs-string">                &#125;</span><br><span class="hljs-string">            `</span>,<br>            <span class="hljs-attr">fragmentShader</span>: <span class="hljs-string">`</span><br><span class="hljs-string">                uniform vec2 mouse;</span><br><span class="hljs-string">                uniform sampler2D depthMap;</span><br><span class="hljs-string">                varying vec4 pos;</span><br><span class="hljs-string">                void main() &#123;</span><br><span class="hljs-string">                    float depth = texture2D(depthMap, mouse).r;</span><br><span class="hljs-string">                    vec4 viewPos = vec4(mouse * 2.0 - 1.0, depth * 2.0 - 1.0, 1.0);</span><br><span class="hljs-string">                    vec4 worldPos = viewMatrix * viewPos;</span><br><span class="hljs-string">                    worldPos /= worldPos.w;</span><br><span class="hljs-string">                    gl_FragColor = vec4(worldPos.xyz, 1.0);</span><br><span class="hljs-string">                &#125;</span><br><span class="hljs-string">            `</span><br>        &#125;);<br><br>        <span class="hljs-comment">// 创建一个平面作为渲染目标</span><br>        <span class="hljs-keyword">var</span> plane = <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">PlaneBufferGeometry</span>(width, height);<br>        <span class="hljs-keyword">var</span> mesh = <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">Mesh</span>(plane, material);<br>        scene.<span class="hljs-title function_">add</span>(mesh);<br><br>        <span class="hljs-comment">// 渲染一次着色器并获取结果</span><br>        renderer.<span class="hljs-title function_">render</span>(scene, camera);<br>        <span class="hljs-keyword">var</span> pixelBuffer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Uint8Array</span>(<span class="hljs-number">4</span>);<br>        renderer.<span class="hljs-title function_">readRenderTargetPixels</span>(depthTarget, mouseX, height - mouseY, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, pixelBuffer);<br>        <span class="hljs-keyword">var</span> worldPos = <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">Vector3</span>(<br>            (pixelBuffer[<span class="hljs-number">0</span>] / <span class="hljs-number">255</span>) * <span class="hljs-number">2</span> - <span class="hljs-number">1</span>,<br>            (pixelBuffer[<span class="hljs-number">1</span>] / <span class="hljs-number">255</span>) * <span class="hljs-number">2</span> - <span class="hljs-number">1</span>,<br>            (pixelBuffer[<span class="hljs-number">2</span>] / <span class="hljs-number">255</span>) * <span class="hljs-number">2</span> - <span class="hljs-number">1</span><br>        );<br>        worldPos.<span class="hljs-title function_">applyMatrix4</span>(camera.<span class="hljs-property">matrixWorldInverse</span>);<br>        scene.<span class="hljs-title function_">remove</span>(mesh);<br>        <span class="hljs-keyword">return</span> worldPos;<br>    &#125;,<br><br>    <span class="hljs-comment">//获取触摸点的坐标并转换为ThreeJS中的坐标</span><br>    <span class="hljs-attr">touch_crash_detect</span>: <span class="hljs-keyword">function</span> <span class="hljs-title function_">touch_crash_detect</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;touchmove&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> &#123;<br>            <span class="hljs-comment">// screen3D_to_3DCoord(event.touches[0].clientX, event.touches[0].clientY,camera, window.innerWidth, window.innerHeight);</span><br>            <span class="hljs-keyword">let</span> pos = space_pos_convert.<span class="hljs-title function_">get3DPosition</span>(event.<span class="hljs-property">touches</span>[<span class="hljs-number">0</span>].<span class="hljs-property">clientX</span>, event.<span class="hljs-property">touches</span>[<span class="hljs-number">0</span>].<span class="hljs-property">clientY</span>, camera, scene, <span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">if</span> (pos.<span class="hljs-property">y</span> != <span class="hljs-number">0</span>) &#123;<br>                pos.<span class="hljs-property">y</span> = <span class="hljs-number">0</span>;<br>            &#125;<br>            <span class="hljs-keyword">return</span> pos;<br>            <span class="hljs-comment">// playerMesh.position.set(pos.x, pos.y, pos.z);</span><br>        &#125;);<br>    &#125;<br></code></pre></td></tr></table></figure></p>
+                <h1 id="huggingface-和相关库">huggingface 和相关库</h1>
+<h2 id="huggingface">huggingface</h2>
+<p><a target="_blank" rel="noopener" href="https://huggingface.co/">Hugging Face</a>是一个专注于自然语言处理（NLP）的开源平台，它旨在让NLP变得更加易用和普及。Hugging Face推出了多个库，例如Transformers，Datasets，Tokenizers和Accelerate，它们分别提供了预训练的模型，大规模的数据集，高效的分词器和分布式训练的工具。Hugging Face还拥有一个活跃的社区，其中有数千名研究人员，开发者和爱好者共同交流和贡献NLP的最新进展。 <img src="https://proxy.thisis.plus/202305092233241.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
+<p>Hugging Face的名字来源于一个可爱的表情符号，它代表了平台的愿景：让人类和机器之间的交流更加自然和亲密。Hugging Face的核心产品是Transformers库，它包含了超过10000个预训练的模型，涵盖了各种NLP任务，如文本分类，问答，文本生成，情感分析等。Transformers库支持多种深度学习框架，如PyTorch，TensorFlow，JAX和Flax，并且可以轻松地在不同的设备上运行，如CPU，GPU和TPU。Hugging Face还提供了一个在线平台，Spaces，它可以让用户快速地部署和分享他们的模型和应用。 <img src="https://proxy.thisis.plus/202305092235498.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
+<p>近年来，Hugging Face托管的模型已经不局限于NLP领域，而是涉及到了更多的领域，如计算机视觉（CV），语音识别（ASR），音乐生成（MG）等。这些模型都可以在Hugging Face的网站上找到，并且可以通过Transformers库或者其他的库来使用。Hugging Face还提供了一个数据集库，叫做Datasets，它包含了超过1000个数据集，覆盖了各种领域和语言。Datasets库可以帮助用户快速地加载，处理和缓存数据，以及进行数据分析和可视化。</p>
+<h2 id="accelerate">Accelerate</h2>
+<p>Accelerate 是一个可以让训练变得更加简单的库，它可以通过几行代码来在分布式设备上运行相同的pytorch代码</p>
+<p>可以通过pypi 和 conda安装 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install accelerate<br>conda install -c conda-forge accelerate<br></code></pre></td></tr></table></figure></p>
+<p>你可能会遇到这种报错 <figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-symbol">WARNING: </span>The scripts accelerate, accelerate-config and accelerate-launch are installed in <span class="hljs-emphasis">&#x27;/home/ubuntu/.local/bin&#x27;</span> which is not on PATH.  <br>Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.  <br><span class="hljs-symbol">WARNING: </span>The script transformers-cli is installed in <span class="hljs-emphasis">&#x27;/home/ubuntu/.local/bin&#x27;</span> which is not on PATH.  <br>Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.  <br><span class="hljs-symbol">WARNING: </span>The script ftfy is installed in <span class="hljs-emphasis">&#x27;/home/ubuntu/.local/bin&#x27;</span> which is not on PATH.  <br>Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.  <br><span class="hljs-symbol">WARNING: </span>The script tensorboard is installed in <span class="hljs-emphasis">&#x27;/home/ubuntu/.local/bin&#x27;</span> which is not on PATH.  <br>Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.  <br><span class="hljs-symbol">WARNING: </span>The script datasets-cli is installed in <span class="hljs-emphasis">&#x27;/home/ubuntu/.local/bin&#x27;</span> which is not on PATH.  <br>Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.<br></code></pre></td></tr></table></figure></p>
+<p>这里的依赖已经安装成功了，只是被安装到了未被添加到PATH的目录，接下来运行的时候只需要指明目录即可。例如下面我们要使用accelerate，正常的用法是 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">accelerate 你要执行的东西<br></code></pre></td></tr></table></figure> 我们只需要改成 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/home/u</span>buntu<span class="hljs-regexp">/.local/</span>bin/accelerate 你要执行的东西<br></code></pre></td></tr></table></figure></p>
+<p>通过<code>accelerate config</code> 命令可以配置当前文件夹启用。(如果啥都不知道就全部选No)</p>
+<h2 id="transformers">Transformers</h2>
+<p><a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/index">Transformers</a> 收集了所有的SOTA的NLP研究方法，并提供了对应的预训练模型和接口。Transformers 支持 PyTorch、TensorFlow 和 JAX 之间的框架互操作性。这提供了在模型生命周期的每个阶段使用不同框架的灵活性；在一个框架中用三行代码训练一个模型，然后将其加载到另一个框架中进行推理。模型还可以导出为 ONNX 和 TorchScript 等格式，以便在生产环境中部署。</p>
+<p>安装非常简单 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install <span class="hljs-string">&#x27;transformers[torch]&#x27;</span><br></code></pre></td></tr></table></figure> 这回安装torch对应的api，当然也可以安装完整版 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install <span class="hljs-string">&#x27;transformers&#x27;</span> <br></code></pre></td></tr></table></figure></p>
+<p>21年冬天在家上网课的时候，我看到了这样的一个教程<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/421642560">这篇文章是我用AI生成出来的</a> ,他就是使用了transformers 库构建了一个生成式语言模型。</p>
+<h2 id="diffusers">Diffusers</h2>
+<p><a target="_blank" rel="noopener" href="https://huggingface.co/docs/diffusers/index">Diffusers</a> 收集了所有SOTA的扩散模型，用于生成图像、音频，甚至分子的 3D 结构。diffusers提供了扩散模型的完整pipeline ，包括DDPM，DDIM，stable_diffusion_2，VAE，controlnet等等，可以使用简单的几行代码完成推理。</p>
+<p>安装和上面一样 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install diffusers[<span class="hljs-string">&quot;torch&quot;</span>]<br></code></pre></td></tr></table></figure> 或者 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install diffusers <br></code></pre></td></tr></table></figure></p>
+<h3 id="pipeline">pipeline</h3>
+<p>pipeline 是diffusers 甚至huggingface各个库的一个重要概念，他封装了各个模型加载权重，构建网络结构，推理和训练的全部过程。</p>
+<p>这里以stable diffusion 1.5为例，首先创建pipeline，并指明stable diffusion 的版本 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> diffusers <span class="hljs-keyword">import</span> DiffusionPipeline<br><br>model_id = <span class="hljs-string">&quot;runwayml/stable-diffusion-v1-5&quot;</span><br>pipeline = DiffusionPipeline.from_pretrained(model_id)<br></code></pre></td></tr></table></figure></p>
+<p>接下来给出提示(prompt) <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">prompt = <span class="hljs-string">&quot;portrait photo of a old warrior chief&quot;</span><br></code></pre></td></tr></table></figure></p>
+<p>为了加速推理，我们可以把数据放到gpu上 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pipeline = pipeline.to(<span class="hljs-string">&quot;cuda&quot;</span>)<br></code></pre></td></tr></table></figure></p>
+<p>设置生成器，并生成图像 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">generator = torch.Generator(<span class="hljs-string">&quot;cuda&quot;</span>).manual_seed(<span class="hljs-number">0</span>)<br>image = pipeline(prompt, generator=generator).images[<span class="hljs-number">0</span>]<br>image<br></code></pre></td></tr></table></figure></p>
+<p>当然，huggingface推荐我们在float16上做推理 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><br>pipeline = DiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16)<br>pipeline = pipeline.to(<span class="hljs-string">&quot;cuda&quot;</span>)<br>generator = torch.Generator(<span class="hljs-string">&quot;cuda&quot;</span>).manual_seed(<span class="hljs-number">0</span>)<br>image = pipeline(prompt, generator=generator).images[<span class="hljs-number">0</span>]<br>image<br></code></pre></td></tr></table></figure></p>
+<h3 id="lora">LoRA</h3>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2106.09685">Low-Rank Adaptation of Large Language Models (LoRA)</a>是一种训练方法，可以加速大型模型的训练，同时消耗更少的内存，最有用的例子莫过于生成人脸了。Diffusers 现在支持使用 LoRA 进行<a target="_blank" rel="noopener" href="https://github.com/huggingface/diffusers/tree/main/examples/text_to_image#training-with-lora">文本到图像生成</a>和<a target="_blank" rel="noopener" href="https://github.com/huggingface/diffusers/tree/main/examples/dreambooth#training-with-low-rank-adaptation-of-large-language-models-lora">DreamBooth</a>微调。</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2208.12242">DreamBooth</a>是Google提出的微调技术，用于个性化文本到图像模型（如 Stable Diffusion），可以以在给定几张主题图像的情况下生成不同背景下主题的逼真图像。</p>
+<p>在<a target="_blank" rel="noopener" href="https://github.com/huggingface/diffusers/blob/main/examples/text_to_image/train_text_to_image_lora.py">这里</a> 你可以找到完整的代码，在<a target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1BO_dyz-p65qhBRRMRA4TbZ8qW4rB99JZ">Google Drive</a> 下载完整的图像用于训练</p>
+<p>先设置基本信息，分别是模型名，示例图片和模型输出文件夹 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> MODEL_NAME=<span class="hljs-string">&quot;runwayml/stable-diffusion-v1-5&quot;</span><br><span class="hljs-built_in">export</span> INSTANCE_DIR=<span class="hljs-string">&quot;path-to-instance-images&quot;</span><br><span class="hljs-built_in">export</span> OUTPUT_DIR=<span class="hljs-string">&quot;path-to-save-model&quot;</span><br></code></pre></td></tr></table></figure></p>
+<p>接下来运行代码 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs bash">accelerate launch train_dreambooth_lora.py \<br>  --pretrained_model_name_or_path=<span class="hljs-variable">$MODEL_NAME</span>  \<br>  --instance_data_dir=<span class="hljs-variable">$INSTANCE_DIR</span> \<br>  --output_dir=<span class="hljs-variable">$OUTPUT_DIR</span> \<br>  --instance_prompt=<span class="hljs-string">&quot;a photo of sks dog&quot;</span> \<br>  --resolution=512 \<br>  --train_batch_size=1 \<br>  --gradient_accumulation_steps=1 \<br>  --checkpointing_steps=100 \<br>  --learning_rate=1e-4 \<br>  --report_to=<span class="hljs-string">&quot;wandb&quot;</span> \<br>  --lr_scheduler=<span class="hljs-string">&quot;constant&quot;</span> \<br>  --lr_warmup_steps=0 \<br>  --max_train_steps=500 \<br>  --validation_prompt=<span class="hljs-string">&quot;A photo of sks dog in a bucket&quot;</span> \<br>  --validation_epochs=50 \<br>  --seed=<span class="hljs-string">&quot;0&quot;</span> \<br>  --push_to_hub<br></code></pre></td></tr></table></figure></p>
+<p>推理也是使用起来很简单的 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">from</span> diffusers <span class="hljs-keyword">import</span> StableDiffusionPipeline<br><br>pipe.unet.load_attn_procs(lora_model_path)<br>pipe.to(<span class="hljs-string">&quot;cuda&quot;</span>)<br><br>image = pipe(<span class="hljs-string">&quot;A picture of a sks dog in a bucket.&quot;</span>, num_inference_steps=<span class="hljs-number">25</span>, guidance_scale=<span class="hljs-number">7.5</span>).images[<span class="hljs-number">0</span>]<br>image.save(<span class="hljs-string">&quot;bucket-dog.png&quot;</span>)<br></code></pre></td></tr></table></figure></p>
+<h3 id="controlnet">[[ControlNet]]</h3>
+<p>可以看之前的文章<a href="https://studyinglover.com/2023/04/27/ControlNet%E8%AE%AD%E7%BB%83%E8%87%AA%E5%B7%B1%E6%95%B0%E6%8D%AE%E9%9B%86/">ControlNet训练自己数据集</a></p>
+<h2 id="gradio">Gradio</h2>
+<p>gradio 是一个可以快速构建交互式网页的工具，Webui就是用它做出来的，使用他的核心代码就是 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">demo = gradio.Interface(fn, inputs, outputs, ···)<br>demo.launch()<br></code></pre></td></tr></table></figure> 传入一个函数和参数，获取返回值</p>
+<p>剩下的就是你写好fn，设计一个好看的界面，然后launch就可以了。</p>
 
                 
               </div>
@@ -341,32 +370,11 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%B7%A5%E5%85%B7/" class="category-chain-item">工具</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/ThreeJS/">#ThreeJS</a>
+        <a href="/tags/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/">#图像生成</a>
       
     </div>
   
@@ -378,8 +386,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>ThreeJS实现屏幕坐标转3d坐标</div>
-      <div>https://studyinglover.com/2023/02/04/ThreeJS实现屏幕坐标转3d坐标/</div>
+      <div>huggingface 和相关库</div>
+      <div>https://studyinglover.com/2023/05/09/huggingface 和相关库/</div>
     </div>
     <div class="license-meta">
       
@@ -391,7 +399,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年2月4日</div>
+          <div>2023年5月9日</div>
         </div>
       
       
@@ -423,18 +431,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/04/copliot%E6%89%8D%E6%98%AF%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91%E7%A5%9E%E5%99%A8/" title="copliot才是代码开发神器">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">copliot才是代码开发神器</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/27/%E5%9C%A8fluid%E4%B8%BB%E9%A2%98%E4%B8%AD%E5%8A%A0%E5%85%A5Google%E5%B9%BF%E5%91%8A/" title="在fluid主题中加入Google广告">
-                        <span class="hidden-mobile">在fluid主题中加入Google广告</span>
+                      <a href="/2023/05/09/multidiffusion%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" title="Multidiffusion代码分析">
+                        <span class="hidden-mobile">Multidiffusion代码分析</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

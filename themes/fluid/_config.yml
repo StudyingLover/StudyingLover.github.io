@@ -428,8 +428,8 @@ scroll_top_arrow:
 open_graph:
   enable: true
   twitter_card: summary_large_image
-  twitter_id: @ZhaoZoom
-  twitter_site: https://twitter.com/ZhaoZoom
+  twitter_id: 
+  twitter_site: 
   google_plus:
   fb_admins:
   fb_app_id:

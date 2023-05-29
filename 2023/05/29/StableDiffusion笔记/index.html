@@ -16,26 +16,26 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="I3D笔记 I3D是一个视频理解模型，采用双流网络的架构，他的核心贡献是提出了如何对2d网络进行膨胀操作，同时提出了一个新的数据集 Kinetics 工作回顾  image.png  在以前，视频理解有三种做法 1. LSTM 2. 3D ConvNets 3. Two-Stream Networks（双流网络） Two-Stream Inflated 3D ConvNets 这篇文章提出的模型被">
+    <meta name="description" content="Stable Diffusion 是一个图像生成方法，由 Stability AI and Runway 在LDM[1] 的基础上提出。在GitHub有很多他的实现和应用[2][3][4] ,其中[2] 是最早的实现版本，[3] 是V2版本，由 Stability AI 完成。 整体结构 flowchart TD  subgraph Input-noisy Random-seed --&gt; l">
 <meta property="og:type" content="article">
-<meta property="og:title" content="I3D笔记">
-<meta property="og:url" content="https://studyinglover.com/2023/04/23/I3D%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="StableDiffusion笔记">
+<meta property="og:url" content="https://studyinglover.com/2023/05/29/StableDiffusion%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="I3D笔记 I3D是一个视频理解模型，采用双流网络的架构，他的核心贡献是提出了如何对2d网络进行膨胀操作，同时提出了一个新的数据集 Kinetics 工作回顾  image.png  在以前，视频理解有三种做法 1. LSTM 2. 3D ConvNets 3. Two-Stream Networks（双流网络） Two-Stream Inflated 3D ConvNets 这篇文章提出的模型被">
+<meta property="og:description" content="Stable Diffusion 是一个图像生成方法，由 Stability AI and Runway 在LDM[1] 的基础上提出。在GitHub有很多他的实现和应用[2][3][4] ,其中[2] 是最早的实现版本，[3] 是V2版本，由 Stability AI 完成。 整体结构 flowchart TD  subgraph Input-noisy Random-seed --&gt; l">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://proxy.thisis.plus/20230423215707.png">
-<meta property="og:image" content="https://proxy.thisis.plus/20230423220521.png">
-<meta property="article:published_time" content="2023-04-23T22:14:00.000Z">
-<meta property="article:modified_time" content="2023-05-29T07:57:32.123Z">
+<meta property="og:image" content="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*IRTbG2rYv0IUH8HHAxWRrQ.png">
+<meta property="article:published_time" content="2023-05-29T15:36:00.000Z">
+<meta property="article:modified_time" content="2023-05-29T07:57:32.127Z">
 <meta property="article:author" content="StudyingLover">
+<meta property="article:tag" content="图像生成">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://proxy.thisis.plus/20230423215707.png">
+<meta name="twitter:image" content="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*IRTbG2rYv0IUH8HHAxWRrQ.png">
   
   
   
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> 
   
-  <title>I3D笔记 - plus studio</title>
+  <title>StableDiffusion笔记 - plus studio</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -236,13 +236,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://drive.studyinglover.com/api/raw/?path=/photos/blog/background/1679397045791.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('https://drive.studyinglover.com/api/raw/?path=/photos/blog/background/1679396994125.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="I3D笔记"></span>
+            <span id="subtitle" data-typed-text="StableDiffusion笔记"></span>
           
         </div>
 
@@ -258,8 +258,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-23 22:14" pubdate>
-          2023年4月23日 晚上
+        <time datetime="2023-05-29 15:36" pubdate>
+          2023年5月29日 下午
         </time>
       </span>
     
@@ -270,7 +270,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          592 字
+          1.8k 字
         
       </span>
     
@@ -281,7 +281,7 @@
         
         
         
-          5 分钟
+          15 分钟
         
       </span>
     
@@ -319,27 +319,60 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">I3D笔记</h1>
+            <h1 style="display: none">StableDiffusion笔记</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="i3d笔记">I3D笔记</h1>
-<p>I3D是一个视频理解模型，采用双流网络的架构，他的核心贡献是提出了如何对2d网络进行膨胀操作，同时提出了一个新的数据集 Kinetics</p>
-<h2 id="工作回顾">工作回顾</h2>
-<figure>
-<img src="https://proxy.thisis.plus/20230423215707.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image.png</figcaption>
-</figure>
-<p>在以前，视频理解有三种做法 1. LSTM 2. 3D ConvNets 3. Two-Stream Networks（双流网络）</p>
-<h2 id="two-stream-inflated-3d-convnets">Two-Stream Inflated 3D ConvNets</h2>
-<p>这篇文章提出的模型被称为 Two-Stream Inflated 3D ConvNets</p>
-<p>Inflate 是模型的核心操作，含义是将一个2d模型"膨胀"成3d模型，做法很简单，就是把一个<span class="math inline">\(N*N\)</span> 的层变成<span class="math inline">\(N*N*N\)</span> ,同时也将参数复制了<span class="math inline">\(N\)</span> 遍。</p>
-<h2 id="kinetics">Kinetics</h2>
-<p>在视频领域，在一个足够大的数据集上训练一个动作分类网络，当应用于不同的时间任务或数据集时，是否会有类似的性能提升是一个悬而未决的问题。构建视频数据集的挑战意味着大多数流行的动作识别基准。</p>
-<p>Kinetics 有400个人体动作类，每个类有400多个例子，每个都来自一个独特的 YouTube 视频</p>
-<h3 id="整体架构">整体架构</h3>
-<p>作者选择了 Inception-v1 构建整个神经网络(作者当时不适用Inception-v1是因为当时认为Inception在视频理解更合适，但架不住ResNet 太棒了，作者在18年也换成了ResNet) <img src="https://proxy.thisis.plus/20230423220521.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
-<p>图中的Inc. 就是经典的Inception-v1 块了，只是做了Inflating 操作</p>
+                <p>Stable Diffusion 是一个图像生成方法，由 <em><a target="_blank" rel="noopener" href="https://stability.ai/">Stability AI</a> and <a target="_blank" rel="noopener" href="https://runwayml.com/">Runway</a></em> 在LDM<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="Rombach, R., Blattmann, A., Lorenz, D., Esser, P., &amp; Ommer, B. (2022). High-Resolution Image Synthesis with Latent Diffusion Models. 2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR). Presented at the 2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), New Orleans, LA, USA. https://doi.org/10.1109/cvpr52688.2022.01042">[1]</span></a></sup> 的基础上提出。在GitHub有很多他的实现和应用<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="CompVis. (n.d.). _GitHub - CompVis/stable-diffusion: A latent text-to-image diffusion model_. GitHub. Retrieved May 29, 2023, from https://github.com/CompVis/stable-diffusion">[2]</span></a></sup><sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="Stability-AI. (n.d.). _GitHub - Stability-AI/stablediffusion: High-Resolution image synthesis with latent diffusion models_. GitHub. Retrieved May 29, 2023, from https://github.com/Stability-AI/stablediffusion">[3]</span></a></sup><sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span class="hint--top hint--rounded" aria-label="AUTOMATIC1111. (n.d.). _GitHub - AUTOMATIC1111/stable-diffusion-webui: Stable Diffusion web UI_. GitHub. Retrieved May 29, 2023, from https://github.com/automatic1111/stable-diffusion-webui">[4]</span></a></sup> ,其中<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="CompVis. (n.d.). _GitHub - CompVis/stable-diffusion: A latent text-to-image diffusion model_. GitHub. Retrieved May 29, 2023, from https://github.com/CompVis/stable-diffusion">[2]</span></a></sup> 是最早的实现版本，<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="Stability-AI. (n.d.). _GitHub - Stability-AI/stablediffusion: High-Resolution image synthesis with latent diffusion models_. GitHub. Retrieved May 29, 2023, from https://github.com/Stability-AI/stablediffusion">[3]</span></a></sup> 是V2版本，由 Stability AI 完成。</p>
+<h2 id="整体结构">整体结构</h2>
+<pre><code class=" mermaid">flowchart TD
+
+subgraph Input-noisy
+Random-seed --&gt; latent-Gaussian-noise 
+end
+
+subgraph Input-prompt
+prompt --&gt; TextEncoder --&gt; TextEmbaddings
+end
+
+latent-Gaussian-noise --&gt;Unet&#123;Unet-with-MultiAttention&#125;
+TextEmbaddings--&gt;Unet
+
+Unet --&gt; predict-noisy --sampling-steps--&gt;Unet
+predict-noisy --&gt; Decoder --&gt; Image 
+
+</code></pre>
+<p>在一开始，StableDiffusion会通过一个随机数种子生成一张在隐空间下的随机噪声，同时通过一个文本编码器对输入的prompt进行编码，生成一个文本向量。随机噪声和文本向量会一块送入Unet，经过DDPM的步骤得到一张隐空间下的图片，通过一个解码器得到完整的图片。这里的Unet做出了改进，中间加入了交叉注意力机制。</p>
+<h3 id="unet-with-multiattention">Unet-with-MultiAttention</h3>
+<p><img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*IRTbG2rYv0IUH8HHAxWRrQ.png" srcset="/img/loading.gif" lazyload alt="Unet-with-MultiAttention 图源medium.com" /> 图中Switch用于在不同的输入之间调整。</p>
+<ul>
+<li>文本数据通过一个文本编码器(一般是CLIP的文本编码器)将文本转换为向量，投影到Unet上</li>
+<li>图像，语义图，表示等直接送入Unet</li>
+</ul>
+<p>反向扩散过程中输入的文本向量和隐空间下的噪声图片需要经过 <span class="math inline">\(t\)</span>轮的Unet网络，每一轮预测一个噪声，噪声图减去这个噪声，得到的图片继续送入Unet进行下一轮</p>
+<h2 id="参考文献">参考文献</h2>
+<section class="footnotes">
+<div class="footnote-list">
+<ol>
+<li>
+<span id="fn:1" class="footnote-text"><span>Rombach, R., Blattmann, A., Lorenz, D., Esser, P., &amp; Ommer, B. (2022). High-Resolution Image Synthesis with Latent Diffusion Models. 2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR). Presented at the 2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), New Orleans, LA, USA. https://doi.org/10.1109/cvpr52688.2022.01042 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:2" class="footnote-text"><span>CompVis. (n.d.). <em>GitHub - CompVis/stable-diffusion: A latent text-to-image diffusion model</em>. GitHub. Retrieved May 29, 2023, from https://github.com/CompVis/stable-diffusion <a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:3" class="footnote-text"><span>Stability-AI. (n.d.). <em>GitHub - Stability-AI/stablediffusion: High-Resolution image synthesis with latent diffusion models</em>. GitHub. Retrieved May 29, 2023, from https://github.com/Stability-AI/stablediffusion <a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:4" class="footnote-text"><span>AUTOMATIC1111. (n.d.). <em>GitHub - AUTOMATIC1111/stable-diffusion-webui: Stable Diffusion web UI</em>. GitHub. Retrieved May 29, 2023, from https://github.com/automatic1111/stable-diffusion-webui <a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:5" class="footnote-text"><span>Steins. (2023, January 2). Stable diffusion clearly explained! - Steins. <em>Medium</em>. https://medium.com/<span class="citation" data-cites="steinsfu/stable-diffusion-clearly-explained-ed008044e07e"><span class="citation" data-cites="steinsfu/stable-diffusion-clearly-explained-ed008044e07e">@steinsfu/stable-diffusion-clearly-explained-ed008044e07e</span></span> <a href="#fnref:5" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
+</li>
+</ol>
+</div>
+</section>
 
                 
               </div>
@@ -348,6 +381,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/">#图像生成</a>
+      
+    </div>
   
 </div>
 
@@ -357,8 +418,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>I3D笔记</div>
-      <div>https://studyinglover.com/2023/04/23/I3D笔记/</div>
+      <div>StableDiffusion笔记</div>
+      <div>https://studyinglover.com/2023/05/29/StableDiffusion笔记/</div>
     </div>
     <div class="license-meta">
       
@@ -370,7 +431,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月23日</div>
+          <div>2023年5月29日</div>
         </div>
       
       
@@ -402,18 +463,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/27/ControlNet%E8%AE%AD%E7%BB%83%E8%87%AA%E5%B7%B1%E6%95%B0%E6%8D%AE%E9%9B%86/" title="ControlNet训练自己数据集">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ControlNet训练自己数据集</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/22/clip_interrogator%E6%95%99%E7%A8%8B/" title="clip_interrogator教程">
-                        <span class="hidden-mobile">clip_interrogator教程</span>
+                      <a href="/2023/05/09/huggingface%E5%92%8C%E7%9B%B8%E5%85%B3%E5%BA%93/" title="huggingface 和相关库">
+                        <span class="hidden-mobile">huggingface 和相关库</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

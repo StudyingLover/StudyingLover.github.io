@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>StableDiffusion笔记</title>
+    <link href="/2023/05/29/StableDiffusion%E7%AC%94%E8%AE%B0/"/>
+    <url>/2023/05/29/StableDiffusion%E7%AC%94%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<p>Stable Diffusion 是一个图像生成方法，由 <em><a href="https://stability.ai/">Stability AI</a> and <a href="https://runwayml.com/">Runway</a></em> 在LDM<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="Rombach, R., Blattmann, A., Lorenz, D., Esser, P., &amp; Ommer, B. (2022). High-Resolution Image Synthesis with Latent Diffusion Models. 2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR). Presented at the 2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), New Orleans, LA, USA. https://doi.org/10.1109/cvpr52688.2022.01042">[1]</span></a></sup> 的基础上提出。在GitHub有很多他的实现和应用<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="CompVis. (n.d.). _GitHub - CompVis/stable-diffusion: A latent text-to-image diffusion model_. GitHub. Retrieved May 29, 2023, from https://github.com/CompVis/stable-diffusion">[2]</span></a></sup><sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="Stability-AI. (n.d.). _GitHub - Stability-AI/stablediffusion: High-Resolution image synthesis with latent diffusion models_. GitHub. Retrieved May 29, 2023, from https://github.com/Stability-AI/stablediffusion">[3]</span></a></sup><sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span class="hint--top hint--rounded" aria-label="AUTOMATIC1111. (n.d.). _GitHub - AUTOMATIC1111/stable-diffusion-webui: Stable Diffusion web UI_. GitHub. Retrieved May 29, 2023, from https://github.com/automatic1111/stable-diffusion-webui">[4]</span></a></sup> ,其中<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="CompVis. (n.d.). _GitHub - CompVis/stable-diffusion: A latent text-to-image diffusion model_. GitHub. Retrieved May 29, 2023, from https://github.com/CompVis/stable-diffusion">[2]</span></a></sup> 是最早的实现版本，<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="Stability-AI. (n.d.). _GitHub - Stability-AI/stablediffusion: High-Resolution image synthesis with latent diffusion models_. GitHub. Retrieved May 29, 2023, from https://github.com/Stability-AI/stablediffusion">[3]</span></a></sup> 是V2版本，由 Stability AI 完成。</p><h2 id="整体结构">整体结构</h2><pre><code class=" mermaid">flowchart TDsubgraph Input-noisyRandom-seed --&gt; latent-Gaussian-noise endsubgraph Input-promptprompt --&gt; TextEncoder --&gt; TextEmbaddingsendlatent-Gaussian-noise --&gt;Unet&#123;Unet-with-MultiAttention&#125;TextEmbaddings--&gt;UnetUnet --&gt; predict-noisy --sampling-steps--&gt;Unetpredict-noisy --&gt; Decoder --&gt; Image </code></pre><p>在一开始，StableDiffusion会通过一个随机数种子生成一张在隐空间下的随机噪声，同时通过一个文本编码器对输入的prompt进行编码，生成一个文本向量。随机噪声和文本向量会一块送入Unet，经过DDPM的步骤得到一张隐空间下的图片，通过一个解码器得到完整的图片。这里的Unet做出了改进，中间加入了交叉注意力机制。</p><h3 id="unet-with-multiattention">Unet-with-MultiAttention</h3><p><img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*IRTbG2rYv0IUH8HHAxWRrQ.png" alt="Unet-with-MultiAttention 图源medium.com" /> 图中Switch用于在不同的输入之间调整。</p><ul><li>文本数据通过一个文本编码器(一般是CLIP的文本编码器)将文本转换为向量，投影到Unet上</li><li>图像，语义图，表示等直接送入Unet</li></ul><p>反向扩散过程中输入的文本向量和隐空间下的噪声图片需要经过 <span class="math inline">\(t\)</span>轮的Unet网络，每一轮预测一个噪声，噪声图减去这个噪声，得到的图片继续送入Unet进行下一轮</p><h2 id="参考文献">参考文献</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>Rombach, R., Blattmann, A., Lorenz, D., Esser, P., &amp; Ommer, B. (2022). High-Resolution Image Synthesis with Latent Diffusion Models. 2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR). Presented at the 2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), New Orleans, LA, USA. https://doi.org/10.1109/cvpr52688.2022.01042 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩︎</a></span></span></li><li><span id="fn:2" class="footnote-text"><span>CompVis. (n.d.). <em>GitHub - CompVis/stable-diffusion: A latent text-to-image diffusion model</em>. GitHub. Retrieved May 29, 2023, from https://github.com/CompVis/stable-diffusion <a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩︎</a></span></span></li><li><span id="fn:3" class="footnote-text"><span>Stability-AI. (n.d.). <em>GitHub - Stability-AI/stablediffusion: High-Resolution image synthesis with latent diffusion models</em>. GitHub. Retrieved May 29, 2023, from https://github.com/Stability-AI/stablediffusion <a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩︎</a></span></span></li><li><span id="fn:4" class="footnote-text"><span>AUTOMATIC1111. (n.d.). <em>GitHub - AUTOMATIC1111/stable-diffusion-webui: Stable Diffusion web UI</em>. GitHub. Retrieved May 29, 2023, from https://github.com/automatic1111/stable-diffusion-webui <a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩︎</a></span></span></li><li><span id="fn:5" class="footnote-text"><span>Steins. (2023, January 2). Stable diffusion clearly explained! - Steins. <em>Medium</em>. https://medium.com/<span class="citation" data-cites="steinsfu/stable-diffusion-clearly-explained-ed008044e07e"><span class="citation" data-cites="steinsfu/stable-diffusion-clearly-explained-ed008044e07e">@steinsfu/stable-diffusion-clearly-explained-ed008044e07e</span></span> <a href="#fnref:5" rev="footnote" class="footnote-backref"> ↩︎</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>笔记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>图像生成</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>huggingface 和相关库</title>
     <link href="/2023/05/09/huggingface%E5%92%8C%E7%9B%B8%E5%85%B3%E5%BA%93/"/>
     <url>/2023/05/09/huggingface%E5%92%8C%E7%9B%B8%E5%85%B3%E5%BA%93/</url>

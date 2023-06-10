@@ -16,30 +16,24 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Everybody Dance Now 为了完成给定一个人跳舞的视频到另一个人的目标，文章作者将这个过程分成三部：pose detection, global pose normalization, and mapping from normalized pose stick figures to the target subject pose detection 使用openpose对骨骼点进行">
+    <meta name="description" content="众所周知，涩涩是图像生成技术发展的重大推动力 . Huggingface的diffusers封装了大量的算法用于生成图片。但是，很不幸的，diffusers会检测生成的图片是否存在NSFW(not safe for work)的内容，这就给我们涩涩带来了不必要的麻烦。所以我将介绍如何去除限制 该方法来自网友，原链接 先给一段示例代码 12345678import numpy as npimport">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Everybody Dance Now笔记">
-<meta property="og:url" content="https://studyinglover.com/2023/03/11/Everybody%20Dance%20Now/index.html">
+<meta property="og:title" content="Diffusers去除NSFW限制">
+<meta property="og:url" content="https://studyinglover.com/2023/06/11/Diffusers%E5%8E%BB%E9%99%A4NSFW%E9%99%90%E5%88%B6/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="Everybody Dance Now 为了完成给定一个人跳舞的视频到另一个人的目标，文章作者将这个过程分成三部：pose detection, global pose normalization, and mapping from normalized pose stick figures to the target subject pose detection 使用openpose对骨骼点进行">
+<meta property="og:description" content="众所周知，涩涩是图像生成技术发展的重大推动力 . Huggingface的diffusers封装了大量的算法用于生成图片。但是，很不幸的，diffusers会检测生成的图片是否存在NSFW(not safe for work)的内容，这就给我们涩涩带来了不必要的麻烦。所以我将介绍如何去除限制 该方法来自网友，原链接 先给一段示例代码 12345678import numpy as npimport">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://proxy.thisis.plus/20230311142224.png">
-<meta property="og:image" content="https://proxy.thisis.plus/20230311142651.png">
-<meta property="og:image" content="https://proxy.thisis.plus/20230311143611.png">
-<meta property="og:image" content="https://proxy.thisis.plus/20230311143636.png">
-<meta property="og:image" content="https://proxy.thisis.plus/20230311143533.png">
-<meta property="article:published_time" content="2023-03-11T16:38:00.000Z">
+<meta property="article:published_time" content="2023-06-11T00:02:00.000Z">
 <meta property="article:modified_time" content="2023-06-10T16:04:36.089Z">
 <meta property="article:author" content="StudyingLover">
 <meta property="article:tag" content="图像生成">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://proxy.thisis.plus/20230311142224.png">
   
   
   
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> 
   
-  <title>Everybody Dance Now笔记 - plus studio</title>
+  <title>Diffusers去除NSFW限制 - plus studio</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -240,13 +234,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://drive.studyinglover.com/api/raw/?path=/photos/blog/background/1679397019134.png') no-repeat center center; background-size: cover;">
+     style="background: url('https://drive.studyinglover.com/api/raw/?path=/photos/blog/background/1679397024795.jpeg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Everybody Dance Now笔记"></span>
+            <span id="subtitle" data-typed-text="Diffusers去除NSFW限制"></span>
           
         </div>
 
@@ -262,8 +256,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-11 16:38" pubdate>
-          2023年3月11日 下午
+        <time datetime="2023-06-11 00:02" pubdate>
+          2023年6月11日 凌晨
         </time>
       </span>
     
@@ -274,7 +268,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          544 字
+          944 字
         
       </span>
     
@@ -285,7 +279,7 @@
         
         
         
-          5 分钟
+          8 分钟
         
       </span>
     
@@ -323,23 +317,17 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Everybody Dance Now笔记</h1>
+            <h1 style="display: none">Diffusers去除NSFW限制</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="everybody-dance-now">Everybody Dance Now</h1>
-<p>为了完成给定一个人跳舞的视频到另一个人的目标，文章作者将这个过程分成三部：<strong>pose detection, global pose normalization, and mapping from normalized pose stick figures to the target subject</strong></p>
-<h2 id="pose-detection">pose detection</h2>
-<p>使用openpose对骨骼点进行标注<span class="math inline">\((x,y)\)</span> <img src="https://proxy.thisis.plus/20230311142224.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
-<h2 id="global-pose-normalization">global pose normalization</h2>
-<p>在不同的视频中，被拍摄的对象的肢体比例可能不同，或者站得离相机更近或更远。因此，在将两个对象之间的动作进行转换时，可能需要转换源人物的姿势关键点，使其符合目标人物的身体形状和位置，就像图3中的转换部分一样。作者通过分析每个人物的姿势高度和脚踝位置，并在两个视频中的最近和最远脚踝位置之间使用线性映射来找到这种转换。在收集这些位置之后，再根据每个帧的对应姿势检测计算其比例和平移。 <img src="https://proxy.thisis.plus/20230311142651.png" srcset="/img/loading.gif" lazyload alt="原文图三" /></p>
-<h2 id="mapping-from-normalized-pose-stick-figures-to-the-target-subject">mapping from normalized pose stick figures to the target subject</h2>
-<ol type="1">
-<li><p>训练一个可以从source生成target人物的pix2pix GAN <img src="https://proxy.thisis.plus/20230311143611.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p></li>
-<li><p>motion transfer 把source的舞蹈转移到目标人物身上 <img src="https://proxy.thisis.plus/20230311143636.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p></li>
-<li><p>对人脸做特别的修正，使用了faceGAN <img src="https://proxy.thisis.plus/20230311143533.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p></li>
-</ol>
+                <p>众所周知，<del>涩涩是图像生成技术发展的重大推动力</del> . Huggingface的diffusers封装了大量的算法用于生成图片。但是，很不幸的，diffusers会检测生成的图片是否存在NSFW(<strong>not safe for work</strong>)的内容，<del>这就给我们涩涩带来了不必要的麻烦</del>。所以我将介绍如何去除限制</p>
+<p>该方法来自网友，<a target="_blank" rel="noopener" href="https://www.reddit.com/r/StableDiffusion/comments/wxba44/disable_hugging_face_nsfw_filter_in_three_step/">原链接</a></p>
+<p>先给一段示例代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> diffusers <span class="hljs-keyword">import</span> StableDiffusionPipeline<br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>	pipe = StableDiffusionPipeline.from_pretrained(<span class="hljs-string">&quot;CompVis/stable-diffusion-v1-4&quot;</span>)<br>	new_image = pipe(prompt, num_inference_steps=<span class="hljs-number">20</span>).images[<span class="hljs-number">0</span>]<br>	plt.save(<span class="hljs-string">&#x27;image.png&#x27;</span>,new_image)<br></code></pre></td></tr></table></figure>
+<p>我们只需要设置<code>StableDiffusionPipeline</code> 这个类的<code>safety_checker</code>函数，更改之后的代码 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> diffusers <span class="hljs-keyword">import</span> StableDiffusionPipeline<br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">dummy</span>(<span class="hljs-params">images, **kwargs</span>): <br>	<span class="hljs-keyword">return</span> images, <span class="hljs-literal">False</span><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>	pipe = StableDiffusionPipeline.from_pretrained(<span class="hljs-string">&quot;CompVis/stable-diffusion-v1-4&quot;</span>)<br>	pipe.safety_checker = dummy<br>	new_image = pipe(prompt, num_inference_steps=<span class="hljs-number">20</span>).images[<span class="hljs-number">0</span>]<br>	plt.save(<span class="hljs-string">&#x27;image.png&#x27;</span>,new_image)<br></code></pre></td></tr></table></figure></p>
+<p>成功实现<del>涩涩自由</del></p>
 
                 
               </div>
@@ -347,27 +335,6 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
   
   
     <div class="post-meta">
@@ -385,8 +352,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Everybody Dance Now笔记</div>
-      <div>https://studyinglover.com/2023/03/11/Everybody Dance Now/</div>
+      <div>Diffusers去除NSFW限制</div>
+      <div>https://studyinglover.com/2023/06/11/Diffusers去除NSFW限制/</div>
     </div>
     <div class="license-meta">
       
@@ -398,7 +365,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年3月11日</div>
+          <div>2023年6月11日</div>
         </div>
       
       
@@ -430,18 +397,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/12/Cascade%20EF-GAN%E7%AC%94%E8%AE%B0/" title="Cascade EF-GAN笔记">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Cascade EF-GAN笔记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/03/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%86%99c%E8%AF%AD%E8%A8%80%E8%AF%BE%E8%AE%BE/" title="从0开始写c语言课设">
-                        <span class="hidden-mobile">从0开始写c语言课设</span>
+                      <a href="/2023/05/29/StableDiffusion%E7%AC%94%E8%AE%B0/" title="StableDiffusion笔记">
+                        <span class="hidden-mobile">StableDiffusion笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

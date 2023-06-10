@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>Diffusers去除NSFW限制</title>
+    <link href="/2023/06/11/Diffusers%E5%8E%BB%E9%99%A4NSFW%E9%99%90%E5%88%B6/"/>
+    <url>/2023/06/11/Diffusers%E5%8E%BB%E9%99%A4NSFW%E9%99%90%E5%88%B6/</url>
+    
+    <content type="html"><![CDATA[<p>众所周知，<del>涩涩是图像生成技术发展的重大推动力</del> . Huggingface的diffusers封装了大量的算法用于生成图片。但是，很不幸的，diffusers会检测生成的图片是否存在NSFW(<strong>not safe for work</strong>)的内容，<del>这就给我们涩涩带来了不必要的麻烦</del>。所以我将介绍如何去除限制</p><p>该方法来自网友，<a href="https://www.reddit.com/r/StableDiffusion/comments/wxba44/disable_hugging_face_nsfw_filter_in_three_step/">原链接</a></p><p>先给一段示例代码</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> diffusers <span class="hljs-keyword">import</span> StableDiffusionPipeline<br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>pipe = StableDiffusionPipeline.from_pretrained(<span class="hljs-string">&quot;CompVis/stable-diffusion-v1-4&quot;</span>)<br>new_image = pipe(prompt, num_inference_steps=<span class="hljs-number">20</span>).images[<span class="hljs-number">0</span>]<br>plt.save(<span class="hljs-string">&#x27;image.png&#x27;</span>,new_image)<br></code></pre></td></tr></table></figure><p>我们只需要设置<code>StableDiffusionPipeline</code> 这个类的<code>safety_checker</code>函数，更改之后的代码 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> diffusers <span class="hljs-keyword">import</span> StableDiffusionPipeline<br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">dummy</span>(<span class="hljs-params">images, **kwargs</span>): <br><span class="hljs-keyword">return</span> images, <span class="hljs-literal">False</span><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>pipe = StableDiffusionPipeline.from_pretrained(<span class="hljs-string">&quot;CompVis/stable-diffusion-v1-4&quot;</span>)<br>pipe.safety_checker = dummy<br>new_image = pipe(prompt, num_inference_steps=<span class="hljs-number">20</span>).images[<span class="hljs-number">0</span>]<br>plt.save(<span class="hljs-string">&#x27;image.png&#x27;</span>,new_image)<br></code></pre></td></tr></table></figure></p><p>成功实现<del>涩涩自由</del></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>图像生成</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>StableDiffusion笔记</title>
     <link href="/2023/05/29/StableDiffusion%E7%AC%94%E8%AE%B0/"/>
     <url>/2023/05/29/StableDiffusion%E7%AC%94%E8%AE%B0/</url>

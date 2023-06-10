@@ -1045,7 +1045,7 @@ links:
       avatar: "/img/favicon.png"
     }
     - {
-      title: "Pluto’s Blog",
+      title: "Pluto's Blog",
       intro: "记录我的生活，分享一些经历与心得。",
       link: "https://blog.aoaostar.com",
       avatar: "https://avatars.githubusercontent.com/u/86001674"
@@ -1055,6 +1055,12 @@ links:
       intro: "一个心怀浪漫的少年",
       link: "https://rich-blog.cn",
       avatar: "https://proxy.thisis.plus/pearl.jpg"
+    }
+    - {
+      title: "佳欢的博客",
+      intro: "Jiahuan's blog",
+      link: "https://jiahuan.tech",
+      avatar: "https://hexo.fluid-dev.com/img/favicon.png"
     }
 
   # 当成员头像加载失败时，替换为指定图片

@@ -193,3 +193,11 @@ AssertionError: No results.txt files found in /content/yolov5-face/runs/train/ex
                file.write(ckpt['training_results'])  # write results.txt
 ```
 如果你只使用单 GPU 并设置 epoch <20，这个块将不起作用。解决方案是设置epoch>20。
+
+### gitpython找不到对应版本
+```
+ERROR: Could not find a version that satisfies the requirement gitpython>=3.1.30 (from versions: 0.1.7, 0.2.0b1, 0.3.0b1, 0.3.0b2, 0.3.1b2, 0.3.2rc1, 0.3.2, 0.3.2.1, 0.3.3, 0.3.4, 0.3.5, 0.3.6, 0.3.7, 1.0.0, 1.0.1, 1.0.2, 2.0.0, 2.0.1, 2.0.2, 2.0.3, 2.0.4, 2.0.5, 2.0.6, 2.0.7, 2.0.8, 2.0.9.dev0, 2.0.9.dev1, 2.0.9, 2.1.0, 2.1.1, 2.1.3, 2.1.4, 2.1.5, 2.1.6, 2.1.7, 2.1.8, 2.1.9, 2.1.10, 2.1.11, 2.1.12, 2.1.13, 2.1.14, 2.1.15, 3.0.0, 3.0.1, 3.0.2, 3.0.3, 3.0.4, 3.0.5, 3.0.6, 3.0.7, 3.0.8, 3.0.9, 3.1.0, 3.1.1, 3.1.2, 3.1.3, 3.1.4, 3.1.5, 3.1.6, 3.1.7, 3.1.8, 3.1.9, 3.1.10, 3.1.11, 3.1.12, 3.1.13, 3.1.14, 3.1.15, 3.1.16, 3.1.17, 3.1.18, 3.1.19, 3.1.20)
+ERROR: No matching distribution found for gitpython>=3.1.30
+```
+
+python版本过低，升级即可。

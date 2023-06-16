@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>没有手都可以在腾讯云创建镜像</title>
+    <link href="/2023/06/16/%E8%85%BE%E8%AE%AF%E4%BA%91%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F/"/>
+    <url>/2023/06/16/%E8%85%BE%E8%AE%AF%E4%BA%91%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F/</url>
+    
+    <content type="html"><![CDATA[<p>腾讯云是国内顶级的云服务商。在大型项目上环境配置和编译是很多人的噩梦，当然也包括我。腾讯云为我们提供了一种新方式打包云服务器镜像。</p><h2 id="创建">创建</h2><p>首先登陆腾讯云的账号，进入控制台界面</p><figure><img src="https://proxy.thisis.plus/202306162104428.png" alt="" /><figcaption>image.png</figcaption></figure><p>选择实例的的更多选项 <img src="https://proxy.thisis.plus/202306162106168.png" alt="image.png" /></p><p>选择制作镜像 <img src="https://proxy.thisis.plus/202306162107031.png" alt="image.png" /></p><p>在弹出的窗口填入镜像名称，标签和备注即可 <img src="https://proxy.thisis.plus/202306162108164.png" alt="image.png" /></p><p>选择制作镜像后就会进入制作界面，稍等片刻我们就可以看到制作的镜像了 <img src="https://proxy.thisis.plus/202306162111218.png" alt="image.png" /></p><h2 id="应用">应用</h2><p>想要使用创建好的实例也很简单，在左侧选择镜像 <img src="https://proxy.thisis.plus/202306162113093.png" alt="image.png" /></p><p>然后点击创建镜像即可 <img src="https://proxy.thisis.plus/202306162113912.png" alt="image.png" /></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>踩坑</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>机器视觉</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>LoRA 笔记</title>
     <link href="/2023/06/13/LoRA%E7%AC%94%E8%AE%B0/"/>
     <url>/2023/06/13/LoRA%E7%AC%94%E8%AE%B0/</url>

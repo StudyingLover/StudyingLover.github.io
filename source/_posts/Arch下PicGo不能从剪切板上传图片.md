@@ -2,8 +2,8 @@
 title: LoRA 笔记
 banner_img: https://proxy.thisis.plus/202306162130625.png
 date: 2023-6-13 0:12:40
-tags:
-- 图像生成
+categories:
+- 踩坑
 ---
 作为一个天天写博客的，PicGo简直是传图片的神器。最近把电脑升级成了Archlinux,不出意外的出问题了，Arch从剪切板上传图片爆了错
 

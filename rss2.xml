@@ -9,7 +9,7 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Fri, 16 Jun 2023 13:31:24 GMT</pubDate>
+    <pubDate>Fri, 16 Jun 2023 13:50:04 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -35,8 +35,6 @@
       <category domain="https://studyinglover.com/categories/%E8%B8%A9%E5%9D%91/">踩坑</category>
       
       
-      <category domain="https://studyinglover.com/tags/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89/">机器视觉</category>
-      
       
       <comments>https://studyinglover.com/2023/06/16/%E8%85%BE%E8%AE%AF%E4%BA%91%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F/#disqus_thread</comments>
       
@@ -60,8 +58,8 @@
       <content:encoded><![CDATA[<p>作为一个天天写博客的，PicGo简直是传图片的神器。最近把电脑升级成了Archlinux,不出意外的出问题了，Arch从剪切板上传图片爆了错</p><figure><img src="https://proxy.thisis.plus/202306162118377.png" alt="" /><figcaption>image.png</figcaption></figure><p>解决方法很简单啦，进入PicGo设置，打开最下面的使用内置剪贴板上传。 <img src="https://proxy.thisis.plus/202306162122805.png" alt="image.png" /></p>]]></content:encoded>
       
       
+      <category domain="https://studyinglover.com/categories/%E8%B8%A9%E5%9D%91/">踩坑</category>
       
-      <category domain="https://studyinglover.com/tags/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/">图像生成</category>
       
       
       <comments>https://studyinglover.com/2023/06/13/Arch%E4%B8%8BPicGo%E4%B8%8D%E8%83%BD%E4%BB%8E%E5%89%AA%E5%88%87%E6%9D%BF%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/#disqus_thread</comments>

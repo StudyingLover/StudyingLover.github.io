@@ -8,7 +8,7 @@
     <link href="/2023/06/18/RoboMaster%E5%BC%80%E6%BA%90%E4%BB%93%E5%BA%93%E6%B1%87%E6%80%BB(%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0)/"/>
     <url>/2023/06/18/RoboMaster%E5%BC%80%E6%BA%90%E4%BB%93%E5%BA%93%E6%B1%87%E6%80%BB(%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0)/</url>
     
-    <content type="html"><![CDATA[<h2 id="陈君">陈君</h2><p>由于部分时间，陈君暂时离开了我们 https://gitlab.com/rm_vision https://github.com/rm-vision-archive</p><h2 id="沈航tup">沈航TUP</h2><p>1.TUP-NN-Train-2:项目结构修改，增加几种新网络结构 https://github.com/tup-robomaster/TUP-NN-Train-2 2.AutoLabel:自动标注pipeline，集成角点坐标分布分析,图像去重等工具 https://github.com/tup-robomaster/AutoLabel 3.TUP2023-Sentry-Framework:哨兵框架开源，包括全向感知，决策，导航 提供VIO和LIO方案 https://github.com/tup-robomaster/TUP2023-Sentry-Framework 4.RM_Radar2023:沈阳航空航天大学2023年雷达程序 https://github.com/tup-robomaster/RM_Radar2023 5.TRTInferenceForYoloX:YOLOXTensorRT推理 https://github.com/tup-robomaster/TRTInferenceForYolo</p><h2 id="工具">工具</h2><p>装甲板数据集制作 http://shenyibo.me/RM-labeling-tool/</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="陈君">陈君</h2><p>由于部分原因，陈君暂时离开了我们</p><p>备份</p><p>https://gitlab.com/rm_vision</p><p>https://github.com/rm-vision-archive</p><h2 id="沈航tup">沈航TUP</h2><p>1.TUP-NN-Train-2:项目结构修改，增加几种新网络结构 https://github.com/tup-robomaster/TUP-NN-Train-2</p><p>2.AutoLabel:自动标注pipeline，集成角点坐标分布分析,图像去重等工具 https://github.com/tup-robomaster/AutoLabel</p><p>3.TUP2023-Sentry-Framework:哨兵框架开源，包括全向感知，决策，导航 提供VIO和LIO方案 https://github.com/tup-robomaster/TUP2023-Sentry-Framework</p><p>4.RM_Radar2023:沈阳航空航天大学2023年雷达程序 https://github.com/tup-robomaster/RM_Radar2023</p><p>5.TRTInferenceForYoloX:YOLOXTensorRT推理 https://github.com/tup-robomaster/TRTInferenceForYolo</p><h2 id="工具">工具</h2><p>装甲板数据集制作 http://shenyibo.me/RM-labeling-tool/</p>]]></content>
     
     
     

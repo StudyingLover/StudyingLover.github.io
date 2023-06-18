@@ -9,8 +9,35 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Fri, 16 Jun 2023 13:50:04 GMT</pubDate>
+    <pubDate>Sun, 18 Jun 2023 03:05:15 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>RoboMaster开源仓库汇总(长期更新)</title>
+      <link>https://studyinglover.com/2023/06/18/RoboMaster%E5%BC%80%E6%BA%90%E4%BB%93%E5%BA%93%E6%B1%87%E6%80%BB(%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0)/</link>
+      <guid>https://studyinglover.com/2023/06/18/RoboMaster%E5%BC%80%E6%BA%90%E4%BB%93%E5%BA%93%E6%B1%87%E6%80%BB(%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0)/</guid>
+      <pubDate>Sun, 18 Jun 2023 22:40:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h2 id=&quot;陈君&quot;&gt;陈君&lt;/h2&gt;
+&lt;p&gt;由于部分时间，陈君暂时离开了我们 https://gitlab.com/rm_vision https://github.com/rm-vision-archive&lt;/p&gt;
+&lt;h2 id=&quot;沈航tup&quot;&gt;沈航TUP&lt;/h2&gt;
+&lt;p&gt;1</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="陈君">陈君</h2><p>由于部分时间，陈君暂时离开了我们 https://gitlab.com/rm_vision https://github.com/rm-vision-archive</p><h2 id="沈航tup">沈航TUP</h2><p>1.TUP-NN-Train-2:项目结构修改，增加几种新网络结构 https://github.com/tup-robomaster/TUP-NN-Train-2 2.AutoLabel:自动标注pipeline，集成角点坐标分布分析,图像去重等工具 https://github.com/tup-robomaster/AutoLabel 3.TUP2023-Sentry-Framework:哨兵框架开源，包括全向感知，决策，导航 提供VIO和LIO方案 https://github.com/tup-robomaster/TUP2023-Sentry-Framework 4.RM_Radar2023:沈阳航空航天大学2023年雷达程序 https://github.com/tup-robomaster/RM_Radar2023 5.TRTInferenceForYoloX:YOLOXTensorRT推理 https://github.com/tup-robomaster/TRTInferenceForYolo</p><h2 id="工具">工具</h2><p>装甲板数据集制作 http://shenyibo.me/RM-labeling-tool/</p>]]></content:encoded>
+      
+      
+      
+      <category domain="https://studyinglover.com/tags/RoboMaster/">RoboMaster</category>
+      
+      
+      <comments>https://studyinglover.com/2023/06/18/RoboMaster%E5%BC%80%E6%BA%90%E4%BB%93%E5%BA%93%E6%B1%87%E6%80%BB(%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0)/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>没有手都可以在腾讯云创建镜像</title>
@@ -511,33 +538,6 @@
       
       
       <comments>https://studyinglover.com/2023/03/12/Cascade%20EF-GAN%E7%AC%94%E8%AE%B0/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Everybody Dance Now笔记</title>
-      <link>https://studyinglover.com/2023/03/11/Everybody%20Dance%20Now/</link>
-      <guid>https://studyinglover.com/2023/03/11/Everybody%20Dance%20Now/</guid>
-      <pubDate>Sat, 11 Mar 2023 16:38:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;everybody-dance-now&quot;&gt;Everybody Dance Now&lt;/h1&gt;
-&lt;p&gt;为了完成给定一个人跳舞的视频到另一个人的目标，文章作者将这个过程分成三部：&lt;strong&gt;pose detection, global pose normalizat</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="everybody-dance-now">Everybody Dance Now</h1><p>为了完成给定一个人跳舞的视频到另一个人的目标，文章作者将这个过程分成三部：<strong>pose detection, global pose normalization, and mapping from normalized pose stick figures to the target subject</strong></p><h2 id="pose-detection">pose detection</h2><p>使用openpose对骨骼点进行标注<span class="math inline">\((x,y)\)</span> <img src="https://proxy.thisis.plus/20230311142224.png" alt="image.png" /></p><h2 id="global-pose-normalization">global pose normalization</h2><p>在不同的视频中，被拍摄的对象的肢体比例可能不同，或者站得离相机更近或更远。因此，在将两个对象之间的动作进行转换时，可能需要转换源人物的姿势关键点，使其符合目标人物的身体形状和位置，就像图3中的转换部分一样。作者通过分析每个人物的姿势高度和脚踝位置，并在两个视频中的最近和最远脚踝位置之间使用线性映射来找到这种转换。在收集这些位置之后，再根据每个帧的对应姿势检测计算其比例和平移。 <img src="https://proxy.thisis.plus/20230311142651.png" alt="原文图三" /></p><h2 id="mapping-from-normalized-pose-stick-figures-to-the-target-subject">mapping from normalized pose stick figures to the target subject</h2><ol type="1"><li><p>训练一个可以从source生成target人物的pix2pix GAN <img src="https://proxy.thisis.plus/20230311143611.png" alt="image.png" /></p></li><li><p>motion transfer 把source的舞蹈转移到目标人物身上 <img src="https://proxy.thisis.plus/20230311143636.png" alt="image.png" /></p></li><li><p>对人脸做特别的修正，使用了faceGAN <img src="https://proxy.thisis.plus/20230311143533.png" alt="image.png" /></p></li></ol>]]></content:encoded>
-      
-      
-      <category domain="https://studyinglover.com/categories/%E7%AC%94%E8%AE%B0/">笔记</category>
-      
-      
-      <category domain="https://studyinglover.com/tags/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/">图像生成</category>
-      
-      
-      <comments>https://studyinglover.com/2023/03/11/Everybody%20Dance%20Now/#disqus_thread</comments>
       
     </item>
     

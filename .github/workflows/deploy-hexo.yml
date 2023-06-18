@@ -34,6 +34,7 @@ jobs:
         cd ./public
         wget https://cdn.jsdelivr.net/gh/StudyingLover/StudyingLover.github.io/google22e70b1e2925e4e9.html
         wget https://cdn.jsdelivr.net/gh/StudyingLover/StudyingLover.github.io/CNAME
+        wget https://cdn.jsdelivr.net/gh/StudyingLover/StudyingLover.github.io/ads.txt
         cd ..
 
     - name: Create download floder 🔧 

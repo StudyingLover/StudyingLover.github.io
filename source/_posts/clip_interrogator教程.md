@@ -14,6 +14,11 @@ clip-interrogator项目地址[GitHub](https://github.com/pharmapsychotic/clip-in
 
 在线体验[huggingface-clip-interrogator](https://huggingface.co/spaces/pharma/CLIP-Interrogator) [huggingface-clip-interrogator2](https://huggingface.co/spaces/fffiloni/CLIP-Interrogator-2) 
 
+## clip-interrogator原理
+首先，clip-interrogator会使用BILP生成一段对图片的自然语言描述。
+
+接下来会根据四种模式，从data文件夹下的txt文件中组合出文字生成图片常用的prompt,通过CLIP进行编码，然后将图片也用CLIP进行编码，计算出相似度最大的一组prompt,和BILP生成的prompt拼接到一起，就得到了一组prompt。
+
 ## 安装
 ```bash
 pip install clip-interrogator==0.5.4

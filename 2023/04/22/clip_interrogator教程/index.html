@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://proxy.thisis.plus/20230422221658.png">
 <meta property="og:image" content="https://proxy.thisis.plus/20230422221818.png">
 <meta property="article:published_time" content="2023-04-22T22:24:00.000Z">
-<meta property="article:modified_time" content="2023-06-23T13:02:17.329Z">
+<meta property="article:modified_time" content="2023-06-23T15:02:34.840Z">
 <meta property="article:author" content="StudyingLover">
 <meta property="article:tag" content="图像生成">
 <meta name="twitter:card" content="summary_large_image">
@@ -271,7 +271,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.4k 字
+          4.6k 字
         
       </span>
     
@@ -282,7 +282,7 @@
         
         
         
-          37 分钟
+          39 分钟
         
       </span>
     
@@ -330,6 +330,9 @@
 <p>受限于clip-interrogator 等于没有的文档，就有了这篇文章来写一些怎么使用clip-interrogator。</p>
 <p>clip-interrogator项目地址<a target="_blank" rel="noopener" href="https://github.com/pharmapsychotic/clip-interrogator">GitHub</a></p>
 <p>在线体验<a target="_blank" rel="noopener" href="https://huggingface.co/spaces/pharma/CLIP-Interrogator">huggingface-clip-interrogator</a> <a target="_blank" rel="noopener" href="https://huggingface.co/spaces/fffiloni/CLIP-Interrogator-2">huggingface-clip-interrogator2</a></p>
+<h2 id="clip-interrogator原理">clip-interrogator原理</h2>
+<p>首先，clip-interrogator会使用BILP生成一段对图片的自然语言描述。</p>
+<p>接下来会根据四种模式，从data文件夹下的txt文件中组合出文字生成图片常用的prompt,通过CLIP进行编码，然后将图片也用CLIP进行编码，计算出相似度最大的一组prompt,和BILP生成的prompt拼接到一起，就得到了一组prompt。</p>
 <h2 id="安装">安装</h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install clip-interrogator==0.5.4<br></code></pre></td></tr></table></figure>
 <p>如果需要BLIP2最新的WIP支持，运行 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install clip-interrogator==0.6.0<br></code></pre></td></tr></table></figure></p>

@@ -1,5 +1,5 @@
 ---
-title: LoRA 笔记
+title: Arch下PicGo不能从剪切板上传图片
 banner_img: https://proxy.thisis.plus/202306162130625.png
 date: 2023-6-13 0:12:40
 categories:

@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>ArchlinuxGnome快捷键打开终端</title>
+    <link href="/2023/06/28/ArchlinuxGnome%E9%85%8D%E7%BD%AE%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF/"/>
+    <url>/2023/06/28/ArchlinuxGnome%E9%85%8D%E7%BD%AE%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF/</url>
+    
+    <content type="html"><![CDATA[<p>网上大量教程说命令打开终端的命令是<code>gnome-terminal</code> ， 然而</p><figure><img src="https://proxy.thisis.plus/202306281925975.png" alt="" /><figcaption>image.png</figcaption></figure><p>经过一番搜索，我发现 https://www.omglinux.com/gnome-console-tab-overview/ <img src="https://proxy.thisis.plus/202306281927089.png" alt="image.png" /></p><p>emmmmm,意思是终端命令是<code>kgx</code> ?</p><p>果然，又被一些教程坑了 <img src="https://proxy.thisis.plus/202306281928138.png" alt="image.png" /></p><p>最后配置如图 <img src="https://proxy.thisis.plus/202306211810384.png" alt="image.png" /></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>踩坑</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>clip-interrogator代码解析</title>
     <link href="/2023/06/23/clip-interrogator%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
     <url>/2023/06/23/clip-interrogator%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90/</url>

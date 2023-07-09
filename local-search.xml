@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>PicGo配置CloudflareR2图片储存</title>
+    <link href="/2023/07/09/PicGo%E9%85%8D%E7%BD%AECloudflareR2%E5%9B%BE%E7%89%87%E5%82%A8%E5%AD%98/"/>
+    <url>/2023/07/09/PicGo%E9%85%8D%E7%BD%AECloudflareR2%E5%9B%BE%E7%89%87%E5%82%A8%E5%AD%98/</url>
+    
+    <content type="html"><![CDATA[<h1 id="picgo配置cloudflarer2图片储存">PicGo配置CloudflareR2图片储存</h1><p>首先需要安装PicGo,并购买CloudFlare R2。CloudFlare R2选择免费计划即可，只是需要绑定银行卡或者paypal(淘宝两块钱解君忧)。</p><p>在R2的管理界面选择管理R2 API Tokens， <img src="https://cdn.studyinglover.com/pic/2023/07/c5fa048794dc5eab45d6e83efef1df8e.png" alt="image.png" /></p><p>创建一个API Token <img src="https://cdn.studyinglover.com/pic/2023/07/eed2d1b23fb75a7abc5ac334688baba7.png" alt="image.png" /> 注意选择权限为edit <img src="https://cdn.studyinglover.com/pic/2023/07/0a7ece4445c1a2f190adc2dd82351f62.png" alt="image.png" /></p><p>创建API Token之后，保存Access Key ID和Secret Access Key。</p><p>接下来返回R2的管理界面，创建一个储存桶 <img src="https://cdn.studyinglover.com/pic/2023/07/6de3892cb5f8a0bf1c53bb83d2070ca6.png" alt="image.png" /> 填入名字并创建桶，点击进入储存桶的管理界面，进入setting界面。 <img src="https://cdn.studyinglover.com/pic/2023/07/674ad9e98a4d4c064cd135353f967fce.png" alt="image.png" /></p><p>自定义自己的域名并允许公开访问，选择Connect Domain绑定到自己的域名，选择AllowAccess允许公开访问。 <img src="https://cdn.studyinglover.com/pic/2023/07/135bb11e6b475ed4d7acdf491003cf52.png" alt="image.png" /></p><p>接下来打开PicGo,安装s3插件 <img src="https://cdn.studyinglover.com/pic/2023/07/bc0d82dee02bc1a2b114477b827b125c.png" alt="image.png" /></p><p>应用密钥ID和应用密钥填入在API Token获取的Access Key ID和Secret Access Key，桶名填入创建的桶的名称，自定义节点填入储存桶管理界面中途中对应的路径。自定义域名填入前面绑定的自己的域名。 <img src="https://cdn.studyinglover.com/pic/2023/07/0c0cc997c92cd807ecb48c3b2b08e394.png" alt="image.png" /></p><p>尝试上传不出意外就上传成功了。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>踩坑</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>ArchlinuxGnome快捷键打开终端</title>
     <link href="/2023/06/28/ArchlinuxGnome%E9%85%8D%E7%BD%AE%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF/"/>
     <url>/2023/06/28/ArchlinuxGnome%E9%85%8D%E7%BD%AE%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF/</url>

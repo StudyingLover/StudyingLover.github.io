@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>open_clip编码图像和文本</title>
+    <link href="/2023/07/13/open_clip%E7%BC%96%E7%A0%81%E5%9B%BE%E5%83%8F%E5%92%8C%E6%96%87%E6%9C%AC/"/>
+    <url>/2023/07/13/open_clip%E7%BC%96%E7%A0%81%E5%9B%BE%E5%83%8F%E5%92%8C%E6%96%87%E6%9C%AC/</url>
+    
+    <content type="html"><![CDATA[<p>open_clip是CLIP的开源实现版本，只训练了CLIP效果最好的几个模型。</p><p>安装是 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install open_clip_torch<br></code></pre></td></tr></table></figure></p><p>首先导入 open_clip，并创建相关模型 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> open_clip<br><span class="hljs-keyword">import</span> torch<br><br>device = torch.device(<span class="hljs-string">&quot;cuda&quot;</span> <span class="hljs-keyword">if</span> torch.cuda.is_available() <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;cpu&quot;</span>)<br>clip_model_name = <span class="hljs-string">&quot;ViT-L-14&quot;</span><br>clip_model,_,clip_preprocess = open_clip.create_model_and_transforms(clip_model_name<br>clip_model_name,pretrained = <span class="hljs-string">&quot;openai&quot;</span>,precision=<span class="hljs-string">&#x27;fp16&#x27;</span> <span class="hljs-keyword">if</span> device == <span class="hljs-string">&#x27;cuda&#x27;</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;fp32&#x27;</span>,device=device,<br>)<br><br>tokenize = open_clip.get_tokenizer(clip_model_name)<br></code></pre></td></tr></table></figure></p><p><code>tokenize</code> 是分词器，所有的文本都要先经过分析器才能放入模型进行推理。</p><h4 id="编码图像">编码图像</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">image_to_features</span>(<span class="hljs-params">image: Image.Image</span>) -&gt; torch.Tensor:<br>images = clip_preprocess(image).unsqueeze(<span class="hljs-number">0</span>).to(device)<br><span class="hljs-keyword">with</span> torch.no_grad(), torch.cuda.amp.autocast():<br>image_features = clip_model.encode_image(images)<br><span class="hljs-keyword">return</span> image_features<br>  <br>img = cv.imread(<span class="hljs-string">&quot;/path/to/example.png&quot;</span>)<br>img = Image.fromarray(img)<br><br>image_feature = image_to_features(img)<br></code></pre></td></tr></table></figure><p><code>/path/to/example.png</code> 替换成自己图片的路径</p><p><code>image_to_features</code> 函数是一个封装过的将图像转成文本的函数，传入的参数是一个<code>image_to_features</code>格式的图片。</p><p><code>image_feature</code> 就是经过CLIP的编码器得到的特征</p><h4 id="编码文本">编码文本</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">prompt = <span class="hljs-string">&quot;a photo of a cat&quot;</span><br>text_tokens = tokenize([prompt]).to(device)<br>text_features = clip_model.encode_text(text_tokens)<br></code></pre></td></tr></table></figure><p><code>text_features</code> 就是得到的特征。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>多模态</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>PicGo配置CloudflareR2图片储存</title>
     <link href="/2023/07/09/PicGo%E9%85%8D%E7%BD%AECloudflareR2%E5%9B%BE%E7%89%87%E5%82%A8%E5%AD%98/"/>
     <url>/2023/07/09/PicGo%E9%85%8D%E7%BD%AECloudflareR2%E5%9B%BE%E7%89%87%E5%82%A8%E5%AD%98/</url>

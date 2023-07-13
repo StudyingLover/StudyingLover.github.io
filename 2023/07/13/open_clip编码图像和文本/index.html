@@ -16,24 +16,23 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="众所周知，涩涩是图像生成技术发展的重大推动力 . Huggingface的diffusers封装了大量的算法用于生成图片。但是，很不幸的，diffusers会检测生成的图片是否存在NSFW(not safe for work)的内容，这就给我们涩涩带来了不必要的麻烦。所以我将介绍如何去除限制 该方法来自网友，原链接 先给一段示例代码 12345678import numpy as npimport">
+    <meta name="description" content="open_clip是CLIP的开源实现版本，只训练了CLIP效果最好的几个模型。 安装是 1pip install open_clip_torch 首先导入 open_clip，并创建相关模型 12345678910import open_clipimport torchdevice &#x3D; torch.device(&quot;cuda&quot; if torch.cuda.is_availabl">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Diffusers去除NSFW限制">
-<meta property="og:url" content="https://studyinglover.com/2023/06/11/Diffusers%E5%8E%BB%E9%99%A4NSFW%E9%99%90%E5%88%B6/index.html">
+<meta property="og:title" content="open_clip编码图像和文本">
+<meta property="og:url" content="https://studyinglover.com/2023/07/13/open_clip%E7%BC%96%E7%A0%81%E5%9B%BE%E5%83%8F%E5%92%8C%E6%96%87%E6%9C%AC/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="众所周知，涩涩是图像生成技术发展的重大推动力 . Huggingface的diffusers封装了大量的算法用于生成图片。但是，很不幸的，diffusers会检测生成的图片是否存在NSFW(not safe for work)的内容，这就给我们涩涩带来了不必要的麻烦。所以我将介绍如何去除限制 该方法来自网友，原链接 先给一段示例代码 12345678import numpy as npimport">
+<meta property="og:description" content="open_clip是CLIP的开源实现版本，只训练了CLIP效果最好的几个模型。 安装是 1pip install open_clip_torch 首先导入 open_clip，并创建相关模型 12345678910import open_clipimport torchdevice &#x3D; torch.device(&quot;cuda&quot; if torch.cuda.is_availabl">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-06-11T00:02:00.000Z">
-<meta property="article:modified_time" content="2023-07-13T15:20:01.330Z">
+<meta property="article:published_time" content="2023-07-13T23:14:00.000Z">
+<meta property="article:modified_time" content="2023-07-13T15:20:01.334Z">
 <meta property="article:author" content="StudyingLover">
-<meta property="article:tag" content="图像生成">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> 
   
-  <title>Diffusers去除NSFW限制 - plus studio</title>
+  <title>open_clip编码图像和文本 - plus studio</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -246,13 +245,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://drive.studyinglover.com/api/raw/?path=/photos/blog/background/1679397024795.jpeg') no-repeat center center; background-size: cover;">
+     style="background: url('https://cdn.studyinglover.com/pic/2023/07/d0c501668714918b17bd10244971fcb1.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Diffusers去除NSFW限制"></span>
+            <span id="subtitle" data-typed-text="open_clip编码图像和文本"></span>
           
         </div>
 
@@ -268,8 +267,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-11 00:02" pubdate>
-          2023年6月11日 凌晨
+        <time datetime="2023-07-13 23:14" pubdate>
+          2023年7月13日 晚上
         </time>
       </span>
     
@@ -280,7 +279,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          944 字
+          1.2k 字
         
       </span>
     
@@ -291,7 +290,7 @@
         
         
         
-          8 分钟
+          10 分钟
         
       </span>
     
@@ -329,17 +328,23 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Diffusers去除NSFW限制</h1>
+            <h1 style="display: none">open_clip编码图像和文本</h1>
             
             
               <div class="markdown-body">
                 
-                <p>众所周知，<del>涩涩是图像生成技术发展的重大推动力</del> . Huggingface的diffusers封装了大量的算法用于生成图片。但是，很不幸的，diffusers会检测生成的图片是否存在NSFW(<strong>not safe for work</strong>)的内容，<del>这就给我们涩涩带来了不必要的麻烦</del>。所以我将介绍如何去除限制</p>
-<p>该方法来自网友，<a target="_blank" rel="noopener" href="https://www.reddit.com/r/StableDiffusion/comments/wxba44/disable_hugging_face_nsfw_filter_in_three_step/">原链接</a></p>
-<p>先给一段示例代码</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> diffusers <span class="hljs-keyword">import</span> StableDiffusionPipeline<br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>	pipe = StableDiffusionPipeline.from_pretrained(<span class="hljs-string">&quot;CompVis/stable-diffusion-v1-4&quot;</span>)<br>	new_image = pipe(prompt, num_inference_steps=<span class="hljs-number">20</span>).images[<span class="hljs-number">0</span>]<br>	plt.save(<span class="hljs-string">&#x27;image.png&#x27;</span>,new_image)<br></code></pre></td></tr></table></figure>
-<p>我们只需要设置<code>StableDiffusionPipeline</code> 这个类的<code>safety_checker</code>函数，更改之后的代码 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> diffusers <span class="hljs-keyword">import</span> StableDiffusionPipeline<br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">dummy</span>(<span class="hljs-params">images, **kwargs</span>): <br>	<span class="hljs-keyword">return</span> images, <span class="hljs-literal">False</span><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>	pipe = StableDiffusionPipeline.from_pretrained(<span class="hljs-string">&quot;CompVis/stable-diffusion-v1-4&quot;</span>)<br>	pipe.safety_checker = dummy<br>	new_image = pipe(prompt, num_inference_steps=<span class="hljs-number">20</span>).images[<span class="hljs-number">0</span>]<br>	plt.save(<span class="hljs-string">&#x27;image.png&#x27;</span>,new_image)<br></code></pre></td></tr></table></figure></p>
-<p>成功实现<del>涩涩自由</del></p>
+                <p>open_clip是CLIP的开源实现版本，只训练了CLIP效果最好的几个模型。</p>
+<p>安装是 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install open_clip_torch<br></code></pre></td></tr></table></figure></p>
+<p>首先导入 open_clip，并创建相关模型 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> open_clip<br><span class="hljs-keyword">import</span> torch<br><br>device = torch.device(<span class="hljs-string">&quot;cuda&quot;</span> <span class="hljs-keyword">if</span> torch.cuda.is_available() <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;cpu&quot;</span>)<br>clip_model_name = <span class="hljs-string">&quot;ViT-L-14&quot;</span><br>clip_model,_,clip_preprocess = open_clip.create_model_and_transforms(clip_model_name<br>clip_model_name,pretrained = <span class="hljs-string">&quot;openai&quot;</span>,precision=<span class="hljs-string">&#x27;fp16&#x27;</span> <span class="hljs-keyword">if</span> device == <span class="hljs-string">&#x27;cuda&#x27;</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;fp32&#x27;</span>,device=device,<br>)<br><br>tokenize = open_clip.get_tokenizer(clip_model_name)<br></code></pre></td></tr></table></figure></p>
+<p><code>tokenize</code> 是分词器，所有的文本都要先经过分析器才能放入模型进行推理。</p>
+<h4 id="编码图像">编码图像</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">image_to_features</span>(<span class="hljs-params">image: Image.Image</span>) -&gt; torch.Tensor:<br>	images = clip_preprocess(image).unsqueeze(<span class="hljs-number">0</span>).to(device)<br>	<span class="hljs-keyword">with</span> torch.no_grad(), torch.cuda.amp.autocast():<br>	image_features = clip_model.encode_image(images)<br>	<span class="hljs-keyword">return</span> image_features<br>  <br>img = cv.imread(<span class="hljs-string">&quot;/path/to/example.png&quot;</span>)<br>img = Image.fromarray(img)<br><br>image_feature = image_to_features(img)<br></code></pre></td></tr></table></figure>
+<p><code>/path/to/example.png</code> 替换成自己图片的路径</p>
+<p><code>image_to_features</code> 函数是一个封装过的将图像转成文本的函数，传入的参数是一个<code>image_to_features</code>格式的图片。</p>
+<p><code>image_feature</code> 就是经过CLIP的编码器得到的特征</p>
+<h4 id="编码文本">编码文本</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">prompt = <span class="hljs-string">&quot;a photo of a cat&quot;</span><br>text_tokens = tokenize([prompt]).to(device)<br>text_features = clip_model.encode_text(text_tokens)<br></code></pre></td></tr></table></figure>
+<p><code>text_features</code> 就是得到的特征。</p>
 
                 
               </div>
@@ -348,13 +353,27 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/">#图像生成</a>
-      
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%A4%9A%E6%A8%A1%E6%80%81/" class="category-chain-item">多模态</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
     </div>
+  
   
 </div>
 
@@ -364,8 +383,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Diffusers去除NSFW限制</div>
-      <div>https://studyinglover.com/2023/06/11/Diffusers去除NSFW限制/</div>
+      <div>open_clip编码图像和文本</div>
+      <div>https://studyinglover.com/2023/07/13/open_clip编码图像和文本/</div>
     </div>
     <div class="license-meta">
       
@@ -377,7 +396,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年6月11日</div>
+          <div>2023年7月13日</div>
         </div>
       
       
@@ -409,18 +428,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/13/LoRA%E7%AC%94%E8%AE%B0/" title="LoRA 笔记">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LoRA 笔记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/29/StableDiffusion%E7%AC%94%E8%AE%B0/" title="StableDiffusion笔记">
-                        <span class="hidden-mobile">StableDiffusion笔记</span>
+                      <a href="/2023/07/09/PicGo%E9%85%8D%E7%BD%AECloudflareR2%E5%9B%BE%E7%89%87%E5%82%A8%E5%AD%98/" title="PicGo配置CloudflareR2图片储存">
+                        <span class="hidden-mobile">PicGo配置CloudflareR2图片储存</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

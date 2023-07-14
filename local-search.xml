@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>Filesystem type ntfs3,ntfs not configured in kernel</title>
+    <link href="/2023/07/14/Filesystem%20type%20ntfs3,ntfs%20not%20configured%20in%20kernel/"/>
+    <url>/2023/07/14/Filesystem%20type%20ntfs3,ntfs%20not%20configured%20in%20kernel/</url>
+    
+    <content type="html"><![CDATA[<h1 id="filesystem-type-ntfs3ntfs-not-configured-in-kernel">Filesystem type ntfs3,ntfs not configured in kernel</h1><p>昨天卸载硬盘的时候卡住了，然后我就直接拔下了硬盘，再插上就出现了这个问题 <img src="https://cdn.studyinglover.com/pic/2023/07/7da166adca81943084fbc25dae0a3e16.png" alt="image.png" /></p><p>我先用备份恢复了一下，但是重新插上硬盘问题依然存在。接下来google了一下，Archwiki中有提到<a href="https://wiki.archlinux.org/title/NTFS">这个问题</a>，但是标记这个问题是已经过时的，所描述的问题已得到解决。从内核版本6.2开始，ntfs3支持<code>windows_names</code>选项。我就先按照文档说的做了，但是问题依然没有解决。 <img src="https://cdn.studyinglover.com/pic/2023/07/92f0be4c455602d2eda6b9ecd6229969.png" alt="image.png" /></p><p>接下来翻了下reddit，发现有人存在类似的问题 https://www.reddit.com/r/archlinux/comments/s3w6uu/cannot_mount_ntfs_drives_on_516/ ， 有人提到需要安装<code>ntfs-3g</code> ,那么就是 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">yay ntfs-3g<br></code></pre></td></tr></table></figure></p><p>问题解决</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>踩坑</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>open_clip编码图像和文本</title>
     <link href="/2023/07/13/open_clip%E7%BC%96%E7%A0%81%E5%9B%BE%E5%83%8F%E5%92%8C%E6%96%87%E6%9C%AC/"/>
     <url>/2023/07/13/open_clip%E7%BC%96%E7%A0%81%E5%9B%BE%E5%83%8F%E5%92%8C%E6%96%87%E6%9C%AC/</url>

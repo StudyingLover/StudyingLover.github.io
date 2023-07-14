@@ -369,8 +369,15 @@ navbar:
     - { key: "category", link: "/categories/", icon: "iconfont icon-category-fill" }
     - { key: "tag", link: "/tags/", icon: "iconfont icon-tags-fill" }
     - { key: "about", link: "/about/", icon: "iconfont icon-user-fill" }
-    - { key: "chatGPT镜像", link: "https://chat.thisis.plus/chat/", icon: "iconfont icon-comment" }
+    - { key: "free-chat", link: "https://chat.thisis.plus/chat/", icon: "iconfont icon-comment" }
     - { key: "links", link: "/links/", icon: "iconfont icon-link-fill" }
+    - {
+      key: '镜像站',
+      icon: 'iconfont icon-books',
+      submenu: [
+        { key: 'ArchLinux教程', link: 'http://arch.studyinglover.top/' },
+        ]
+      }
 
 # 搜索功能，基于 hexo-generator-search 插件，若已安装其他搜索插件请关闭此功能，以避免生成多余的索引文件
 # Search feature, based on hexo-generator-search. If you have installed other search plugins, please disable this feature to avoid generating redundant index files

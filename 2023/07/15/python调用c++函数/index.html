@@ -16,24 +16,23 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="视觉 陈君 陈君视觉1 陈君视觉2 沈航  TUP-NN-Train-2:项目结构修改，增加几种新网络结构 TUP2023-Sentry-Framework:哨兵框架开源，包括全向感知，决策，导航 提供VIO和LIO方案 RM_Radar2023:沈阳航空航天大学2023年雷达程序 TRTInferenceForYoloX:YOLOXTensorRT推理  西浦 四点识别模型 工具 装甲板数据集制">
+    <meta name="description" content="python调用c++函数 当我们需要在Python中使用C++编写的函数时，可以将C++代码编译成共享库文件（.so文件），然后来调用这些函数。这里介绍两种方法。 使用python的api 首先要安装安装python-dev 和cmake 在Archlinux下yay python-dev ，yay cmake即可。其他平台需要自行搜索 首先创建一个C++文件 main.cpp 12345678">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RoboMaster开源仓库汇总(长期更新)">
-<meta property="og:url" content="https://studyinglover.com/2023/06/18/RoboMaster%E5%BC%80%E6%BA%90%E4%BB%93%E5%BA%93%E6%B1%87%E6%80%BB(%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0)/index.html">
+<meta property="og:title" content="python调用c++函数">
+<meta property="og:url" content="https://studyinglover.com/2023/07/15/python%E8%B0%83%E7%94%A8c++%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="视觉 陈君 陈君视觉1 陈君视觉2 沈航  TUP-NN-Train-2:项目结构修改，增加几种新网络结构 TUP2023-Sentry-Framework:哨兵框架开源，包括全向感知，决策，导航 提供VIO和LIO方案 RM_Radar2023:沈阳航空航天大学2023年雷达程序 TRTInferenceForYoloX:YOLOXTensorRT推理  西浦 四点识别模型 工具 装甲板数据集制">
+<meta property="og:description" content="python调用c++函数 当我们需要在Python中使用C++编写的函数时，可以将C++代码编译成共享库文件（.so文件），然后来调用这些函数。这里介绍两种方法。 使用python的api 首先要安装安装python-dev 和cmake 在Archlinux下yay python-dev ，yay cmake即可。其他平台需要自行搜索 首先创建一个C++文件 main.cpp 12345678">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-06-18T22:40:00.000Z">
+<meta property="article:published_time" content="2023-07-15T09:30:00.000Z">
 <meta property="article:modified_time" content="2023-07-15T01:33:19.708Z">
 <meta property="article:author" content="StudyingLover">
-<meta property="article:tag" content="RoboMaster">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> 
   
-  <title>RoboMaster开源仓库汇总(长期更新) - plus studio</title>
+  <title>python调用c++函数 - plus studio</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -266,13 +265,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://drive.studyinglover.com/api/raw/?path=/photos/blog/background/1679396994125.png') no-repeat center center; background-size: cover;">
+     style="background: url('https://proxy.thisis.plus/202306281933716.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="RoboMaster开源仓库汇总(长期更新)"></span>
+            <span id="subtitle" data-typed-text="python调用c++函数"></span>
           
         </div>
 
@@ -288,8 +287,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-18 22:40" pubdate>
-          2023年6月18日 晚上
+        <time datetime="2023-07-15 09:30" pubdate>
+          2023年7月15日 上午
         </time>
       </span>
     
@@ -300,7 +299,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          244 字
+          1.8k 字
         
       </span>
     
@@ -311,7 +310,7 @@
         
         
         
-          3 分钟
+          15 分钟
         
       </span>
     
@@ -349,28 +348,24 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">RoboMaster开源仓库汇总(长期更新)</h1>
+            <h1 style="display: none">python调用c++函数</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="视觉">视觉</h2>
-<h3 id="陈君">陈君</h3>
-<p><a target="_blank" rel="noopener" href="https://gitlab.com/rm_vision">陈君视觉1</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/rm-vision-archive">陈君视觉2</a></p>
-<h3 id="沈航">沈航</h3>
-<ol type="1">
-<li><a target="_blank" rel="noopener" href="https://github.com/tup-robomaster/TUP-NN-Train-2">TUP-NN-Train-2:项目结构修改，增加几种新网络结构</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/tup-robomaster/TUP2023-Sentry-Framework">TUP2023-Sentry-Framework:哨兵框架开源，包括全向感知，决策，导航 提供VIO和LIO方案</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/tup-robomaster/RM_Radar2023">RM_Radar2023:沈阳航空航天大学2023年雷达程序</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/tup-robomaster/TRTInferenceForYolo">TRTInferenceForYoloX:YOLOXTensorRT推理</a></li>
-</ol>
-<h3 id="西浦">西浦</h3>
-<p><a target="_blank" rel="noopener" href="https://github.com/zRzRzRzRzRzRzR/YOLO-of-RoboMaster-Keypoints-Detection-2023">四点识别模型</a></p>
-<h2 id="工具">工具</h2>
-<p><a target="_blank" rel="noopener" href="http://shenyibo.me/RM-labeling-tool/">装甲板数据集制作</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/tup-robomaster/AutoLabel">AutoLabel:自动标注pipeline，集成角点坐标分布分析,图像去重等工具</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/ifr-cv/rm_part_visual_tag_identify">RoboMaster视觉标签识别器</a></p>
+                <h1 id="python调用c函数">python调用c++函数</h1>
+<p>当我们需要在Python中使用C++编写的函数时，可以将C++代码编译成共享库文件（.so文件），然后来调用这些函数。这里介绍两种方法。</p>
+<h2 id="使用python的api">使用python的api</h2>
+<p>首先要安装安装<code>python-dev</code> 和<code>cmake</code></p>
+<p>在Archlinux下<code>yay python-dev</code> ，<code>yay cmake</code>即可。其他平台需要自行搜索</p>
+<p>首先创建一个C++文件 <code>main.cpp</code> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;Python.h&gt;</span></span><br>  <br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>&#123;<br>	<span class="hljs-keyword">return</span> a + b;<br>&#125;<br>  <br><span class="hljs-function"><span class="hljs-type">static</span> PyObject* <span class="hljs-title">py_add</span><span class="hljs-params">(PyObject* self, PyObject* args)</span> </span>&#123;<br>	<span class="hljs-type">int</span> a, b;<br>	<span class="hljs-keyword">if</span> (!<span class="hljs-built_in">PyArg_ParseTuple</span>(args, <span class="hljs-string">&quot;ii&quot;</span>, &amp;a, &amp;b)) &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>	&#125;<br>	<span class="hljs-type">int</span> result = <span class="hljs-built_in">add</span>(a, b);<br>	<span class="hljs-keyword">return</span> <span class="hljs-built_in">PyLong_FromLong</span>(result);<br>&#125;<br>  <br><span class="hljs-type">static</span> PyMethodDef module_methods[] = &#123;<br>	&#123;<span class="hljs-string">&quot;add&quot;</span>, py_add, METH_VARARGS, <span class="hljs-string">&quot;Add two integers.&quot;</span>&#125;,<br>	&#123;<span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-number">0</span>, <span class="hljs-literal">NULL</span>&#125;<br>&#125;;<br>  <br><span class="hljs-type">static</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">PyModuleDef</span> module_def = &#123;<br>	PyModuleDef_HEAD_INIT,<br>	<span class="hljs-string">&quot;my_module&quot;</span>,<br>	<span class="hljs-string">&quot;My custom module.&quot;</span>,<br>	<span class="hljs-number">-1</span>,<br>	module_methods<br>&#125;;<br>  <br><span class="hljs-function">PyMODINIT_FUNC <span class="hljs-title">PyInit_my_module</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> </span>&#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-built_in">PyModule_Create</span>(&amp;module_def);<br>&#125;<br></code></pre></td></tr></table></figure></p>
+<p>接着用cmake构建<code>.so</code>文件，<code>CMakeLists.txt</code> 内容如下 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs CMakeLists">cmake_minimum_required(VERSION 3.0)<br>  <br>project(my_module)<br>  <br>find_package(Python REQUIRED COMPONENTS Interpreter Development)<br>  <br>add_library(my_module SHARED main.cpp)<br>  <br>target_include_directories(my_module PRIVATE $&#123;Python_INCLUDE_DIRS&#125;)<br>target_link_libraries(my_module PRIVATE $&#123;Python_LIBRARIES&#125;)<br>  <br>set_target_properties(my_module PROPERTIES PREFIX &quot;&quot;)<br>set_target_properties(my_module PROPERTIES SUFFIX &quot;.so&quot;)<br></code></pre></td></tr></table></figure></p>
+<p>构建完成后会有一个名为<code>my_module.so</code> 的文件</p>
+<p>接下来使用python调用,注意将python文件和<code>my_module.so</code> 放到同一个目录下 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> my_module<br>  <br>result = my_module.add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br><span class="hljs-built_in">print</span>(result)<br></code></pre></td></tr></table></figure></p>
+<h2 id="按照-c-语言的规则来编译和链接">按照 C 语言的规则来编译和链接</h2>
+<p>首先，我们需要编写一个C++文件<code>mylib.cpp</code> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> a + b;<br>&#125;<br></code></pre></td></tr></table></figure></p>
+<p>接下来，编译<code>mylib.cpp</code> 为一个<code>.so</code>文件 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">g++ -shared -o mylib.so -fPIC mylib.cpp<br></code></pre></td></tr></table></figure></p>
+<p>最后使用python加载<code>mylib.so</code> 文件并调用 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> ctypes<br><br><span class="hljs-comment"># 加载共享库文件</span><br>mylib = ctypes.cdll.LoadLibrary(<span class="hljs-string">&#x27;./mylib.so&#x27;</span>)<br><br>result = mylib.add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br><span class="hljs-built_in">print</span>(result)<br></code></pre></td></tr></table></figure></p>
 
                 
               </div>
@@ -379,13 +374,27 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/RoboMaster/">#RoboMaster</a>
-      
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%B8%A9%E5%9D%91/" class="category-chain-item">踩坑</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
     </div>
+  
   
 </div>
 
@@ -395,8 +404,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>RoboMaster开源仓库汇总(长期更新)</div>
-      <div>https://studyinglover.com/2023/06/18/RoboMaster开源仓库汇总(长期更新)/</div>
+      <div>python调用c++函数</div>
+      <div>https://studyinglover.com/2023/07/15/python调用c++函数/</div>
     </div>
     <div class="license-meta">
       
@@ -408,7 +417,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年6月18日</div>
+          <div>2023年7月15日</div>
         </div>
       
       
@@ -440,18 +449,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/19/2023%E5%8D%8E%E4%B8%BA%E9%B2%B2%E9%B9%8F%E7%95%85%E6%83%B3%E6%97%A5%E6%9A%A8%E8%A5%BF%E5%AE%89%E9%AB%98%E6%96%B0%E5%9B%BD%E9%99%85%E4%BC%9A%E8%AE%AE%E4%B8%AD%E5%BF%83%E9%9B%B6%E9%A3%9F%E5%8D%88%E9%A5%AD%E6%B5%8B%E8%AF%84/" title="2023华为鲲鹏畅想日暨西安高新国际会议中心零食午饭测评">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">2023华为鲲鹏畅想日暨西安高新国际会议中心零食午饭测评</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/06/16/%E8%85%BE%E8%AE%AF%E4%BA%91%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F/" title="没有手都可以在腾讯云创建镜像">
-                        <span class="hidden-mobile">没有手都可以在腾讯云创建镜像</span>
+                      <a href="/2023/07/14/Filesystem%20type%20ntfs3,ntfs%20not%20configured%20in%20kernel/" title="Filesystem type ntfs3,ntfs not configured in kernel">
+                        <span class="hidden-mobile">Filesystem type ntfs3,ntfs not configured in kernel</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

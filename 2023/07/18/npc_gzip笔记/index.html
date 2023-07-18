@@ -16,14 +16,14 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="python调用c++函数 当我们需要在Python中使用C++编写的函数时，可以将C++代码编译成共享库文件（.so文件），然后来调用这些函数。这里介绍两种方法。 使用python的api 首先要安装安装python-dev 和cmake 在Archlinux下yay python-dev ，yay cmake即可。其他平台需要自行搜索 首先创建一个C++文件 main.cpp 12345678">
+    <meta name="description" content="npc_gzip笔记 论文笔记 npc_gzip 的论文名叫做 &quot;Low-Resource&quot; Text Classification: A Parameter-Free Classification Method with Compressors ,意为不需要参数，使用压缩器的文本分类方法。论文的代码也只有仅仅的十四行，就在部分数据集上取得了超越 bert 的效果。 npc_gzip由一个无损压缩">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python调用c++函数">
-<meta property="og:url" content="https://studyinglover.com/2023/07/15/python%E8%B0%83%E7%94%A8c++%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:title" content="npc_gzip笔记">
+<meta property="og:url" content="https://studyinglover.com/2023/07/18/npc_gzip%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="python调用c++函数 当我们需要在Python中使用C++编写的函数时，可以将C++代码编译成共享库文件（.so文件），然后来调用这些函数。这里介绍两种方法。 使用python的api 首先要安装安装python-dev 和cmake 在Archlinux下yay python-dev ，yay cmake即可。其他平台需要自行搜索 首先创建一个C++文件 main.cpp 12345678">
+<meta property="og:description" content="npc_gzip笔记 论文笔记 npc_gzip 的论文名叫做 &quot;Low-Resource&quot; Text Classification: A Parameter-Free Classification Method with Compressors ,意为不需要参数，使用压缩器的文本分类方法。论文的代码也只有仅仅的十四行，就在部分数据集上取得了超越 bert 的效果。 npc_gzip由一个无损压缩">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-15T09:30:00.000Z">
+<meta property="article:published_time" content="2023-07-18T16:57:00.000Z">
 <meta property="article:modified_time" content="2023-07-18T09:00:35.797Z">
 <meta property="article:author" content="StudyingLover">
 <meta name="twitter:card" content="summary_large_image">
@@ -32,7 +32,7 @@
   
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> 
   
-  <title>python调用c++函数 - plus studio</title>
+  <title>npc_gzip笔记 - plus studio</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -265,13 +265,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://proxy.thisis.plus/202306281933716.png') no-repeat center center; background-size: cover;">
+     style="background: url('https://cdn.studyinglover.com/pic/2023/07/9482f9fe9617825162494635a1b7f460.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="python调用c++函数"></span>
+            <span id="subtitle" data-typed-text="npc_gzip笔记"></span>
           
         </div>
 
@@ -287,8 +287,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-15 09:30" pubdate>
-          2023年7月15日 上午
+        <time datetime="2023-07-18 16:57" pubdate>
+          2023年7月18日 下午
         </time>
       </span>
     
@@ -299,7 +299,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          3.5k 字
         
       </span>
     
@@ -310,7 +310,7 @@
         
         
         
-          15 分钟
+          30 分钟
         
       </span>
     
@@ -348,24 +348,30 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">python调用c++函数</h1>
+            <h1 style="display: none">npc_gzip笔记</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="python调用c函数">python调用c++函数</h1>
-<p>当我们需要在Python中使用C++编写的函数时，可以将C++代码编译成共享库文件（.so文件），然后来调用这些函数。这里介绍两种方法。</p>
-<h2 id="使用python的api">使用python的api</h2>
-<p>首先要安装安装<code>python-dev</code> 和<code>cmake</code></p>
-<p>在Archlinux下<code>yay python-dev</code> ，<code>yay cmake</code>即可。其他平台需要自行搜索</p>
-<p>首先创建一个C++文件 <code>main.cpp</code> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;Python.h&gt;</span></span><br>  <br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>&#123;<br>	<span class="hljs-keyword">return</span> a + b;<br>&#125;<br>  <br><span class="hljs-function"><span class="hljs-type">static</span> PyObject* <span class="hljs-title">py_add</span><span class="hljs-params">(PyObject* self, PyObject* args)</span> </span>&#123;<br>	<span class="hljs-type">int</span> a, b;<br>	<span class="hljs-keyword">if</span> (!<span class="hljs-built_in">PyArg_ParseTuple</span>(args, <span class="hljs-string">&quot;ii&quot;</span>, &amp;a, &amp;b)) &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>	&#125;<br>	<span class="hljs-type">int</span> result = <span class="hljs-built_in">add</span>(a, b);<br>	<span class="hljs-keyword">return</span> <span class="hljs-built_in">PyLong_FromLong</span>(result);<br>&#125;<br>  <br><span class="hljs-type">static</span> PyMethodDef module_methods[] = &#123;<br>	&#123;<span class="hljs-string">&quot;add&quot;</span>, py_add, METH_VARARGS, <span class="hljs-string">&quot;Add two integers.&quot;</span>&#125;,<br>	&#123;<span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-number">0</span>, <span class="hljs-literal">NULL</span>&#125;<br>&#125;;<br>  <br><span class="hljs-type">static</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">PyModuleDef</span> module_def = &#123;<br>	PyModuleDef_HEAD_INIT,<br>	<span class="hljs-string">&quot;my_module&quot;</span>,<br>	<span class="hljs-string">&quot;My custom module.&quot;</span>,<br>	<span class="hljs-number">-1</span>,<br>	module_methods<br>&#125;;<br>  <br><span class="hljs-function">PyMODINIT_FUNC <span class="hljs-title">PyInit_my_module</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> </span>&#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-built_in">PyModule_Create</span>(&amp;module_def);<br>&#125;<br></code></pre></td></tr></table></figure></p>
-<p>接着用cmake构建<code>.so</code>文件，<code>CMakeLists.txt</code> 内容如下 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs CMakeLists">cmake_minimum_required(VERSION 3.0)<br>  <br>project(my_module)<br>  <br>find_package(Python REQUIRED COMPONENTS Interpreter Development)<br>  <br>add_library(my_module SHARED main.cpp)<br>  <br>target_include_directories(my_module PRIVATE $&#123;Python_INCLUDE_DIRS&#125;)<br>target_link_libraries(my_module PRIVATE $&#123;Python_LIBRARIES&#125;)<br>  <br>set_target_properties(my_module PROPERTIES PREFIX &quot;&quot;)<br>set_target_properties(my_module PROPERTIES SUFFIX &quot;.so&quot;)<br></code></pre></td></tr></table></figure></p>
-<p>构建完成后会有一个名为<code>my_module.so</code> 的文件</p>
-<p>接下来使用python调用,注意将python文件和<code>my_module.so</code> 放到同一个目录下 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> my_module<br>  <br>result = my_module.add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br><span class="hljs-built_in">print</span>(result)<br></code></pre></td></tr></table></figure></p>
-<h2 id="按照-c-语言的规则来编译和链接">按照 C 语言的规则来编译和链接</h2>
-<p>首先，我们需要编写一个C++文件<code>mylib.cpp</code> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> a + b;<br>&#125;<br></code></pre></td></tr></table></figure></p>
-<p>接下来，编译<code>mylib.cpp</code> 为一个<code>.so</code>文件 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">g++ -shared -o mylib.so -fPIC mylib.cpp<br></code></pre></td></tr></table></figure></p>
-<p>最后使用python加载<code>mylib.so</code> 文件并调用 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> ctypes<br><br><span class="hljs-comment"># 加载共享库文件</span><br>mylib = ctypes.cdll.LoadLibrary(<span class="hljs-string">&#x27;./mylib.so&#x27;</span>)<br><br>result = mylib.add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br><span class="hljs-built_in">print</span>(result)<br></code></pre></td></tr></table></figure></p>
+                <h1 id="npc_gzip笔记">npc_gzip笔记</h1>
+<h2 id="论文笔记">论文笔记</h2>
+<p>npc_gzip 的论文名叫做 "Low-Resource" Text Classification: A Parameter-Free Classification Method with Compressors ,意为不需要参数，使用压缩器的文本分类方法。论文的代码也只有仅仅的十四行，就在部分数据集上取得了超越 <strong>bert</strong> 的效果。</p>
+<p>npc_gzip由一个无损压缩器，一个基于距离的度量函数和K近邻算法组成。</p>
+<p>使用压缩器进行分类的直觉是有两方面 1. 压缩器擅长捕捉规律性；<br />
+2. 来自同一类别的对象比不同类别的对象具有更多的规律性。</p>
+<p>假设<span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_2\)</span> 属于相同的类别，<span class="math inline">\(x_3\)</span> 属于不同的类别，用<span class="math inline">\(C(\cdot)\)</span> 代表压缩器， 我们会发现<span class="math inline">\(C\left(x_1 x_2\right)-C\left(x_1\right)&lt;C\left(x_1 x_3\right)-C\left(x_1\right)\)</span> , <span class="math inline">\(C\left(x_1 x_2\right)\)</span> 代表 x1 和 x2 的串联的压缩长度。换句话说<span class="math inline">\(C\left(x_1 x_2\right)\)</span> 可以解释为我们仍然需要根据 x1 的信息对 x2 进行编码多少字节： <figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs erlang">x1 = Japan&#x27;s Seiko Epson Corp. has developed a <span class="hljs-number">12</span>-gram flying microrobot.<br><br>x2 = The latest tiny flying robot has been unveiled in Japan.<br><br>x3 = Michael Phelps won the gold medal in the <span class="hljs-number">400</span> individual medley.<br></code></pre></td></tr></table></figure></p>
+<p>这种直觉可以形式化为源自 Kolmogorov 复杂度的距离度量。Kolmogorov 复杂度 K(x) 表征了可以生成 x 的最短二进制程序的长度。K(x) 理论上是信息测量的最终下限。</p>
+<p><span class="math display">\[\begin{aligned} E(x, y) &amp; =\max \{K(x \mid y), K(y \mid x)\} \\ &amp; =K(x y)-\min \{K(x), K(y)\}\end{aligned}\]</span></p>
+<p>由于 Kolmogorov 复杂度的可计算性质使得 E(x,y) 不可计算，所以可以使用归一化压缩距离 (NCD)，利用压缩长度 C(x) 来近似 Kolmogorov 复杂度 K(x)。形式上是<span class="math display">\[N C D(x, y)=\frac{C(x y)-\min \{C(x), C(y)\}}{\max \{C(x), C(y)\}}\]</span> 使用压缩长度背后的直觉是压缩器最大压缩的 x 的长度接近 K(x)。一般来说，压缩比越高，C(x)越接近K(x)。</p>
+<p>实验的结果使用 gzip 作为压缩器，这里的<span class="math inline">\(C(x)\)</span> 表示 gzip 压缩后 x 的长度。<span class="math inline">\(C(xy)\)</span> 是 x 和 y 的串联的压缩长度。NCD 提供距离矩阵使用 k-最近邻来执行分类。</p>
+<p>核心代码真的真的就非常简单了 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> gzip2 <br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">for</span> ( x1 , _ ) <span class="hljs-keyword">in</span> test_set :<br>	Cx1 = <span class="hljs-built_in">len</span> ( gzip . compress ( x1 . encode () ) )<br>	distance_from_x1 = []<br>	<span class="hljs-keyword">for</span> ( x2 , _ ) <span class="hljs-keyword">in</span> training_set :<br>		Cx2 = <span class="hljs-built_in">len</span> ( gzip . compress ( x2 . encode () )<br>		x1x2 = <span class="hljs-string">&quot; &quot;</span> . join ([ x1 , x2 ])<br>		Cx1x2 = <span class="hljs-built_in">len</span> ( gzip . compress ( x1x2 . encode () )<br>		ncd = ( Cx1x2 - <span class="hljs-built_in">min</span> ( Cx1 , Cx2 )) / <span class="hljs-built_in">max</span> ( Cx1 , Cx2 )<br>		distance_from_x1 . append ( ncd )<br>		sorted_idx = np . argsort ( np . array ( distance_from_x1 ) )<br>	top_k_class = training_set [ sorted_idx [: k ] , <span class="hljs-number">1</span>]<br>	predict_class = <span class="hljs-built_in">max</span> ( <span class="hljs-built_in">set</span> ( top_k_class ) , key = top_k_class . count )<br></code></pre></td></tr></table></figure></p>
+<p>这种方法是 DNN 的简单、轻量级和通用的替代方案。很简单，因为它不需要任何预处理或训练。它的轻量级在于它不需要参数或 GPU 资源进行分类。由于压缩器是数据类型不可知的，非参数方法不会带来潜在的假设。</p>
+<h2 id="代码实践">代码实践</h2>
+<p>作者在GitHub上开源了他的代码 <a target="_blank" rel="noopener" href="https://github.com/bazingagin/npc_gzip">npc_gzip</a> .我们先把代码拉到本地 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/bazingagin/npc_gzip<br></code></pre></td></tr></table></figure> 接下来安装依赖项，有条件的话创建一个虚拟环境 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ./npc_gzip<br>pip install -r requirements.txt<br></code></pre></td></tr></table></figure></p>
+<p>安装完了之后运行<code>main_text.py</code> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python main_text.py<br></code></pre></td></tr></table></figure></p>
+<p>注意，如果你遇到了这个问题 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">Traceback (most recent <span class="hljs-keyword">call</span> last):<br>  File &quot;main_text.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">2</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    <span class="hljs-keyword">from</span> data <span class="hljs-keyword">import</span> *<br>  File &quot;/home/zjh/npc_gzip/data.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">12</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    <span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset<br>  File &quot;/home/zjh/.conda/envs/npc_gzip/lib/python3.7/site-packages/datasets/__init__.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">43</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    <span class="hljs-keyword">from</span> .arrow_dataset <span class="hljs-keyword">import</span> Dataset<br>  File &quot;/home/zjh/.conda/envs/npc_gzip/lib/python3.7/site-packages/datasets/arrow_dataset.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">59</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    <span class="hljs-keyword">from</span> huggingface_hub <span class="hljs-keyword">import</span> HfApi, HfFolder<br>  File &quot;/home/zjh/.conda/envs/npc_gzip/lib/python3.7/site-packages/huggingface_hub/__init__.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">322</span>, <span class="hljs-keyword">in</span> __getattr__<br>    submod = importlib.import_module(submod_path)<br>  File &quot;/home/zjh/.conda/envs/npc_gzip/lib/python3.7/importlib/__init__.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">127</span>, <span class="hljs-keyword">in</span> import_module<br>    <span class="hljs-keyword">return</span> _bootstrap._gcd_import(<span class="hljs-type">name</span>[<span class="hljs-keyword">level</span>:], package, <span class="hljs-keyword">level</span>)<br>  File &quot;/home/zjh/.conda/envs/npc_gzip/lib/python3.7/site-packages/huggingface_hub/hf_api.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">32</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    <span class="hljs-keyword">import</span> requests<br>  File &quot;/home/zjh/.conda/envs/npc_gzip/lib/python3.7/site-packages/requests/__init__.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">43</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    <span class="hljs-keyword">import</span> urllib3<br>  File &quot;/home/zjh/.conda/envs/npc_gzip/lib/python3.7/site-packages/urllib3/__init__.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">42</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    &quot;urllib3 v2.0 only supports OpenSSL 1.1.1+, currently &quot;<br>ImportError: urllib3 v2<span class="hljs-number">.0</span> <span class="hljs-keyword">only</span> supports OpenSSL <span class="hljs-number">1.1</span><span class="hljs-number">.1</span>+, currently the <span class="hljs-string">&#x27;ssl&#x27;</span> module <span class="hljs-keyword">is</span> compiled <span class="hljs-keyword">with</span> <span class="hljs-string">&#x27;OpenSSL 1.0.2u  20 Dec 2019&#x27;</span>. See: https://github.com/urllib3/urllib3/issues/<span class="hljs-number">2168</span><br></code></pre></td></tr></table></figure></p>
+<p>urllib3 v2.0（您安装的版本）需要 OpenSSL 1.1.1+ 才能正常工作，因为它依赖于 OpenSSL 1.1 的一些新功能.</p>
+<p>安装旧版本即可解决 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install urllib3==1.26.6 <br></code></pre></td></tr></table></figure></p>
 
                 
               </div>
@@ -384,7 +390,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%B8%A9%E5%9D%91/" class="category-chain-item">踩坑</a>
+  <a href="/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/" class="category-chain-item">自然语言处理</a>
   
   
 
@@ -404,8 +410,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>python调用c++函数</div>
-      <div>https://studyinglover.com/2023/07/15/python调用c++函数/</div>
+      <div>npc_gzip笔记</div>
+      <div>https://studyinglover.com/2023/07/18/npc_gzip笔记/</div>
     </div>
     <div class="license-meta">
       
@@ -417,7 +423,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月15日</div>
+          <div>2023年7月18日</div>
         </div>
       
       
@@ -449,18 +455,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/18/npc_gzip%E7%AC%94%E8%AE%B0/" title="npc_gzip笔记">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">npc_gzip笔记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/14/Filesystem%20type%20ntfs3,ntfs%20not%20configured%20in%20kernel/" title="Filesystem type ntfs3,ntfs not configured in kernel">
-                        <span class="hidden-mobile">Filesystem type ntfs3,ntfs not configured in kernel</span>
+                      <a href="/2023/07/15/python%E8%B0%83%E7%94%A8c++%E5%87%BD%E6%95%B0/" title="python调用c++函数">
+                        <span class="hidden-mobile">python调用c++函数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

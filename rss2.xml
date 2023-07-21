@@ -9,8 +9,33 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 18 Jul 2023 14:30:22 GMT</pubDate>
+    <pubDate>Fri, 21 Jul 2023 08:17:03 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Archlinux安装scrcpy加载共享库出错 error while loading shared libraries:libusb-1.0.so.0:wrong ELF class:ELFCLASS32</title>
+      <link>https://studyinglover.com/2023/07/21/Archlinux%E5%AE%89%E8%A3%85scrcpy%E5%8A%A0%E8%BD%BD%E5%85%B1%E4%BA%AB%E5%BA%93%E5%87%BA%E9%94%99/</link>
+      <guid>https://studyinglover.com/2023/07/21/Archlinux%E5%AE%89%E8%A3%85scrcpy%E5%8A%A0%E8%BD%BD%E5%85%B1%E4%BA%AB%E5%BA%93%E5%87%BA%E9%94%99/</guid>
+      <pubDate>Fri, 21 Jul 2023 16:13:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;archlinux安装scrcpy加载共享库出错&quot;&gt;Archlinux安装scrcpy加载共享库出错&lt;/h1&gt;
+&lt;p&gt;在安装scrcpy时通过&lt;code&gt;sudo pacman -S scrcpy&lt;/code&gt;顺利安装,但是运行报错 &lt;figure class=&quot;</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="archlinux安装scrcpy加载共享库出错">Archlinux安装scrcpy加载共享库出错</h1><p>在安装scrcpy时通过<code>sudo pacman -S scrcpy</code>顺利安装,但是运行报错 <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vbnet"><span class="hljs-symbol">scrcpy:</span> <span class="hljs-keyword">error</span> <span class="hljs-keyword">while</span> loading <span class="hljs-keyword">shared</span> libraries: libusb-<span class="hljs-number">1.0</span>.so.<span class="hljs-number">0</span>: wrong ELF <span class="hljs-keyword">class</span>: ELFCLASS32<br></code></pre></td></tr></table></figure></p><p>这是在64位系统上运行32位库出错，我发现了这个10年的issue https://github.com/Rouji/Ergodone-Setup/issues/1 也就是说我们只需要运行<code>sudo pacman -S libusb-compat</code></p><p>但是运行之后出现了新的问题 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">libusb</span>-compat: 文件系统中已存在 /usr/lib/libusb-<span class="hljs-number">0</span>.<span class="hljs-number">1</span>.so.<span class="hljs-number">4</span> <br><span class="hljs-attribute">libusb</span>-compat: 文件系统中已存在 /usr/lib/libusb-<span class="hljs-number">0</span>.<span class="hljs-number">1</span>.so.<span class="hljs-number">4</span>.<span class="hljs-number">4</span>.<span class="hljs-number">4</span> <br><span class="hljs-attribute">libusb</span>-compat: 文件系统中已存在 /usr/lib/libusb-<span class="hljs-number">0</span>.<span class="hljs-number">1</span>.so.<span class="hljs-number">4</span>.<span class="hljs-number">4</span>.<span class="hljs-number">4</span> <br></code></pre></td></tr></table></figure></p><p>一般来说已经有的库就不要动它了，运行<code>sudo pacman -Syu</code> 没有解决，会报同样的错误，说明libusb这个文件不是包管理器提供的，那就删掉现有的库然后让pacman帮我们安装</p><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> rm -f /usr/lib/libusb-<span class="hljs-number">0</span>.<span class="hljs-number">1</span>.so.<span class="hljs-number">4</span> <br><span class="hljs-attribute">sudo</span> rm -f /usr/lib/libusb-<span class="hljs-number">0</span>.<span class="hljs-number">1</span>.so.<span class="hljs-number">4</span>.<span class="hljs-number">4</span>.<span class="hljs-number">4</span> <br><span class="hljs-attribute">sudo</span> rm -f /usr/lib/libusb-<span class="hljs-number">0</span>.<span class="hljs-number">1</span>.so.<span class="hljs-number">4</span>.<span class="hljs-number">4</span>.<span class="hljs-number">4</span> <br><span class="hljs-attribute">sudo</span> pacman -S libusb-compat<br></code></pre></td></tr></table></figure><p>插上手机，运行<code>scrcpy</code>,成功运行</p>]]></content:encoded>
+      
+      
+      <category domain="https://studyinglover.com/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/">自然语言处理</category>
+      
+      
+      
+      <comments>https://studyinglover.com/2023/07/21/Archlinux%E5%AE%89%E8%A3%85scrcpy%E5%8A%A0%E8%BD%BD%E5%85%B1%E4%BA%AB%E5%BA%93%E5%87%BA%E9%94%99/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>npc_gzip笔记</title>
@@ -495,32 +520,6 @@
       
       
       <comments>https://studyinglover.com/2023/04/27/ControlNet%E8%AE%AD%E7%BB%83%E8%87%AA%E5%B7%B1%E6%95%B0%E6%8D%AE%E9%9B%86/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>I3D笔记</title>
-      <link>https://studyinglover.com/2023/04/23/I3D%E7%AC%94%E8%AE%B0/</link>
-      <guid>https://studyinglover.com/2023/04/23/I3D%E7%AC%94%E8%AE%B0/</guid>
-      <pubDate>Sun, 23 Apr 2023 22:14:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;i3d笔记&quot;&gt;I3D笔记&lt;/h1&gt;
-&lt;p&gt;I3D是一个视频理解模型，采用双流网络的架构，他的核心贡献是提出了如何对2d网络进行膨胀操作，同时提出了一个新的数据集 Kinetics&lt;/p&gt;
-&lt;h2 id=&quot;工作回顾&quot;&gt;工作回顾&lt;/h2&gt;
-&lt;figure&gt;
-&lt;img </description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="i3d笔记">I3D笔记</h1><p>I3D是一个视频理解模型，采用双流网络的架构，他的核心贡献是提出了如何对2d网络进行膨胀操作，同时提出了一个新的数据集 Kinetics</p><h2 id="工作回顾">工作回顾</h2><figure><img src="https://proxy.thisis.plus/20230423215707.png" alt="" /><figcaption>image.png</figcaption></figure><p>在以前，视频理解有三种做法 1. LSTM 2. 3D ConvNets 3. Two-Stream Networks（双流网络）</p><h2 id="two-stream-inflated-3d-convnets">Two-Stream Inflated 3D ConvNets</h2><p>这篇文章提出的模型被称为 Two-Stream Inflated 3D ConvNets</p><p>Inflate 是模型的核心操作，含义是将一个2d模型"膨胀"成3d模型，做法很简单，就是把一个<span class="math inline">\(N*N\)</span> 的层变成<span class="math inline">\(N*N*N\)</span> ,同时也将参数复制了<span class="math inline">\(N\)</span> 遍。</p><h2 id="kinetics">Kinetics</h2><p>在视频领域，在一个足够大的数据集上训练一个动作分类网络，当应用于不同的时间任务或数据集时，是否会有类似的性能提升是一个悬而未决的问题。构建视频数据集的挑战意味着大多数流行的动作识别基准。</p><p>Kinetics 有400个人体动作类，每个类有400多个例子，每个都来自一个独特的 YouTube 视频</p><h3 id="整体架构">整体架构</h3><p>作者选择了 Inception-v1 构建整个神经网络(作者当时不适用Inception-v1是因为当时认为Inception在视频理解更合适，但架不住ResNet 太棒了，作者在18年也换成了ResNet) <img src="https://proxy.thisis.plus/20230423220521.png" alt="image.png" /></p><p>图中的Inc. 就是经典的Inception-v1 块了，只是做了Inflating 操作</p>]]></content:encoded>
-      
-      
-      
-      
-      <comments>https://studyinglover.com/2023/04/23/I3D%E7%AC%94%E8%AE%B0/#disqus_thread</comments>
       
     </item>
     

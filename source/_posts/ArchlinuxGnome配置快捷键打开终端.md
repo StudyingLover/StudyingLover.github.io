@@ -4,6 +4,8 @@ banner_img: https://proxy.thisis.plus/202306281933716.png
 date: 2023-6-28 19:30:00
 categories:
 - 踩坑
+tag:
+- ArchLinux
 ---
 网上大量教程说命令打开终端的命令是`gnome-terminal` ， 然而
 

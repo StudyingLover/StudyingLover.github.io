@@ -3,7 +3,9 @@ title: Archlinux安装scrcpy加载共享库出错 error while loading shared lib
 banner_img: https://cdn.studyinglover.com/pic/2023/07/ab2b83b00e35b75a8efc48b98125ee5c.jpeg
 date: 2023-7-21 16:13:00
 categories:
-- 自然语言处理
+- 踩坑
+tag:
+- ArchLinux
 ---
 # Archlinux安装scrcpy加载共享库出错
 在安装scrcpy时通过`sudo pacman -S scrcpy`顺利安装,但是运行报错

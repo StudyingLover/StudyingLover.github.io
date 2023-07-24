@@ -3,7 +3,7 @@ title: 通过colab体验ControlNet
 banner_img: https://i.imgtg.com/2023/01/29/S2miD.jpg
 date: 2023-3-20 15:50:00
 tags:
-- 图像生成
+- 文字生成图片
 ---
 # 通过colab体验ControlNet
 ## 跑通流程

@@ -3,7 +3,7 @@ title: clip_interrogator教程
 banner_img: https://drive.studyinglover.com/api/raw/?path=/photos/blog/background/1679397024795.jpeg
 date: 2023-4-22 22:24:00
 tags:
-- 图像生成
+- 文字生成图片
 ---
 # clip_interrogator教程
 文字生成图片是近年来多模态和大模型研究的热门方向，openai提出的CLIP提供了一个方法建立起了图片和文字的联系，但是只能做到给定一张图片选择给定文本语义最相近的那一个，实际项目开发中我们总是需要从一张图片获取描述，感谢社区的活力，clip-interrogator应运而生。

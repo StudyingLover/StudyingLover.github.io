@@ -5,7 +5,7 @@ date: 2023-5-29 15:36:00
 categories:
 - 笔记
 tags:
-- 图像生成
+- 文字生成图片
 ---
 
 Stable Diffusion 是一个图像生成方法，由 _[Stability AI](https://stability.ai/) and [Runway](https://runwayml.com/)_ 在LDM[^1] 的基础上提出。在GitHub有很多他的实现和应用[^2][^3][^4] ,其中[^2] 是最早的实现版本，[^3] 是V2版本，由 Stability AI 完成。

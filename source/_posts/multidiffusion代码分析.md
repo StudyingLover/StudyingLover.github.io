@@ -3,7 +3,7 @@ title: Multidiffusion代码分析
 banner_img: https://proxy.thisis.plus/202305091237913.png
 date: 2023-5-9 12:35:00
 tags:
-- 图像生成
+- 文字生成图片
 ---
 # Multidiffusion代码分析
 

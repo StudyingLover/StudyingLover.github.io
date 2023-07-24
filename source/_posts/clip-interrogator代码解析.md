@@ -3,7 +3,7 @@ title: clip-interrogator代码解析
 banner_img: https://proxy.thisis.plus/202306232259566.png
 date: 2023-6-23 22:59:40
 tag:
-- 图像生成
+- 文字生成图片
 ---
 # clip-interrogator代码解析
 clip-interrogator 的的主要代码在仓库的`./clip-interrogator`  文件夹下

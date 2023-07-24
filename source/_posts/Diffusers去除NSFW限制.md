@@ -3,9 +3,9 @@ title: Diffusers去除NSFW限制
 banner_img: https://drive.studyinglover.com/api/raw/?path=/photos/blog/background/1679397024795.jpeg
 date: 2023-6-11 0:02:00
 tags:
-- 图像生成
+- 文字生成图片
 ---
-众所周知，~~涩涩是图像生成技术发展的重大推动力~~ . Huggingface的diffusers封装了大量的算法用于生成图片。但是，很不幸的，diffusers会检测生成的图片是否存在NSFW(**not safe for work**)的内容，~~这就给我们涩涩带来了不必要的麻烦~~。所以我将介绍如何去除限制 
+众所周知，~~涩涩是文字生成图片技术发展的重大推动力~~ . Huggingface的diffusers封装了大量的算法用于生成图片。但是，很不幸的，diffusers会检测生成的图片是否存在NSFW(**not safe for work**)的内容，~~这就给我们涩涩带来了不必要的麻烦~~。所以我将介绍如何去除限制 
 
 该方法来自网友，[原链接](https://www.reddit.com/r/StableDiffusion/comments/wxba44/disable_hugging_face_nsfw_filter_in_three_step/) 
 

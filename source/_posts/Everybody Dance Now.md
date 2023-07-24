@@ -5,7 +5,7 @@ date: 2023-03-11 16:38:00
 categories:
 - 笔记
 tags:
-- 图像生成
+- 文字生成图片
 ---
 # Everybody Dance Now
 为了完成给定一个人跳舞的视频到另一个人的目标，文章作者将这个过程分成三部：**pose detection, global pose normalization, and mapping from normalized pose stick figures to the target subject**

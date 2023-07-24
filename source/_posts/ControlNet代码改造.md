@@ -3,7 +3,7 @@ title: ControlNet代码改造计划
 banner_img: https://drive.studyinglover.com/api/raw/?path=/photos/blog/background/1679397024795.jpeg
 date: 2023-4-21 11:30:00
 tags:
-- 图像生成
+- 文字生成图片
 ---
 虽然现在webui已经支持了ControlNet，但是如果我们需要单独抽出来ControlNet做一些项目就需要对ControlNet进行改造。同时我也想加入一些开源的工具让ControlNet更加有趣，例如[clip_interrogator](https://github.com/pharmapsychotic/clip-interrogator).
 

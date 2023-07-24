@@ -5,7 +5,7 @@ date: 2023-3-20 15:50:00
 categories:
 - 笔记
 tags:
-- 图像生成
+- 文字生成图片
 ---
 # ControlNet笔记
 

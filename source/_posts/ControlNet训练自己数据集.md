@@ -3,7 +3,7 @@ title: ControlNet训练自己数据集
 banner_img: https://proxy.thisis.plus/202304271933740.png
 date: 2023-4-27 19:36:00
 tags:
-- 图像生成
+- 文字生成图片
 ---
 # ControlNet训练自己数据集
 ## 从官方仓库训练

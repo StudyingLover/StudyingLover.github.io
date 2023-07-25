@@ -16,24 +16,24 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="ThreeJS实现屏幕坐标转3d坐标 本文使用chatGPT辅助完成 在虚拟世界中，3D坐标与屏幕坐标之间的转换是一个重要的问题。使用ThreeJS开发3D场景时，经常需要将屏幕坐标转换为3D坐标。在本文中，我们将介绍如何使用ThreeJS实现屏幕坐标转3D坐标的两种方法 根据相机的投影矩阵和射线拾取 在我的笔记摄像机模型中详细推导了相机的投影矩阵。 在ThreeJS中，相机的投影矩阵是一个4x4">
+    <meta name="description" content="快速上手llama2.c llama2.c一个完整的解决方案，可以使用PyTorch从头开始训练Llama 2 LLM（Lightweight Language Model）模型，并将权重导出为二进制文件，然后加载到一个简单的500行C文件（run.c）中进行推理。另外，你也可以加载、微调和推理Meta的Llama 2模型（但这部分仍在积极开发中）。因此，这个仓库提供了一个&quot;全栈&quot;的训练和推理方案">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ThreeJS实现屏幕坐标转3d坐标">
-<meta property="og:url" content="https://studyinglover.com/2023/02/04/ThreeJS%E5%AE%9E%E7%8E%B0%E5%B1%8F%E5%B9%95%E5%9D%90%E6%A0%87%E8%BD%AC3d%E5%9D%90%E6%A0%87/index.html">
+<meta property="og:title" content="快速上手llama2.c">
+<meta property="og:url" content="https://studyinglover.com/2023/07/25/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bllama2.c/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="ThreeJS实现屏幕坐标转3d坐标 本文使用chatGPT辅助完成 在虚拟世界中，3D坐标与屏幕坐标之间的转换是一个重要的问题。使用ThreeJS开发3D场景时，经常需要将屏幕坐标转换为3D坐标。在本文中，我们将介绍如何使用ThreeJS实现屏幕坐标转3D坐标的两种方法 根据相机的投影矩阵和射线拾取 在我的笔记摄像机模型中详细推导了相机的投影矩阵。 在ThreeJS中，相机的投影矩阵是一个4x4">
+<meta property="og:description" content="快速上手llama2.c llama2.c一个完整的解决方案，可以使用PyTorch从头开始训练Llama 2 LLM（Lightweight Language Model）模型，并将权重导出为二进制文件，然后加载到一个简单的500行C文件（run.c）中进行推理。另外，你也可以加载、微调和推理Meta的Llama 2模型（但这部分仍在积极开发中）。因此，这个仓库提供了一个&quot;全栈&quot;的训练和推理方案">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-04T20:30:00.000Z">
+<meta property="article:published_time" content="2023-07-25T16:19:00.000Z">
 <meta property="article:modified_time" content="2023-07-25T08:23:20.302Z">
 <meta property="article:author" content="StudyingLover">
-<meta property="article:tag" content="ThreeJS">
+<meta property="article:tag" content="踩坑">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> 
   
-  <title>ThreeJS实现屏幕坐标转3d坐标 - plus studio</title>
+  <title>快速上手llama2.c - plus studio</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -266,13 +266,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://drive.studyinglover.com/api/raw/?path=/photos/blog/background/e4127f10a90d5f6fd4f77b0225a19878.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('https://github.com/karpathy/llama2.c/blob/master/assets/llama_cute.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="ThreeJS实现屏幕坐标转3d坐标"></span>
+            <span id="subtitle" data-typed-text="快速上手llama2.c"></span>
           
         </div>
 
@@ -288,8 +288,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-04 20:30" pubdate>
-          2023年2月4日 晚上
+        <time datetime="2023-07-25 16:19" pubdate>
+          2023年7月25日 下午
         </time>
       </span>
     
@@ -300,7 +300,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.1k 字
+          1.6k 字
         
       </span>
     
@@ -311,7 +311,7 @@
         
         
         
-          26 分钟
+          13 分钟
         
       </span>
     
@@ -349,22 +349,19 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ThreeJS实现屏幕坐标转3d坐标</h1>
+            <h1 style="display: none">快速上手llama2.c</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="threejs实现屏幕坐标转3d坐标">ThreeJS实现屏幕坐标转3d坐标</h1>
-<p>本文使用chatGPT辅助完成</p>
-<p>在虚拟世界中，3D坐标与屏幕坐标之间的转换是一个重要的问题。使用ThreeJS开发3D场景时，经常需要将屏幕坐标转换为3D坐标。在本文中，我们将介绍如何使用ThreeJS实现屏幕坐标转3D坐标的两种方法</p>
-<h2 id="根据相机的投影矩阵和射线拾取">根据相机的投影矩阵和射线拾取</h2>
-<p>在我的笔记<a href="https://studyinglover.com/2022/12/29/%E6%91%84%E5%83%8F%E6%9C%BA%E6%A8%A1%E5%9E%8B/">摄像机模型</a>中详细推导了相机的投影矩阵。</p>
-<p>在ThreeJS中，相机的投影矩阵是一个4x4的矩阵，它将3D坐标转换为屏幕坐标。我们可以使用这个矩阵将屏幕坐标转换为3D坐标。 官方为我们提供了一个接口<code>vector.unproject(camera)</code>,它可以将屏幕坐标转换为3D坐标。但是这个接口只能将屏幕坐标转换为相机坐标系下的3D坐标，如果我们需要将屏幕坐标转换为世界坐标系下的3D坐标，我们需要使用<code>vector.applyMatrix4(camera.matrixWorldInverse)</code>将相机坐标系下的3D坐标转换为世界坐标系下的3D坐标。(这里代码本来不是这么写的，但是copilot给了我好多提示，我就照着他的提示改了改，如果你发现代码有问题，问问chatGPT吧)</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">screenToWorld</span>(<span class="hljs-params">screenX, screenY, camera，hyper_z</span>) &#123;<br>    <span class="hljs-keyword">const</span> vector = <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">Vector3</span>();<br>    vector.<span class="hljs-title function_">set</span>(<br>        (screenX / <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerWidth</span>) * <span class="hljs-number">2</span> - <span class="hljs-number">1</span>,<br>        -(screenY / <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerHeight</span>) * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>,<br>        hyper_z<br>    );<br>    vector.<span class="hljs-title function_">unproject</span>(camera);<br>    vector.<span class="hljs-title function_">applyMatrix4</span>(camera.<span class="hljs-property">matrixWorldInverse</span>);<br>    <span class="hljs-keyword">return</span> vector;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>这里的<code>hyper_z</code>网上很多教程认为是写0.5,但是我实际试了一下，发现效果很差，就把他改成了一个超参数。后来在一位不能透露姓名的大佬的帮助下，得知这个参数的值应该写成1。我试了下，勉强可以得到预期的效果</p>
-<h2 id="通过深度图采样shader改深度缓冲">通过深度图采样，shader改深度缓冲</h2>
-<p>这种方法是通过深度图采样，shader改深度缓冲，然后再通过深度缓冲得到3D坐标。这种方法的优点是可以得到更精确的3D坐标，但是缺点是需要使用shader，而且需要修改深度缓冲，可能会影响性能。</p>
-<p>感谢chatGPT，我只需要把我需要的内容告诉他，他就会给我写一个完整的代码。 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">convert2Dto3D</span>(<span class="hljs-params">mouseX, mouseY, camera, width, height, scene</span>) &#123;<br>        <span class="hljs-comment">// 构建纹理</span><br>        <span class="hljs-keyword">var</span> depthTarget = <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">WebGLRenderTarget</span>(width, height);<br>        depthTarget.<span class="hljs-property">texture</span>.<span class="hljs-property">minFilter</span> = <span class="hljs-variable constant_">THREE</span>.<span class="hljs-property">LinearFilter</span>;<br><br>        <span class="hljs-comment">// 渲染深度图</span><br>        renderer.<span class="hljs-title function_">render</span>(scene, camera, depthTarget);<br><br>        <span class="hljs-comment">// 创建着色器</span><br>        <span class="hljs-keyword">var</span> material = <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">ShaderMaterial</span>(&#123;<br>            <span class="hljs-attr">uniforms</span>: &#123;<br>                <span class="hljs-attr">mouse</span>: &#123; <span class="hljs-attr">value</span>: <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">Vector2</span>(mouseX, mouseY) &#125;,<br>                <span class="hljs-attr">depthMap</span>: &#123; <span class="hljs-attr">value</span>: depthTarget.<span class="hljs-property">texture</span> &#125;,<br>                <span class="hljs-attr">projectionMatrix</span>: &#123; <span class="hljs-attr">value</span>: camera.<span class="hljs-property">projectionMatrix</span> &#125;,<br>                <span class="hljs-attr">viewMatrix</span>: &#123; <span class="hljs-attr">value</span>: camera.<span class="hljs-property">matrixWorldInverse</span> &#125;<br>            &#125;,<br>            <span class="hljs-attr">vertexShader</span>: <span class="hljs-string">`</span><br><span class="hljs-string">                uniform vec2 mouse;</span><br><span class="hljs-string">                uniform mat4 projectionMatrix;</span><br><span class="hljs-string">                uniform mat4 viewMatrix;</span><br><span class="hljs-string">                uniform sampler2D depthMap;</span><br><span class="hljs-string">                varying vec4 pos;</span><br><span class="hljs-string">                void main() &#123;</span><br><span class="hljs-string">                    pos = vec4(position, 1.0);</span><br><span class="hljs-string">                    gl_Position = projectionMatrix * viewMatrix * pos;</span><br><span class="hljs-string">                &#125;</span><br><span class="hljs-string">            `</span>,<br>            <span class="hljs-attr">fragmentShader</span>: <span class="hljs-string">`</span><br><span class="hljs-string">                uniform vec2 mouse;</span><br><span class="hljs-string">                uniform sampler2D depthMap;</span><br><span class="hljs-string">                varying vec4 pos;</span><br><span class="hljs-string">                void main() &#123;</span><br><span class="hljs-string">                    float depth = texture2D(depthMap, mouse).r;</span><br><span class="hljs-string">                    vec4 viewPos = vec4(mouse * 2.0 - 1.0, depth * 2.0 - 1.0, 1.0);</span><br><span class="hljs-string">                    vec4 worldPos = viewMatrix * viewPos;</span><br><span class="hljs-string">                    worldPos /= worldPos.w;</span><br><span class="hljs-string">                    gl_FragColor = vec4(worldPos.xyz, 1.0);</span><br><span class="hljs-string">                &#125;</span><br><span class="hljs-string">            `</span><br>        &#125;);<br><br>        <span class="hljs-comment">// 创建一个平面作为渲染目标</span><br>        <span class="hljs-keyword">var</span> plane = <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">PlaneBufferGeometry</span>(width, height);<br>        <span class="hljs-keyword">var</span> mesh = <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">Mesh</span>(plane, material);<br>        scene.<span class="hljs-title function_">add</span>(mesh);<br><br>        <span class="hljs-comment">// 渲染一次着色器并获取结果</span><br>        renderer.<span class="hljs-title function_">render</span>(scene, camera);<br>        <span class="hljs-keyword">var</span> pixelBuffer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Uint8Array</span>(<span class="hljs-number">4</span>);<br>        renderer.<span class="hljs-title function_">readRenderTargetPixels</span>(depthTarget, mouseX, height - mouseY, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, pixelBuffer);<br>        <span class="hljs-keyword">var</span> worldPos = <span class="hljs-keyword">new</span> <span class="hljs-variable constant_">THREE</span>.<span class="hljs-title class_">Vector3</span>(<br>            (pixelBuffer[<span class="hljs-number">0</span>] / <span class="hljs-number">255</span>) * <span class="hljs-number">2</span> - <span class="hljs-number">1</span>,<br>            (pixelBuffer[<span class="hljs-number">1</span>] / <span class="hljs-number">255</span>) * <span class="hljs-number">2</span> - <span class="hljs-number">1</span>,<br>            (pixelBuffer[<span class="hljs-number">2</span>] / <span class="hljs-number">255</span>) * <span class="hljs-number">2</span> - <span class="hljs-number">1</span><br>        );<br>        worldPos.<span class="hljs-title function_">applyMatrix4</span>(camera.<span class="hljs-property">matrixWorldInverse</span>);<br>        scene.<span class="hljs-title function_">remove</span>(mesh);<br>        <span class="hljs-keyword">return</span> worldPos;<br>    &#125;,<br><br>    <span class="hljs-comment">//获取触摸点的坐标并转换为ThreeJS中的坐标</span><br>    <span class="hljs-attr">touch_crash_detect</span>: <span class="hljs-keyword">function</span> <span class="hljs-title function_">touch_crash_detect</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;touchmove&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> &#123;<br>            <span class="hljs-comment">// screen3D_to_3DCoord(event.touches[0].clientX, event.touches[0].clientY,camera, window.innerWidth, window.innerHeight);</span><br>            <span class="hljs-keyword">let</span> pos = space_pos_convert.<span class="hljs-title function_">get3DPosition</span>(event.<span class="hljs-property">touches</span>[<span class="hljs-number">0</span>].<span class="hljs-property">clientX</span>, event.<span class="hljs-property">touches</span>[<span class="hljs-number">0</span>].<span class="hljs-property">clientY</span>, camera, scene, <span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">if</span> (pos.<span class="hljs-property">y</span> != <span class="hljs-number">0</span>) &#123;<br>                pos.<span class="hljs-property">y</span> = <span class="hljs-number">0</span>;<br>            &#125;<br>            <span class="hljs-keyword">return</span> pos;<br>            <span class="hljs-comment">// playerMesh.position.set(pos.x, pos.y, pos.z);</span><br>        &#125;);<br>    &#125;<br></code></pre></td></tr></table></figure></p>
+                <h1 id="快速上手llama2.c">快速上手llama2.c</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/karpathy/llama2.c.git">llama2.c</a>一个完整的解决方案，可以使用PyTorch从头开始训练Llama 2 LLM（Lightweight Language Model）模型，并将权重导出为二进制文件，然后加载到一个简单的500行C文件（run.c）中进行推理。另外，你也可以加载、微调和推理Meta的Llama 2模型（但这部分仍在积极开发中）。因此，这个仓库提供了一个"全栈"的训练和推理方案，专注于极简和简洁性。你可能会认为只有拥有数十亿参数的LLM才能实现有用的功能，但事实上，如果领域足够狭窄，非常小的LLM也可以表现出惊人的性能。建议参考TinyStories论文以获得灵感。</p>
+<p>需要注意的是，这个项目最初只是一个有趣的周末项目：作者在之前的nanoGPT基础上进行了调整，实现了Llama-2架构而不是GPT-2，并且主要的工作是编写了C推理引擎（run.c）。因此，这个项目还比较年轻，并且在快速发展中。特别感谢llama.cpp项目为此项目提供了灵感。作者希望保持超级简洁，所以选择了硬编码Llama 2架构，采用fp32精度，并仅使用纯C编写一个没有依赖项的推理文件。</p>
+<p>首先clone整个仓库并编译 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/karpathy/llama2.c.git<br><span class="hljs-built_in">cd</span> llama.c<br>gcc -O3 -o run run.c -lm<br></code></pre></td></tr></table></figure></p>
+<p>接下来下载模型 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://karpathy.ai/llama2c/model.bin -P out<br></code></pre></td></tr></table></figure></p>
+<p>或者下载更大的一个模型 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://karpathy.ai/llama2c/model44m.bin -P out44m<br></code></pre></td></tr></table></figure></p>
+<p>接下来进行推理 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./run out/model.bin<br></code></pre></td></tr></table></figure></p>
+<p>我们将会看到这样一段输出就代表运行成功 <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">&lt;s&gt;<br> One day, <span class="hljs-keyword">a</span> little otter named Ollie went <span class="hljs-built_in">to</span> play <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> river. Ollie was very compassionate. He loved <span class="hljs-built_in">to</span> help his friends <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> town.<br>While playing, Ollie saw <span class="hljs-keyword">a</span> big fish. The fish was stuck <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> mud. <span class="hljs-string">&quot;Help me, please!&quot;</span> said <span class="hljs-keyword">the</span> fish. Ollie wanted <span class="hljs-built_in">to</span> help <span class="hljs-keyword">the</span> fish. He swam away, looking <span class="hljs-keyword">for</span> something <span class="hljs-built_in">to</span> break <span class="hljs-keyword">the</span> mud.<br>Ollie found <span class="hljs-keyword">a</span> small stick. He used <span class="hljs-keyword">the</span> stick <span class="hljs-built_in">to</span> break <span class="hljs-keyword">the</span> mud. The fish was free! <span class="hljs-string">&quot;Thank you, Ollie!&quot;</span> <span class="hljs-keyword">the</span> fish said. The fish was happy <span class="hljs-keyword">and</span> swam away.<br>Ollie felt good <span class="hljs-keyword">for</span> helping <span class="hljs-keyword">the</span> fish. He went back <span class="hljs-built_in">to</span> play <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> river. Ollie knew that helping others made him feel good. And <span class="hljs-built_in">from</span> that day, Ollie was always compassionate <span class="hljs-built_in">to</span> everyone.<br>&lt;s&gt;<br> Tom was <span class="hljs-keyword">a</span> big boy who liked <span class="hljs-built_in">to</span> help his mom. He saw his mom doing laundry <span class="hljs-keyword">and</span> asked <span class="hljs-keyword">if</span> he could join. His mom said yes, but he had <span class="hljs-built_in">to</span> be careful <span class="hljs-keyword">with</span> <span class="hljs-keyword">the</span> iron. The iron was hot <span class="hljs-keyword">and</span> had <span class="hljs-keyword">a</span> button <span class="hljs-keyword">on</span> <span class="hljs-title">it</span>.<br>Tom took <span class="hljs-keyword">the</span> iron <span class="hljs-keyword">and</span> ran <span class="hljs-built_in">to</span> <span class="hljs-keyword">the</span> house. He wanted <span class="hljs-built_in">to</span> iron his shirt<br>achieved tok/s: <span class="hljs-number">178.148921</span><br></code></pre></td></tr></table></figure></p>
 
                 
               </div>
@@ -373,32 +370,11 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%B7%A5%E5%85%B7/" class="category-chain-item">工具</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/ThreeJS/">#ThreeJS</a>
+        <a href="/tags/%E8%B8%A9%E5%9D%91/">#踩坑</a>
       
     </div>
   
@@ -410,8 +386,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>ThreeJS实现屏幕坐标转3d坐标</div>
-      <div>https://studyinglover.com/2023/02/04/ThreeJS实现屏幕坐标转3d坐标/</div>
+      <div>快速上手llama2.c</div>
+      <div>https://studyinglover.com/2023/07/25/快速上手llama2.c/</div>
     </div>
     <div class="license-meta">
       
@@ -423,7 +399,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年2月4日</div>
+          <div>2023年7月25日</div>
         </div>
       
       
@@ -455,18 +431,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/04/copliot%E6%89%8D%E6%98%AF%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91%E7%A5%9E%E5%99%A8/" title="copliot才是代码开发神器">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">copliot才是代码开发神器</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/27/%E5%9C%A8fluid%E4%B8%BB%E9%A2%98%E4%B8%AD%E5%8A%A0%E5%85%A5Google%E5%B9%BF%E5%91%8A/" title="在fluid主题中加入Google广告">
-                        <span class="hidden-mobile">在fluid主题中加入Google广告</span>
+                      <a href="/2023/07/24/AnyDoor%E7%AC%94%E8%AE%B0/" title="AnyDoor笔记">
+                        <span class="hidden-mobile">AnyDoor笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

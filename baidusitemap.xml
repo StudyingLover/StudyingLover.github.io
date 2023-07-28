@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://studyinglover.com/2023/06/18/RoboMaster%E5%BC%80%E6%BA%90%E4%BB%93%E5%BA%93%E6%B1%87%E6%80%BB(%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0)/</loc>
-    <lastmod>2023-07-28</lastmod>
-  </url>
-  <url>
     <loc>https://studyinglover.com/2023/04/07/Segment%20Anything%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2023-07-28</lastmod>
   </url>
@@ -42,6 +38,10 @@
   </url>
   <url>
     <loc>https://studyinglover.com/2023/01/20/jsdelivr%E5%8A%A0%E9%80%9FGithub%E6%96%87%E4%BB%B6/</loc>
+    <lastmod>2023-07-28</lastmod>
+  </url>
+  <url>
+    <loc>https://studyinglover.com/2023/07/28/llama-cpp-python%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</loc>
     <lastmod>2023-07-28</lastmod>
   </url>
   <url>
@@ -182,6 +182,10 @@
   </url>
   <url>
     <loc>https://studyinglover.com/2023/07/09/PicGo%E9%85%8D%E7%BD%AECloudflareR2%E5%9B%BE%E7%89%87%E5%82%A8%E5%AD%98/</loc>
+    <lastmod>2023-07-28</lastmod>
+  </url>
+  <url>
+    <loc>https://studyinglover.com/2023/06/18/RoboMaster%E5%BC%80%E6%BA%90%E4%BB%93%E5%BA%93%E6%B1%87%E6%80%BB(%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0)/</loc>
     <lastmod>2023-07-28</lastmod>
   </url>
 </urlset> 

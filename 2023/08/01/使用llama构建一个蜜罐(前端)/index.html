@@ -16,23 +16,27 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="python调用c++函数 当我们需要在Python中使用C++编写的函数时，可以将C++代码编译成共享库文件（.so文件），然后来调用这些函数。这里介绍两种方法。 使用python的api 首先要安装安装python-dev 和cmake 在Archlinux下yay python-dev ，yay cmake即可。其他平台需要自行搜索 首先创建一个C++文件 main.cpp 12345678">
+    <meta name="description" content="使用llama构建一个蜜罐(前端)  在使用llama构建一个蜜罐(后端) 中我们通过llama和flask构建了一个蜜罐的后端，通过将shell命令作为字段的一部分，让llama假装执行命令来防止蜜罐被攻破。那有了后端我们还需要一个前端命令行来让用户登陆并执行命令。 完整项目开源在了GitHub 接下来，让我们来实现一个模拟ssh服务器，或者说实现一个ssh mock 然后执行命令的时候不让他真">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python调用c++函数">
-<meta property="og:url" content="https://studyinglover.com/2023/07/15/python%E8%B0%83%E7%94%A8c++%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:title" content="使用llama构建一个蜜罐(前端)">
+<meta property="og:url" content="https://studyinglover.com/2023/08/01/%E4%BD%BF%E7%94%A8llama%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%9C%9C%E7%BD%90(%E5%89%8D%E7%AB%AF)/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="python调用c++函数 当我们需要在Python中使用C++编写的函数时，可以将C++代码编译成共享库文件（.so文件），然后来调用这些函数。这里介绍两种方法。 使用python的api 首先要安装安装python-dev 和cmake 在Archlinux下yay python-dev ，yay cmake即可。其他平台需要自行搜索 首先创建一个C++文件 main.cpp 12345678">
+<meta property="og:description" content="使用llama构建一个蜜罐(前端)  在使用llama构建一个蜜罐(后端) 中我们通过llama和flask构建了一个蜜罐的后端，通过将shell命令作为字段的一部分，让llama假装执行命令来防止蜜罐被攻破。那有了后端我们还需要一个前端命令行来让用户登陆并执行命令。 完整项目开源在了GitHub 接下来，让我们来实现一个模拟ssh服务器，或者说实现一个ssh mock 然后执行命令的时候不让他真">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-15T09:30:00.000Z">
+<meta property="og:image" content="https://cdn.studyinglover.com/pic/2023/07/e9a49d4a404ed9bc4b0f119249194e3d.png">
+<meta property="og:image" content="https://cdn.studyinglover.com/pic/2023/07/dd31f63365b8a8657b1459f7fe883a36.png">
+<meta property="article:published_time" content="2023-08-01T00:12:00.000Z">
 <meta property="article:modified_time" content="2023-07-31T16:15:26.608Z">
 <meta property="article:author" content="StudyingLover">
+<meta property="article:tag" content="网络安全">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.studyinglover.com/pic/2023/07/e9a49d4a404ed9bc4b0f119249194e3d.png">
   
   
   
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> 
   
-  <title>python调用c++函数 - plus studio</title>
+  <title>使用llama构建一个蜜罐(前端) - plus studio</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -265,13 +269,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://proxy.thisis.plus/202306281933716.png') no-repeat center center; background-size: cover;">
+     style="background: url('https://cdn.studyinglover.com/pic/2023/07/e9a49d4a404ed9bc4b0f119249194e3d.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="python调用c++函数"></span>
+            <span id="subtitle" data-typed-text="使用llama构建一个蜜罐(前端)"></span>
           
         </div>
 
@@ -287,8 +291,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-15 09:30" pubdate>
-          2023年7月15日 上午
+        <time datetime="2023-08-01 00:12" pubdate>
+          2023年8月1日 凌晨
         </time>
       </span>
     
@@ -299,7 +303,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          1.2k 字
         
       </span>
     
@@ -310,7 +314,7 @@
         
         
         
-          15 分钟
+          10 分钟
         
       </span>
     
@@ -348,24 +352,24 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">python调用c++函数</h1>
+            <h1 style="display: none">使用llama构建一个蜜罐(前端)</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="python调用c函数">python调用c++函数</h1>
-<p>当我们需要在Python中使用C++编写的函数时，可以将C++代码编译成共享库文件（.so文件），然后来调用这些函数。这里介绍两种方法。</p>
-<h2 id="使用python的api">使用python的api</h2>
-<p>首先要安装安装<code>python-dev</code> 和<code>cmake</code></p>
-<p>在Archlinux下<code>yay python-dev</code> ，<code>yay cmake</code>即可。其他平台需要自行搜索</p>
-<p>首先创建一个C++文件 <code>main.cpp</code> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;Python.h&gt;</span></span><br>  <br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>&#123;<br>	<span class="hljs-keyword">return</span> a + b;<br>&#125;<br>  <br><span class="hljs-function"><span class="hljs-type">static</span> PyObject* <span class="hljs-title">py_add</span><span class="hljs-params">(PyObject* self, PyObject* args)</span> </span>&#123;<br>	<span class="hljs-type">int</span> a, b;<br>	<span class="hljs-keyword">if</span> (!<span class="hljs-built_in">PyArg_ParseTuple</span>(args, <span class="hljs-string">&quot;ii&quot;</span>, &amp;a, &amp;b)) &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>	&#125;<br>	<span class="hljs-type">int</span> result = <span class="hljs-built_in">add</span>(a, b);<br>	<span class="hljs-keyword">return</span> <span class="hljs-built_in">PyLong_FromLong</span>(result);<br>&#125;<br>  <br><span class="hljs-type">static</span> PyMethodDef module_methods[] = &#123;<br>	&#123;<span class="hljs-string">&quot;add&quot;</span>, py_add, METH_VARARGS, <span class="hljs-string">&quot;Add two integers.&quot;</span>&#125;,<br>	&#123;<span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-number">0</span>, <span class="hljs-literal">NULL</span>&#125;<br>&#125;;<br>  <br><span class="hljs-type">static</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">PyModuleDef</span> module_def = &#123;<br>	PyModuleDef_HEAD_INIT,<br>	<span class="hljs-string">&quot;my_module&quot;</span>,<br>	<span class="hljs-string">&quot;My custom module.&quot;</span>,<br>	<span class="hljs-number">-1</span>,<br>	module_methods<br>&#125;;<br>  <br><span class="hljs-function">PyMODINIT_FUNC <span class="hljs-title">PyInit_my_module</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> </span>&#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-built_in">PyModule_Create</span>(&amp;module_def);<br>&#125;<br></code></pre></td></tr></table></figure></p>
-<p>接着用cmake构建<code>.so</code>文件，<code>CMakeLists.txt</code> 内容如下 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs CMakeLists">cmake_minimum_required(VERSION 3.0)<br>  <br>project(my_module)<br>  <br>find_package(Python REQUIRED COMPONENTS Interpreter Development)<br>  <br>add_library(my_module SHARED main.cpp)<br>  <br>target_include_directories(my_module PRIVATE $&#123;Python_INCLUDE_DIRS&#125;)<br>target_link_libraries(my_module PRIVATE $&#123;Python_LIBRARIES&#125;)<br>  <br>set_target_properties(my_module PROPERTIES PREFIX &quot;&quot;)<br>set_target_properties(my_module PROPERTIES SUFFIX &quot;.so&quot;)<br></code></pre></td></tr></table></figure></p>
-<p>构建完成后会有一个名为<code>my_module.so</code> 的文件</p>
-<p>接下来使用python调用,注意将python文件和<code>my_module.so</code> 放到同一个目录下 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> my_module<br>  <br>result = my_module.add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br><span class="hljs-built_in">print</span>(result)<br></code></pre></td></tr></table></figure></p>
-<h2 id="按照-c-语言的规则来编译和链接">按照 C 语言的规则来编译和链接</h2>
-<p>首先，我们需要编写一个C++文件<code>mylib.cpp</code> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> a + b;<br>&#125;<br></code></pre></td></tr></table></figure></p>
-<p>接下来，编译<code>mylib.cpp</code> 为一个<code>.so</code>文件 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">g++ -shared -o mylib.so -fPIC mylib.cpp<br></code></pre></td></tr></table></figure></p>
-<p>最后使用python加载<code>mylib.so</code> 文件并调用 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> ctypes<br><br><span class="hljs-comment"># 加载共享库文件</span><br>mylib = ctypes.cdll.LoadLibrary(<span class="hljs-string">&#x27;./mylib.so&#x27;</span>)<br><br>result = mylib.add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br><span class="hljs-built_in">print</span>(result)<br></code></pre></td></tr></table></figure></p>
+                <h1 id="使用llama构建一个蜜罐前端">使用llama构建一个蜜罐(前端)</h1>
+<p><img src="https://cdn.studyinglover.com/pic/2023/07/e9a49d4a404ed9bc4b0f119249194e3d.png" srcset="/img/loading.gif" lazyload /> 在<a href="https://studyinglover.com/2023/07/29/%E4%BD%BF%E7%94%A8llama%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%9C%9C%E7%BD%90(%E5%90%8E%E7%AB%AF)/">使用llama构建一个蜜罐(后端)</a> 中我们通过llama和flask构建了一个蜜罐的后端，通过将shell命令作为字段的一部分，让llama假装执行命令来防止蜜罐被攻破。那有了后端我们还需要一个前端命令行来让用户登陆并执行命令。</p>
+<p>完整项目开源在了<a target="_blank" rel="noopener" href="https://github.com/StudyingLover/llama-honeypot-python">GitHub</a></p>
+<p>接下来，让我们来实现一个模拟ssh服务器，或者说实现一个ssh mock 然后执行命令的时候不让他真的执行同时改一下输出。</p>
+<p><strong>等等？我们真的需要一个ssh mock 吗？</strong> 还是说，我们需要的是一个<strong>跑在终端的，长得很像终端的，能输入输出的，一个可交互的代码？</strong></p>
+<p>哦，好像我们需要的只是一个可交互的代码，难道攻击方ssh上来了还能验证一下这是不是真的是终端？(我用了三天才想通这个问题)</p>
+<p>so,工作量一下子减少了太多了 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> requests<br>  <br><span class="hljs-comment"># 禁用 Ctrl Z stty susp undef</span><br><span class="hljs-comment"># 启用 Ctrl Z stty susp ^Z</span><br><br>admin_key = <span class="hljs-string">&quot;123456&quot;</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_responce</span>(<span class="hljs-params">command</span>):<br>	<span class="hljs-keyword">if</span> (command == admin_key):<br>		exit()<br>	output = requests.post(<span class="hljs-string">&quot;http://127.0.0.1:9000/admin/&quot;</span>+command).json()<br>	<span class="hljs-keyword">return</span> output[<span class="hljs-string">&quot;message&quot;</span>]<br>    <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">attact_warning</span>():<br>	<span class="hljs-keyword">pass</span><br>  <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">anti_attact</span>():<br>	<span class="hljs-keyword">pass</span><br>  <br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>	attact_warning()<br>	anti_attact()<br>	<span class="hljs-keyword">try</span>:<br>		command = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;[root@ubuntu ~]$ &quot;</span>)<br>		<span class="hljs-built_in">print</span>(get_responce(command))<br>	  <br>	<span class="hljs-keyword">except</span> KeyboardInterrupt:<br>		<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;&quot;</span>)<br></code></pre></td></tr></table></figure></p>
+<p>这里有几个点需要注意 1. 代码<strong>不能直接用于生产环境！！！请先完善细节并大量测试。本项目仅为学习使用，未经过专业人员测试</strong> 1. <code>admin_key</code>，这个变量的作用是让管理员能用终端，<strong>记得修改</strong>。如果你认为这种方法太low了或者可能被作为突破口，请修改或PR。 2. 接口地址，我这里是<code>http://127.0.0.1:9000/admin/</code> ，这里需要改成你的，建议先用postman或者apifox或者啥的测一下。 3. 入侵检测和反击模块需要你<strong>自己实现</strong>，毕竟这只是一个让你的蜜罐更安全的项目。</p>
+<p>在三个终端分别运行llama服务器(图右终端)，蜜罐后端(图左终端)和蜜罐前端(图中终端)</p>
+<figure>
+<img src="https://cdn.studyinglover.com/pic/2023/07/dd31f63365b8a8657b1459f7fe883a36.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image.png</figcaption>
+</figure>
+<p>项目还有很多改进之处，在后面我也会进一步优化prompt和模型来获得更好的终端对话体验。</p>
 
                 
               </div>
@@ -374,27 +378,13 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
       
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E8%B8%A9%E5%9D%91/" class="category-chain-item">踩坑</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
+        <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">#网络安全</a>
+      
     </div>
-  
   
 </div>
 
@@ -404,8 +394,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>python调用c++函数</div>
-      <div>https://studyinglover.com/2023/07/15/python调用c++函数/</div>
+      <div>使用llama构建一个蜜罐(前端)</div>
+      <div>https://studyinglover.com/2023/08/01/使用llama构建一个蜜罐(前端)/</div>
     </div>
     <div class="license-meta">
       
@@ -417,7 +407,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月15日</div>
+          <div>2023年8月1日</div>
         </div>
       
       
@@ -449,18 +439,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/18/npc_gzip%E7%AC%94%E8%AE%B0/" title="npc_gzip笔记">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">npc_gzip笔记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/14/Filesystem%20type%20ntfs3,ntfs%20not%20configured%20in%20kernel/" title="Filesystem type ntfs3,ntfs not configured in kernel">
-                        <span class="hidden-mobile">Filesystem type ntfs3,ntfs not configured in kernel</span>
+                      <a href="/2023/07/29/%E4%BD%BF%E7%94%A8llama%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%9C%9C%E7%BD%90(%E5%90%8E%E7%AB%AF)/" title="使用llama构建一个蜜罐(后端)">
+                        <span class="hidden-mobile">使用llama构建一个蜜罐(后端)</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

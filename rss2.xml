@@ -9,8 +9,34 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Wed, 02 Aug 2023 10:47:15 GMT</pubDate>
+    <pubDate>Sun, 06 Aug 2023 15:02:45 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>花式求GCD</title>
+      <link>https://studyinglover.com/2023/08/06/GPU%E9%83%A8%E7%BD%B2llama-cpp-python(llama.cpp%E9%80%9A%E7%94%A8)/</link>
+      <guid>https://studyinglover.com/2023/08/06/GPU%E9%83%A8%E7%BD%B2llama-cpp-python(llama.cpp%E9%80%9A%E7%94%A8)/</guid>
+      <pubDate>Sun, 06 Aug 2023 23:01:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;gpu部署llama-cpp-pythonllama.cpp通用&quot;&gt;GPU部署llama-cpp-python(llama.cpp通用)&lt;/h1&gt;
+&lt;h2 id=&quot;通用流程&quot;&gt;通用流程&lt;/h2&gt;
+&lt;p&gt;我们的安装平台是Ubuntu20.04，Python 3.8.</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="gpu部署llama-cpp-pythonllama.cpp通用">GPU部署llama-cpp-python(llama.cpp通用)</h1><h2 id="通用流程">通用流程</h2><p>我们的安装平台是Ubuntu20.04，Python 3.8.10，cuda 11.6。</p><p>首先确保自己是否已经安装了cuda,输入 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nvcc -V<br></code></pre></td></tr></table></figure></p><p>有类似下面的输出即可 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nvcc</span>: NVIDIA (R) Cuda compiler driver<br><span class="hljs-attribute">Copyright</span> (c) <span class="hljs-number">2005</span>-<span class="hljs-number">2021</span> NVIDIA Corporation<br><span class="hljs-attribute">Built</span> <span class="hljs-literal">on</span> Fri_Dec_17_18:<span class="hljs-number">16</span>:<span class="hljs-number">03</span>_PST_2021<br><span class="hljs-attribute">Cuda</span> compilation tools, release <span class="hljs-number">11</span>.<span class="hljs-number">6</span>, V11.<span class="hljs-number">6</span>.<span class="hljs-number">55</span><br><span class="hljs-attribute">Build</span> cuda_11.<span class="hljs-number">6</span>.r11.<span class="hljs-number">6</span>/compiler.<span class="hljs-number">30794723</span>_0<br></code></pre></td></tr></table></figure></p><p>我们选用 <code>cuBLAS</code> 加速后端代理。直接按照下面命令安装 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> LLAMA_CUBLAS=1<br>CMAKE_ARGS=<span class="hljs-string">&quot;-DLLAMA_CUBLAS=on&quot;</span> FORCE_CMAKE=1 pip install llama-cpp-python<br></code></pre></td></tr></table></figure></p><p>不出意外的话就安装好了，但是你会出现很多意外，请你努力在一堆红色的报错中找出关键出错点，然后搜索，这里我给给出了几个我遇到的。</p><h2 id="报错解决">报错解决</h2><h3 id="check-for-working-cuda-compiler-usrlocalcudabinnvcc---skipped">Check for working CUDA compiler: /usr/local/cuda/bin/nvcc - skipped</h3><p>参考 https://github.com/ggerganov/llama.cpp/issues/1832 系统安装过程中没找到你的cuda在哪里，所以在pip安装之前先设置一个环境变量,<strong>把/usr/local/cuda-x.y改成你的cuda路径</strong> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> CUDA_PATH=/usr/local/cuda-x.y<br></code></pre></td></tr></table></figure> ### 'f16c': expected a number 这是你的cuda版本太低了，升级到较新版本(11.6可用)。</p><p>或者参考 https://github.com/ggerganov/llama.cpp/issues/1467 和 https://github.com/marella/ctransformers/issues/53 中提到的命令和构建(我没有尝试，有谁试了可以请我结果)。</p><h3 id="value-sm_30-is-not-defined-for-option-gpu-name-tesla-t">Value 'sm_30' is not defined for option 'gpu-name' Tesla T</h3><p>先运行下面的命令 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt-cache policy nvidia-cuda-toolkit<br></code></pre></td></tr></table></figure> 如果版本是<strong>1.0</strong> 那么请运行 <code>sudo apt remove nvidia-cuda-toolkit</code></p><h2 id="运行">运行</h2><p>运行和CPU直接运行相似，只是需要加入几个参数 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 -m llama_cpp.server --model llama-2-70b-chat.ggmlv3.q5_K_M.bin --n_threads 30 --n_gpu_layers 200<br></code></pre></td></tr></table></figure></p><p><code>n_threads</code> 是一个CPU也有的参数，代表最多使用多少县城。</p><p><code>n_gpu_layers</code> 是一个GPU部署非常重要的一步，代表大语言模型有多少层在GPU运算，如果你的显存出现 <code>out of memory</code> 那就减小 <code>n_gpu_layers</code></p>]]></content:encoded>
+      
+      
+      
+      <category domain="https://studyinglover.com/tags/%E8%B8%A9%E5%9D%91/">踩坑</category>
+      
+      
+      <comments>https://studyinglover.com/2023/08/06/GPU%E9%83%A8%E7%BD%B2llama-cpp-python(llama.cpp%E9%80%9A%E7%94%A8)/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>花式求GCD</title>
@@ -488,33 +514,6 @@
       
       
       <comments>https://studyinglover.com/2023/06/19/2023%E5%8D%8E%E4%B8%BA%E9%B2%B2%E9%B9%8F%E7%95%85%E6%83%B3%E6%97%A5%E6%9A%A8%E8%A5%BF%E5%AE%89%E9%AB%98%E6%96%B0%E5%9B%BD%E9%99%85%E4%BC%9A%E8%AE%AE%E4%B8%AD%E5%BF%83%E9%9B%B6%E9%A3%9F%E5%8D%88%E9%A5%AD%E6%B5%8B%E8%AF%84/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>RoboMaster开源仓库汇总(长期更新)</title>
-      <link>https://studyinglover.com/2023/06/18/RoboMaster%E5%BC%80%E6%BA%90%E4%BB%93%E5%BA%93%E6%B1%87%E6%80%BB(%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0)/</link>
-      <guid>https://studyinglover.com/2023/06/18/RoboMaster%E5%BC%80%E6%BA%90%E4%BB%93%E5%BA%93%E6%B1%87%E6%80%BB(%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0)/</guid>
-      <pubDate>Sun, 18 Jun 2023 22:40:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h2 id=&quot;视觉&quot;&gt;视觉&lt;/h2&gt;
-&lt;h3 id=&quot;陈君&quot;&gt;陈君&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://gitlab.com/rm_vision&quot;&gt;陈君视觉1&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/rm-vision-arc</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h2 id="视觉">视觉</h2><h3 id="陈君">陈君</h3><p><a href="https://gitlab.com/rm_vision">陈君视觉1</a></p><p><a href="https://github.com/rm-vision-archive">陈君视觉2</a></p><h3 id="沈航">沈航</h3><ol type="1"><li><a href="https://github.com/tup-robomaster/TUP-NN-Train-2">TUP-NN-Train-2:项目结构修改，增加几种新网络结构</a></li><li><a href="https://github.com/tup-robomaster/TUP2023-Sentry-Framework">TUP2023-Sentry-Framework:哨兵框架开源，包括全向感知，决策，导航 提供VIO和LIO方案</a></li><li><a href="https://github.com/tup-robomaster/RM_Radar2023">RM_Radar2023:沈阳航空航天大学2023年雷达程序</a></li><li><a href="https://github.com/tup-robomaster/TRTInferenceForYolo">TRTInferenceForYoloX:YOLOXTensorRT推理</a></li></ol><h3 id="西浦">西浦</h3><p><a href="https://github.com/zRzRzRzRzRzRzR/YOLO-of-RoboMaster-Keypoints-Detection-2023">四点识别模型</a></p><h2 id="工具">工具</h2><p><a href="http://shenyibo.me/RM-labeling-tool/">装甲板数据集制作</a></p><p><a href="https://github.com/tup-robomaster/AutoLabel">AutoLabel:自动标注pipeline，集成角点坐标分布分析,图像去重等工具</a></p><p><a href="https://github.com/ifr-cv/rm_part_visual_tag_identify">RoboMaster视觉标签识别器</a></p>]]></content:encoded>
-      
-      
-      
-      <category domain="https://studyinglover.com/tags/RoboMaster/">RoboMaster</category>
-      
-      
-      <comments>https://studyinglover.com/2023/06/18/RoboMaster%E5%BC%80%E6%BA%90%E4%BB%93%E5%BA%93%E6%B1%87%E6%80%BB(%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0)/#disqus_thread</comments>
       
     </item>
     

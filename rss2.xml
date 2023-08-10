@@ -9,8 +9,34 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 07 Aug 2023 13:33:45 GMT</pubDate>
+    <pubDate>Thu, 10 Aug 2023 09:22:45 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>arch蓝牙无法连接</title>
+      <link>https://studyinglover.com/2023/08/10/arch%E8%93%9D%E7%89%99%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5/</link>
+      <guid>https://studyinglover.com/2023/08/10/arch%E8%93%9D%E7%89%99%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5/</guid>
+      <pubDate>Thu, 10 Aug 2023 17:18:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;arch蓝牙无法连接&quot;&gt;arch蓝牙无法连接&lt;/h1&gt;
+&lt;p&gt;在arcchlinux成功安装并且已经安装蓝牙的相关包之后，在设置打开蓝牙发现需要先开启蓝牙。&lt;/p&gt;
+&lt;p&gt;没啥好的解决办法，运行 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;ta</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="arch蓝牙无法连接">arch蓝牙无法连接</h1><p>在arcchlinux成功安装并且已经安装蓝牙的相关包之后，在设置打开蓝牙发现需要先开启蓝牙。</p><p>没啥好的解决办法，运行 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl <span class="hljs-built_in">enable</span>  --now bluetooth <br></code></pre></td></tr></table></figure> 问题解决。</p>]]></content:encoded>
+      
+      
+      
+      <category domain="https://studyinglover.com/tags/%E8%B8%A9%E5%9D%91/">踩坑</category>
+      
+      
+      <comments>https://studyinglover.com/2023/08/10/arch%E8%93%9D%E7%89%99%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>GPU部署llama-cpp-python(llama.cpp通用)</title>
@@ -27,7 +53,7 @@
       
       
       
-      <content:encoded><![CDATA[<h1 id="gpu部署llama-cpp-pythonllama.cpp通用">GPU部署llama-cpp-python(llama.cpp通用)</h1><h2 id="通用流程">通用流程</h2><p>我们的安装平台是Ubuntu20.04，Python 3.8.10，cuda 11.6。</p><p>首先确保自己是否已经安装了cuda,输入 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nvcc -V<br></code></pre></td></tr></table></figure></p><p>有类似下面的输出即可 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nvcc</span>: NVIDIA (R) Cuda compiler driver<br><span class="hljs-attribute">Copyright</span> (c) <span class="hljs-number">2005</span>-<span class="hljs-number">2021</span> NVIDIA Corporation<br><span class="hljs-attribute">Built</span> <span class="hljs-literal">on</span> Fri_Dec_17_18:<span class="hljs-number">16</span>:<span class="hljs-number">03</span>_PST_2021<br><span class="hljs-attribute">Cuda</span> compilation tools, release <span class="hljs-number">11</span>.<span class="hljs-number">6</span>, V11.<span class="hljs-number">6</span>.<span class="hljs-number">55</span><br><span class="hljs-attribute">Build</span> cuda_11.<span class="hljs-number">6</span>.r11.<span class="hljs-number">6</span>/compiler.<span class="hljs-number">30794723</span>_0<br></code></pre></td></tr></table></figure></p><p>我们选用 <code>cuBLAS</code> 加速后端代理。直接按照下面命令安装 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> LLAMA_CUBLAS=1<br>CMAKE_ARGS=<span class="hljs-string">&quot;-DLLAMA_CUBLAS=on&quot;</span> FORCE_CMAKE=1 pip install llama-cpp-python<br></code></pre></td></tr></table></figure></p><p>不出意外的话就安装好了，但是你会出现很多意外，请你努力在一堆红色的报错中找出关键出错点，然后搜索，在最后我给出了几个我遇到的。</p><h2 id="运行">运行</h2><p>运行和CPU直接运行相似，只是需要加入几个参数. <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 -m llama_cpp.server --model llama-2-70b-chat.ggmlv3.q5_K_M.bin --n_threads 30 --n_gpu_layers 200<br></code></pre></td></tr></table></figure></p><p><code>n_threads</code> 是一个CPU也有的参数，代表最多使用多少线程。</p><p><code>n_gpu_layers</code> 是一个GPU部署非常重要的一步，代表大语言模型有多少层在GPU运算，如果你的显存出现 <code>out of memory</code> 那就减小 <code>n_gpu_layers</code></p><h2 id="关于多卡">关于多卡</h2><p>亲测多卡没有遇到什么大坑，只要<code>torch.cuda.is_available()</code> 和<code>torch.cuda.device_count()</code>正常就可以跑起来。</p><p>两张 Tesla T4 的卡推理70B大概半分钟就可以出结果。</p><h2 id="报错解决">报错解决</h2><h3 id="check-for-working-cuda-compiler-usrlocalcudabinnvcc---skipped">Check for working CUDA compiler: /usr/local/cuda/bin/nvcc - skipped</h3><p>参考 https://github.com/ggerganov/llama.cpp/issues/1832 系统安装过程中没找到你的cuda在哪里，所以在pip安装之前先设置一个环境变量,<strong>把/usr/local/cuda-x.y改成你的cuda路径</strong> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> CUDA_PATH=/usr/local/cuda-x.y<br></code></pre></td></tr></table></figure> ### 'f16c': expected a number 这是你的cuda版本太低了，升级到较新版本(11.6可用)。</p><p>或者参考 https://github.com/ggerganov/llama.cpp/issues/1467 和 https://github.com/marella/ctransformers/issues/53 中提到的命令和构建(我没有尝试，有谁试了可以请我结果)。</p><h3 id="value-sm_30-is-not-defined-for-option-gpu-name-tesla-t">Value 'sm_30' is not defined for option 'gpu-name' Tesla T</h3><p>先运行下面的命令 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt-cache policy nvidia-cuda-toolkit<br></code></pre></td></tr></table></figure> 如果版本是<strong>1.0</strong> 那么请运行 <code>sudo apt remove nvidia-cuda-toolkit</code></p>]]></content:encoded>
+      <content:encoded><![CDATA[<h1 id="gpu部署llama-cpp-pythonllama.cpp通用">GPU部署llama-cpp-python(llama.cpp通用)</h1><h2 id="通用流程">通用流程</h2><p>我们的安装平台是Ubuntu20.04，Python 3.8.10，cuda 11.6。</p><p>首先确保自己是否已经安装了cuda,输入 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nvcc -V<br></code></pre></td></tr></table></figure></p><p>有类似下面的输出即可 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nvcc</span>: NVIDIA (R) Cuda compiler driver<br><span class="hljs-attribute">Copyright</span> (c) <span class="hljs-number">2005</span>-<span class="hljs-number">2021</span> NVIDIA Corporation<br><span class="hljs-attribute">Built</span> <span class="hljs-literal">on</span> Fri_Dec_17_18:<span class="hljs-number">16</span>:<span class="hljs-number">03</span>_PST_2021<br><span class="hljs-attribute">Cuda</span> compilation tools, release <span class="hljs-number">11</span>.<span class="hljs-number">6</span>, V11.<span class="hljs-number">6</span>.<span class="hljs-number">55</span><br><span class="hljs-attribute">Build</span> cuda_11.<span class="hljs-number">6</span>.r11.<span class="hljs-number">6</span>/compiler.<span class="hljs-number">30794723</span>_0<br></code></pre></td></tr></table></figure></p><p>我们选用 <code>cuBLAS</code> 加速后端代理。直接按照下面命令安装 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> LLAMA_CUBLAS=1<br>CMAKE_ARGS=<span class="hljs-string">&quot;-DLLAMA_CUBLAS=on&quot;</span> FORCE_CMAKE=1 pip install llama-cpp-python<br></code></pre></td></tr></table></figure></p><p>不出意外的话就安装好了，但是你会出现很多意外，请你努力在一堆红色的报错中找出关键出错点，然后搜索，在最后我给出了几个我遇到的。</p><h2 id="运行">运行</h2><p>运行和CPU直接运行相似，只是需要加入几个参数. <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 -m llama_cpp.server --model llama-2-70b-chat.ggmlv3.q5_K_M.bin --n_threads 30 --n_gpu_layers 200<br></code></pre></td></tr></table></figure></p><p><code>n_threads</code> 是一个CPU也有的参数，代表最多使用多少线程。</p><p><code>n_gpu_layers</code> 是一个GPU部署非常重要的一步，代表大语言模型有多少层在GPU运算，如果你的显存出现 <code>out of memory</code> 那就减小 <code>n_gpu_layers</code></p><h2 id="关于多卡">关于多卡</h2><p>亲测多卡没有遇到什么大坑，只要<code>torch.cuda.is_available()</code> 和<code>torch.cuda.device_count()</code>正常就可以跑起来。</p><p>两张 Tesla T4 的卡推理70B大概半分钟就可以出结果。</p><h2 id="报错解决">报错解决</h2><h3 id="check-for-working-cuda-compiler-usrlocalcudabinnvcc---skipped">Check for working CUDA compiler: /usr/local/cuda/bin/nvcc - skipped</h3><p>参考 https://github.com/ggerganov/llama.cpp/issues/1832 系统安装过程中没找到你的cuda在哪里，所以在pip安装之前先设置一个环境变量,<strong>把/usr/local/cuda-x.y改成你的cuda路径</strong> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> CUDA_PATH=/usr/local/cuda-x.y<br></code></pre></td></tr></table></figure></p><h3 id="f16c-expected-a-number">'f16c': expected a number</h3><p>这是你的cuda版本太低了，升级到较新版本(11.6可用)。</p><p>或者参考 https://github.com/ggerganov/llama.cpp/issues/1467 和 https://github.com/marella/ctransformers/issues/53 中提到的命令和构建(我没有尝试，有谁试了可以请我结果)。</p><h3 id="value-sm_30-is-not-defined-for-option-gpu-name-tesla-t">Value 'sm_30' is not defined for option 'gpu-name' Tesla T</h3><p>先运行下面的命令 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt-cache policy nvidia-cuda-toolkit<br></code></pre></td></tr></table></figure> 如果版本是<strong>1.0</strong> 那么请运行 <code>sudo apt remove nvidia-cuda-toolkit</code></p>]]></content:encoded>
       
       
       
@@ -489,31 +515,6 @@
       
       
       <comments>https://studyinglover.com/2023/06/21/GroundingDINO%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>2023华为鲲鹏畅想日暨西安高新国际会议中心零食午饭测评</title>
-      <link>https://studyinglover.com/2023/06/19/2023%E5%8D%8E%E4%B8%BA%E9%B2%B2%E9%B9%8F%E7%95%85%E6%83%B3%E6%97%A5%E6%9A%A8%E8%A5%BF%E5%AE%89%E9%AB%98%E6%96%B0%E5%9B%BD%E9%99%85%E4%BC%9A%E8%AE%AE%E4%B8%AD%E5%BF%83%E9%9B%B6%E9%A3%9F%E5%8D%88%E9%A5%AD%E6%B5%8B%E8%AF%84/</link>
-      <guid>https://studyinglover.com/2023/06/19/2023%E5%8D%8E%E4%B8%BA%E9%B2%B2%E9%B9%8F%E7%95%85%E6%83%B3%E6%97%A5%E6%9A%A8%E8%A5%BF%E5%AE%89%E9%AB%98%E6%96%B0%E5%9B%BD%E9%99%85%E4%BC%9A%E8%AE%AE%E4%B8%AD%E5%BF%83%E9%9B%B6%E9%A3%9F%E5%8D%88%E9%A5%AD%E6%B5%8B%E8%AF%84/</guid>
-      <pubDate>Mon, 19 Jun 2023 23:06:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;华为鲲鹏畅想日暨西安高新国际会议中心零食午饭测评&quot;&gt;2023华为鲲鹏畅想日暨西安高新国际会议中心零食午饭测评&lt;/h1&gt;
-&lt;h2 id=&quot;鲲鹏活动&quot;&gt;鲲鹏活动&lt;/h2&gt;
-&lt;p&gt;我是白吃白喝来的你真以为我是来学技术的？&lt;/p&gt;
-&lt;h3 id=&quot;上午场&quot;&gt;上午场&lt;/h3</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="华为鲲鹏畅想日暨西安高新国际会议中心零食午饭测评">2023华为鲲鹏畅想日暨西安高新国际会议中心零食午饭测评</h1><h2 id="鲲鹏活动">鲲鹏活动</h2><p>我是白吃白喝来的你真以为我是来学技术的？</p><h3 id="上午场">上午场</h3><p><img src="https://proxy.thisis.plus/202306190655993.jpg" /></p><p>院士发言，讲了从教多年开设公共课的历程，还有将核心技术掌握在自己手里的重要性，举了上世纪欧洲软件和20年哈工大哈工程被禁用matlab的例子。 <img src="https://proxy.thisis.plus/202306190655529.jpg" /></p><p>然后我就牙疼的受不了看牙去了……</p><h3 id="下午场">下午场</h3><p>下午场有三部分，星享会，鲲鹏训练营还有人才发展论坛。星享会是关于互联网+产业命题赛道和鲲鹏应用创新大赛的分享。鲲鹏训练营没有参与，我猜是用类似华为云的沙盒做实验。人才发展论坛是大佬们发言讲自己做的一些研究和人才培养模式 <img src="https://proxy.thisis.plus/202306190703495.jpg" alt="IMG_20230617_135653.jpg" /></p><figure><img src="https://proxy.thisis.plus/202306190704505.jpg" alt="" /><figcaption>IMG_20230617_173651.jpg</figcaption></figure><figure><img src="https://proxy.thisis.plus/202306190704514.jpg" alt="" /><figcaption>IMG_20230617_165145.jpg</figcaption></figure><h2 id="零食午饭测评">零食午饭测评</h2><p>因为牙疼刚做了根管的缘故没有吃的太全，所以只能聊一聊自己吃了的部分</p><h3 id="午饭">午饭</h3><p><img src="https://proxy.thisis.plus/202306190642829.jpg" /></p><p>左边粥是皮蛋瘦肉粥，绝对好评，好喝还适合我这种牙刚做了手术的人，我喝了三碗。</p><p>右边的甜点里我们最远的那一排左边的是蒸饺，正常。右边的不知道叫什么，夹心，正常水平。</p><p>中间的一排虽然长得不一样，都是千层饼。有一点咸味，有点硬不适合那天的牙。</p><p>离我们最近的一排最左边的小蛋糕，我吃了两个，第一个没啥味道，第二个有苦味。中间的豆沙。最右边的，流心绿豆糕，非常好吃，很软口感很好，很适合我的牙，吃了六个吧。</p><h3 id="零食">零食</h3><p><img src="https://proxy.thisis.plus/202306190642391.jpg" /></p><p>右边的饮料据工作人员说是他们自己调的，气泡莫吉托，挺好喝的，有碳酸饮料的感觉 <img src="https://proxy.thisis.plus/202306190642335.jpg" /></p><p>左边盘子里左上是芒果蛋糕，右上草莓蛋糕。芒果蛋糕整个是芒果和奶油，草莓蛋糕正常。左下不好吃，很硬没啥味道。右下核桃芯还是很好吃的。</p><h2 id="收获">收获</h2><p>一本基于鲲鹏的大数据挖掘de书，两个水杯，一个肩带，一个文化衫</p>]]></content:encoded>
-      
-      
-      
-      
-      <comments>https://studyinglover.com/2023/06/19/2023%E5%8D%8E%E4%B8%BA%E9%B2%B2%E9%B9%8F%E7%95%85%E6%83%B3%E6%97%A5%E6%9A%A8%E8%A5%BF%E5%AE%89%E9%AB%98%E6%96%B0%E5%9B%BD%E9%99%85%E4%BC%9A%E8%AE%AE%E4%B8%AD%E5%BF%83%E9%9B%B6%E9%A3%9F%E5%8D%88%E9%A5%AD%E6%B5%8B%E8%AF%84/#disqus_thread</comments>
       
     </item>
     

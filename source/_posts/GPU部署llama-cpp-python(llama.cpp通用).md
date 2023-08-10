@@ -1,6 +1,6 @@
 ---
 title: GPU部署llama-cpp-python(llama.cpp通用)
-banner_img: https://cdn.studyinglover.com/pic/2023/07/869e354fa5d2254251c10bc2e3cf1bef.png
+banner_img: https://cdn.studyinglover.com/pic/2023/08/a5e39db5abf0853e6c456728df8bd971.jpg
 date: 2023-8-6 23:01:00
 tags:
 - 踩坑
@@ -54,6 +54,7 @@ python3 -m llama_cpp.server --model llama-2-70b-chat.ggmlv3.q5_K_M.bin --n_threa
 ```bash
 export CUDA_PATH=/usr/local/cuda-x.y
 ```
+
 ### 'f16c': expected a number
 这是你的cuda版本太低了，升级到较新版本(11.6可用)。
 

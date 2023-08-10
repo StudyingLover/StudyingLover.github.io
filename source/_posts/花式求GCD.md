@@ -1,6 +1,6 @@
 ---
 title: 花式求GCD
-banner_img: https://cdn.studyinglover.com/pic/2023/07/869e354fa5d2254251c10bc2e3cf1bef.png
+banner_img: https://cdn.studyinglover.com/pic/2023/08/a5e39db5abf0853e6c456728df8bd971.jpg
 date: 2023-8-2 18:46:00
 tags:
 - 算法

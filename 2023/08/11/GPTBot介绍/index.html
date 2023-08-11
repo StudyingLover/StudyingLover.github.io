@@ -16,24 +16,23 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="快速上手llama2.c llama2.c一个完整的解决方案，可以使用PyTorch从头开始训练的Llama 2 LLM（Lightweight Language Model）模型，并将权重导出为二进制文件，然后加载到一个简单的500行C文件（run.c）中进行推理。另外，你也可以加载、微调和推理Meta的Llama 2模型（但这部分仍在积极开发中）。因此，这个仓库提供了一个&quot;全栈&quot;的训练和推理方">
+    <meta name="description" content="GPTBot介绍 最近，openai公布了GPTBot 的相关信息，并给出了禁止GPTBot的方法。以下是全文翻译。 GPTBot是OpenAI的网络爬虫，可以通过以下User agent和字符串来识别。 12User agent token: GPTBotFull user-agent string: Mozilla&#x2F;5.0 AppleWebKit&#x2F;537.36 (KHTML, like Gec">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快速上手llama2.c">
-<meta property="og:url" content="https://studyinglover.com/2023/07/25/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bllama2.c/index.html">
+<meta property="og:title" content="GPTBot介绍">
+<meta property="og:url" content="https://studyinglover.com/2023/08/11/GPTBot%E4%BB%8B%E7%BB%8D/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="快速上手llama2.c llama2.c一个完整的解决方案，可以使用PyTorch从头开始训练的Llama 2 LLM（Lightweight Language Model）模型，并将权重导出为二进制文件，然后加载到一个简单的500行C文件（run.c）中进行推理。另外，你也可以加载、微调和推理Meta的Llama 2模型（但这部分仍在积极开发中）。因此，这个仓库提供了一个&quot;全栈&quot;的训练和推理方">
+<meta property="og:description" content="GPTBot介绍 最近，openai公布了GPTBot 的相关信息，并给出了禁止GPTBot的方法。以下是全文翻译。 GPTBot是OpenAI的网络爬虫，可以通过以下User agent和字符串来识别。 12User agent token: GPTBotFull user-agent string: Mozilla&#x2F;5.0 AppleWebKit&#x2F;537.36 (KHTML, like Gec">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-25T16:19:00.000Z">
+<meta property="article:published_time" content="2023-08-11T20:58:00.000Z">
 <meta property="article:modified_time" content="2023-08-11T13:04:54.887Z">
 <meta property="article:author" content="StudyingLover">
-<meta property="article:tag" content="踩坑">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> 
   
-  <title>快速上手llama2.c - plus studio</title>
+  <title>GPTBot介绍 - plus studio</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -266,13 +265,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://github.com/karpathy/llama2.c/blob/master/assets/llama_cute.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('https://cdn.studyinglover.com/pic/2023/08/e7c591ac6e7423c1c9576ca0716c4d01.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="快速上手llama2.c"></span>
+            <span id="subtitle" data-typed-text="GPTBot介绍"></span>
           
         </div>
 
@@ -288,8 +287,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-25 16:19" pubdate>
-          2023年7月25日 下午
+        <time datetime="2023-08-11 20:58" pubdate>
+          2023年8月11日 晚上
         </time>
       </span>
     
@@ -300,7 +299,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          792 字
         
       </span>
     
@@ -311,7 +310,7 @@
         
         
         
-          13 分钟
+          7 分钟
         
       </span>
     
@@ -349,19 +348,23 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">快速上手llama2.c</h1>
+            <h1 style="display: none">GPTBot介绍</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="快速上手llama2.c">快速上手llama2.c</h1>
-<p><a target="_blank" rel="noopener" href="https://github.com/karpathy/llama2.c.git">llama2.c</a>一个完整的解决方案，可以使用PyTorch从头开始训练的Llama 2 LLM（Lightweight Language Model）模型，并将权重导出为二进制文件，然后加载到一个简单的500行C文件（run.c）中进行推理。另外，你也可以加载、微调和推理Meta的Llama 2模型（但这部分仍在积极开发中）。因此，这个仓库提供了一个"全栈"的训练和推理方案，专注于极简和简洁性。你可能会认为只有拥有数十亿参数的LLM才能实现有用的功能，但事实上，如果领域足够狭窄，非常小的LLM也可以表现出惊人的性能。建议参考TinyStories论文以获得灵感。</p>
-<p>需要注意的是，这个项目最初只是一个有趣的周末项目：作者在之前的nanoGPT基础上进行了调整，实现了Llama-2架构而不是GPT-2，并且主要的工作是编写了C推理引擎（run.c）。因此，这个项目还比较年轻，并且在快速发展中。特别感谢llama.cpp项目为此项目提供了灵感。作者希望保持超级简洁，所以选择了硬编码Llama 2架构，采用fp32精度，并仅使用纯C编写一个没有依赖项的推理文件。</p>
-<p>首先clone整个仓库并编译 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/karpathy/llama2.c.git<br><span class="hljs-built_in">cd</span> llama.c<br>gcc -O3 -o run run.c -lm<br></code></pre></td></tr></table></figure></p>
-<p>接下来下载模型 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://karpathy.ai/llama2c/model.bin -P out<br></code></pre></td></tr></table></figure></p>
-<p>或者下载更大的一个模型 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://karpathy.ai/llama2c/model44m.bin -P out44m<br></code></pre></td></tr></table></figure></p>
-<p>接下来进行推理 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./run out/model.bin<br></code></pre></td></tr></table></figure></p>
-<p>我们将会看到这样一段输出就代表运行成功 <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">&lt;s&gt;<br> One day, <span class="hljs-keyword">a</span> little otter named Ollie went <span class="hljs-built_in">to</span> play <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> river. Ollie was very compassionate. He loved <span class="hljs-built_in">to</span> help his friends <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> town.<br>While playing, Ollie saw <span class="hljs-keyword">a</span> big fish. The fish was stuck <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> mud. <span class="hljs-string">&quot;Help me, please!&quot;</span> said <span class="hljs-keyword">the</span> fish. Ollie wanted <span class="hljs-built_in">to</span> help <span class="hljs-keyword">the</span> fish. He swam away, looking <span class="hljs-keyword">for</span> something <span class="hljs-built_in">to</span> break <span class="hljs-keyword">the</span> mud.<br>Ollie found <span class="hljs-keyword">a</span> small stick. He used <span class="hljs-keyword">the</span> stick <span class="hljs-built_in">to</span> break <span class="hljs-keyword">the</span> mud. The fish was free! <span class="hljs-string">&quot;Thank you, Ollie!&quot;</span> <span class="hljs-keyword">the</span> fish said. The fish was happy <span class="hljs-keyword">and</span> swam away.<br>Ollie felt good <span class="hljs-keyword">for</span> helping <span class="hljs-keyword">the</span> fish. He went back <span class="hljs-built_in">to</span> play <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> river. Ollie knew that helping others made him feel good. And <span class="hljs-built_in">from</span> that day, Ollie was always compassionate <span class="hljs-built_in">to</span> everyone.<br>&lt;s&gt;<br> Tom was <span class="hljs-keyword">a</span> big boy who liked <span class="hljs-built_in">to</span> help his mom. He saw his mom doing laundry <span class="hljs-keyword">and</span> asked <span class="hljs-keyword">if</span> he could join. His mom said yes, but he had <span class="hljs-built_in">to</span> be careful <span class="hljs-keyword">with</span> <span class="hljs-keyword">the</span> iron. The iron was hot <span class="hljs-keyword">and</span> had <span class="hljs-keyword">a</span> button <span class="hljs-keyword">on</span> <span class="hljs-title">it</span>.<br>Tom took <span class="hljs-keyword">the</span> iron <span class="hljs-keyword">and</span> ran <span class="hljs-built_in">to</span> <span class="hljs-keyword">the</span> house. He wanted <span class="hljs-built_in">to</span> iron his shirt<br>achieved tok/s: <span class="hljs-number">178.148921</span><br></code></pre></td></tr></table></figure></p>
+                <h1 id="gptbot介绍">GPTBot介绍</h1>
+<p>最近，openai公布了<a target="_blank" rel="noopener" href="https://platform.openai.com/docs/gptbot/gptbot">GPTBot</a> 的相关信息，并给出了禁止GPTBot的方法。以下是全文翻译。</p>
+<p>GPTBot是OpenAI的网络爬虫，可以通过以下User agent和字符串来识别。 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">User</span> agent token: GPTBot<br><span class="hljs-attribute">Full</span> user-agent string: Mozilla/<span class="hljs-number">5</span>.<span class="hljs-number">0</span> AppleWebKit/<span class="hljs-number">537</span>.<span class="hljs-number">36</span> (KHTML, like Gecko; compatible; GPTBot/<span class="hljs-number">1</span>.<span class="hljs-number">0</span>; +https://openai.com/gptbot)<br></code></pre></td></tr></table></figure></p>
+<h2 id="使用">使用</h2>
+<p>使用 GPTBot 用户代理爬取的网页可能会用于改进未来的模型，并且会过滤掉需要付费访问、已知收集个人身份信息（PII）或含有违反我们政策的文本的来源。允许 GPTBot 访问您的网站可以帮助 AI 模型变得更准确，提高它们的一般能力和安全性。在下面，我们还分享了如何禁止 GPTBot 访问您的网站。</p>
+<h3 id="禁止-gptbot">禁止 GPTBot</h3>
+<p>要禁止 GPTBot 访问您的网站，您可以将 GPTBot 添加到您网站的 robots.txt： <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-attribute">User-agent</span><span class="hljs-punctuation">: </span>GPTBot<br><span class="hljs-attribute">Disallow</span><span class="hljs-punctuation">: </span>/<br></code></pre></td></tr></table></figure></p>
+<h3 id="自定义-gptbot-访问">自定义 GPTBot 访问</h3>
+<p>要允许 GPTBot 仅访问您网站的部分内容，您可以将 GPTBot 令牌添加到您网站的 robots.txt，如下所示： <figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs arcade">User-agent: GPTBot<br>Allow: <span class="hljs-regexp">/directory-1/</span><br>Disallow: <span class="hljs-regexp">/directory-2/</span><br></code></pre></td></tr></table></figure></p>
+<h3 id="ip-出口范围">IP 出口范围</h3>
+<p>对于 OpenAI 的爬虫，它会从 <a target="_blank" rel="noopener" href="https://openai.com/gptbot-ranges.txt">OpenAI 网站</a>上记录的 IP 地址段向网站发出请求。</p>
+<p>这里我给出IP 地址段 <figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-number">20.15.240.64</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.240.80</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.240.96</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.240.176</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.241.0</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.242.128</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.242.144</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.242.192</span>/<span class="hljs-number">28</span><br><span class="hljs-number">40.83.2.64</span>/<span class="hljs-number">28</span><br></code></pre></td></tr></table></figure></p>
 
                 
               </div>
@@ -371,13 +374,6 @@
               <div class="post-metas my-3">
   
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E8%B8%A9%E5%9D%91/">#踩坑</a>
-      
-    </div>
-  
 </div>
 
 
@@ -386,8 +382,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>快速上手llama2.c</div>
-      <div>https://studyinglover.com/2023/07/25/快速上手llama2.c/</div>
+      <div>GPTBot介绍</div>
+      <div>https://studyinglover.com/2023/08/11/GPTBot介绍/</div>
     </div>
     <div class="license-meta">
       
@@ -399,7 +395,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月25日</div>
+          <div>2023年8月11日</div>
         </div>
       
       
@@ -431,18 +427,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/27/DINO-v2%E7%AC%94%E8%AE%B0/" title="DINO-v2笔记">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">DINO-v2笔记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/24/AnyDoor%E7%AC%94%E8%AE%B0/" title="AnyDoor笔记">
-                        <span class="hidden-mobile">AnyDoor笔记</span>
+                      <a href="/2023/08/10/arch%E8%93%9D%E7%89%99%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5/" title="arch蓝牙无法连接">
+                        <span class="hidden-mobile">arch蓝牙无法连接</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

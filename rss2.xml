@@ -9,8 +9,36 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sun, 13 Aug 2023 03:46:46 GMT</pubDate>
+    <pubDate>Fri, 18 Aug 2023 07:09:02 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>LISA(推理分割)笔记</title>
+      <link>https://studyinglover.com/2023/08/18/LISA(%E6%8E%A8%E7%90%86%E5%88%86%E5%89%B2)%E7%AC%94%E8%AE%B0/</link>
+      <guid>https://studyinglover.com/2023/08/18/LISA(%E6%8E%A8%E7%90%86%E5%88%86%E5%89%B2)%E7%AC%94%E8%AE%B0/</guid>
+      <pubDate>Fri, 18 Aug 2023 15:05:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;lisa推理分割笔记&quot;&gt;LISA(推理分割)笔记&lt;/h1&gt;
+&lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
+&lt;p&gt;这篇论文题目中文翻译是 基于大型语言模型的语义分割， 提出了一个新任务-推理分割。大概就是给一张图和一段话，模型使用大语言模型分割出目标。作者给了一个例子，从</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="lisa推理分割笔记">LISA(推理分割)笔记</h1><h2 id="简介">简介</h2><p>这篇论文题目中文翻译是 基于大型语言模型的语义分割， 提出了一个新任务-推理分割。大概就是给一张图和一段话，模型使用大语言模型分割出目标。作者给了一个例子，从图片中分割出富含维生素C的物品。</p><p>作者说这篇论文有三个贡献，提出了推理分割的任务，建立了一个推理分割基准，ReasonSeg， 还有训练了一个模型。</p><p>项目主页<a href="https://github.com/dvlab-research/LISA">GitHub</a></p><p>LISA可以完成四种任务 1) complex reasoning; 2) world knowledge; 3) explanatory answers; 4) multi-turn conversation</p><h2 id="模型架构">模型架构</h2><h3 id="生成mask">生成mask</h3><p>这里作者提出了一些问题，就是大部分llm是不具备视觉能力，有视觉能力的泛化型不好还不好训练。相比之下，训练 LISA-7B 在 8 个 NVIDIA 24G 3090 GPU 上只需要 10,000 个训练步骤。(嗯8块3090)</p><p><img src="https://cdn.studyinglover.com/pic/2023/08/ded90e7e3f84739b187dd679c39bd8dd.png" alt="image.png" /> 模型结构就是上面这张图，右下角标了火花的就说明是需要训练或者微调的。首先扩充词表，加入<code>&lt;SEG&gt;</code> ,接下来给出一张图片<span class="math inline">\(x_{img}\)</span>和一段文本<span class="math inline">\(x_{txt}\)</span>, 将他们送入大语言模型<span class="math inline">\(\mathcal{F}\)</span> ,写成公式就是<span class="math display">\[\hat{\boldsymbol{y}}_{txt}=\mathcal{F}(x_{img},\boldsymbol{x}_{txt}).\]</span> 当LLM倾向于生成二进制分割掩码时，输出<span class="math inline">\(\hat{\boldsymbol{y}}_{txt}\)</span>应该包含一个<code>&lt;SEG&gt;</code>令牌。所以提取最后一层嵌入<span class="math inline">\(\hat{h}_{seg}\)</span> (因为他和<code>&lt;SEG&gt;</code> token 是相关的)， 并用一个MLP <span class="math inline">\(\gamma\)</span> 将其投影到<span class="math inline">\(h_{seg}\)</span>。</p><p>同时，视觉编码器<span class="math inline">\(\mathcal{F_{enc}}\)</span> 会从图片中提取出视觉特征<span class="math inline">\(\text{f}\)</span> 。</p><p>最后<span class="math inline">\(h_{seg}\)</span>和<span class="math inline">\(\text{f}\)</span> 会被送入一个和SAM有相同架构的解码器，获得最后的mask.</p><p>整个过程表示出来就是<span class="math display">\[\begin{gathered}\boldsymbol{h}_{seg}=\gamma(\hat{\boldsymbol{h}}_{seg}),\quad\boldsymbol{f}=\mathcal{F}_{enc}(\boldsymbol{x}_{img}),\\\hat{\boldsymbol{M}}=\mathcal{F}_{dec}(\boldsymbol{h}_{seg},\boldsymbol{f}).\end{gathered}\]</span> ### 训练目标 训练目标是文本生成损失 <span class="math inline">\(\mathcal{L}_{txt}\)</span> 和分割掩码损失 <span class="math inline">\(\mathcal{L}_{mask}\)</span> 进行端到端训练。总体目标 <span class="math inline">\(L\)</span> 是这些损失的加权和，由 <span class="math inline">\(\lambda_{txt}\)</span> 和 <span class="math inline">\(\lambda_{mask}\)</span> 确定<span class="math display">\[\mathcal{L}=\lambda_{txt}\mathcal{L}_{txt}+\lambda_{mask}\mathcal{L}_{mask}.\]</span> ## 训练 ### 数据集 训练数据由三部分组成，都是开源数据集 1. Semantic Segmentation Dataset 2. Vanilla Referring Segmentation Dataset 3. Visual Question Answering Dataset</p><p><strong>值得注意的是，LISA具有zero-shot能力，因为训练集不包含任何推理分割的内容。</strong></p><h3 id="需要训练的参数">需要训练的参数</h3><p>为了保持llm的泛化能力作者用了lora,解码器可以被微调，llm的词嵌入和投影最后一层潜入的mlp也可以微调</p>]]></content:encoded>
+      
+      
+      <category domain="https://studyinglover.com/categories/%E7%AC%94%E8%AE%B0/">笔记</category>
+      
+      
+      <category domain="https://studyinglover.com/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/">多模态</category>
+      
+      
+      <comments>https://studyinglover.com/2023/08/18/LISA(%E6%8E%A8%E7%90%86%E5%88%86%E5%89%B2)%E7%AC%94%E8%AE%B0/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>在终端绘制GPU显存使用曲线</title>
@@ -484,34 +512,6 @@
       
       
       <comments>https://studyinglover.com/2023/07/09/PicGo%E9%85%8D%E7%BD%AECloudflareR2%E5%9B%BE%E7%89%87%E5%82%A8%E5%AD%98/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>ArchlinuxGnome快捷键打开终端</title>
-      <link>https://studyinglover.com/2023/06/28/ArchlinuxGnome%E9%85%8D%E7%BD%AE%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF/</link>
-      <guid>https://studyinglover.com/2023/06/28/ArchlinuxGnome%E9%85%8D%E7%BD%AE%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF/</guid>
-      <pubDate>Wed, 28 Jun 2023 19:30:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;网上大量教程说命令打开终端的命令是&lt;code&gt;gnome-terminal&lt;/code&gt; ， 然而&lt;/p&gt;
-&lt;figure&gt;
-&lt;img src=&quot;https://proxy.thisis.plus/202306281925975.png&quot; alt=&quot;&quot; /&gt;&lt;figcapt</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<p>网上大量教程说命令打开终端的命令是<code>gnome-terminal</code> ， 然而</p><figure><img src="https://proxy.thisis.plus/202306281925975.png" alt="" /><figcaption>image.png</figcaption></figure><p>经过一番搜索，我发现 https://www.omglinux.com/gnome-console-tab-overview/ <img src="https://proxy.thisis.plus/202306281927089.png" alt="image.png" /></p><p>emmmmm,意思是终端命令是<code>kgx</code> ?</p><p>果然，又被一些教程坑了 <img src="https://proxy.thisis.plus/202306281928138.png" alt="image.png" /></p><p>最后配置如图 <img src="https://proxy.thisis.plus/202306211810384.png" alt="image.png" /></p>]]></content:encoded>
-      
-      
-      <category domain="https://studyinglover.com/categories/%E8%B8%A9%E5%9D%91/">踩坑</category>
-      
-      
-      <category domain="https://studyinglover.com/tags/ArchLinux/">ArchLinux</category>
-      
-      
-      <comments>https://studyinglover.com/2023/06/28/ArchlinuxGnome%E9%85%8D%E7%BD%AE%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF/#disqus_thread</comments>
       
     </item>
     

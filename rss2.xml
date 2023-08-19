@@ -9,8 +9,31 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Fri, 18 Aug 2023 07:09:02 GMT</pubDate>
+    <pubDate>Sat, 19 Aug 2023 13:37:18 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>arch4edu搞崩了我的flutter</title>
+      <link>https://studyinglover.com/2023/08/19/arch4edu%E6%90%9E%E5%B4%A9%E4%BA%86%E6%88%91%E7%9A%84flutter/</link>
+      <guid>https://studyinglover.com/2023/08/19/arch4edu%E6%90%9E%E5%B4%A9%E4%BA%86%E6%88%91%E7%9A%84flutter/</guid>
+      <pubDate>Sat, 19 Aug 2023 21:36:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;arch4edu搞崩了我的flutter&quot;&gt;arch4edu搞崩了我的flutter&lt;/h1&gt;
+&lt;p&gt;今天是快乐的一天，适合滚包 &lt;figure class=&quot;highlight ebnf&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="arch4edu搞崩了我的flutter">arch4edu搞崩了我的flutter</h1><p>今天是快乐的一天，适合滚包 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">yay</span><br></code></pre></td></tr></table></figure> 一切安好，arch4edu说我的flutter需要更新 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">==&gt; 要排除的包: (示例: <span class="hljs-string">&quot;1 2 3&quot;</span>, <span class="hljs-string">&quot;1-3&quot;</span>, <span class="hljs-string">&quot;^4&quot;</span> 或软件库名称)<br> -&gt; 排除软件包可能会导致不完整的升级并破坏系统<br>==&gt; <br><br></code></pre></td></tr></table></figure> 没什么需要排除的，接下来就是愉快的自动安装</p><p>突然我看到了这个</p><figure><img src="https://cdn.studyinglover.com/pic/2023/08/d257220b6c5bc01465f92fdd72320344.png" alt="" /><figcaption>image.png</figcaption></figure><p>警告啦，没啥好担心的啦，待会跑一下看好着没</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash">flutter doctor                     <br>Found an existing Pub cache at /home/zjh/.pub-cache.<br>It can be repaired by running `dart pub cache repair`.<br>It can be reset by running `dart pub cache clean`.<br>Found an existing Dart Analysis Server cache at /home/zjh/.dartServer.<br>It can be reset by deleting /home/zjh/.dartServer.<br>Flutter failed to write to a file at <span class="hljs-string">&quot;/opt/flutter/packages/flutter_tools/.dart_tool/version&quot;</span>.<br>Please ensure that the SDK and/or project is installed <span class="hljs-keyword">in</span> a location that has <span class="hljs-built_in">read</span>/write<br>permissions <span class="hljs-keyword">for</span> the current user.<br>Try running:<br>  sudo <span class="hljs-built_in">chown</span> -R $(<span class="hljs-built_in">whoami</span>) /opt/flutter/packages/flutter_tools/.dart_tool/version<br><br></code></pre></td></tr></table></figure><p>好的他炸了</p><p>看着问题不大，就是读写权限的问题，的问题？鬼知道会有啥问题，我决定让arch4edu滚蛋</p><p>先<code>sudo pacman -Rns flutter</code>把arch4edu的flutter删掉，然后去<code>/etc/pacman.conf</code> 删除了arch4edu镜像，再<code>sudo pacman -Syu</code>滚一遍包，最后<code>yay flutter</code></p><p>中间会有一个问题 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">错误：无法提交处理 (有冲突的文件)<br>flutter: 文件系统中已存在 <span class="hljs-regexp">/opt/</span>flutter<span class="hljs-regexp">/bin/</span>cache/flutter_version_check.stamp <br>发生错误，没有软件包被更新。<br></code></pre></td></tr></table></figure> ok,sudo直接删就行，反正是cache</p><p>最后<code>flutter docker</code></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">Doctor summary (to see all details, run flutter doctor -v):<br>[✓] Flutter (Channel stable, 3.13.0, on Arch Linux 6.4.10-arch1-1, locale zh_CN.UTF-8)<br>[✓] Android toolchain - develop <span class="hljs-keyword">for</span> Android devices (Android SDK version 34.0.0)<br>[✓] Chrome - develop <span class="hljs-keyword">for</span> the web<br>[✓] Linux toolchain - develop <span class="hljs-keyword">for</span> Linux desktop<br>[✓] Android Studio (version 2022.2)<br>[✓] Connected device (2 available)<br>[✓] Network resources<br><br>• No issues found!<br><br></code></pre></td></tr></table></figure>]]></content:encoded>
+      
+      
+      
+      
+      <comments>https://studyinglover.com/2023/08/19/arch4edu%E6%90%9E%E5%B4%A9%E4%BA%86%E6%88%91%E7%9A%84flutter/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>LISA(推理分割)笔记</title>
@@ -487,31 +510,6 @@
       
       
       <comments>https://studyinglover.com/2023/07/13/open_clip%E7%BC%96%E7%A0%81%E5%9B%BE%E5%83%8F%E5%92%8C%E6%96%87%E6%9C%AC/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>PicGo配置CloudflareR2图片储存</title>
-      <link>https://studyinglover.com/2023/07/09/PicGo%E9%85%8D%E7%BD%AECloudflareR2%E5%9B%BE%E7%89%87%E5%82%A8%E5%AD%98/</link>
-      <guid>https://studyinglover.com/2023/07/09/PicGo%E9%85%8D%E7%BD%AECloudflareR2%E5%9B%BE%E7%89%87%E5%82%A8%E5%AD%98/</guid>
-      <pubDate>Sun, 09 Jul 2023 20:24:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;picgo配置cloudflarer2图片储存&quot;&gt;PicGo配置CloudflareR2图片储存&lt;/h1&gt;
-&lt;p&gt;首先需要安装PicGo,并购买CloudFlare R2。CloudFlare R2选择免费计划即可，只是需要绑定银行卡或者paypal(淘宝两块钱解</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="picgo配置cloudflarer2图片储存">PicGo配置CloudflareR2图片储存</h1><p>首先需要安装PicGo,并购买CloudFlare R2。CloudFlare R2选择免费计划即可，只是需要绑定银行卡或者paypal(淘宝两块钱解君忧)。</p><p>在R2的管理界面选择管理R2 API Tokens， <img src="https://cdn.studyinglover.com/pic/2023/07/c5fa048794dc5eab45d6e83efef1df8e.png" alt="image.png" /></p><p>创建一个API Token <img src="https://cdn.studyinglover.com/pic/2023/07/eed2d1b23fb75a7abc5ac334688baba7.png" alt="image.png" /> 注意选择权限为edit <img src="https://cdn.studyinglover.com/pic/2023/07/0a7ece4445c1a2f190adc2dd82351f62.png" alt="image.png" /></p><p>创建API Token之后，保存Access Key ID和Secret Access Key。</p><p>接下来返回R2的管理界面，创建一个储存桶 <img src="https://cdn.studyinglover.com/pic/2023/07/6de3892cb5f8a0bf1c53bb83d2070ca6.png" alt="image.png" /> 填入名字并创建桶，点击进入储存桶的管理界面，进入setting界面。 <img src="https://cdn.studyinglover.com/pic/2023/07/674ad9e98a4d4c064cd135353f967fce.png" alt="image.png" /></p><p>自定义自己的域名并允许公开访问，选择Connect Domain绑定到自己的域名，选择AllowAccess允许公开访问。 <img src="https://cdn.studyinglover.com/pic/2023/07/135bb11e6b475ed4d7acdf491003cf52.png" alt="image.png" /></p><p>接下来打开PicGo,安装s3插件 <img src="https://cdn.studyinglover.com/pic/2023/07/bc0d82dee02bc1a2b114477b827b125c.png" alt="image.png" /></p><p>应用密钥ID和应用密钥填入在API Token获取的Access Key ID和Secret Access Key，桶名填入创建的桶的名称，自定义节点填入储存桶管理界面中途中对应的路径。自定义域名填入前面绑定的自己的域名。 <img src="https://cdn.studyinglover.com/pic/2023/07/0c0cc997c92cd807ecb48c3b2b08e394.png" alt="image.png" /></p><p>尝试上传不出意外就上传成功了。</p>]]></content:encoded>
-      
-      
-      <category domain="https://studyinglover.com/categories/%E8%B8%A9%E5%9D%91/">踩坑</category>
-      
-      
-      
-      <comments>https://studyinglover.com/2023/07/09/PicGo%E9%85%8D%E7%BD%AECloudflareR2%E5%9B%BE%E7%89%87%E5%82%A8%E5%AD%98/#disqus_thread</comments>
       
     </item>
     

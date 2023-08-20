@@ -9,8 +9,36 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 19 Aug 2023 13:37:18 GMT</pubDate>
+    <pubDate>Sun, 20 Aug 2023 01:51:10 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>ViT在DDPM取代UNet(DiT)</title>
+      <link>https://studyinglover.com/2023/08/20/ViT%E5%9C%A8DDPM%E5%8F%96%E4%BB%A3UNet(DiT)/</link>
+      <guid>https://studyinglover.com/2023/08/20/ViT%E5%9C%A8DDPM%E5%8F%96%E4%BB%A3UNet(DiT)/</guid>
+      <pubDate>Sun, 20 Aug 2023 09:43:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;vit在ddpm取代unetdit&quot;&gt;ViT在DDPM取代UNet(DiT)&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.wpeebles.com/DiT.html&quot;&gt;项目主页&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这篇论文主要是尝试使用ViT取代DDPM中的UNe</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="vit在ddpm取代unetdit">ViT在DDPM取代UNet(DiT)</h1><p><a href="https://www.wpeebles.com/DiT.html">项目主页</a></p><p>这篇论文主要是尝试使用ViT取代DDPM中的UNet，叫做Diffusion Transformer-DiT，作者训练了DiT-S、DiT-B、DiT-L 和 DiT-XL四种模型，每种模型的patch取8,4,2, 一共训练了12个模型。</p><p>作者探索的完整 DiT 设计空间是补丁大小、变压器块架构和模型大小。</p><p>模型第一层是对 sequences of patches 进行操作(就是ViT把图片看成<span class="math inline">\(16*16\)</span>的的单词之后单词构成的序列) 。 <img src="https://cdn.studyinglover.com/pic/2023/08/d9b9a168f177471d890c1bd3e3f2cc2d.png" alt="image.png" /></p><p>如图所示，给定的patch是<span class="math inline">\(p\times p\)</span> ,VAE采样出来的草绳大小是<span class="math inline">\(I\times I\times C\)</span> ,那么patches会变成长度为<span class="math inline">\(T=(I/\hat{p})^{2}\)</span> 的一个序列,每个patch维度是<span class="math inline">\(d\)</span> ,位置嵌入用的是sine-cosine。</p><p>接下来就是diffusion transformers的设计。 <img src="https://cdn.studyinglover.com/pic/2023/08/f68c4f271029a484e97822dbb9fb2569.png" alt="image.png" /></p><p>作者提到了一点，就是获取到path序列之后应该在后面加上去噪步数和类别标签，并在最后一个DiT块之后删掉。</p><p>在最终的 DiT 块之后，需要将输出解码为噪声预测和对角协方差预测。这两个输出的形状都等于整个模型的输入。作者使用标准线性解码器来做到这一点。如果使用 adaLN 自适应就应用最后一层范数，并将每个标记线性解码为 <span class="math inline">\(p\times p\times2C\)</span> 张量，其中 <span class="math inline">\(C\)</span> 是输入到DiT的空间大小。最后，将解码的token重新排列到其原始空间布局中，得到预测的噪声和协方差。</p>]]></content:encoded>
+      
+      
+      <category domain="https://studyinglover.com/categories/%E7%AC%94%E8%AE%B0/">笔记</category>
+      
+      
+      <category domain="https://studyinglover.com/tags/%E6%96%87%E5%AD%97%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87/">文字生成图片</category>
+      
+      
+      <comments>https://studyinglover.com/2023/08/20/ViT%E5%9C%A8DDPM%E5%8F%96%E4%BB%A3UNet(DiT)/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>arch4edu搞崩了我的flutter</title>
@@ -485,31 +513,6 @@
       
       
       <comments>https://studyinglover.com/2023/07/14/Filesystem%20type%20ntfs3,ntfs%20not%20configured%20in%20kernel/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>open_clip编码图像和文本</title>
-      <link>https://studyinglover.com/2023/07/13/open_clip%E7%BC%96%E7%A0%81%E5%9B%BE%E5%83%8F%E5%92%8C%E6%96%87%E6%9C%AC/</link>
-      <guid>https://studyinglover.com/2023/07/13/open_clip%E7%BC%96%E7%A0%81%E5%9B%BE%E5%83%8F%E5%92%8C%E6%96%87%E6%9C%AC/</guid>
-      <pubDate>Thu, 13 Jul 2023 23:14:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;open_clip是CLIP的开源实现版本，只训练了CLIP效果最好的几个模型。&lt;/p&gt;
-&lt;p&gt;安装是 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<p>open_clip是CLIP的开源实现版本，只训练了CLIP效果最好的几个模型。</p><p>安装是 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install open_clip_torch<br></code></pre></td></tr></table></figure></p><p>首先导入 open_clip，并创建相关模型 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> open_clip<br><span class="hljs-keyword">import</span> torch<br><br>device = torch.device(<span class="hljs-string">&quot;cuda&quot;</span> <span class="hljs-keyword">if</span> torch.cuda.is_available() <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;cpu&quot;</span>)<br>clip_model_name = <span class="hljs-string">&quot;ViT-L-14&quot;</span><br>clip_model,_,clip_preprocess = open_clip.create_model_and_transforms(clip_model_name<br>clip_model_name,pretrained = <span class="hljs-string">&quot;openai&quot;</span>,precision=<span class="hljs-string">&#x27;fp16&#x27;</span> <span class="hljs-keyword">if</span> device == <span class="hljs-string">&#x27;cuda&#x27;</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;fp32&#x27;</span>,device=device,<br>)<br><br>tokenize = open_clip.get_tokenizer(clip_model_name)<br></code></pre></td></tr></table></figure></p><p><code>tokenize</code> 是分词器，所有的文本都要先经过分析器才能放入模型进行推理。</p><h4 id="编码图像">编码图像</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">image_to_features</span>(<span class="hljs-params">image: Image.Image</span>) -&gt; torch.Tensor:<br>images = clip_preprocess(image).unsqueeze(<span class="hljs-number">0</span>).to(device)<br><span class="hljs-keyword">with</span> torch.no_grad(), torch.cuda.amp.autocast():<br>image_features = clip_model.encode_image(images)<br><span class="hljs-keyword">return</span> image_features<br>  <br>img = cv.imread(<span class="hljs-string">&quot;/path/to/example.png&quot;</span>)<br>img = Image.fromarray(img)<br><br>image_feature = image_to_features(img)<br></code></pre></td></tr></table></figure><p><code>/path/to/example.png</code> 替换成自己图片的路径</p><p><code>image_to_features</code> 函数是一个封装过的将图像转成文本的函数，传入的参数是一个<code>image_to_features</code>格式的图片。</p><p><code>image_feature</code> 就是经过CLIP的编码器得到的特征</p><h4 id="编码文本">编码文本</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">prompt = <span class="hljs-string">&quot;a photo of a cat&quot;</span><br>text_tokens = tokenize([prompt]).to(device)<br>text_features = clip_model.encode_text(text_tokens)<br></code></pre></td></tr></table></figure><p><code>text_features</code> 就是得到的特征。</p>]]></content:encoded>
-      
-      
-      <category domain="https://studyinglover.com/categories/%E5%A4%9A%E6%A8%A1%E6%80%81/">多模态</category>
-      
-      
-      
-      <comments>https://studyinglover.com/2023/07/13/open_clip%E7%BC%96%E7%A0%81%E5%9B%BE%E5%83%8F%E5%92%8C%E6%96%87%E6%9C%AC/#disqus_thread</comments>
       
     </item>
     

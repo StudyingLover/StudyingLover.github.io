@@ -9,8 +9,31 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Wed, 23 Aug 2023 03:46:41 GMT</pubDate>
+    <pubDate>Wed, 23 Aug 2023 12:44:03 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>MediaPipe即将推出图像生成服务</title>
+      <link>https://studyinglover.com/2023/08/23/MediaPipe%E5%8D%B3%E5%B0%86%E6%8E%A8%E5%87%BA%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90%E6%9C%8D%E5%8A%A1/</link>
+      <guid>https://studyinglover.com/2023/08/23/MediaPipe%E5%8D%B3%E5%B0%86%E6%8E%A8%E5%87%BA%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90%E6%9C%8D%E5%8A%A1/</guid>
+      <pubDate>Wed, 23 Aug 2023 20:42:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;mediapipe即将推出图像生成服务&quot;&gt;MediaPipe即将推出图像生成服务&lt;/h1&gt;
+&lt;p&gt;今天我逛GitHub Trending的时候突然发现MediaPipe的示例库被顶到了前排 &lt;img src=&quot;https://cdn.studyinglover.c</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="mediapipe即将推出图像生成服务">MediaPipe即将推出图像生成服务</h1><p>今天我逛GitHub Trending的时候突然发现MediaPipe的示例库被顶到了前排 <img src="https://cdn.studyinglover.com/pic/2023/08/0bc3379fab3273262e8b6f14799b629a.png" alt="image.png" /></p><p>这不对劲，我赶紧去mediapipe的储存库，发现7个小时前Google推送了新的内容 <a href="https://github.com/google/mediapipe/commit/2ebdb01d4326c934e0628e7ff45cadda6575d23f">ImageGenerator Java API</a> <img src="https://cdn.studyinglover.com/pic/2023/08/b744863d78b3347dc0cfb23c7a0cd29d.png" alt="image.png" /></p><p>原来MediaPipe也要推出文字生成图片内容啊，还是移动端设备上的，这让我想起来GitHub最近有人开始写stable-diffusion.cpp，一个使用了ggml量化加速的sd。</p><p>顺藤摸瓜我们可以找到MediaPipe的<a href="https://developers.google.com/mediapipe/solutions/vision/image_generator">文档</a>。 <img src="https://cdn.studyinglover.com/pic/2023/08/6c50982c58e1d65562e230b0bb601d15.png" alt="image.png" /></p><p>还是即将推出状态，但是给了一个简单示例。</p><p>用法超级简单，就是下载下面几个模型中的一个 - <a href="https://huggingface.co/runwayml/stable-diffusion-v1-5/blob/main/v1-5-pruned-emaonly.ckpt">runwayml/stable-diffusion-v1-5</a> - <a href="https://huggingface.co/justinpinkney/miniSD/blob/main/miniSD.ckpt">justinpinkney/miniSD</a> - <a href="https://huggingface.co/hakurei/waifu-diffusion-v1-4/blob/main/models/wd-1-3-penultimate-ucg-cont.ckpt">hakurei/waifu-diffusion-v1-4</a> - <a href="https://huggingface.co/Fictiverse/Stable_Diffusion_PaperCut_Model/blob/main/PaperCut_v1.ckpt">Fictiverse/Stable_Diffusion_PaperCut_Model</a></p><p>安装依赖 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install torch typing_extensions numpy Pillow requests pytorch_lightning absl-py<br></code></pre></td></tr></table></figure> 把这个文件copy下来,<a href="https://github.com/googlesamples/mediapipe/blob/main/tools/image_generator_converter/convert.py">地址</a></p><p>然后 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 convert.py --ckpt_path &lt;ckpt_path&gt; --output_path &lt;output_path&gt;<br></code></pre></td></tr></table></figure></p><p>接着将文件夹内容<code>&lt;output_path&gt;</code>推送到 Android 设备。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">adb shell <span class="hljs-built_in">rm</span> -r /data/local/tmp/image_generator/ <br><br>adb shell <span class="hljs-built_in">mkdir</span> -p /data/local/tmp/image_generator/<br><br>adb push &lt;output_path&gt;/. /data/local/tmp/image_generator/bins<br></code></pre></td></tr></table></figure> 安装 Android 演示应用程序,在<a href="https://storage.googleapis.com/mediapipe-tasks/image_generator/imagegenerator.apk">这里</a>下载 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">adb install imagegenerator.apk<br></code></pre></td></tr></table></figure></p>]]></content:encoded>
+      
+      
+      
+      
+      <comments>https://studyinglover.com/2023/08/23/MediaPipe%E5%8D%B3%E5%B0%86%E6%8E%A8%E5%87%BA%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90%E6%9C%8D%E5%8A%A1/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Dual-Stream Diffusion Net for Text-to-Video Generation笔记</title>
@@ -489,32 +512,6 @@
       
       
       <comments>https://studyinglover.com/2023/07/18/npc_gzip%E7%AC%94%E8%AE%B0/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>python调用c++函数</title>
-      <link>https://studyinglover.com/2023/07/15/python%E8%B0%83%E7%94%A8c++%E5%87%BD%E6%95%B0/</link>
-      <guid>https://studyinglover.com/2023/07/15/python%E8%B0%83%E7%94%A8c++%E5%87%BD%E6%95%B0/</guid>
-      <pubDate>Sat, 15 Jul 2023 09:30:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;python调用c函数&quot;&gt;python调用c++函数&lt;/h1&gt;
-&lt;p&gt;当我们需要在Python中使用C++编写的函数时，可以将C++代码编译成共享库文件（.so文件），然后来调用这些函数。这里介绍两种方法。&lt;/p&gt;
-&lt;h2 id=&quot;使用python的api&quot;&gt;使用</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="python调用c函数">python调用c++函数</h1><p>当我们需要在Python中使用C++编写的函数时，可以将C++代码编译成共享库文件（.so文件），然后来调用这些函数。这里介绍两种方法。</p><h2 id="使用python的api">使用python的api</h2><p>首先要安装安装<code>python-dev</code> 和<code>cmake</code></p><p>在Archlinux下<code>yay python-dev</code> ，<code>yay cmake</code>即可。其他平台需要自行搜索</p><p>首先创建一个C++文件 <code>main.cpp</code> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;Python.h&gt;</span></span><br>  <br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>&#123;<br><span class="hljs-keyword">return</span> a + b;<br>&#125;<br>  <br><span class="hljs-function"><span class="hljs-type">static</span> PyObject* <span class="hljs-title">py_add</span><span class="hljs-params">(PyObject* self, PyObject* args)</span> </span>&#123;<br><span class="hljs-type">int</span> a, b;<br><span class="hljs-keyword">if</span> (!<span class="hljs-built_in">PyArg_ParseTuple</span>(args, <span class="hljs-string">&quot;ii&quot;</span>, &amp;a, &amp;b)) &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>&#125;<br><span class="hljs-type">int</span> result = <span class="hljs-built_in">add</span>(a, b);<br><span class="hljs-keyword">return</span> <span class="hljs-built_in">PyLong_FromLong</span>(result);<br>&#125;<br>  <br><span class="hljs-type">static</span> PyMethodDef module_methods[] = &#123;<br>&#123;<span class="hljs-string">&quot;add&quot;</span>, py_add, METH_VARARGS, <span class="hljs-string">&quot;Add two integers.&quot;</span>&#125;,<br>&#123;<span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-number">0</span>, <span class="hljs-literal">NULL</span>&#125;<br>&#125;;<br>  <br><span class="hljs-type">static</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">PyModuleDef</span> module_def = &#123;<br>PyModuleDef_HEAD_INIT,<br><span class="hljs-string">&quot;my_module&quot;</span>,<br><span class="hljs-string">&quot;My custom module.&quot;</span>,<br><span class="hljs-number">-1</span>,<br>module_methods<br>&#125;;<br>  <br><span class="hljs-function">PyMODINIT_FUNC <span class="hljs-title">PyInit_my_module</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> </span>&#123;<br><span class="hljs-keyword">return</span> <span class="hljs-built_in">PyModule_Create</span>(&amp;module_def);<br>&#125;<br></code></pre></td></tr></table></figure></p><p>接着用cmake构建<code>.so</code>文件，<code>CMakeLists.txt</code> 内容如下 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs CMakeLists">cmake_minimum_required(VERSION 3.0)<br>  <br>project(my_module)<br>  <br>find_package(Python REQUIRED COMPONENTS Interpreter Development)<br>  <br>add_library(my_module SHARED main.cpp)<br>  <br>target_include_directories(my_module PRIVATE $&#123;Python_INCLUDE_DIRS&#125;)<br>target_link_libraries(my_module PRIVATE $&#123;Python_LIBRARIES&#125;)<br>  <br>set_target_properties(my_module PROPERTIES PREFIX &quot;&quot;)<br>set_target_properties(my_module PROPERTIES SUFFIX &quot;.so&quot;)<br></code></pre></td></tr></table></figure></p><p>构建完成后会有一个名为<code>my_module.so</code> 的文件</p><p>接下来使用python调用,注意将python文件和<code>my_module.so</code> 放到同一个目录下 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> my_module<br>  <br>result = my_module.add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br><span class="hljs-built_in">print</span>(result)<br></code></pre></td></tr></table></figure></p><h2 id="按照-c-语言的规则来编译和链接">按照 C 语言的规则来编译和链接</h2><p>首先，我们需要编写一个C++文件<code>mylib.cpp</code> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> a + b;<br>&#125;<br></code></pre></td></tr></table></figure></p><p>接下来，编译<code>mylib.cpp</code> 为一个<code>.so</code>文件 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">g++ -shared -o mylib.so -fPIC mylib.cpp<br></code></pre></td></tr></table></figure></p><p>最后使用python加载<code>mylib.so</code> 文件并调用 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> ctypes<br><br><span class="hljs-comment"># 加载共享库文件</span><br>mylib = ctypes.cdll.LoadLibrary(<span class="hljs-string">&#x27;./mylib.so&#x27;</span>)<br><br>result = mylib.add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br><span class="hljs-built_in">print</span>(result)<br></code></pre></td></tr></table></figure></p>]]></content:encoded>
-      
-      
-      <category domain="https://studyinglover.com/categories/%E8%B8%A9%E5%9D%91/">踩坑</category>
-      
-      
-      
-      <comments>https://studyinglover.com/2023/07/15/python%E8%B0%83%E7%94%A8c++%E5%87%BD%E6%95%B0/#disqus_thread</comments>
       
     </item>
     

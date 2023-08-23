@@ -1,6 +1,7 @@
 ---
 title: LISA(推理分割)笔记
 banner_img: https://cdn.studyinglover.com/pic/2023/08/10f885319b150cc20093124185e25c3b.png
+index_img: https://cdn.studyinglover.com/pic/2023/08/ded90e7e3f84739b187dd679c39bd8dd.png
 date: 2023-8-18 15:05:00
 categories:
 - 笔记

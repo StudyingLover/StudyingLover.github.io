@@ -1,6 +1,7 @@
 ---
 title: ViT在DDPM取代UNet(DiT)
 banner_img: https://cdn.studyinglover.com/pic/2023/08/b6f940f512488c10b7a1bf40eb242cae.png
+index_img: https://cdn.studyinglover.com/pic/2023/08/f68c4f271029a484e97822dbb9fb2569.png
 date: 2023-8-20 9:43:00
 categories:
 - 笔记
@@ -17,7 +18,7 @@ tags:
 模型第一层是对 sequences of patches 进行操作(就是ViT把图片看成$16*16$的的单词之后单词构成的序列) 。
 ![image.png](https://cdn.studyinglover.com/pic/2023/08/d9b9a168f177471d890c1bd3e3f2cc2d.png)
 
-如图所示，给定的patch是$p\times p$ ,VAE采样出来的草绳大小是$I\times I\times C$ ,那么patches会变成长度为$T=(I/\hat{p})^{2}$ 的一个序列,每个patch维度是$d$ ,位置嵌入用的是sine-cosine。
+如图所示，给定的patch是$p\times p$ ,VAE采样出来的噪声大小是$I\times I\times C$ ,那么patches会变成长度为$T=(I/\hat{p})^{2}$ 的一个序列,每个patch维度是$d$ ,位置嵌入用的是sine-cosine。
 
 接下来就是diffusion transformers的设计。
 ![image.png](https://cdn.studyinglover.com/pic/2023/08/f68c4f271029a484e97822dbb9fb2569.png)

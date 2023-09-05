@@ -13,7 +13,7 @@
      
 <strong>Hi, I am StudyingLover !👋 </strong>
 
-<strong>a freshman at XUPT in computer science and technology. </strong>
+<strong>A Sophomore student at XUPT in computer science and technology. </strong>
 
 </pre> 
 

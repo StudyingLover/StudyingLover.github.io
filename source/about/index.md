@@ -18,10 +18,10 @@ date: 2023-01-26 10:49:25
      
 <strong>Hi, I am StudyingLover !👋 </strong>
 
-<strong>a freshman at XUPT in computer science and technology. </strong>
+<strong>A Sophomore student at XUPT in computer science and technology. </strong>
 </pre> 
 
-<img width="100%" alt="game gif" src="https://cdn.jsdelivr.net/gh/StudyingLover/StudyingLover/assets/github-contribution-grid-snake.gif"/>
+My another web is [EnchantNet](https://enchant.thisis.plus/),where I will write some serious articles and tutorials using Jupyter Notebook.
 
 ## How to reach me:
 - GitHub: [github](https://github.com/StudyingLover) (Why not follow me? :eyes:)

@@ -16,16 +16,16 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="prompt2model笔记 prompt2model是一个通过提示自动生成语言模型的方法 项目地址GitHub  image.png  模型分为Prompt Parser，Dataset Retriever，Dataset Generator，Model Retriever几个部分 Prompt Parser  image.png  作者使用具有上下文学习的 LLM 来分割用户提示，在我们的实验">
+    <meta name="description" content="prompt2model笔记 prompt2model是一个通过提示自动生成语言模型的方法 项目地址GitHub  image.png  模型分为Prompt Parser，Dataset Retriever，Dataset Generator，Model Retriever几个部分 Prompt Parser  image.png  作者使用具有上下文学习的 LLM 来分割用户提示，在实验中使用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RoboTAP笔记">
-<meta property="og:url" content="https://studyinglover.com/2023/09/01/prompt2model%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="prompt2model笔记">
+<meta property="og:url" content="https://studyinglover.com/2023/09/05/prompt2model%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="prompt2model笔记 prompt2model是一个通过提示自动生成语言模型的方法 项目地址GitHub  image.png  模型分为Prompt Parser，Dataset Retriever，Dataset Generator，Model Retriever几个部分 Prompt Parser  image.png  作者使用具有上下文学习的 LLM 来分割用户提示，在我们的实验">
+<meta property="og:description" content="prompt2model笔记 prompt2model是一个通过提示自动生成语言模型的方法 项目地址GitHub  image.png  模型分为Prompt Parser，Dataset Retriever，Dataset Generator，Model Retriever几个部分 Prompt Parser  image.png  作者使用具有上下文学习的 LLM 来分割用户提示，在实验中使用">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.studyinglover.com/pic/2023/09/b125b68b936c4cce09d451a5f790cb35.png">
-<meta property="article:published_time" content="2023-09-01T12:35:00.000Z">
-<meta property="article:modified_time" content="2023-09-05T01:15:10.730Z">
+<meta property="article:published_time" content="2023-09-05T09:15:00.000Z">
+<meta property="article:modified_time" content="2023-09-05T01:18:04.360Z">
 <meta property="article:author" content="StudyingLover">
 <meta property="article:tag" content="自然语言处理">
 <meta name="twitter:card" content="summary_large_image">
@@ -35,7 +35,7 @@
   
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> 
   
-  <title>RoboTAP笔记 - plus studio</title>
+  <title>prompt2model笔记 - plus studio</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -274,7 +274,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="RoboTAP笔记"></span>
+            <span id="subtitle" data-typed-text="prompt2model笔记"></span>
           
         </div>
 
@@ -290,8 +290,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-09-01 12:35" pubdate>
-          2023年9月1日 下午
+        <time datetime="2023-09-05 09:15" pubdate>
+          2023年9月5日 上午
         </time>
       </span>
     
@@ -313,7 +313,7 @@
         
         
         
-          10 分钟
+          9 分钟
         
       </span>
     
@@ -351,7 +351,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">RoboTAP笔记</h1>
+            <h1 style="display: none">prompt2model笔记</h1>
             
             
               <div class="markdown-body">
@@ -367,20 +367,25 @@
 <figure>
 <img src="https://cdn.studyinglover.com/pic/2023/09/b8ddca1c0daa867307144f0a5546230a.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image.png</figcaption>
 </figure>
-<p>作者使用具有上下文学习的 LLM 来分割用户提示，在我们的实验中使用 OpenAI gpt-3.5-turbo-0613。如果提供的指令被识别为英语以外的语言，我们使用 DeepL API.2 将其转换为英语</p>
+<p>作者使用具有上下文学习的 LLM 来分割用户提示，在实验中使用 OpenAI gpt-3.5-turbo-0613。如果提供的指令被识别为英语以外的语言，就使用 DeepL API.2 将其转换为英语</p>
 <h2 id="dataset-retriever">Dataset Retriever</h2>
 <figure>
 <img src="https://cdn.studyinglover.com/pic/2023/09/8acdf0823c2fb3757b694f71e982a0ce.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image.png</figcaption>
 </figure>
-<p>给定一个提示，我们首先尝试发现现有的手动注释的数据，可以支持用户的任务描述。数据集检索器有几个设计决策： 1. 搜索哪些数据集。 2. 如何索引数据集以供搜索。 3. 3.用户任务需要哪些数据集列，应该忽略哪些列。 作者选用了 Viswanathan et al. (2023) 的方案，称为DataFinder</p>
+<p>给定一个提示，首先尝试发现现有的手动注释的数据，可以支持用户的任务描述。数据集检索器有几个设计决策：</p>
+<ol type="1">
+<li>搜索哪些数据集。</li>
+<li>如何索引数据集以供搜索。</li>
+<li>3.用户任务需要哪些数据集列，应该忽略哪些列。 作者选用了 Viswanathan et al. (2023) 的方案，称为DataFinder</li>
+</ol>
 <p>作者利用 DataFinder 训练的双编码器检索器对最相关的数据集进行排名。一旦确定了相关数据集，下一步是确定数据集的哪些列对应于用户指定的输入和期望输出。由于自动为任何数据集诱导正确的模式可能具有挑战性，所以作者采用了 human-inthe-loop 中的方法。将前 k 个数据集（默认情况下 k = 25）呈现给用户，并允许用户要么选择最相关的数据集，要么声明没有一个非常适合他们的任务。然后，要求用户从数据集的模式中识别输入和输出的适当列。</p>
 <h2 id="dataset-generator">Dataset Generator</h2>
-<p><img src="https://cdn.studyinglover.com/pic/2023/09/622f2321a6504a87d67b8866a2c5c0b5.png" srcset="/img/loading.gif" lazyload alt="image.png" /> 作者使用自动提示工程来生成不同的数据集，使用退火算法对生成的数据集进行排名。自一致性过滤来防止llm生成的伪标签。具体做法是通过选择最频繁的答案为每个唯一输入创建一个共识输出；在平局的情况下，我们启发式地选择最短的答案。使用了zeno-build做并行。</p>
+<p><img src="https://cdn.studyinglover.com/pic/2023/09/622f2321a6504a87d67b8866a2c5c0b5.png" srcset="/img/loading.gif" lazyload alt="image.png" /> 作者使用自动提示工程来生成不同的数据集，使用退火算法对生成的数据集进行排名。自一致性过滤来防止llm生成的伪标签。具体做法是通过选择最频繁的答案为每个唯一输入创建一个共识输出；在平局的情况下，启发式地选择最短的答案。使用了zeno-build做并行。</p>
 <h2 id="model-retriever">Model Retriever</h2>
 <figure>
 <img src="https://cdn.studyinglover.com/pic/2023/09/413a97d48cf68b35b004601c0fbd4446.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image.png</figcaption>
 </figure>
-<p>这是一个检索类问题。作者选择encoder-decoder的架构，但是仍然有非常多的选择，像Salesforce/codet5-base，MaryaAI/opus-mt-ar-en-finetuned-ar-to-en，所以作为一个检索类问题使用用户的指令作为查询，我们搜索 Hugging Face 上模型的所有文本描述。 <img src="https://cdn.studyinglover.com/pic/2023/09/7f7790be882200d87972f87e06697d8f.png" srcset="/img/loading.gif" lazyload alt="image.png" /> ，考虑到对模型的描述一般是比较稀疏并且包含大量模板文本，这里作者使用gpt-3.5-turbo生成了模型可能的描述，用 BM25 算法来计算查询模型相似度分数。</p>
+<p>这是一个检索类问题。作者选择encoder-decoder的架构，但是仍然有非常多的选择，像Salesforce/codet5-base，MaryaAI/opus-mt-ar-en-finetuned-ar-to-en，所以作为一个检索类问题使用用户的指令作为查询，搜索 Hugging Face 上模型的所有文本描述。 <img src="https://cdn.studyinglover.com/pic/2023/09/7f7790be882200d87972f87e06697d8f.png" srcset="/img/loading.gif" lazyload alt="image.png" /> ，考虑到对模型的描述一般是比较稀疏并且包含大量模板文本，这里作者使用gpt-3.5-turbo生成了模型可能的描述，用 BM25 算法来计算查询模型相似度分数。</p>
 <p>为了模型易部署，作者过滤了大于3gb的所有模型，同时引入了一个直觉，下载量越高的模型效果越好。</p>
 
                 
@@ -427,8 +432,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>RoboTAP笔记</div>
-      <div>https://studyinglover.com/2023/09/01/prompt2model笔记/</div>
+      <div>prompt2model笔记</div>
+      <div>https://studyinglover.com/2023/09/05/prompt2model笔记/</div>
     </div>
     <div class="license-meta">
       
@@ -440,7 +445,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年9月1日</div>
+          <div>2023年9月5日</div>
         </div>
       
       
@@ -472,18 +477,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/09/01/RoboTAP%E7%AC%94%E8%AE%B0/" title="RoboTAP笔记">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">RoboTAP笔记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/08/31/%E8%87%AA%E5%BB%BAobsidian%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/" title="自建obsidian同步服务">
-                        <span class="hidden-mobile">自建obsidian同步服务</span>
+                      <a href="/2023/09/01/RoboTAP%E7%AC%94%E8%AE%B0/" title="RoboTAP笔记">
+                        <span class="hidden-mobile">RoboTAP笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

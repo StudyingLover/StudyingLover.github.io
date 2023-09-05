@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>speculative-sampling笔记</title>
+    <link href="/2023/09/05/speculative-sampling%E7%AC%94%E8%AE%B0/"/>
+    <url>/2023/09/05/speculative-sampling%E7%AC%94%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="speculative-sampling笔记">speculative-sampling笔记</h1><p>speculative-sampling,投机采样是一种加速llm推理的方法。</p><p>论文<a href="https://arxiv.org/abs/2302.01318">arxiv</a> ,参考博客<a href="https://jaykmody.com/blog/speculative-sampling/">jaykmody.com</a></p><p>这个方法需要用到两个模型，一个小模型，称为 draft model，一个大模型，称为target model。</p><p>speculative-sampling使用了一种直觉，对于一些序列下一个token预测是i很明显的，小模型也可以完成。因此，如果draft model和target model在给定的很明显的序列上的分布之间存在很强的一致性，那么就允许targrt model被调用时一次输出多个token</p><p><img src="https://cdn.studyinglover.com/pic/2023/09/a74b5ced4e8f8945acc8cf6b4fbbdfb7.png" alt="image.png" /> 自回归采样，就是说给一个序列模型预测下一个token。</p><p><img src="https://cdn.studyinglover.com/pic/2023/09/5867fc09bb99e8709725e0813d4ad7cf.png" alt="image.png" /> 对于大模型来说，主要是三个部分拖慢了推理速度，线性层，注意力机制和通信。</p><p>拒绝采样的公式被修改为<span class="math display">\[\min\left(1,\frac{q(\tilde{x}_{n+1}|x_1,\ldots,x_n)}{p(\tilde{x}_{n+1}|x_1,\ldots,x_n)}\right)\]</span> 给定一个序列<span class="math inline">\(x_0,\ldots,x_t\)</span> 和一个<span class="math inline">\(K\)</span> ,用draft model先采样<span class="math inline">\(\tilde{x}_t\sim p(x|,x_1,\ldots,x_n,\tilde{x}_1,\ldots,\tilde{x}_{t-1})\)</span> ，循环<span class="math inline">\(K\)</span>词</p><p>然后并行计算<span class="math inline">\(q(x|,x_1,\ldots,x_n),~q(x|,x_1,\ldots,x_n,\tilde{x}_1),~\ldots,~q(x|,x_1,\ldots,x_n,\tilde{x}_1,\ldots,\tilde{x}_K)\)</span></p><p>采样一个<span class="math inline">\(r\sim U[0,1]\)</span> ,如果<span class="math inline">\(r&lt;\min\left(1,\frac{q(x|x_1,...,x_{n+t-1})}{p(x|x_1,...,x_{n+t-1})}\right)\)</span> 就把<span class="math inline">\({\tilde{x}_t}\)</span> 拼到序列<span class="math inline">\(x_{n+t-1}\)</span> 后面，这里的<span class="math inline">\(n\)</span> 是序列长度。</p><p>如果<span class="math inline">\(\tilde{x}_{n+1}\)</span> 被拒绝了，也就是说<span class="math inline">\(r&gt;\min\left(1,\frac{q(x|x_1,...,x_{n+t-1})}{p(x|x_1,...,x_{n+t-1})}\right)\)</span>,那么就直接按照<span class="math inline">\(x_{n+1}\sim(q(x|x_1,\ldots,x_n)-p(x|x_1,\ldots,x_n))_+\)</span>采样一个<span class="math inline">\(x_{n+1}\)</span></p><p><span class="math inline">\((.)_{+}\)</span> 被定义为<span class="math display">\[(f(x))_+=\frac{\max(0,f(x))}{\sum_x\max(0,f(x))}\]</span> 如果所有的token都被接受了，那就再采样一个拼到序列后面，然后结束。</p><p>使用标准采样方法，如核、top-k 采样和调整温度，可以在应用这种拒绝采样方案之前相应地修改概率。作者观察到整体接受率对使用的确切参数具有鲁棒性。</p><p>因为speculative-sampling没有改变transformer的结构，所以<strong>可以和其他方法结合使用</strong> ,例如量化，multi-query attention。</p><p>在选择draft model方面，可以简单地使用较小版本的目标语言模型作为草稿并获得较高的接受率。从工程和工作流程的角度来看，这也很方便，因为应该首先存在对此类模型的稳健工具来训练目标模型。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>笔记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>自然语言处理</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>prompt2model笔记</title>
     <link href="/2023/09/05/prompt2model%E7%AC%94%E8%AE%B0/"/>
     <url>/2023/09/05/prompt2model%E7%AC%94%E8%AE%B0/</url>

@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>FreeU-文字生成图片的免费午餐笔记</title>
+    <link href="/2023/10/01/FreeU-%E6%96%87%E5%AD%97%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%E7%9A%84%E5%85%8D%E8%B4%B9%E5%8D%88%E9%A4%90/"/>
+    <url>/2023/10/01/FreeU-%E6%96%87%E5%AD%97%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%E7%9A%84%E5%85%8D%E8%B4%B9%E5%8D%88%E9%A4%90/</url>
+    
+    <content type="html"><![CDATA[<h1 id="freeu-文字生成图片的免费午餐">FreeU-文字生成图片的免费午餐</h1><p>项目地址<a href="https://chenyangsi.top/FreeU/">主页</a></p><p>作者在这篇论文引入了一种对UNet的改进方式，不需要重新训练和微调。</p><figure><img src="https://cdn.studyinglover.com/pic/2023/10/c48e2f490270ef836b26f6d7ed8d7f0e.png" alt="" /><figcaption>image.png</figcaption></figure><p>在UNet中存在两种连接，一种是上一层网络传递来的基础连接，主要贡献去噪能力。一种是跳线连接，主要贡献高频细节。UNet会将这两部分的特征contat之后作为下一层输入。作者的方法就是对这两部分做调整来提升图像质量。 <img src="https://cdn.studyinglover.com/pic/2023/10/483c5afa7533a2e1dcaf2cf0273c6677.png" alt="image.png" /></p><p>从技术上讲，对于 U-Net 解码器的第 <span class="math inline">\(l\)</span> 个块，<span class="math inline">\(\boldsymbol{x}_{l}\)</span> 表示前一个块主主干的主干特征图，让 <span class="math inline">\(h_l\)</span> 表示通过相应跳过连接传播的特征图。为了调整这些特征图，作者引入了两个标量因子：<span class="math inline">\(x_l\)</span> 对应的主干特征比例因子 <span class="math inline">\(b_l\)</span> 和 <span class="math inline">\(h_l\)</span> 的跳线特征对应的比例因子 sl。具体来说，因子 <span class="math inline">\(b_l\)</span> 旨在放大主干特征图 <span class="math inline">\(x_l\)</span>，而因子 <span class="math inline">\(s_l\)</span> 旨在衰减跳过特征图 <span class="math inline">\(h_l\)</span>。对于主干特征，在实验调查中，作者发现通过与<span class="math inline">\(b_l\)</span>相乘不加区别地放大<span class="math inline">\(x_l\)</span>的所有通道，在生成的合成图像中产生过度平滑的纹理。原因是增强的U-Net在去噪时损害了图像的高频细节，所以将缩放操作限制在<span class="math inline">\(x_l\)</span>的一半通道，如下所示:<span class="math display">\[\boldsymbol{x}_{l,i}^{^{\prime}}=\begin{cases}b_l\cdot\boldsymbol{x}_{l,i},&amp;\mathrm{~if~}i&lt;C/2\\\boldsymbol{x}_{l,i},&amp;\mathrm{~otherwise}&amp;\end{cases}\]</span></p><p>其中<span class="math inline">\(\boldsymbol{x}_{l,i}\)</span> 是第<span class="math inline">\(i\)</span> 层的第<span class="math inline">\(l\)</span>个特征图，<span class="math inline">\(C\)</span>是通道数。这个方法不仅增强了主干的去噪能力，而且还避免了全局应用缩放的不良结果，从而在降噪和纹理保存之间取得更细微的平衡。</p><p>为了进一步缓解由于增强去噪而导致的过度平滑纹理问题，FreeU进一步在傅里叶域中使用光谱调制来选择性地减少跳过特征的低频分量。在数学上，此操作执行如下<span class="math display">\[\begin{aligned}\mathcal{F}(\boldsymbol{h}_{l,i})&amp; =\operatorname{FFT}(\boldsymbol{h}_{l,i})  \\\mathcal{F}^{\prime}(\boldsymbol{h}_{l,i})&amp; =\mathcal{F}(\boldsymbol{h}_{l,i})\odot\boldsymbol{\alpha}_{l,i}  \\\boldsymbol{h}_{l,i}^{\prime}&amp; =\mathrm{IFFT}(\mathcal{F}^{\prime}(\boldsymbol{h}_{l,i})) \end{aligned}\]</span></p><p><span class="math inline">\(\mathrm{FFT}(\cdot)\)</span> 和 <span class="math inline">\(\operatorname{IFFT}(\cdot)\)</span> 是傅里叶变换和反傅里叶变换，<span class="math inline">\(\odot\)</span> 是逐元素乘法。</p><p><span class="math inline">\(\boldsymbol{\alpha}_{l,i}\)</span>是一个傅里叶掩码，用于设定<span class="math inline">\(s_l\)</span>的大小，<span class="math inline">\(R\)</span>是半径，<span class="math inline">\(r_\mathrm{thresh}\)</span> 是频率阈值 <span class="math display">\[\boldsymbol{\alpha}_{l,i}(r)=\begin{cases}s_l&amp;\mathrm{~if~}r&lt;r_\mathrm{thresh},\\1&amp;\text{ otherwise.}&amp;\end{cases}\]</span></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>笔记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>文字生成图片</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>使用xgboost的c接口推理模型</title>
     <link href="/2023/09/10/%E4%BD%BF%E7%94%A8xgboost%E7%9A%84c%E6%8E%A5%E5%8F%A3%E6%8E%A8%E7%90%86%E6%A8%A1%E5%9E%8B/"/>
     <url>/2023/09/10/%E4%BD%BF%E7%94%A8xgboost%E7%9A%84c%E6%8E%A5%E5%8F%A3%E6%8E%A8%E7%90%86%E6%A8%A1%E5%9E%8B/</url>
@@ -262,31 +287,6 @@
     <content type="html"><![CDATA[<h1 id="arch4edu搞崩了我的flutter">arch4edu搞崩了我的flutter</h1><p>今天是快乐的一天，适合滚包 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">yay</span><br></code></pre></td></tr></table></figure> 一切安好，arch4edu说我的flutter需要更新 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">==&gt; 要排除的包: (示例: <span class="hljs-string">&quot;1 2 3&quot;</span>, <span class="hljs-string">&quot;1-3&quot;</span>, <span class="hljs-string">&quot;^4&quot;</span> 或软件库名称)<br> -&gt; 排除软件包可能会导致不完整的升级并破坏系统<br>==&gt; <br><br></code></pre></td></tr></table></figure> 没什么需要排除的，接下来就是愉快的自动安装</p><p>突然我看到了这个</p><figure><img src="https://cdn.studyinglover.com/pic/2023/08/d257220b6c5bc01465f92fdd72320344.png" alt="" /><figcaption>image.png</figcaption></figure><p>警告啦，没啥好担心的啦，待会跑一下看好着没</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash">flutter doctor                     <br>Found an existing Pub cache at /home/zjh/.pub-cache.<br>It can be repaired by running `dart pub cache repair`.<br>It can be reset by running `dart pub cache clean`.<br>Found an existing Dart Analysis Server cache at /home/zjh/.dartServer.<br>It can be reset by deleting /home/zjh/.dartServer.<br>Flutter failed to write to a file at <span class="hljs-string">&quot;/opt/flutter/packages/flutter_tools/.dart_tool/version&quot;</span>.<br>Please ensure that the SDK and/or project is installed <span class="hljs-keyword">in</span> a location that has <span class="hljs-built_in">read</span>/write<br>permissions <span class="hljs-keyword">for</span> the current user.<br>Try running:<br>  sudo <span class="hljs-built_in">chown</span> -R $(<span class="hljs-built_in">whoami</span>) /opt/flutter/packages/flutter_tools/.dart_tool/version<br><br></code></pre></td></tr></table></figure><p>好的他炸了</p><p>看着问题不大，就是读写权限的问题，的问题？鬼知道会有啥问题，我决定让arch4edu滚蛋</p><p>先<code>sudo pacman -Rns flutter</code>把arch4edu的flutter删掉，然后去<code>/etc/pacman.conf</code> 删除了arch4edu镜像，再<code>sudo pacman -Syu</code>滚一遍包，最后<code>yay flutter</code></p><p>中间会有一个问题 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">错误：无法提交处理 (有冲突的文件)<br>flutter: 文件系统中已存在 <span class="hljs-regexp">/opt/</span>flutter<span class="hljs-regexp">/bin/</span>cache/flutter_version_check.stamp <br>发生错误，没有软件包被更新。<br></code></pre></td></tr></table></figure> ok,sudo直接删就行，反正是cache</p><p>最后<code>flutter docker</code></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">Doctor summary (to see all details, run flutter doctor -v):<br>[✓] Flutter (Channel stable, 3.13.0, on Arch Linux 6.4.10-arch1-1, locale zh_CN.UTF-8)<br>[✓] Android toolchain - develop <span class="hljs-keyword">for</span> Android devices (Android SDK version 34.0.0)<br>[✓] Chrome - develop <span class="hljs-keyword">for</span> the web<br>[✓] Linux toolchain - develop <span class="hljs-keyword">for</span> Linux desktop<br>[✓] Android Studio (version 2022.2)<br>[✓] Connected device (2 available)<br>[✓] Network resources<br><br>• No issues found!<br><br></code></pre></td></tr></table></figure>]]></content>
     
     
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>FreeU-文字生成图片的免费午餐笔记</title>
-    <link href="/2023/08/18/FreeU-%E6%96%87%E5%AD%97%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%E7%9A%84%E5%85%8D%E8%B4%B9%E5%8D%88%E9%A4%90/"/>
-    <url>/2023/08/18/FreeU-%E6%96%87%E5%AD%97%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%E7%9A%84%E5%85%8D%E8%B4%B9%E5%8D%88%E9%A4%90/</url>
-    
-    <content type="html"><![CDATA[<h1 id="freeu-文字生成图片的免费午餐">FreeU-文字生成图片的免费午餐</h1><p>项目地址<a href="https://chenyangsi.top/FreeU/">主页</a></p><p>作者在这篇论文引入了一种对UNet的改进方式，不需要重新训练和微调。</p><figure><img src="https://cdn.studyinglover.com/pic/2023/10/c48e2f490270ef836b26f6d7ed8d7f0e.png" alt="" /><figcaption>image.png</figcaption></figure><p>在UNet中存在两种连接，一种是上一层网络传递来的基础连接，主要贡献去噪能力。一种是跳线连接，主要贡献高频细节。UNet会将这两部分的特征contat之后作为下一层输入。作者的方法就是对这两部分做调整来提升图像质量。 <img src="https://cdn.studyinglover.com/pic/2023/10/483c5afa7533a2e1dcaf2cf0273c6677.png" alt="image.png" /></p><p>从技术上讲，对于 U-Net 解码器的第 <span class="math inline">\(l\)</span> 个块，<span class="math inline">\(\boldsymbol{x}_{l}\)</span> 表示前一个块主主干的主干特征图，让 <span class="math inline">\(h_l\)</span> 表示通过相应跳过连接传播的特征图。为了调整这些特征图，作者引入了两个标量因子：<span class="math inline">\(x_l\)</span> 对应的主干特征比例因子 <span class="math inline">\(b_l\)</span> 和 <span class="math inline">\(h_l\)</span> 的跳线特征对应的比例因子 sl。具体来说，因子 <span class="math inline">\(b_l\)</span> 旨在放大主干特征图 <span class="math inline">\(x_l\)</span>，而因子 <span class="math inline">\(s_l\)</span> 旨在衰减跳过特征图 <span class="math inline">\(h_l\)</span>。对于主干特征，在实验调查中，作者发现通过与<span class="math inline">\(b_l\)</span>相乘不加区别地放大<span class="math inline">\(x_l\)</span>的所有通道，在生成的合成图像中产生过度平滑的纹理。原因是增强的U-Net在去噪时损害了图像的高频细节，所以将缩放操作限制在<span class="math inline">\(x_l\)</span>的一半通道，如下所示:<span class="math display">\[\boldsymbol{x}_{l,i}^{^{\prime}}=\begin{cases}b_l\cdot\boldsymbol{x}_{l,i},&amp;\mathrm{~if~}i&lt;C/2\\\boldsymbol{x}_{l,i},&amp;\mathrm{~otherwise}&amp;\end{cases}\]</span></p><p>其中<span class="math inline">\(\boldsymbol{x}_{l,i}\)</span> 是第<span class="math inline">\(i\)</span> 层的第<span class="math inline">\(l\)</span>个特征图，<span class="math inline">\(C\)</span>是通道数。这个方法不仅增强了主干的去噪能力，而且还避免了全局应用缩放的不良结果，从而在降噪和纹理保存之间取得更细微的平衡。</p><p>为了进一步缓解由于增强去噪而导致的过度平滑纹理问题，FreeU进一步在傅里叶域中使用光谱调制来选择性地减少跳过特征的低频分量。在数学上，此操作执行如下<span class="math display">\[\begin{aligned}\mathcal{F}(\boldsymbol{h}_{l,i})&amp; =\operatorname{FFT}(\boldsymbol{h}_{l,i})  \\\mathcal{F}^{\prime}(\boldsymbol{h}_{l,i})&amp; =\mathcal{F}(\boldsymbol{h}_{l,i})\odot\boldsymbol{\alpha}_{l,i}  \\\boldsymbol{h}_{l,i}^{\prime}&amp; =\mathrm{IFFT}(\mathcal{F}^{\prime}(\boldsymbol{h}_{l,i})) \end{aligned}\]</span></p><p><span class="math inline">\(\mathrm{FFT}(\cdot)\)</span> 和 <span class="math inline">\(\operatorname{IFFT}(\cdot)\)</span> 是傅里叶变换和反傅里叶变换，<span class="math inline">\(\odot\)</span> 是逐元素乘法。</p><p><span class="math inline">\(\boldsymbol{\alpha}_{l,i}\)</span>是一个傅里叶掩码，用于设定<span class="math inline">\(s_l\)</span>的大小，<span class="math inline">\(R\)</span>是半径，<span class="math inline">\(r_\mathrm{thresh}\)</span> 是频率阈值 <span class="math display">\[\boldsymbol{\alpha}_{l,i}(r)=\begin{cases}s_l&amp;\mathrm{~if~}r&lt;r_\mathrm{thresh},\\1&amp;\text{ otherwise.}&amp;\end{cases}\]</span></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>笔记</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>文字生成图片</tag>
-      
-    </tags>
     
   </entry>
   

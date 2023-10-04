@@ -9,8 +9,36 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sun, 01 Oct 2023 13:22:21 GMT</pubDate>
+    <pubDate>Wed, 04 Oct 2023 01:45:48 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>FreeU-文字生成图片的免费午餐笔记</title>
+      <link>https://studyinglover.com/2023/10/01/FreeU-%E6%96%87%E5%AD%97%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%E7%9A%84%E5%85%8D%E8%B4%B9%E5%8D%88%E9%A4%90/</link>
+      <guid>https://studyinglover.com/2023/10/01/FreeU-%E6%96%87%E5%AD%97%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%E7%9A%84%E5%85%8D%E8%B4%B9%E5%8D%88%E9%A4%90/</guid>
+      <pubDate>Sun, 01 Oct 2023 15:05:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;freeu-文字生成图片的免费午餐&quot;&gt;FreeU-文字生成图片的免费午餐&lt;/h1&gt;
+&lt;p&gt;项目地址&lt;a href=&quot;https://chenyangsi.top/FreeU/&quot;&gt;主页&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;作者在这篇论文引入了一种对UNet的改进方式，不需要重新训</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="freeu-文字生成图片的免费午餐">FreeU-文字生成图片的免费午餐</h1><p>项目地址<a href="https://chenyangsi.top/FreeU/">主页</a></p><p>作者在这篇论文引入了一种对UNet的改进方式，不需要重新训练和微调。</p><figure><img src="https://cdn.studyinglover.com/pic/2023/10/c48e2f490270ef836b26f6d7ed8d7f0e.png" alt="" /><figcaption>image.png</figcaption></figure><p>在UNet中存在两种连接，一种是上一层网络传递来的基础连接，主要贡献去噪能力。一种是跳线连接，主要贡献高频细节。UNet会将这两部分的特征contat之后作为下一层输入。作者的方法就是对这两部分做调整来提升图像质量。 <img src="https://cdn.studyinglover.com/pic/2023/10/483c5afa7533a2e1dcaf2cf0273c6677.png" alt="image.png" /></p><p>从技术上讲，对于 U-Net 解码器的第 <span class="math inline">\(l\)</span> 个块，<span class="math inline">\(\boldsymbol{x}_{l}\)</span> 表示前一个块主主干的主干特征图，让 <span class="math inline">\(h_l\)</span> 表示通过相应跳过连接传播的特征图。为了调整这些特征图，作者引入了两个标量因子：<span class="math inline">\(x_l\)</span> 对应的主干特征比例因子 <span class="math inline">\(b_l\)</span> 和 <span class="math inline">\(h_l\)</span> 的跳线特征对应的比例因子 sl。具体来说，因子 <span class="math inline">\(b_l\)</span> 旨在放大主干特征图 <span class="math inline">\(x_l\)</span>，而因子 <span class="math inline">\(s_l\)</span> 旨在衰减跳过特征图 <span class="math inline">\(h_l\)</span>。对于主干特征，在实验调查中，作者发现通过与<span class="math inline">\(b_l\)</span>相乘不加区别地放大<span class="math inline">\(x_l\)</span>的所有通道，在生成的合成图像中产生过度平滑的纹理。原因是增强的U-Net在去噪时损害了图像的高频细节，所以将缩放操作限制在<span class="math inline">\(x_l\)</span>的一半通道，如下所示:<span class="math display">\[\boldsymbol{x}_{l,i}^{^{\prime}}=\begin{cases}b_l\cdot\boldsymbol{x}_{l,i},&amp;\mathrm{~if~}i&lt;C/2\\\boldsymbol{x}_{l,i},&amp;\mathrm{~otherwise}&amp;\end{cases}\]</span></p><p>其中<span class="math inline">\(\boldsymbol{x}_{l,i}\)</span> 是第<span class="math inline">\(i\)</span> 层的第<span class="math inline">\(l\)</span>个特征图，<span class="math inline">\(C\)</span>是通道数。这个方法不仅增强了主干的去噪能力，而且还避免了全局应用缩放的不良结果，从而在降噪和纹理保存之间取得更细微的平衡。</p><p>为了进一步缓解由于增强去噪而导致的过度平滑纹理问题，FreeU进一步在傅里叶域中使用光谱调制来选择性地减少跳过特征的低频分量。在数学上，此操作执行如下<span class="math display">\[\begin{aligned}\mathcal{F}(\boldsymbol{h}_{l,i})&amp; =\operatorname{FFT}(\boldsymbol{h}_{l,i})  \\\mathcal{F}^{\prime}(\boldsymbol{h}_{l,i})&amp; =\mathcal{F}(\boldsymbol{h}_{l,i})\odot\boldsymbol{\alpha}_{l,i}  \\\boldsymbol{h}_{l,i}^{\prime}&amp; =\mathrm{IFFT}(\mathcal{F}^{\prime}(\boldsymbol{h}_{l,i})) \end{aligned}\]</span></p><p><span class="math inline">\(\mathrm{FFT}(\cdot)\)</span> 和 <span class="math inline">\(\operatorname{IFFT}(\cdot)\)</span> 是傅里叶变换和反傅里叶变换，<span class="math inline">\(\odot\)</span> 是逐元素乘法。</p><p><span class="math inline">\(\boldsymbol{\alpha}_{l,i}\)</span>是一个傅里叶掩码，用于设定<span class="math inline">\(s_l\)</span>的大小，<span class="math inline">\(R\)</span>是半径，<span class="math inline">\(r_\mathrm{thresh}\)</span> 是频率阈值 <span class="math display">\[\boldsymbol{\alpha}_{l,i}(r)=\begin{cases}s_l&amp;\mathrm{~if~}r&lt;r_\mathrm{thresh},\\1&amp;\text{ otherwise.}&amp;\end{cases}\]</span></p>]]></content:encoded>
+      
+      
+      <category domain="https://studyinglover.com/categories/%E7%AC%94%E8%AE%B0/">笔记</category>
+      
+      
+      <category domain="https://studyinglover.com/tags/%E6%96%87%E5%AD%97%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87/">文字生成图片</category>
+      
+      
+      <comments>https://studyinglover.com/2023/10/01/FreeU-%E6%96%87%E5%AD%97%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%E7%9A%84%E5%85%8D%E8%B4%B9%E5%8D%88%E9%A4%90/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>使用xgboost的c接口推理模型</title>
@@ -325,34 +353,6 @@
       
       
       <comments>https://studyinglover.com/2023/08/19/arch4edu%E6%90%9E%E5%B4%A9%E4%BA%86%E6%88%91%E7%9A%84flutter/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>FreeU-文字生成图片的免费午餐笔记</title>
-      <link>https://studyinglover.com/2023/08/18/FreeU-%E6%96%87%E5%AD%97%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%E7%9A%84%E5%85%8D%E8%B4%B9%E5%8D%88%E9%A4%90/</link>
-      <guid>https://studyinglover.com/2023/08/18/FreeU-%E6%96%87%E5%AD%97%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%E7%9A%84%E5%85%8D%E8%B4%B9%E5%8D%88%E9%A4%90/</guid>
-      <pubDate>Fri, 18 Aug 2023 15:05:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;freeu-文字生成图片的免费午餐&quot;&gt;FreeU-文字生成图片的免费午餐&lt;/h1&gt;
-&lt;p&gt;项目地址&lt;a href=&quot;https://chenyangsi.top/FreeU/&quot;&gt;主页&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;作者在这篇论文引入了一种对UNet的改进方式，不需要重新训</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="freeu-文字生成图片的免费午餐">FreeU-文字生成图片的免费午餐</h1><p>项目地址<a href="https://chenyangsi.top/FreeU/">主页</a></p><p>作者在这篇论文引入了一种对UNet的改进方式，不需要重新训练和微调。</p><figure><img src="https://cdn.studyinglover.com/pic/2023/10/c48e2f490270ef836b26f6d7ed8d7f0e.png" alt="" /><figcaption>image.png</figcaption></figure><p>在UNet中存在两种连接，一种是上一层网络传递来的基础连接，主要贡献去噪能力。一种是跳线连接，主要贡献高频细节。UNet会将这两部分的特征contat之后作为下一层输入。作者的方法就是对这两部分做调整来提升图像质量。 <img src="https://cdn.studyinglover.com/pic/2023/10/483c5afa7533a2e1dcaf2cf0273c6677.png" alt="image.png" /></p><p>从技术上讲，对于 U-Net 解码器的第 <span class="math inline">\(l\)</span> 个块，<span class="math inline">\(\boldsymbol{x}_{l}\)</span> 表示前一个块主主干的主干特征图，让 <span class="math inline">\(h_l\)</span> 表示通过相应跳过连接传播的特征图。为了调整这些特征图，作者引入了两个标量因子：<span class="math inline">\(x_l\)</span> 对应的主干特征比例因子 <span class="math inline">\(b_l\)</span> 和 <span class="math inline">\(h_l\)</span> 的跳线特征对应的比例因子 sl。具体来说，因子 <span class="math inline">\(b_l\)</span> 旨在放大主干特征图 <span class="math inline">\(x_l\)</span>，而因子 <span class="math inline">\(s_l\)</span> 旨在衰减跳过特征图 <span class="math inline">\(h_l\)</span>。对于主干特征，在实验调查中，作者发现通过与<span class="math inline">\(b_l\)</span>相乘不加区别地放大<span class="math inline">\(x_l\)</span>的所有通道，在生成的合成图像中产生过度平滑的纹理。原因是增强的U-Net在去噪时损害了图像的高频细节，所以将缩放操作限制在<span class="math inline">\(x_l\)</span>的一半通道，如下所示:<span class="math display">\[\boldsymbol{x}_{l,i}^{^{\prime}}=\begin{cases}b_l\cdot\boldsymbol{x}_{l,i},&amp;\mathrm{~if~}i&lt;C/2\\\boldsymbol{x}_{l,i},&amp;\mathrm{~otherwise}&amp;\end{cases}\]</span></p><p>其中<span class="math inline">\(\boldsymbol{x}_{l,i}\)</span> 是第<span class="math inline">\(i\)</span> 层的第<span class="math inline">\(l\)</span>个特征图，<span class="math inline">\(C\)</span>是通道数。这个方法不仅增强了主干的去噪能力，而且还避免了全局应用缩放的不良结果，从而在降噪和纹理保存之间取得更细微的平衡。</p><p>为了进一步缓解由于增强去噪而导致的过度平滑纹理问题，FreeU进一步在傅里叶域中使用光谱调制来选择性地减少跳过特征的低频分量。在数学上，此操作执行如下<span class="math display">\[\begin{aligned}\mathcal{F}(\boldsymbol{h}_{l,i})&amp; =\operatorname{FFT}(\boldsymbol{h}_{l,i})  \\\mathcal{F}^{\prime}(\boldsymbol{h}_{l,i})&amp; =\mathcal{F}(\boldsymbol{h}_{l,i})\odot\boldsymbol{\alpha}_{l,i}  \\\boldsymbol{h}_{l,i}^{\prime}&amp; =\mathrm{IFFT}(\mathcal{F}^{\prime}(\boldsymbol{h}_{l,i})) \end{aligned}\]</span></p><p><span class="math inline">\(\mathrm{FFT}(\cdot)\)</span> 和 <span class="math inline">\(\operatorname{IFFT}(\cdot)\)</span> 是傅里叶变换和反傅里叶变换，<span class="math inline">\(\odot\)</span> 是逐元素乘法。</p><p><span class="math inline">\(\boldsymbol{\alpha}_{l,i}\)</span>是一个傅里叶掩码，用于设定<span class="math inline">\(s_l\)</span>的大小，<span class="math inline">\(R\)</span>是半径，<span class="math inline">\(r_\mathrm{thresh}\)</span> 是频率阈值 <span class="math display">\[\boldsymbol{\alpha}_{l,i}(r)=\begin{cases}s_l&amp;\mathrm{~if~}r&lt;r_\mathrm{thresh},\\1&amp;\text{ otherwise.}&amp;\end{cases}\]</span></p>]]></content:encoded>
-      
-      
-      <category domain="https://studyinglover.com/categories/%E7%AC%94%E8%AE%B0/">笔记</category>
-      
-      
-      <category domain="https://studyinglover.com/tags/%E6%96%87%E5%AD%97%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87/">文字生成图片</category>
-      
-      
-      <comments>https://studyinglover.com/2023/08/18/FreeU-%E6%96%87%E5%AD%97%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%E7%9A%84%E5%85%8D%E8%B4%B9%E5%8D%88%E9%A4%90/#disqus_thread</comments>
       
     </item>
     

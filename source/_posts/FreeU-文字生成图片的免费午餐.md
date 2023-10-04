@@ -2,7 +2,7 @@
 title: FreeU-文字生成图片的免费午餐笔记
 banner_img: https://cdn.studyinglover.com/pic/2023/10/c48e2f490270ef836b26f6d7ed8d7f0e.png
 index_img: https://cdn.studyinglover.com/pic/2023/10/483c5afa7533a2e1dcaf2cf0273c6677.png
-date: 2023-8-18 15:05:00
+date: 2023-10-1 15:05:00
 categories:
 - 笔记
 tags:

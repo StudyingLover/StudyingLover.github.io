@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.studyinglover.com/pic/2023/08/d257220b6c5bc01465f92fdd72320344.png">
 <meta property="article:published_time" content="2023-08-19T21:36:00.000Z">
-<meta property="article:modified_time" content="2023-10-04T01:45:48.925Z">
+<meta property="article:modified_time" content="2023-10-09T13:50:30.129Z">
 <meta property="article:author" content="StudyingLover">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.studyinglover.com/pic/2023/08/d257220b6c5bc01465f92fdd72320344.png">
@@ -366,7 +366,7 @@
 <p>好的他炸了</p>
 <p>看着问题不大，就是读写权限的问题，的问题？鬼知道会有啥问题，我决定让arch4edu滚蛋</p>
 <p>先<code>sudo pacman -Rns flutter</code>把arch4edu的flutter删掉，然后去<code>/etc/pacman.conf</code> 删除了arch4edu镜像，再<code>sudo pacman -Syu</code>滚一遍包，最后<code>yay flutter</code></p>
-<p>中间会有一个问题 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">错误：无法提交处理 (有冲突的文件)<br>flutter: 文件系统中已存在 <span class="hljs-regexp">/opt/</span>flutter<span class="hljs-regexp">/bin/</span>cache/flutter_version_check.stamp <br>发生错误，没有软件包被更新。<br></code></pre></td></tr></table></figure> ok,sudo直接删就行，反正是cache</p>
+<p>中间会有一个问题 <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dts">错误：无法提交处理 (有冲突的文件)<br><span class="hljs-symbol">flutter:</span> 文件系统中已存在 <span class="hljs-keyword">/opt/</span>flutter<span class="hljs-keyword">/bin/</span>cache/flutter_version_check.stamp <br>发生错误，没有软件包被更新。<br></code></pre></td></tr></table></figure> ok,sudo直接删就行，反正是cache</p>
 <p>最后<code>flutter docker</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">Doctor summary (to see all details, run flutter doctor -v):<br>[✓] Flutter (Channel stable, 3.13.0, on Arch Linux 6.4.10-arch1-1, locale zh_CN.UTF-8)<br>[✓] Android toolchain - develop <span class="hljs-keyword">for</span> Android devices (Android SDK version 34.0.0)<br>[✓] Chrome - develop <span class="hljs-keyword">for</span> the web<br>[✓] Linux toolchain - develop <span class="hljs-keyword">for</span> Linux desktop<br>[✓] Android Studio (version 2022.2)<br>[✓] Connected device (2 available)<br>[✓] Network resources<br><br>• No issues found!<br><br></code></pre></td></tr></table></figure>
 

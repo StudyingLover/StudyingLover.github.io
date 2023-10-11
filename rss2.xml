@@ -9,8 +9,33 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 09 Oct 2023 13:50:30 GMT</pubDate>
+    <pubDate>Wed, 11 Oct 2023 07:33:40 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>cloudlflare推理llama2</title>
+      <link>https://studyinglover.com/2023/10/11/cloudlflare%E6%8E%A8%E7%90%86llama2/</link>
+      <guid>https://studyinglover.com/2023/10/11/cloudlflare%E6%8E%A8%E7%90%86llama2/</guid>
+      <pubDate>Wed, 11 Oct 2023 15:32:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;cloudlflare推理llama2&quot;&gt;cloudlflare推理llama2&lt;/h1&gt;
+&lt;p&gt;最近，cloudlfare悄悄上线了一项新功能，全球网络上的gpu加速推理，显然的，我们可以用它推理llama2,cloudflare也提供了一个库进行推理。&lt;/p&gt;</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="cloudlflare推理llama2">cloudlflare推理llama2</h1><p>最近，cloudlfare悄悄上线了一项新功能，全球网络上的gpu加速推理，显然的，我们可以用它推理llama2,cloudflare也提供了一个库进行推理。</p><p>新建一个cloudflare,然后，代码改成下面的，就可以进行推理了 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Ai</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./vendor/@cloudflare/ai.js&#x27;</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-keyword">async</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-params">request, env</span>) &#123;<br>    <span class="hljs-keyword">const</span> tasks = [];<br>    <span class="hljs-keyword">const</span> ai = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Ai</span>(env.<span class="hljs-property">AI</span>);<br><br>    <span class="hljs-comment">// Get the request body</span><br>    <span class="hljs-keyword">const</span> requestBody = <span class="hljs-keyword">await</span> request.<span class="hljs-title function_">json</span>();<br><br>    <span class="hljs-comment">// messages - chat style input</span><br>    <span class="hljs-keyword">let</span> chat = &#123;<br>      <span class="hljs-attr">messages</span>: [<br>        &#123; <span class="hljs-attr">role</span>: <span class="hljs-string">&#x27;system&#x27;</span>, <span class="hljs-attr">content</span>: <span class="hljs-string">&#x27;You are a helpful, kind, honest, friendly, good at writing and never fails to answer my requests immediately and with details and precision.&#x27;</span>&#125;,<br>        &#123; <span class="hljs-attr">role</span>: <span class="hljs-string">&#x27;user&#x27;</span>, <span class="hljs-attr">content</span>: requestBody.<span class="hljs-property">prompt</span> &#125;<br>      ]<br>    &#125;;<br>    <span class="hljs-keyword">let</span> response = <span class="hljs-keyword">await</span> ai.<span class="hljs-title function_">run</span>(<span class="hljs-string">&#x27;@cf/meta/llama-2-7b-chat-int8&#x27;</span>, chat);<br>    tasks.<span class="hljs-title function_">push</span>(&#123; <span class="hljs-attr">inputs</span>: chat, response &#125;);<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-title class_">Response</span>.<span class="hljs-title function_">json</span>(tasks);<br>  &#125;<br>&#125;;<br></code></pre></td></tr></table></figure></p><p>我们可以测试一下,在命令行运行下面的命令，将<code>https://example.workers.dev/</code> 换成你的网址。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -X POST https://example.workers.dev/ -d <span class="hljs-string">&#x27;&#123;&quot;prompt&quot;:&quot;Write a poem that talks about the connectivity cloud&quot;&#125;&#x27;</span> <br></code></pre></td></tr></table></figure></p><p>看到类似下面的返回值代表成功 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs swift">[&#123;<span class="hljs-string">&quot;inputs&quot;</span>:&#123;<span class="hljs-string">&quot;messages&quot;</span>:[&#123;<span class="hljs-string">&quot;role&quot;</span>:<span class="hljs-string">&quot;system&quot;</span>,<span class="hljs-string">&quot;content&quot;</span>:<span class="hljs-string">&quot;You are a helpful, kind, honest, friendly, good at writing and never fails to answer my requests immediately and with details and precision.&quot;</span>&#125;,&#123;<span class="hljs-string">&quot;role&quot;</span>:<span class="hljs-string">&quot;user&quot;</span>,<span class="hljs-string">&quot;content&quot;</span>:<span class="hljs-string">&quot;Write a poem that talks about the connectivity cloud&quot;</span>&#125;]&#125;,<span class="hljs-string">&quot;response&quot;</span>:&#123;<span class="hljs-string">&quot;response&quot;</span>:<span class="hljs-string">&quot;In the realm of the digital sky,<span class="hljs-subst">\n</span>Where information flows, and data fly,<span class="hljs-subst">\n</span>There&#x27;s a place that brings us all together,<span class="hljs-subst">\n</span>A connectivity cloud, a true forever.<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>It&#x27;s a space that&#x27;s vast and wide,<span class="hljs-subst">\n</span>Where thoughts and ideas collide,<span class="hljs-subst">\n</span>A hub of communication and exchange,<span class="hljs-subst">\n</span>Where the world&#x27;s voices all combine and blend.<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>In this cloud of connectivity,<span class="hljs-subst">\n</span>We find our voices, our identity,<span class="hljs-subst">\n</span>A platform for sharing and growth,<span class="hljs-subst">\n</span>Where our stories are told and our dreams take flight.<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>With just a click or tap of a key,<span class="hljs-subst">\n</span>We can connect with anyone, anywhere,<span class="hljs-subst">\n</span>Sharing laughter, love, and tears,<span class="hljs-subst">\n</span>In this digital embrace, we all share.<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>So let us cherish this cloud of connectivity,<span class="hljs-subst">\n</span>This gift that brings us all sovereignty,<span class="hljs-subst">\n</span>For in its depths, we find our tribe,<span class="hljs-subst">\n</span>And our voices, heard, can never be denied.<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>In this cloud of connectivity,<span class="hljs-subst">\n</span>We are all connected, you see,<span class="hljs-subst">\n</span>A global community, united and free,<span class="hljs-subst">\n</span>In this digital age, where we all can be&quot;</span>&#125;&#125;]<br></code></pre></td></tr></table></figure></p>]]></content:encoded>
+      
+      
+      <category domain="https://studyinglover.com/categories/%E8%B8%A9%E5%9D%91/">踩坑</category>
+      
+      
+      
+      <comments>https://studyinglover.com/2023/10/11/cloudlflare%E6%8E%A8%E7%90%86llama2/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>docker搭建elasticsearch并使用python连接</title>
@@ -506,31 +531,6 @@
       
       
       <comments>https://studyinglover.com/2023/08/06/GPU%E9%83%A8%E7%BD%B2llama-cpp-python(llama.cpp%E9%80%9A%E7%94%A8)/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>花式求GCD</title>
-      <link>https://studyinglover.com/2023/08/02/%E8%8A%B1%E5%BC%8F%E6%B1%82GCD/</link>
-      <guid>https://studyinglover.com/2023/08/02/%E8%8A%B1%E5%BC%8F%E6%B1%82GCD/</guid>
-      <pubDate>Wed, 02 Aug 2023 18:46:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;花式求gcd&quot;&gt;花式求GCD&lt;/h1&gt;
-&lt;p&gt;今天学校实验室纳新群有同学提到了&lt;code&gt;a^=b^=a^=b​&lt;/code&gt; 交换两个数的操作，我突然想到之前在知乎看到通过异或实现gcd的方法，一番翻找后没啥结果，便去问了下认识的oi大佬有没有一行求gcd的算法</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="花式求gcd">花式求GCD</h1><p>今天学校实验室纳新群有同学提到了<code>a^=b^=a^=b​</code> 交换两个数的操作，我突然想到之前在知乎看到通过异或实现gcd的方法，一番翻找后没啥结果，便去问了下认识的oi大佬有没有一行求gcd的算法。</p><p>大佬很快给出了一个函数<code>int gcd(int a,int b)&#123;return y?gcd(y,x%y):x;&#125;</code> 真的就是一行，完整的代码就是下面这个</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">gcd</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>&#123; <span class="hljs-keyword">return</span> y ? <span class="hljs-built_in">gcd</span>(y, x % y) : x; &#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br><span class="hljs-type">int</span> a,b;<br>a=<span class="hljs-number">10</span>;<br>b=<span class="hljs-number">20</span>;<br>a = <span class="hljs-built_in">gcd</span>(a,b);<br>cout&lt;&lt;a&lt;&lt;endl;<br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure><p>但是我一像不对啊，我的异或呢？我又问了一下，大佬给了我一个截图 <img src="https://cdn.studyinglover.com/pic/2023/08/07b57e65da92d9c19bb82d740132f07c.png" /></p><p>就是这个神奇的写法</p><p>这段代码的实现方式是，使用异或运算符（^）和取模运算符（%）来交换变量a和b的值。具体来说，代码中的while循环会一直执行，直到b的值为0为止。在每次循环中，代码会先将a对b取模，然后将结果赋值给a，接着将b对a取模，然后将结果赋值给b，最后使用异或运算符交换a和b的值。这样，当循环结束时，a和b的值就被成功地交换了。(来自copilot chat)</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br><span class="hljs-type">int</span> a,b;<br>a=<span class="hljs-number">10</span>;<br>b=<span class="hljs-number">20</span>;<br><span class="hljs-keyword">while</span>(b^=a^=b^=a%=b);<br>cout&lt;&lt;a&lt;&lt;endl;<br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>]]></content:encoded>
-      
-      
-      
-      <category domain="https://studyinglover.com/tags/%E7%AE%97%E6%B3%95/">算法</category>
-      
-      
-      <comments>https://studyinglover.com/2023/08/02/%E8%8A%B1%E5%BC%8F%E6%B1%82GCD/#disqus_thread</comments>
       
     </item>
     

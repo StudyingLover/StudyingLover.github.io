@@ -16,26 +16,24 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="快速上手llama2.c(更新版) 在上一次我同时在我的博客和知乎发布了快速上手llama2.c 之后，我一个小透明也收获了不少收藏，并收到了人生中第一个这样的留言(其实我感觉是机器人)。  当然，之前的llama2.c也有一些不好的地方，例如不能添加自己的prompt,所以我提了这样的一个issue,今天收到了贡献者的回复说是可以用了。那我们来看一下。 首先还是克隆整个仓库，编译并下载模型，这里">
+    <meta name="description" content="xgboost使用GPU最佳实践 首先更新xgboost到2.0.0 1pip install xgboost -U  这里给出一个使用GPU的例子，使用的是nvidia显卡 12345678910111213141516171819202122232425import xgboostimport numpy as npfrom scipy import stats# 生成示例数据np.rando">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快速上手llama2.c(更新版)">
-<meta property="og:url" content="https://studyinglover.com/2023/07/28/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bllama2.c(%E6%9B%B4%E6%96%B0%E7%89%88)/index.html">
+<meta property="og:title" content="FreeU-文字生成图片的免费午餐笔记">
+<meta property="og:url" content="https://studyinglover.com/2023/10/18/xgboost%E4%BD%BF%E7%94%A8GPU%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="快速上手llama2.c(更新版) 在上一次我同时在我的博客和知乎发布了快速上手llama2.c 之后，我一个小透明也收获了不少收藏，并收到了人生中第一个这样的留言(其实我感觉是机器人)。  当然，之前的llama2.c也有一些不好的地方，例如不能添加自己的prompt,所以我提了这样的一个issue,今天收到了贡献者的回复说是可以用了。那我们来看一下。 首先还是克隆整个仓库，编译并下载模型，这里">
+<meta property="og:description" content="xgboost使用GPU最佳实践 首先更新xgboost到2.0.0 1pip install xgboost -U  这里给出一个使用GPU的例子，使用的是nvidia显卡 12345678910111213141516171819202122232425import xgboostimport numpy as npfrom scipy import stats# 生成示例数据np.rando">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.studyinglover.com/pic/2023/07/2eda3b2dcb8d68fc01169f5366c8157c.jpg">
-<meta property="article:published_time" content="2023-07-28T16:31:00.000Z">
+<meta property="article:published_time" content="2023-10-18T18:50:00.000Z">
 <meta property="article:modified_time" content="2023-10-18T10:51:35.552Z">
 <meta property="article:author" content="StudyingLover">
-<meta property="article:tag" content="踩坑">
+<meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.studyinglover.com/pic/2023/07/2eda3b2dcb8d68fc01169f5366c8157c.jpg">
   
   
   
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> 
   
-  <title>快速上手llama2.c(更新版) - plus studio</title>
+  <title>FreeU-文字生成图片的免费午餐笔记 - plus studio</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -268,13 +266,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://github.com/karpathy/llama2.c/blob/master/assets/llama_cute.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('https://cdn.studyinglover.com/pic/2023/10/faf4c4a867b04fc7cc77110926bf2d43.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="快速上手llama2.c(更新版)"></span>
+            <span id="subtitle" data-typed-text="FreeU-文字生成图片的免费午餐笔记"></span>
           
         </div>
 
@@ -290,8 +288,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-28 16:31" pubdate>
-          2023年7月28日 下午
+        <time datetime="2023-10-18 18:50" pubdate>
+          2023年10月18日 晚上
         </time>
       </span>
     
@@ -302,7 +300,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          525 字
         
       </span>
     
@@ -313,7 +311,7 @@
         
         
         
-          14 分钟
+          5 分钟
         
       </span>
     
@@ -351,20 +349,14 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">快速上手llama2.c(更新版)</h1>
+            <h1 style="display: none">FreeU-文字生成图片的免费午餐笔记</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="快速上手llama2.c更新版">快速上手llama2.c(更新版)</h1>
-<p>在上一次我同时在我的博客和知乎发布了<a href="https://studyinglover.com/2023/07/25/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8Bllama2.c/">快速上手llama2.c</a> 之后，我一个小透明也收获了不少收藏，并收到了人生中第一个这样的留言(其实我感觉是机器人)。 <img src="https://cdn.studyinglover.com/pic/2023/07/2eda3b2dcb8d68fc01169f5366c8157c.jpg" srcset="/img/loading.gif" lazyload /></p>
-<p>当然，之前的llama2.c也有一些不好的地方，例如不能添加自己的prompt,所以我提了这样的一个<a target="_blank" rel="noopener" href="https://github.com/karpathy/llama2.c/issues/64">issue</a>,今天收到了贡献者的回复说是可以用了。那我们来看一下。</p>
-<p>首先还是克隆整个仓库，编译并下载模型，这里以15m参数的模型作为示例 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/karpathy/llama2.c.git<br><span class="hljs-built_in">cd</span> llama2.c<br>make run<br>wget https://huggingface.co/karpathy/tinyllamas/resolve/main/stories15M.bin<br></code></pre></td></tr></table></figure></p>
-<p>接下来我们就可以使用编译出来的<code>run</code> 运行了,要使用自己的prompt,需要指定温度和 步长，这里温度设置成1.0,步长设置256,prompt在双引号写，我这里写的是<code>One day morning , I don't want to go to school</code> . <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./run stories15M.bin 1.0 256 <span class="hljs-string">&quot;One day morning , I don&#x27;t want to go to school&quot;</span><br></code></pre></td></tr></table></figure></p>
-<p>这里给出我的运行结果，也就3秒种不到 <figure class="highlight tp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs tp">&lt;s&gt;<br>One day morning , I don<span class="hljs-string">&#x27;t want to go to school, so he packed his trunk lid to pack. memorized his chores, he thought about what his mom would like him to stay home and not do all day. She wanted him to in a very competitive way.</span><br><span class="hljs-string">&quot;Come and play in the puddle, it&#x27;</span>ll be more fun<span class="hljs-comment">!&quot;He begged.</span><br><span class="hljs-comment">Mom shook her head. &quot;No, we haven&#x27;t seen coming for sure,&quot; she said thought. </span><br><span class="hljs-comment">Thumper and Mom just shrugged.</span><br><span class="hljs-comment">&quot;See,&quot; she said. &quot;Come on now. Let&#x27;s go and find some fun ways to clean the world!&quot;</span><br><span class="hljs-comment">The little boy was relieved and ran out to the yard. He had found a great idea to share his day with his mom instead. They scattered around the yard and had fun playing until their tired eyes were aching.</span><br><span class="hljs-comment">&lt;s&gt;</span><br><span class="hljs-comment">Once upon a time, there was a little boy named Tim. Tim was very excited because he was going on a trip with his family. He saw a big bus that helped them get off at their destination.</span><br><span class="hljs-comment">As the bus drove along, Tim noticed an unusual looking man sitting next to it. Tim asked the</span><br><span class="hljs-comment">achieved tok/s: 175.378267</span><br><span class="hljs-comment"></span><br></code></pre></td></tr></table></figure></p>
-<p>当然为了获得更好的效果，我们可以使用更大模型</p>
-<p>下载42m参数模型 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://huggingface.co/karpathy/tinyllamas/resolve/main/stories42M.bin<br></code></pre></td></tr></table></figure></p>
-<p>下载110m参数模型 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://huggingface.co/karpathy/tinyllamas/resolve/main/stories110M.bin<br></code></pre></td></tr></table></figure></p>
+                <h1 id="xgboost使用gpu最佳实践">xgboost使用GPU最佳实践</h1>
+<p>首先更新xgboost到2.0.0 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install xgboost -U <br></code></pre></td></tr></table></figure></p>
+<p>这里给出一个使用GPU的例子，使用的是nvidia显卡 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> xgboost<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">from</span> scipy <span class="hljs-keyword">import</span> stats<br><br><span class="hljs-comment"># 生成示例数据</span><br>np.random.seed(<span class="hljs-number">114514</span>)<br>X = np.random.randn(<span class="hljs-number">100</span>, <span class="hljs-number">3</span>)  <span class="hljs-comment"># 生成100个样本，每个样本有3个特征</span><br>y = stats.bernoulli.rvs(<span class="hljs-number">0.5</span>, size=<span class="hljs-number">100</span>)  <span class="hljs-comment"># 生成二分类标签，概率为0.5</span><br><br><span class="hljs-comment"># 设置参数</span><br>params = &#123;<br>    <span class="hljs-string">&quot;device&quot;</span>: <span class="hljs-string">&quot;cuda&quot;</span><br>&#125;<br><br><span class="hljs-comment"># 创建DMatrix对象</span><br>Xy = xgboost.DMatrix(X, y)<br><br><span class="hljs-comment"># 训练模型</span><br>model = xgboost.train(params, Xy)<br><br><span class="hljs-comment"># 测试模型</span><br>test_array = np.random.randn(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>)<br>dtest = xgboost.DMatrix(test_array)<br>pred = model.predict(dtest)<br><span class="hljs-built_in">print</span>(pred)<br></code></pre></td></tr></table></figure></p>
 
                 
               </div>
@@ -373,11 +365,32 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%B8%A9%E5%9D%91/" class="category-chain-item">踩坑</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E8%B8%A9%E5%9D%91/">#踩坑</a>
+        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">#机器学习</a>
       
     </div>
   
@@ -389,8 +402,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>快速上手llama2.c(更新版)</div>
-      <div>https://studyinglover.com/2023/07/28/快速上手llama2.c(更新版)/</div>
+      <div>FreeU-文字生成图片的免费午餐笔记</div>
+      <div>https://studyinglover.com/2023/10/18/xgboost使用GPU最佳实践/</div>
     </div>
     <div class="license-meta">
       
@@ -402,7 +415,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月28日</div>
+          <div>2023年10月18日</div>
         </div>
       
       
@@ -434,18 +447,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/28/llama-cpp-python%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/" title="llama-cpp-python快速上手">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">llama-cpp-python快速上手</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/27/Paper%20Gestalt%E7%AC%94%E8%AE%B0/" title="Paper Gestalt笔记">
-                        <span class="hidden-mobile">Paper Gestalt笔记</span>
+                      <a href="/2023/10/12/%E9%A9%AC%E8%B8%8F%E6%A3%8B%E7%9B%98/" title="马踏棋盘">
+                        <span class="hidden-mobile">马踏棋盘</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

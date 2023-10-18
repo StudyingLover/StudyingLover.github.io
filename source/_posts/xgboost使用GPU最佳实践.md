@@ -1,5 +1,5 @@
 ---
-title: FreeU-文字生成图片的免费午餐笔记
+title: xgboost使用GPU最佳实践
 banner_img: https://cdn.studyinglover.com/pic/2023/10/faf4c4a867b04fc7cc77110926bf2d43.png
 date: 2023-10-18 18:50:00
 categories:

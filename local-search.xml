@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>xgboost2.0最佳实践</title>
+    <link href="/2023/10/19/xgboost2.0%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
+    <url>/2023/10/19/xgboost2.0%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</url>
+    
+    <content type="html"><![CDATA[<h1 id="xgboost2.0最佳实践">xgboost2.0最佳实践</h1><p>首先更新xgboost到2.0.0 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install xgboost -U <br></code></pre></td></tr></table></figure></p><p>在最新版本的训练中，参数可以使用字典传递。同时数据和样本需要先合并成一个<code>xgb.DMatrix</code> 对象 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 设置参数</span><br>params = &#123;<br>    <span class="hljs-string">&quot;device&quot;</span>: <span class="hljs-string">&quot;cuda&quot;</span>,<br>&#125;<br><br><span class="hljs-comment"># 创建DMatrix对象</span><br>Xy = xgb.DMatrix(X_train, y_train)<br><br><span class="hljs-comment"># 训练模型</span><br>model = xgb.train(params, Xy)<br></code></pre></td></tr></table></figure></p><p>进行分类任务是，需要传递类别数，而不是像之前版本那样自动检测类别 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 设置参数</span><br>params = &#123;<br>    <span class="hljs-string">&quot;device&quot;</span>: <span class="hljs-string">&quot;cuda&quot;</span>,<br>    <span class="hljs-string">&quot;num_class&quot;</span>: <span class="hljs-number">5</span><br>&#125;<br></code></pre></td></tr></table></figure></p><p>根据xgboost路线图<a href="https://github.com/dmlc/xgboost/issues/7547">Roadmap Phasing out the support for old binary format.</a>，在2.2版本将删除对保存旧二进制格式的支持，删除对旧 JSON 模型的支持。在2.3版本将删除对加载旧二进制格式的支持。最新保存模型的方式是 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">xgb.save(bst, <span class="hljs-string">&#x27;model_file_name.json&#x27;</span>)<br></code></pre></td></tr></table></figure></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>踩坑</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>机器学习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>xgboost使用GPU最佳实践</title>
     <link href="/2023/10/18/xgboost%E4%BD%BF%E7%94%A8GPU%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
     <url>/2023/10/18/xgboost%E4%BD%BF%E7%94%A8GPU%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</url>

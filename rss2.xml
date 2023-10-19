@@ -9,8 +9,35 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Wed, 18 Oct 2023 10:59:56 GMT</pubDate>
+    <pubDate>Thu, 19 Oct 2023 00:36:17 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>xgboost2.0最佳实践</title>
+      <link>https://studyinglover.com/2023/10/19/xgboost2.0%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</link>
+      <guid>https://studyinglover.com/2023/10/19/xgboost2.0%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</guid>
+      <pubDate>Thu, 19 Oct 2023 08:30:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;xgboost2.0最佳实践&quot;&gt;xgboost2.0最佳实践&lt;/h1&gt;
+&lt;p&gt;首先更新xgboost到2.0.0 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span cla</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="xgboost2.0最佳实践">xgboost2.0最佳实践</h1><p>首先更新xgboost到2.0.0 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install xgboost -U <br></code></pre></td></tr></table></figure></p><p>在最新版本的训练中，参数可以使用字典传递。同时数据和样本需要先合并成一个<code>xgb.DMatrix</code> 对象 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 设置参数</span><br>params = &#123;<br>    <span class="hljs-string">&quot;device&quot;</span>: <span class="hljs-string">&quot;cuda&quot;</span>,<br>&#125;<br><br><span class="hljs-comment"># 创建DMatrix对象</span><br>Xy = xgb.DMatrix(X_train, y_train)<br><br><span class="hljs-comment"># 训练模型</span><br>model = xgb.train(params, Xy)<br></code></pre></td></tr></table></figure></p><p>进行分类任务是，需要传递类别数，而不是像之前版本那样自动检测类别 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 设置参数</span><br>params = &#123;<br>    <span class="hljs-string">&quot;device&quot;</span>: <span class="hljs-string">&quot;cuda&quot;</span>,<br>    <span class="hljs-string">&quot;num_class&quot;</span>: <span class="hljs-number">5</span><br>&#125;<br></code></pre></td></tr></table></figure></p><p>根据xgboost路线图<a href="https://github.com/dmlc/xgboost/issues/7547">Roadmap Phasing out the support for old binary format.</a>，在2.2版本将删除对保存旧二进制格式的支持，删除对旧 JSON 模型的支持。在2.3版本将删除对加载旧二进制格式的支持。最新保存模型的方式是 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">xgb.save(bst, <span class="hljs-string">&#x27;model_file_name.json&#x27;</span>)<br></code></pre></td></tr></table></figure></p>]]></content:encoded>
+      
+      
+      <category domain="https://studyinglover.com/categories/%E8%B8%A9%E5%9D%91/">踩坑</category>
+      
+      
+      <category domain="https://studyinglover.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</category>
+      
+      
+      <comments>https://studyinglover.com/2023/10/19/xgboost2.0%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>xgboost使用GPU最佳实践</title>
@@ -508,29 +535,6 @@
       
       
       <comments>https://studyinglover.com/2023/08/13/%E5%9C%A8%E7%BB%88%E7%AB%AF%E7%BB%98%E5%88%B6GPU%E6%98%BE%E5%AD%98%E4%BD%BF%E7%94%A8%E6%9B%B2%E7%BA%BF/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>GPTBot介绍</title>
-      <link>https://studyinglover.com/2023/08/11/GPTBot%E4%BB%8B%E7%BB%8D/</link>
-      <guid>https://studyinglover.com/2023/08/11/GPTBot%E4%BB%8B%E7%BB%8D/</guid>
-      <pubDate>Fri, 11 Aug 2023 20:58:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;gptbot介绍&quot;&gt;GPTBot介绍&lt;/h1&gt;
-&lt;p&gt;最近，openai公布了&lt;a href=&quot;https://platform.openai.com/docs/gptbot/gptbot&quot;&gt;GPTBot&lt;/a&gt; 的相关信息，并给出了禁止GPTBot的方法。以下是</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="gptbot介绍">GPTBot介绍</h1><p>最近，openai公布了<a href="https://platform.openai.com/docs/gptbot/gptbot">GPTBot</a> 的相关信息，并给出了禁止GPTBot的方法。以下是全文翻译。</p><p>GPTBot是OpenAI的网络爬虫，可以通过以下User agent和字符串来识别。 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">User</span> agent token: GPTBot<br><span class="hljs-attribute">Full</span> user-agent string: Mozilla/<span class="hljs-number">5</span>.<span class="hljs-number">0</span> AppleWebKit/<span class="hljs-number">537</span>.<span class="hljs-number">36</span> (KHTML, like Gecko; compatible; GPTBot/<span class="hljs-number">1</span>.<span class="hljs-number">0</span>; +https://openai.com/gptbot)<br></code></pre></td></tr></table></figure></p><h2 id="使用">使用</h2><p>使用 GPTBot 用户代理爬取的网页可能会用于改进未来的模型，并且会过滤掉需要付费访问、已知收集个人身份信息（PII）或含有违反我们政策的文本的来源。允许 GPTBot 访问您的网站可以帮助 AI 模型变得更准确，提高它们的一般能力和安全性。在下面，我们还分享了如何禁止 GPTBot 访问您的网站。</p><h3 id="禁止-gptbot">禁止 GPTBot</h3><p>要禁止 GPTBot 访问您的网站，您可以将 GPTBot 添加到您网站的 robots.txt： <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-attribute">User-agent</span><span class="hljs-punctuation">: </span>GPTBot<br><span class="hljs-attribute">Disallow</span><span class="hljs-punctuation">: </span>/<br></code></pre></td></tr></table></figure></p><h3 id="自定义-gptbot-访问">自定义 GPTBot 访问</h3><p>要允许 GPTBot 仅访问您网站的部分内容，您可以将 GPTBot 令牌添加到您网站的 robots.txt，如下所示： <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dts">User-agent: GPTBot<br><span class="hljs-symbol">Allow:</span> <span class="hljs-keyword">/directory-1/</span><br><span class="hljs-symbol">Disallow:</span> <span class="hljs-keyword">/directory-2/</span><br></code></pre></td></tr></table></figure></p><h3 id="ip-出口范围">IP 出口范围</h3><p>对于 OpenAI 的爬虫，它会从 <a href="https://openai.com/gptbot-ranges.txt">OpenAI 网站</a>上记录的 IP 地址段向网站发出请求。</p><p>这里我给出IP 地址段 <figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-number">20.15.240.64</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.240.80</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.240.96</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.240.176</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.241.0</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.242.128</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.242.144</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.242.192</span>/<span class="hljs-number">28</span><br><span class="hljs-number">40.83.2.64</span>/<span class="hljs-number">28</span><br></code></pre></td></tr></table></figure></p>]]></content:encoded>
-      
-      
-      
-      
-      <comments>https://studyinglover.com/2023/08/11/GPTBot%E4%BB%8B%E7%BB%8D/#disqus_thread</comments>
       
     </item>
     

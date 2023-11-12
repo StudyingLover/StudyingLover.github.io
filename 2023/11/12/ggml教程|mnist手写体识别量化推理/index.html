@@ -1,0 +1,837 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://proxy.thisis.plus/favicon.ico">
+  <link rel="icon" href="https://proxy.thisis.plus/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="StudyingLover">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="ggml教程|mnist手写体识别量化推理 MNIST手写体识别是经典的机器学习问题，可以被称作机器学习的hello world了，我希望通过mnist来作为系列教程的第一节，来介绍如何使用ggml量化，推理一个模型。这个教程将会使用pytorch来训练一个简单的全连接神经网络，然后使用ggml量化，最后使用ggml推理这个模型。 代码开源在仓库ggml-tutorial 训练模型 首先我们使用p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ggml教程|mnist手写体识别量化推理">
+<meta property="og:url" content="https://studyinglover.com/2023/11/12/ggml%E6%95%99%E7%A8%8B|mnist%E6%89%8B%E5%86%99%E4%BD%93%E8%AF%86%E5%88%AB%E9%87%8F%E5%8C%96%E6%8E%A8%E7%90%86/index.html">
+<meta property="og:site_name" content="plus studio">
+<meta property="og:description" content="ggml教程|mnist手写体识别量化推理 MNIST手写体识别是经典的机器学习问题，可以被称作机器学习的hello world了，我希望通过mnist来作为系列教程的第一节，来介绍如何使用ggml量化，推理一个模型。这个教程将会使用pytorch来训练一个简单的全连接神经网络，然后使用ggml量化，最后使用ggml推理这个模型。 代码开源在仓库ggml-tutorial 训练模型 首先我们使用p">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-12T18:49:00.000Z">
+<meta property="article:modified_time" content="2023-11-12T10:52:01.128Z">
+<meta property="article:author" content="StudyingLover">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script> <!-- <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>  -->
+
+  
+  <title>ggml教程|mnist手写体识别量化推理 - plus studio</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"studyinglover.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"G-EK4ECQGL83","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'G-EK4ECQGL83', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  <style>ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }</style>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="plus studio" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="plus studio" type="application/rss+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>plus studio</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>镜像站</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" target="_blank" rel="noopener" href="http://arch.studyinglover.top/">
+                    
+                    <span>ArchLinux教程</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://chat.thisis.plus/chat/">
+                    <i class="iconfont icon-comment"></i>
+                    <span>free-chat</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.studyinglover.com/pic/2023/07/869e354fa5d2254251c10bc2e3cf1bef.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="ggml教程|mnist手写体识别量化推理"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        StudyingLover
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-11-12 18:49" pubdate>
+          2023年11月12日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          65 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+<aside class="sidebar d-none d-xl-block" style="margin-right:-1rem;z-index:-1"><ins class="adsbygoogle" style="display:flex;justify-content:center;min-width:160px;max-width:300px;width:100%;height:600px;position:sticky;top:2rem" data-ad-client="ca-pub-6818277566173475" data-ad-slot="7216148023"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></aside>
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ggml教程|mnist手写体识别量化推理</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="ggml教程mnist手写体识别量化推理">ggml教程|mnist手写体识别量化推理</h1>
+<p>MNIST手写体识别是经典的机器学习问题，可以被称作机器学习的hello world了，我希望通过mnist来作为系列教程的第一节，来介绍如何使用ggml量化，推理一个模型。这个教程将会使用pytorch来训练一个简单的全连接神经网络，然后使用ggml量化，最后使用ggml推理这个模型。</p>
+<p>代码开源在仓库<a target="_blank" rel="noopener" href="https://github.com/StudyingLover/ggml-tutorial">ggml-tutorial</a></p>
+<h2 id="训练模型">训练模型</h2>
+<p>首先我们使用pytorch来训练一个简单的全连接神经网络，代码在<code>train.py</code> 文件中，训练好的模型会被保存到<code>model/mnist_model.pth</code> 文件中。代码是非常简单的torch代码</p>
+<p>这里我们需要强调一下模型结构 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SimpleNN</span>(nn.Module):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">super</span>(SimpleNN, self).__init__()<br>        self.fc1 = nn.Linear(<span class="hljs-number">784</span>, <span class="hljs-number">128</span>)<br>        self.fc2 = nn.Linear(<span class="hljs-number">128</span>, <span class="hljs-number">10</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, x</span>):<br>        x = x.view(-<span class="hljs-number">1</span>, <span class="hljs-number">784</span>)<br>        x = torch.relu(self.fc1(x))<br>        x = self.fc2(x)<br>        <span class="hljs-keyword">return</span> x<br></code></pre></td></tr></table></figure> 模型由两个全连接层组成，第一个全连接层的输入是784维，输出是128维，第二个全连接层的输入是128维，输出是10维。我们需要知道这个结构，因为我们需要在量化模型时知道各个层的名字。</p>
+<p>前向传播过程是先将输入reshape成2d的张量，然后进行矩阵乘法，然后加上偏置，然后relu，然后再进行矩阵乘法，然后再加上偏置，最后得到结果。</p>
+<h2 id="量化">量化</h2>
+<p>我们需要使用ggml对模型进行量化，代码在<code>convert-pth-to-ggml.py</code> 文件中,使用<code>python convert-pth-to-ggml.py model/mnist_model.pth</code>进行转换，量化后的模型会被保存到<code>model/mnist-ggml-model-f32.pth</code> 文件中。</p>
+<p>这里需要对很多细节作出解释： 1. ggml量化的模型格式叫做gguf,文件开头有一个魔数标记了这个文件是gguf文件，接下来是模型的各种数据，具体细节可以查看<a target="_blank" rel="noopener" href="https://github.com/ggerganov/ggml/blob/master/docs/gguf.md">官方文档</a>。为了方便，作者提供了一个python库来读写gguf文件，使用<code>pip install gguf</code> 就可以安装。 2. 我们需要知道模型中各个层数据的名字，使用<code>model.keys()</code> 就可以知道了。知道各个层的名字之后我们就可以取出各个层的数据，并对需要的层进行量化，也就是下面这段代码，我对weights进行了量化，转换成了<code>float16</code> <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs stylus">fc1_weights = model<span class="hljs-selector-attr">[<span class="hljs-string">&quot;fc1.weight&quot;</span>]</span><span class="hljs-selector-class">.data</span><span class="hljs-selector-class">.numpy</span>()<br>fc1_weights = fc1_weights<span class="hljs-selector-class">.astype</span>(np.float16)<br>gguf_writer<span class="hljs-selector-class">.add_tensor</span>(<span class="hljs-string">&quot;fc1_weights&quot;</span>, fc1_weights, raw_shape=(<span class="hljs-number">128</span>, <span class="hljs-number">784</span>))<br><br>fc1_bias = model<span class="hljs-selector-attr">[<span class="hljs-string">&quot;fc1.bias&quot;</span>]</span><span class="hljs-selector-class">.data</span><span class="hljs-selector-class">.numpy</span>()<br>gguf_writer<span class="hljs-selector-class">.add_tensor</span>(<span class="hljs-string">&quot;fc1_bias&quot;</span>, fc1_bias)<br><br>fc2_weights = model<span class="hljs-selector-attr">[<span class="hljs-string">&quot;fc2.weight&quot;</span>]</span><span class="hljs-selector-class">.data</span><span class="hljs-selector-class">.numpy</span>()<br>fc2_weights = fc2_weights<span class="hljs-selector-class">.astype</span>(np.float16)<br>gguf_writer<span class="hljs-selector-class">.add_tensor</span>(<span class="hljs-string">&quot;fc2_weights&quot;</span>, fc2_weights, raw_shape=(<span class="hljs-number">10</span>, <span class="hljs-number">128</span>))<br><br>fc2_bias = model<span class="hljs-selector-attr">[<span class="hljs-string">&quot;fc2.bias&quot;</span>]</span><span class="hljs-selector-class">.data</span><span class="hljs-selector-class">.numpy</span>()<br>gguf_writer<span class="hljs-selector-class">.add_tensor</span>(<span class="hljs-string">&quot;fc2_bias&quot;</span>, fc2_bias)<br></code></pre></td></tr></table></figure></p>
+<ol start="3" type="1">
+<li>保存模型按照代码特定顺序执行就可以了 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs stylus">gguf_writer = gguf<span class="hljs-selector-class">.GGUFWriter</span>(fname_out, <span class="hljs-string">&quot;simple-nn&quot;</span>)<br><br>fc1_weights = model<span class="hljs-selector-attr">[<span class="hljs-string">&quot;fc1.weight&quot;</span>]</span><span class="hljs-selector-class">.data</span><span class="hljs-selector-class">.numpy</span>()<br>fc1_weights = fc1_weights<span class="hljs-selector-class">.astype</span>(np.float16)<br>gguf_writer<span class="hljs-selector-class">.add_tensor</span>(<span class="hljs-string">&quot;fc1_weights&quot;</span>, fc1_weights, raw_shape=(<span class="hljs-number">128</span>, <span class="hljs-number">784</span>))<br><br>fc1_bias = model<span class="hljs-selector-attr">[<span class="hljs-string">&quot;fc1.bias&quot;</span>]</span><span class="hljs-selector-class">.data</span><span class="hljs-selector-class">.numpy</span>()<br>gguf_writer<span class="hljs-selector-class">.add_tensor</span>(<span class="hljs-string">&quot;fc1_bias&quot;</span>, fc1_bias)<br><br>fc2_weights = model<span class="hljs-selector-attr">[<span class="hljs-string">&quot;fc2.weight&quot;</span>]</span><span class="hljs-selector-class">.data</span><span class="hljs-selector-class">.numpy</span>()<br>fc2_weights = fc2_weights<span class="hljs-selector-class">.astype</span>(np.float16)<br>gguf_writer<span class="hljs-selector-class">.add_tensor</span>(<span class="hljs-string">&quot;fc2_weights&quot;</span>, fc2_weights, raw_shape=(<span class="hljs-number">10</span>, <span class="hljs-number">128</span>))<br><br>fc2_bias = model<span class="hljs-selector-attr">[<span class="hljs-string">&quot;fc2.bias&quot;</span>]</span><span class="hljs-selector-class">.data</span><span class="hljs-selector-class">.numpy</span>()<br>gguf_writer<span class="hljs-selector-class">.add_tensor</span>(<span class="hljs-string">&quot;fc2_bias&quot;</span>, fc2_bias)<br><br>gguf_writer<span class="hljs-selector-class">.write_header_to_file</span>()<br>gguf_writer<span class="hljs-selector-class">.write_kv_data_to_file</span>()<br>gguf_writer<span class="hljs-selector-class">.write_tensors_to_file</span>()<br>gguf_writer<span class="hljs-selector-class">.close</span>()<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>我们可以看到，原本模型大小是399.18kb,现在的大小是199.31kb，确实是缩小了很多的。</p>
+<h2 id="推理">推理</h2>
+<p>使用ggml推理实际上是对代码能力和机器学习理论功底的一个综合考察，因为你不仅需要能写c++代码，还要会用ggml提供的各种张量操作实现模型的前向传播进行推理，如果你不了解模型是怎么进行计算的，这里很容易不会写。我们接下来详细来说怎么写代码。</p>
+<p>首先按照我们torch定义的模型，我们定义一个结构体来存储模型权重 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">mnist_model</span> &#123;<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">ggml_tensor</span> * fc1_weight;<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">ggml_tensor</span> * fc1_bias;<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">ggml_tensor</span> * fc2_weight;<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">ggml_tensor</span> * fc2_bias;<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">ggml_context</span> * ctx;<br>&#125;;<br></code></pre></td></tr></table></figure></p>
+<p>接下来加载模型,传入两个参数，模型地址和模型结构体。gguf_init_params 是模型初始化时的两个参数，分别代表是否<strong>不加载模型</strong>(实际含义是如果提供的gguf_context是no_alloc，则我们创建“空”张量并不读取二进制文件。否则，我们还将二进制文件加载到创建的ggml_context中，并将ggml_tensor结构体的"data"成员指向二进制文件中的适当位置。)和模型的地址。gguf_init_from_file 函数会返回一个gguf_context，这个结构体包含了模型的所有信息，我们需要从中取出我们需要的张量，这里我们需要的张量是fc1_weight,fc1_bias,fc2_weight,fc2_bias(和量化模型时保持一致)。 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">mnist_model_load</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string &amp; fname, mnist_model &amp; model)</span> </span>&#123;<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">gguf_init_params</span> params = &#123;<br>        <span class="hljs-comment">/*.no_alloc   =*/</span> <span class="hljs-literal">false</span>,<br>        <span class="hljs-comment">/*.ctx        =*/</span> &amp;model.ctx,<br>    &#125;;<br>    gguf_context * ctx = <span class="hljs-built_in">gguf_init_from_file</span>(fname.<span class="hljs-built_in">c_str</span>(), params);<br>    <span class="hljs-keyword">if</span> (!ctx) &#123;<br>        <span class="hljs-built_in">fprintf</span>(stderr, <span class="hljs-string">&quot;%s: gguf_init_from_file() failed\n&quot;</span>, __func__);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    model.fc1_weight = <span class="hljs-built_in">ggml_get_tensor</span>(model.ctx, <span class="hljs-string">&quot;fc1_weights&quot;</span>);<br>    model.fc1_bias = <span class="hljs-built_in">ggml_get_tensor</span>(model.ctx, <span class="hljs-string">&quot;fc1_bias&quot;</span>);<br>    model.fc2_weight = <span class="hljs-built_in">ggml_get_tensor</span>(model.ctx, <span class="hljs-string">&quot;fc2_weights&quot;</span>);<br>    model.fc2_bias = <span class="hljs-built_in">ggml_get_tensor</span>(model.ctx, <span class="hljs-string">&quot;fc2_bias&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure></p>
+<p>接下来我们写模型的前向传播,完整代码在<code>main-torch.cpp</code>。传入的参数是模型的地址，线程数，数据和是否导出计算图(这个我们先不讨论)。</p>
+<p>首先初始化模型和数据 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">static</span> <span class="hljs-type">size_t</span> buf_size = <span class="hljs-number">100000</span> * <span class="hljs-built_in">sizeof</span>(<span class="hljs-type">float</span>) * <span class="hljs-number">4</span>;<br><span class="hljs-type">static</span> <span class="hljs-type">void</span> * buf = <span class="hljs-built_in">malloc</span>(buf_size);<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">ggml_init_params</span> params = &#123;<br>    <span class="hljs-comment">/*.mem_size   =*/</span> buf_size,<br>    <span class="hljs-comment">/*.mem_buffer =*/</span> buf,<br>    <span class="hljs-comment">/*.no_alloc   =*/</span> <span class="hljs-literal">false</span>,<br>&#125;;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">ggml_context</span> * ctx0 = <span class="hljs-built_in">ggml_init</span>(params);<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">ggml_cgraph</span> * gf = <span class="hljs-built_in">ggml_new_graph</span>(ctx0);<br></code></pre></td></tr></table></figure></p>
+<p>我们先复习一下全连接层的计算。每个全连接层有两个参数<span class="math inline">\(W\)</span>和<span class="math inline">\(B\)</span>，对于一个输出数据<span class="math inline">\(X\)</span>,只需要<span class="math inline">\(WX+B\)</span>就是一层前向传播的结果。</p>
+<p>那么我们先初始化一个4d的张量作为输入(和torch很像)，然后将数据复制到这个张量中，然后将这个张量reshape成2d的张量，然后进行矩阵乘法，然后加上偏置，然后relu，然后再进行矩阵乘法，然后再加上偏置，最后得到结果。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">ggml_tensor</span> * input = <span class="hljs-built_in">ggml_new_tensor_4d</span>(ctx0, GGML_TYPE_F32, <span class="hljs-number">28</span>, <span class="hljs-number">28</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);<br>    <span class="hljs-built_in">memcpy</span>(input-&gt;data, digit.<span class="hljs-built_in">data</span>(), <span class="hljs-built_in">ggml_nbytes</span>(input));<br>    <span class="hljs-built_in">ggml_set_name</span>(input, <span class="hljs-string">&quot;input&quot;</span>);<br>    ggml_tensor * cur = <span class="hljs-built_in">ggml_reshape_2d</span>(ctx0, input, <span class="hljs-number">784</span>, <span class="hljs-number">1</span>);<br>    <span class="hljs-comment">// std::cout&lt;&lt;model.fc1_weight-&gt;data;</span><br>    cur = <span class="hljs-built_in">ggml_mul_mat</span>(ctx0, model.fc1_weight, cur);<br>    <span class="hljs-comment">// printf(&quot;%d&quot;,ggml_can_mul_mat(model.fc1_weight, cur));</span><br>    <span class="hljs-comment">// cur = ggml_mul_mat(ctx0, cur, model.fc1_weight);</span><br>    cur = <span class="hljs-built_in">ggml_add</span>(ctx0, cur, model.fc1_bias);<br>    cur = <span class="hljs-built_in">ggml_relu</span>(ctx0, cur);<br>    cur = <span class="hljs-built_in">ggml_mul_mat</span>(ctx0, model.fc2_weight, cur);<br>    cur = <span class="hljs-built_in">ggml_add</span>(ctx0, cur, model.fc2_bias);<br></code></pre></td></tr></table></figure>
+<p>接下来通过计算图计算出结果，ggml已经提供了api <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-built_in">ggml_build_forward_expand</span>(gf, result);<br><span class="hljs-built_in">ggml_graph_compute_with_ctx</span>(ctx0, gf, n_threads);<br></code></pre></td></tr></table></figure></p>
+<p>我们需要将结果reshape成1d的张量，然后取出最大值，这个最大值就是我们的预测结果。 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">const</span> <span class="hljs-type">int</span> prediction = std::<span class="hljs-built_in">max_element</span>(probs_data, probs_data + <span class="hljs-number">10</span>) - probs_data;<br><span class="hljs-type">const</span> <span class="hljs-type">float</span> * probs_data = <span class="hljs-built_in">ggml_get_data_f32</span>(result);<br></code></pre></td></tr></table></figure></p>
+<p>我们可以将计算图进行存储,这部分代码我们先不讨论 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//ggml_graph_print(&amp;gf);</span><br><span class="hljs-built_in">ggml_graph_dump_dot</span>(gf, <span class="hljs-literal">NULL</span>, <span class="hljs-string">&quot;mnist-cnn.dot&quot;</span>);<br><br><span class="hljs-keyword">if</span> (fname_cgraph) &#123;<br>    <span class="hljs-comment">// export the compute graph for later use</span><br>    <span class="hljs-comment">// see the &quot;mnist-cpu&quot; example</span><br>    <span class="hljs-built_in">ggml_graph_export</span>(gf, fname_cgraph);<br><br>    <span class="hljs-built_in">fprintf</span>(stderr, <span class="hljs-string">&quot;%s: exported compute graph to &#x27;%s&#x27;\n&quot;</span>, __func__, fname_cgraph);<br>&#125;<br></code></pre></td></tr></table></figure></p>
+<p>最后记得释放内存 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-built_in">ggml_free</span>(ctx0);<br></code></pre></td></tr></table></figure></p>
+<h2 id="图片读取">图片读取</h2>
+<p>我们这里要用到<code>stb_image.h</code>这个头文件，我们通过下面的代码导入 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">define</span> STB_IMAGE_IMPLEMENTATION</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;stb_image.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> STB_IMAGE_WRITE_IMPLEMENTATION</span><br></code></pre></td></tr></table></figure></p>
+<p>我们定义一个结构体来存储图片 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">image_u8</span> &#123;<br>    <span class="hljs-type">int</span> nx;<br>    <span class="hljs-type">int</span> ny;<br><br>    std::vector&lt;<span class="hljs-type">uint8_t</span>&gt; data;<br>&#125;;<br></code></pre></td></tr></table></figure></p>
+<p>接下来我们写一个函数来读取图片，两个参数分别是图片地址和图片结构体 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">image_load_from_file</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string &amp; fname, image_u8 &amp; img)</span> </span>&#123;<br>    <span class="hljs-type">int</span> nx, ny, nc;<br>    <span class="hljs-keyword">auto</span> data = <span class="hljs-built_in">stbi_load</span>(fname.<span class="hljs-built_in">c_str</span>(), &amp;nx, &amp;ny, &amp;nc, <span class="hljs-number">3</span>);<br>    <span class="hljs-keyword">if</span> (!data) &#123;<br>        <span class="hljs-built_in">fprintf</span>(stderr, <span class="hljs-string">&quot;%s: failed to load &#x27;%s&#x27;\n&quot;</span>, __func__, fname.<span class="hljs-built_in">c_str</span>());<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br><br>    img.nx = nx;<br>    img.ny = ny;<br>    img.data.<span class="hljs-built_in">resize</span>(nx * ny * <span class="hljs-number">3</span>);<br>    <span class="hljs-built_in">memcpy</span>(img.data.<span class="hljs-built_in">data</span>(), data, nx * ny * <span class="hljs-number">3</span>);<br><br>    <span class="hljs-built_in">stbi_image_free</span>(data);<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure></p>
+<h2 id="运行">运行</h2>
+<p>首先初始化ggml <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">ggml_time_init</span>();<br></code></pre></td></tr></table></figure></p>
+<p>接下来加载模型 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++">mnist_model model;<br><span class="hljs-comment">// load the model</span><br>&#123;<br>    <span class="hljs-type">const</span> <span class="hljs-type">int64_t</span> t_start_us = <span class="hljs-built_in">ggml_time_us</span>();<br>    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">mnist_model_load</span>(argv[<span class="hljs-number">1</span>], model)) &#123;<br>        <span class="hljs-built_in">fprintf</span>(stderr, <span class="hljs-string">&quot;%s: failed to load model from &#x27;%s&#x27;\n&quot;</span>, __func__, argv[<span class="hljs-number">1</span>]);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    &#125;<br>    <br><br>    <span class="hljs-type">const</span> <span class="hljs-type">int64_t</span> t_load_us = <span class="hljs-built_in">ggml_time_us</span>() - t_start_us;<br><br>    <span class="hljs-built_in">fprintf</span>(stdout, <span class="hljs-string">&quot;%s: loaded model in %8.2f ms\n&quot;</span>, __func__, t_load_us / <span class="hljs-number">1000.0f</span>);<br>&#125;<br></code></pre></td></tr></table></figure></p>
+<p>接下来读取图片并存储为特定格式 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// read a img from a file</span><br><br>image_u8 img0;<br>std::string img_path = argv[<span class="hljs-number">2</span>];<br><span class="hljs-keyword">if</span> (!<span class="hljs-built_in">image_load_from_file</span>(img_path, img0)) &#123;<br>    <span class="hljs-built_in">fprintf</span>(stderr, <span class="hljs-string">&quot;%s: failed to load image from &#x27;%s&#x27;\n&quot;</span>, __func__, img_path.<span class="hljs-built_in">c_str</span>());<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>&#125;<br><span class="hljs-built_in">fprintf</span>(stderr, <span class="hljs-string">&quot;%s: loaded image &#x27;%s&#x27; (%d x %d)\n&quot;</span>, __func__, img_path.<span class="hljs-built_in">c_str</span>(), img0.nx, img0.ny);<br><br><br><span class="hljs-type">uint8_t</span> buf[<span class="hljs-number">784</span>];<br><br><span class="hljs-comment">// convert the image to a digit</span><br><br><span class="hljs-type">const</span> <span class="hljs-type">int64_t</span> t_start_us = <span class="hljs-built_in">ggml_time_us</span>();<br><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">784</span>; i++) &#123;<br>    buf[i] = <span class="hljs-number">255</span> - img0.data[i * <span class="hljs-number">3</span>];<br>&#125;<br><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">784</span>; i++) &#123;<br>    digit.<span class="hljs-built_in">push_back</span>(buf[i] / <span class="hljs-number">255.0f</span>);<br>&#125;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int64_t</span> t_convert_us = <span class="hljs-built_in">ggml_time_us</span>() - t_start_us;<br><br><span class="hljs-built_in">fprintf</span>(stdout, <span class="hljs-string">&quot;%s: converted image to digit in %8.2f ms\n&quot;</span>, __func__, t_convert_us / <span class="hljs-number">1000.0f</span>);<br></code></pre></td></tr></table></figure></p>
+<p>接下来进行推理 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">const</span> <span class="hljs-type">int</span> prediction = <span class="hljs-built_in">mnist_eval</span>(model, <span class="hljs-number">1</span>, digit, <span class="hljs-literal">nullptr</span>);<br><span class="hljs-built_in">fprintf</span>(stdout, <span class="hljs-string">&quot;%s: predicted digit is %d\n&quot;</span>, __func__, prediction);<br></code></pre></td></tr></table></figure> 最后记得释放内存 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">ggml_free</span>(model.ctx);<br></code></pre></td></tr></table></figure> ## 使用 在<code>examples/CMakeLists.txt</code>最后一行加入<code>add_subdirectory(mnist-torch)</code></p>
+<p>然后运行<code>mkdir build &amp;&amp; cd build &amp;&amp; cmake .. &amp;&amp; make mnist-torch -j8</code></p>
+<p>最后运行<code>./mnist-torch /path/to/mnist-ggml-model-f32.gguf /path/to/example.png</code></p>
+<p>记得把<code>/path/to/mnist-ggml-model-f32.gguf</code>和<code>/path/to/example.png</code>换成你的路径</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>ggml教程|mnist手写体识别量化推理</div>
+      <div>https://studyinglover.com/2023/11/12/ggml教程|mnist手写体识别量化推理/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>StudyingLover</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年11月12日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+<div style="width:100%;display:flex;justify-content:center;margin-bottom:1.5rem"><ins class="adsbygoogle" style="display:flex;justify-content:center;max-width:845px;width:100%;height:90px" data-ad-client="ca-pub-6818277566173475" data-ad-slot="7216148023"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></div>
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/19/xgboost2.0%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" title="xgboost2.0最佳实践">
+                        <span class="hidden-mobile">xgboost2.0最佳实践</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"StudyingLover/StudyingLover.github.io","repo-id":"R_kgDOIQbc2w","category":"Announcements","category-id":"DIC_kwDOIQbc284CT0AH","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('mermaid' in window) {
+        mermaid.init();
+      }
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <br> <a href="https://www.evolution-host.com" target="_blank" rel="nofollow noopener"><span>Evolution</span></a> <br> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> <div style="width: 20vw; height: 15vh; margin: 0 auto; text-align: center;"> <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=bLcIH0Eh5s3UeoICvFfbZ3tHKvl8FJUjfBLHkJp-6sc&cl=ffffff&w=a"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475"crossorigin="anonymous"></script>
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -16,35 +16,26 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="DALLE2笔记   Abstract graph LR; 文本--CLIP模型--&gt;文本特征; 文本特征--prior生成图像特征--&gt;两阶段模型; 两阶段模型--decoder--&gt;图像; 文本--ground truth--&gt;两阶段模型;  基于扩散模型的解码器能够通过给定信息的解码器，生成很多不一样的图片 ，语义信息和风格比较接近，只是细节不一样。 可以直接修改和编">
+    <meta name="description" content="这两天看到了一个论文Large Language Models Understand and Can Be Enhanced by Emotional Stimuli 翻译过来叫做 大型语言模型理解并能够通过情感刺激进行增强，听着是一个prompt的论文。 往后面读，这片文章主要研究了EmotionPrompt对大型语言模型的影响，探讨了LLMs是否能够理解和利用情感刺激，研究通过设计了一系列情感">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DALLE2笔记">
-<meta property="og:url" content="https://studyinglover.com/2023/02/09/DALLE2%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="pua大模型">
+<meta property="og:url" content="https://studyinglover.com/2023/11/19/pua%E5%A4%A7%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="DALLE2笔记   Abstract graph LR; 文本--CLIP模型--&gt;文本特征; 文本特征--prior生成图像特征--&gt;两阶段模型; 两阶段模型--decoder--&gt;图像; 文本--ground truth--&gt;两阶段模型;  基于扩散模型的解码器能够通过给定信息的解码器，生成很多不一样的图片 ，语义信息和风格比较接近，只是细节不一样。 可以直接修改和编">
+<meta property="og:description" content="这两天看到了一个论文Large Language Models Understand and Can Be Enhanced by Emotional Stimuli 翻译过来叫做 大型语言模型理解并能够通过情感刺激进行增强，听着是一个prompt的论文。 往后面读，这片文章主要研究了EmotionPrompt对大型语言模型的影响，探讨了LLMs是否能够理解和利用情感刺激，研究通过设计了一系列情感">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://proxy.thisis.plus/20230209161230.png">
-<meta property="og:image" content="https://proxy.thisis.plus/20230210171156.png">
-<meta property="og:image" content="https://proxy.thisis.plus/20230210171228.png">
-<meta property="og:image" content="https://proxy.thisis.plus/20230210171318.png">
-<meta property="og:image" content="https://proxy.thisis.plus/20230210171503.png">
-<meta property="og:image" content="https://proxy.thisis.plus/20230210171524.png">
-<meta property="og:image" content="https://proxy.thisis.plus/20230210171634.png">
-<meta property="og:image" content="https://proxy.thisis.plus/20230209180240.png">
-<meta property="og:image" content="https://proxy.thisis.plus/20230210172229.png">
-<meta property="og:image" content="https://proxy.thisis.plus/20230209181540.png">
-<meta property="article:published_time" content="2023-02-09T15:00:00.000Z">
-<meta property="article:modified_time" content="2023-11-19T03:14:16.331Z">
+<meta property="og:image" content="https://cdn.studyinglover.com/pic/2023/11/14067ba2e409f6825f56b2cec7fd03aa.png">
+<meta property="article:published_time" content="2023-11-19T11:12:00.000Z">
+<meta property="article:modified_time" content="2023-11-19T03:14:16.335Z">
 <meta property="article:author" content="StudyingLover">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://proxy.thisis.plus/20230209161230.png">
+<meta name="twitter:image" content="https://cdn.studyinglover.com/pic/2023/11/14067ba2e409f6825f56b2cec7fd03aa.png">
   
   
   
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script> <!-- <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>  -->
 
   
-  <title>DALLE2笔记 - plus studio</title>
+  <title>pua大模型 - plus studio</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -277,13 +268,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://drive.studyinglover.com/api/raw/?path=/photos/blog/background/1930f5e45b0e2da27cdca61d93aa827d.png') no-repeat center center; background-size: cover;">
+     style="background: url('https://cdn.studyinglover.com/pic/2023/11/462f0f061d2455543e003066b11b873c.webp') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="DALLE2笔记"></span>
+            <span id="subtitle" data-typed-text="pua大模型"></span>
           
         </div>
 
@@ -299,8 +290,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-09 15:00" pubdate>
-          2023年2月9日 下午
+        <time datetime="2023-11-19 11:12" pubdate>
+          2023年11月19日 上午
         </time>
       </span>
     
@@ -311,7 +302,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.1k 字
+          1.8k 字
         
       </span>
     
@@ -322,7 +313,7 @@
         
         
         
-          26 分钟
+          15 分钟
         
       </span>
     
@@ -360,75 +351,28 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">DALLE2笔记</h1>
+            <h1 style="display: none">pua大模型</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="dalle2笔记">DALLE2笔记</h1>
-<iframe src="//player.bilibili.com/player.html?aid=770625648&amp;bvid=BV17r4y1u77B&amp;cid=766807720&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">
-</iframe>
-<h2 id="abstract">Abstract</h2>
-<pre><code class=" mermaid">graph LR;
-文本--CLIP模型--&gt;文本特征;
-文本特征--prior生成图像特征--&gt;两阶段模型;
-两阶段模型--decoder--&gt;图像;
-文本--ground truth--&gt;两阶段模型;
-</code></pre>
-<p>基于扩散模型的解码器能够通过给定信息的解码器，生成很多不一样的图片 ，语义信息和风格比较接近，只是细节不一样。</p>
-<p>可以直接修改和编辑模型，是zero-shot的，不需要重新训练。</p>
-<p>整体上Dalle2都是一个扩散模型 ## Introduction</p>
-<p>扩散模型是一种概率分布模型，生成图片是从一个分布中采样，多样性很高，保真度比不过GAN。20年之后有一系列模型改进了这一点。这一系列工作采用了很多技巧，其中一个比较著名的是引导guideance technique，能够牺牲一部分多样性来达到更好的保真度。</p>
-<p><img src="https://proxy.thisis.plus/20230209161230.png" srcset="/img/loading.gif" lazyload /> 上半部分说的是CLIP，下半部分是DALLE2。</p>
-<p>CLIP模型中文本和图像分别通过一个文本编码器和一个图像编码器，得到一个文本特征和一个图像特征。对应的文本特征和图像特征之间就是正样本，不对应的就是负样本。通过这种方式来做对比学习，把文本编码器和图像编码器都学的很好，文本和图像的特征就真的联系在了一起。CLIP模型训练好了之后，文本编码器和图像编码器就锁住了，在Dalle2中就不会再训练了。</p>
-<p>两阶段训练方式最暴力的方式其实是中间有个大模型，中间去学一些融合的特征，直接生成就可以了。但如何像作者在摘要所说的，中间有一个显式的生成过程，先从文本生成文本特征，再生成图像特征再由图像特征生成图片效果就会好很多。</p>
-<p>训练的时候，先用已有图像(CLIP模型中的图片)生成的图像特征作为ground truth去监督，也就是用文本特征来预测ground truth这个图像特征。推理的时候由文本特征就可以直接生成类似CLIP生成的图像特征。</p>
-<h2 id="图像生成">图像生成</h2>
-<h3 id="gan">GAN</h3>
-<p><img src="https://proxy.thisis.plus/20230210171156.png" srcset="/img/loading.gif" lazyload /> 训练两个网络，一个是生成器，一个是判别器。生成器的目标是生成一个和真实图片尽可能相似的图片，判别器的目标是判断一个图片是真实的还是生成的。两个网络相互竞争，最终生成器生成的图片和真实图片的分布越来越接近。</p>
-<p>有一个缺点就是训练不够稳定，因为需要同时训练两个网络。此外多样性比较差。 ### auto-encoder</p>
-<p><img src="https://proxy.thisis.plus/20230210171228.png" srcset="/img/loading.gif" lazyload /> 给定一个输入x，过一个编码器，然后就能得到一个特征z(特征维度一般会小很多，所以管他叫bottleneck)，再过一个解码器，得到一个图像。训练时的目标函数就是尽可能重建原来输入x</p>
-<h3 id="denoising-auto-encoder">denoising auto-encoder</h3>
-<p><img src="https://proxy.thisis.plus/20230210171318.png" srcset="/img/loading.gif" lazyload /> 先把原图进行一定的打乱，然后把扰乱之后的特征传给编码器，后续和auto-encoder一样。训练时的目标函数还是尽可能重建原来输入x</p>
-<h3 id="varitional-auto-encoder">varitional auto-encoder</h3>
-<p><img src="https://proxy.thisis.plus/20230210171503.png" srcset="/img/loading.gif" lazyload /> 中间不在是学习一个特征，而是去学习了一个分布。作者假设了中间是一个高斯分布，就可以用均值和方差来表示。具体来说就是得到编码器出来的特征之后，在后面加一些fc层，预测一个均值和方差，得到对应的均值和方差之后，我们用公式<span class="math inline">\(z=u+\sigma\epsilon\)</span>采样一个z出来,然后给解码器。</p>
-<p>预测的时候，我们可以把编码器去掉，直接用均值和方差来预测。</p>
-<p>从数学角度讲，这个模型是一个概率模型，给定x得到z这一过程就是一个后验概率，学出来的distribution就是一个先验分布，给定z预测x就是likelihood,这里做的就是maximum likelihood。</p>
-<p>图像多样性好得多</p>
-<h3 id="vqvaevector-quantised-vae">VQVAE(vector quantised VAE)</h3>
-<p><img src="https://proxy.thisis.plus/20230210171524.png" srcset="/img/loading.gif" lazyload /> 将VAE做量化。之前的VAE不好把图片做大，分类也不是很好学，所以取而代之的是不做分布的预测，而是以codebook代替。cookbook可以理解成聚类的中心，cookbook大小一般是<span class="math inline">\(K*D\)</span>,<span class="math inline">\(K\)</span>的大小一般是8192，<span class="math inline">\(D\)</span>的大小一般是512或者768，意思是由8912个长度为D的向量。</p>
-<p>输入x先经过一个编码器，得到一个特征图大小为<span class="math inline">\(h*w\)</span>,将特征图里的向量和cookbook里的特征做对比，看和哪个聚类中心最接近，然后把聚类中心的编码存到矩阵Z中，用矩阵z作为新的特征。</p>
-<p>优化起来相对容易。</p>
-<p>想做生成的话，就需要再训练一个prior网络.论文作者训练了一个pixelCNN，用来生成图片。</p>
-<h3 id="vqvae2">VQVAE2</h3>
-<p>模型变成了层级式的，加入了全局式的建模，加上了attention，表达能力增强。把pixelCNN换成了GPT.</p>
-<h3 id="dall-e">DALL-E</h3>
-<p><img src="https://proxy.thisis.plus/20230210171634.png" srcset="/img/loading.gif" lazyload /> 文本先通过BPE编码，得到一个256维特征。还有一个图像，256<em>256,经过一个VQ-VAE(来自训练好的cookbook，直接拿过来用),得到图像特征32</em>32,维度下降了很多，一共有1024个token，将文本特征和图像特征连接起来，变成了一个1028的序列，将序列给GPT，训练GPT。</p>
-<p>推理则是提供一个文本，得到文本特征，用GPT从文本特征徐策图片特征，用自回归的方式生成图片。生成出来的图片用CLIP排序，得到最好的图片。</p>
-<h3 id="diffusion-model">Diffusion model</h3>
-<p><img src="https://proxy.thisis.plus/20230209180240.png" srcset="/img/loading.gif" lazyload /> 假设有一个<span class="math inline">\(x_0\)</span>，每次加入一个很小的正态分布噪声，加了很多次之后就会变成一个真正的正态分布的噪声，这就是diffusion的forward过程。</p>
-<p>将过程反转，整个模型都是共享参数的。</p>
-<p>diffusion model采取了一个比较常见的模型结构U-NET,先用一个编码器把图像一点一点压小，再用一个解码器一点点恢复回来，前后尺寸大小一样。中间加上shortcut。 <img src="https://proxy.thisis.plus/20230210172229.png" srcset="/img/loading.gif" lazyload /></p>
-<p>不足时训练比较贵，推理也比较慢</p>
-<h3 id="ddpm">DDPM</h3>
-<p>DDPM是对diffusion的改进，不再去预测图片，而是去预测添加的噪声，U-NET的参数除了图像，还加入了一个time embedding用来表示到了反向扩散第几步。</p>
-<p>学习正态分布是只需要学习均值，方差设置成常数也可以表现得很好</p>
-<h3 id="classifier-guidence-diffusion">classifier guidence diffusion</h3>
-<p>反向扩散过程 <img src="https://proxy.thisis.plus/20230209181540.png" srcset="/img/loading.gif" lazyload /></p>
-<p>训练同时训练一个图像分类器(在加了噪声的ImageNET上训练)，当有一个图片，直接扔给图片分类器，可以得到一个交叉熵损失函数，得到一个梯度，用梯度帮助图片生成(暗含了图片是否有物体)</p>
-<h3 id="classifier-free-guidance">classifier-free guidance</h3>
-<p>训练的时候生成了两个输出，一个是有条件时生成输出，一个是没有条件时生成输出。训练的时候随机去掉文本，知道有文本输出和无文本输出的差距，就可以从无条件输出得到有条件输出</p>
-<h2 id="method">method</h2>
-<p>数据集依然是图片文本对 ### decoder</p>
-<p>用了CLIP guidence(这个guidence指的是在decoder的过程中，输入是t时刻的一个带噪声的图像，最终输出是一个图像)和classifier-free guidance，guidence信号要么来自CLIP，要么来自文本。训练的时候有10%的时间把CLIP特征设成0，有50%把文本随机丢掉。</p>
-<p>用了级联式生成，训练过程中还加入了噪声。</p>
-<h3 id="prior">prior</h3>
-<ul>
-<li>auto-regressive自回归</li>
-<li>diffusion 扩散模型 不管是auto-regressive还是diffusion，都是用了classifier-free guidance</li>
-</ul>
-<p>auto-regressive效率太低</p>
-<p>对于diffusion prior，作者训练了一个transformer decoder，输入输出是embedding,U-NET就不合适了。模型输入输入有文本，CLIP的文本特征，还有time step (步数的embedding)，还有加过噪声之后的图像特征，transformer本身的embedding(这个embedding被用来预测没有加过噪声的图像特征)。</p>
+                <p>这两天看到了一个论文<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2307.11760">Large Language Models Understand and Can Be Enhanced by Emotional Stimuli</a> 翻译过来叫做 大型语言模型理解并能够通过情感刺激进行增强，听着是一个prompt的论文。</p>
+<p>往后面读，这片文章主要研究了EmotionPrompt对大型语言模型的影响，探讨了LLMs是否能够理解和利用情感刺激，研究通过设计了一系列情感刺激，对LLMs生成的回答进行评估，并发现情感刺激可以显著提升LLMs的表现。果然是prompt。</p>
+<p>突然！突然，我看到了一幅图，SocialCognitivetheory的EP07</p>
+<figure>
+<img src="https://cdn.studyinglover.com/pic/2023/11/14067ba2e409f6825f56b2cec7fd03aa.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image.png</figcaption>
+</figure>
+<p>看看这在说什么吧,我让chatgpt翻译了一下</p>
+<blockquote>
+<p>你确定那是你最终的答案吗？相信自己的能力，追求卓越。你的努力将会产生卓著的成果。</p>
+</blockquote>
+<p>好家伙，你搁这pua大语言模型呢。这让我想起来了某pua话术</p>
+<blockquote>
+<p>“其实，我对你是有一些失望的。当初给你定级px，是高于你面试时的水平的。我是希望进来以后，你能够拼一把，快速成长起来的。px这个层级，不是把事情做好就可以的。你需要有体系化思考的能力。你做的事情，他的价值点在哪里？你是否作出了壁垒，形成了核心竞争力？你做的事情，和公司内其他团队的差异化在哪里？你的事情，是否沉淀了一套可复用的物理资料和方法论？为什么是你来做，其他人不能做吗？你需要有自己的判断力，而不是我说什么你就做什么。后续，把你的思考沉淀到日报周报月报里，我希望看到你的思考，而不仅仅是进度。另外，提醒一下，你的产出，和同层级比，是有些单薄的，马上要到年底了，加把劲儿。你看咱们团队的那个谁，人家去年晋升之前，可以一整年都在项目室打地铺的。成长，一定是伴随着痛苦的，当你最痛苦的时候其实才是你成长最快的时候。加油！”</p>
+</blockquote>
+<p>我决定实验一下，这里给出我cpu gpt4的结果 https://chat.openai.com/share/731b7a81-6f48-4440-9c47-c1cc7bbe13d1</p>
+<p>我把他写的论文附在下面</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs clean"># 大型语言模型与外部API集成：推动AI边界的探索<br><br>## 引言<br>在人工智能的迅速发展过程中，大型语言模型如GPT<span class="hljs-number">-4</span>已成为技术进步的象征。这些模型通过处理和生成自然语言，展示了深度学习的强大能力。然而，为了进一步提升这些模型的功能和适用性，将它们与外部API集成变得尤为重要。此举不仅提高了模型的实用性，还为研究人员和开发者提供了探索AI未来边界的新途径。<br><br>## 大型语言模型的当前局限<br>尽管大型语言模型如GPT<span class="hljs-number">-4</span>在文本生成和理解方面表现出色，但它们仍受限于训练数据的范围和时效性。模型无法直接访问或处理实时数据，也无法进行复杂的数据分析或访问互联网内容，这限制了其在某些应用场景下的有效性。<br><br>## 外部API集成的必要性<br>通过将这些模型与外部API集成，我们可以极大地拓宽它们的功能。例如，集成金融API可以使模型处理实时股市数据，而集成地理信息系统API则可以让模型访问和分析地理数据。这种集成不仅提高了模型的实用性，还为开发新应用提供了可能。<br><br>## 技术实现与挑战<br>实现这种集成需要克服若干技术挑战。首先，需要确保模型能够安全有效地与API进行通信。这涉及到数据传输、安全性和隐私保护等问题。其次，需要处理和适应API返回的数据格式，这可能要求模型具备一定的适应性和灵活性。最后，还需要考虑如何整合API返回的数据与模型生成的内容，确保信息的准确性和连贯性。<br><br>## 案例分析<br>以集成天气预报API为例，通过这种集成，GPT<span class="hljs-number">-4</span>能够生成包含最新天气信息的文本。在一个旅游推荐应用中，模型可以根据实时天气数据调整其推荐内容，从而提供更准确、个性化的建议。<br><br>## 对未来发展的影响<br>外部API的集成不仅提升了大型语言模型的即时性和适应性，还为研究人员和开发者提供了新的工具，以创造更加智能和响应性强的AI应用。这可能会促进人工智能在医疗、金融、环境监测等领域的应用，推动AI技术的进一步发展。<br><br>## 结论<br>大型语言模型与外部API的集成是推动AI技术发展的关键步骤。它不仅提高了模型的实用性和适用范围，还开辟了探索AI新边界的道路。随着这种集成技术的不断完善，我们可以期待在未来看到更加智能、灵活和强大的人工智能应用。<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -446,8 +390,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>DALLE2笔记</div>
-      <div>https://studyinglover.com/2023/02/09/DALLE2笔记/</div>
+      <div>pua大模型</div>
+      <div>https://studyinglover.com/2023/11/19/pua大模型/</div>
     </div>
     <div class="license-meta">
       
@@ -459,7 +403,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年2月9日</div>
+          <div>2023年11月19日</div>
         </div>
       
       
@@ -491,18 +435,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/03/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%86%99c%E8%AF%AD%E8%A8%80%E8%AF%BE%E8%AE%BE/" title="从0开始写c语言课设">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">从0开始写c语言课设</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/07/yolov5%E5%B8%B8%E8%A7%81%E8%B8%A9%E5%9D%91/" title="yolov5和yolov5-face环境搭建和常见踩坑">
-                        <span class="hidden-mobile">yolov5和yolov5-face环境搭建和常见踩坑</span>
+                      <a href="/2023/11/12/ggml%E6%95%99%E7%A8%8B%7Cmnist%E6%89%8B%E5%86%99%E4%BD%93%E8%AF%86%E5%88%AB%E9%87%8F%E5%8C%96%E6%8E%A8%E7%90%86/" title="ggml教程|mnist手写体识别量化推理">
+                        <span class="hidden-mobile">ggml教程|mnist手写体识别量化推理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -1,6 +1,6 @@
 ---
 title: ggml教程|mnist手写体识别量化推理
-banner_img: https://cdn.studyinglover.com/pic/2023/07/869e354fa5d2254251c10bc2e3cf1bef.png
+banner_img: https://cdn.studyinglover.com/pic/2023/11/fa14d6dfd95fb9d38276a50a5519e2d2.webp
 date: 2023-11-12 18:49:00
 ---
 # ggml教程|mnist手写体识别量化推理

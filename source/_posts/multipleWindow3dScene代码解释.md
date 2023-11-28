@@ -3,7 +3,8 @@ title: 深入分析：GitHub Trending 项目 "multipleWindow3dScene"
 banner_img: https://cdn.studyinglover.com/pic/2023/11/b57a22bd9cf8a1c0a954fd61e6c311f2.png
 date: 2023-11-27 19:18:00
 tags:
-- 文字生成图片
+- threejs
+- 前端
 ---
 
 这是由chatGPT生成的文章，内容是关于GitHub Trending 项目 "multipleWindow3dScene"的深入分析，分享链接[ChatGPT](https://chat.openai.com/share/289860f7-6e7e-458c-b3a8-fe97d01e63bd)

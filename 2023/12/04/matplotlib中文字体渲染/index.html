@@ -16,16 +16,17 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="npc_gzip笔记 论文笔记 npc_gzip 的论文名叫做 &quot;Low-Resource&quot; Text Classification: A Parameter-Free Classification Method with Compressors ,意为不需要参数，使用压缩器的文本分类方法。论文的代码也只有仅仅的十四行，就在部分数据集上取得了超越 bert 的效果。 npc_gzip由一个无损压缩">
+    <meta name="description" content="matplotlib中文字体渲染 matplotlib 在画图例的时候不可避免的需要使用中文字体，但是有的时候电脑自带的字体不能渲染中文，这就需要我们自己解决字体问题。 首先用一个代码看一下系统里的字体哪些可以正常渲染中文字体 12345678910111213141516171819202122232425262728293031323334353637import matplotlib.fon">
 <meta property="og:type" content="article">
-<meta property="og:title" content="npc_gzip笔记">
-<meta property="og:url" content="https://studyinglover.com/2023/07/18/npc_gzip%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="matplotlib中文字体渲染">
+<meta property="og:url" content="https://studyinglover.com/2023/12/04/matplotlib%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93%E6%B8%B2%E6%9F%93/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="npc_gzip笔记 论文笔记 npc_gzip 的论文名叫做 &quot;Low-Resource&quot; Text Classification: A Parameter-Free Classification Method with Compressors ,意为不需要参数，使用压缩器的文本分类方法。论文的代码也只有仅仅的十四行，就在部分数据集上取得了超越 bert 的效果。 npc_gzip由一个无损压缩">
+<meta property="og:description" content="matplotlib中文字体渲染 matplotlib 在画图例的时候不可避免的需要使用中文字体，但是有的时候电脑自带的字体不能渲染中文，这就需要我们自己解决字体问题。 首先用一个代码看一下系统里的字体哪些可以正常渲染中文字体 12345678910111213141516171819202122232425262728293031323334353637import matplotlib.fon">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-18T16:57:00.000Z">
+<meta property="article:published_time" content="2023-12-04T21:52:00.000Z">
 <meta property="article:modified_time" content="2023-12-04T13:54:40.135Z">
 <meta property="article:author" content="StudyingLover">
+<meta property="article:tag" content="踩坑">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -33,7 +34,7 @@
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script> <!-- <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>  -->
 
   
-  <title>npc_gzip笔记 - plus studio</title>
+  <title>matplotlib中文字体渲染 - plus studio</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -266,13 +267,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://cdn.studyinglover.com/pic/2023/07/9482f9fe9617825162494635a1b7f460.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('https://cdn.studyinglover.com/pic/2023/12/334c0c129076533308cbc7e03f8c55be.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="npc_gzip笔记"></span>
+            <span id="subtitle" data-typed-text="matplotlib中文字体渲染"></span>
           
         </div>
 
@@ -288,8 +289,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-18 16:57" pubdate>
-          2023年7月18日 下午
+        <time datetime="2023-12-04 21:52" pubdate>
+          2023年12月4日 晚上
         </time>
       </span>
     
@@ -300,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.5k 字
+          1.8k 字
         
       </span>
     
@@ -311,7 +312,7 @@
         
         
         
-          30 分钟
+          16 分钟
         
       </span>
     
@@ -349,30 +350,37 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">npc_gzip笔记</h1>
+            <h1 style="display: none">matplotlib中文字体渲染</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="npc_gzip笔记">npc_gzip笔记</h1>
-<h2 id="论文笔记">论文笔记</h2>
-<p>npc_gzip 的论文名叫做 "Low-Resource" Text Classification: A Parameter-Free Classification Method with Compressors ,意为不需要参数，使用压缩器的文本分类方法。论文的代码也只有仅仅的十四行，就在部分数据集上取得了超越 <strong>bert</strong> 的效果。</p>
-<p>npc_gzip由一个无损压缩器，一个基于距离的度量函数和K近邻算法组成。</p>
-<p>使用压缩器进行分类的直觉是有两方面 1. 压缩器擅长捕捉规律性；<br />
-2. 来自同一类别的对象比不同类别的对象具有更多的规律性。</p>
-<p>假设<span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_2\)</span> 属于相同的类别，<span class="math inline">\(x_3\)</span> 属于不同的类别，用<span class="math inline">\(C(\cdot)\)</span> 代表压缩器， 我们会发现<span class="math inline">\(C\left(x_1 x_2\right)-C\left(x_1\right)&lt;C\left(x_1 x_3\right)-C\left(x_1\right)\)</span> , <span class="math inline">\(C\left(x_1 x_2\right)\)</span> 代表 x1 和 x2 的串联的压缩长度。换句话说<span class="math inline">\(C\left(x_1 x_2\right)\)</span> 可以解释为我们仍然需要根据 x1 的信息对 x2 进行编码多少字节： <figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs erlang">x1 = Japan&#x27;s Seiko Epson Corp. has developed a <span class="hljs-number">12</span>-gram flying microrobot.<br><br>x2 = The latest tiny flying robot has been unveiled in Japan.<br><br>x3 = Michael Phelps won the gold medal in the <span class="hljs-number">400</span> individual medley.<br></code></pre></td></tr></table></figure></p>
-<p>这种直觉可以形式化为源自 Kolmogorov 复杂度的距离度量。Kolmogorov 复杂度 K(x) 表征了可以生成 x 的最短二进制程序的长度。K(x) 理论上是信息测量的最终下限。</p>
-<p><span class="math display">\[\begin{aligned} E(x, y) &amp; =\max \{K(x \mid y), K(y \mid x)\} \\ &amp; =K(x y)-\min \{K(x), K(y)\}\end{aligned}\]</span></p>
-<p>由于 Kolmogorov 复杂度的可计算性质使得 E(x,y) 不可计算，所以可以使用归一化压缩距离 (NCD)，利用压缩长度 C(x) 来近似 Kolmogorov 复杂度 K(x)。形式上是<span class="math display">\[N C D(x, y)=\frac{C(x y)-\min \{C(x), C(y)\}}{\max \{C(x), C(y)\}}\]</span> 使用压缩长度背后的直觉是压缩器最大压缩的 x 的长度接近 K(x)。一般来说，压缩比越高，C(x)越接近K(x)。</p>
-<p>实验的结果使用 gzip 作为压缩器，这里的<span class="math inline">\(C(x)\)</span> 表示 gzip 压缩后 x 的长度。<span class="math inline">\(C(xy)\)</span> 是 x 和 y 的串联的压缩长度。NCD 提供距离矩阵使用 k-最近邻来执行分类。</p>
-<p>核心代码真的真的就非常简单了 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> gzip2 <br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">for</span> ( x1 , _ ) <span class="hljs-keyword">in</span> test_set :<br>	Cx1 = <span class="hljs-built_in">len</span> ( gzip . compress ( x1 . encode () ) )<br>	distance_from_x1 = []<br>	<span class="hljs-keyword">for</span> ( x2 , _ ) <span class="hljs-keyword">in</span> training_set :<br>		Cx2 = <span class="hljs-built_in">len</span> ( gzip . compress ( x2 . encode () )<br>		x1x2 = <span class="hljs-string">&quot; &quot;</span> . join ([ x1 , x2 ])<br>		Cx1x2 = <span class="hljs-built_in">len</span> ( gzip . compress ( x1x2 . encode () )<br>		ncd = ( Cx1x2 - <span class="hljs-built_in">min</span> ( Cx1 , Cx2 )) / <span class="hljs-built_in">max</span> ( Cx1 , Cx2 )<br>		distance_from_x1 . append ( ncd )<br>		sorted_idx = np . argsort ( np . array ( distance_from_x1 ) )<br>	top_k_class = training_set [ sorted_idx [: k ] , <span class="hljs-number">1</span>]<br>	predict_class = <span class="hljs-built_in">max</span> ( <span class="hljs-built_in">set</span> ( top_k_class ) , key = top_k_class . count )<br></code></pre></td></tr></table></figure></p>
-<p>这种方法是 DNN 的简单、轻量级和通用的替代方案。很简单，因为它不需要任何预处理或训练。它的轻量级在于它不需要参数或 GPU 资源进行分类。由于压缩器是数据类型不可知的，非参数方法不会带来潜在的假设。</p>
-<h2 id="代码实践">代码实践</h2>
-<p>作者在GitHub上开源了他的代码 <a target="_blank" rel="noopener" href="https://github.com/bazingagin/npc_gzip">npc_gzip</a> .我们先把代码拉到本地 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/bazingagin/npc_gzip<br></code></pre></td></tr></table></figure> 接下来安装依赖项，有条件的话创建一个虚拟环境 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ./npc_gzip<br>pip install -r requirements.txt<br></code></pre></td></tr></table></figure></p>
-<p>安装完了之后运行<code>main_text.py</code> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python main_text.py<br></code></pre></td></tr></table></figure></p>
-<p>注意，如果你遇到了这个问题 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">Traceback (most recent <span class="hljs-keyword">call</span> last):<br>  File &quot;main_text.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">2</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    <span class="hljs-keyword">from</span> data <span class="hljs-keyword">import</span> *<br>  File &quot;/home/npc_gzip/data.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">12</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    <span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset<br>  File &quot;/home/.conda/envs/npc_gzip/lib/python3.7/site-packages/datasets/__init__.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">43</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    <span class="hljs-keyword">from</span> .arrow_dataset <span class="hljs-keyword">import</span> Dataset<br>  File &quot;/home/.conda/envs/npc_gzip/lib/python3.7/site-packages/datasets/arrow_dataset.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">59</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    <span class="hljs-keyword">from</span> huggingface_hub <span class="hljs-keyword">import</span> HfApi, HfFolder<br>  File &quot;/home/.conda/envs/npc_gzip/lib/python3.7/site-packages/huggingface_hub/__init__.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">322</span>, <span class="hljs-keyword">in</span> __getattr__<br>    submod = importlib.import_module(submod_path)<br>  File &quot;/home/.conda/envs/npc_gzip/lib/python3.7/importlib/__init__.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">127</span>, <span class="hljs-keyword">in</span> import_module<br>    <span class="hljs-keyword">return</span> _bootstrap._gcd_import(<span class="hljs-type">name</span>[<span class="hljs-keyword">level</span>:], package, <span class="hljs-keyword">level</span>)<br>  File &quot;/home/.conda/envs/npc_gzip/lib/python3.7/site-packages/huggingface_hub/hf_api.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">32</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    <span class="hljs-keyword">import</span> requests<br>  File &quot;/home/.conda/envs/npc_gzip/lib/python3.7/site-packages/requests/__init__.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">43</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    <span class="hljs-keyword">import</span> urllib3<br>  File &quot;/home/.conda/envs/npc_gzip/lib/python3.7/site-packages/urllib3/__init__.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">42</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    &quot;urllib3 v2.0 only supports OpenSSL 1.1.1+, currently &quot;<br>ImportError: urllib3 v2<span class="hljs-number">.0</span> <span class="hljs-keyword">only</span> supports OpenSSL <span class="hljs-number">1.1</span><span class="hljs-number">.1</span>+, currently the <span class="hljs-string">&#x27;ssl&#x27;</span> module <span class="hljs-keyword">is</span> compiled <span class="hljs-keyword">with</span> <span class="hljs-string">&#x27;OpenSSL 1.0.2u  20 Dec 2019&#x27;</span>. See: https://github.com/urllib3/urllib3/issues/<span class="hljs-number">2168</span><br></code></pre></td></tr></table></figure></p>
-<p>urllib3 v2.0（您安装的版本）需要 OpenSSL 1.1.1+ 才能正常工作，因为它依赖于 OpenSSL 1.1 的一些新功能.</p>
-<p>安装旧版本即可解决 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install urllib3==1.26.6 <br></code></pre></td></tr></table></figure></p>
+                <h1 id="matplotlib中文字体渲染">matplotlib中文字体渲染</h1>
+<p>matplotlib 在画图例的时候不可避免的需要使用中文字体，但是有的时候电脑自带的字体不能渲染中文，这就需要我们自己解决字体问题。</p>
+<p>首先用一个代码看一下系统里的字体哪些可以正常渲染中文字体</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.font_manager <span class="hljs-keyword">as</span> font_manager<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">import</span> time<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">find_chinese_fonts</span>(<span class="hljs-params">test_string</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    This function tests each available font to see if it can render the given Chinese string</span><br><span class="hljs-string">    without causing any rendering issues or noticeable delays.</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    fonts = font_manager.findSystemFonts(fontpaths=<span class="hljs-literal">None</span>, fontext=<span class="hljs-string">&#x27;ttf&#x27;</span>)<br>    working_fonts = []<br><br>    <span class="hljs-keyword">for</span> font <span class="hljs-keyword">in</span> fonts:<br>        <span class="hljs-keyword">try</span>:<br>            prop = font_manager.FontProperties(fname=font)<br>            plt.figure()<br>            start_time = time.time()<br>            plt.text(<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>, test_string, fontproperties=prop, ha=<span class="hljs-string">&#x27;center&#x27;</span>, va=<span class="hljs-string">&#x27;center&#x27;</span>)<br>            plt.close()<br>            end_time = time.time()<br>            render_time = end_time - start_time<br><br>            <span class="hljs-comment"># Check if the rendering time is less than a certain threshold (e.g., 0.5 seconds)</span><br>            <span class="hljs-keyword">if</span> render_time &lt; <span class="hljs-number">5</span>:<br>                working_fonts.append(font)<br><br>        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>            <span class="hljs-comment"># If there&#x27;s an error rendering with this font, skip it</span><br>            <span class="hljs-keyword">continue</span><br><br>    <span class="hljs-keyword">return</span> working_fonts<br><br><span class="hljs-comment"># Test string: &quot;不卡顿&quot;</span><br>test_string = <span class="hljs-string">&quot;不卡顿&quot;</span><br>fonts = find_chinese_fonts(test_string)<br>fonts<br><br></code></pre></td></tr></table></figure>
+<p>假设输出了 <code>'/usr/share/fonts/truetype/liberation/LiberationMono-Bold.ttf'</code></p>
+<p>使用这个字体的代码就是 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> matplotlib.font_manager <span class="hljs-keyword">import</span> FontProperties<br><br><span class="hljs-comment"># 创建一个FontProperties对象，指定字体文件路径</span><br>font = FontProperties(fname=<span class="hljs-string">&#x27;/usr/share/fonts/truetype/liberation/LiberationMono-Bold.ttf&#x27;</span>)<br><br><span class="hljs-comment"># 绘制散点图</span><br>plt.scatter([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>], color=<span class="hljs-string">&quot;red&quot;</span>)<br><br><span class="hljs-comment"># 添加图例，使用指定的字体</span><br>plt.legend([<span class="hljs-string">&quot;例子&quot;</span>], prop=font)<br><br><span class="hljs-comment"># 显示图像</span><br>plt.show()<br></code></pre></td></tr></table></figure></p>
+<p>假如代码没找到可用字体呢？</p>
+<p>手动下载字体。以下是一些中文字体的官方下载页面或者信誉良好的资源：</p>
+<ol type="1">
+<li><strong>思源宋体（Source Han Serif）</strong>:
+<ul>
+<li>官方GitHub页面: <a target="_blank" rel="noopener" href="https://github.com/adobe-fonts/source-han-serif">Adobe Fonts</a></li>
+<li>选择您需要的语言子集，例如简体中文（SC），并下载相应的 OTF 文件。</li>
+</ul></li>
+<li><strong>思源黑体（Source Han Sans）</strong>:
+<ul>
+<li>官方GitHub页面: <a target="_blank" rel="noopener" href="https://github.com/adobe-fonts/source-han-sans">Adobe Fonts</a></li>
+<li>同样地，选择您需要的语言子集，并下载 OTF 文件。</li>
+</ul></li>
+<li><strong>文泉驿正黑（WenQuanYi Zen Hei）</strong>:
+<ul>
+<li>官方网站: <a target="_blank" rel="noopener" href="http://wenq.org/wqy2/index.cgi?ZenHei">WenQuanYi</a></li>
+<li>可以直接下载 TTF 文件。</li>
+</ul></li>
+</ol>
+<p>下载完成后然后<code>font = FontProperties(fname='/usr/share/fonts/truetype/liberation/LiberationMono-Bold.ttf')</code> 引入即可。</p>
 
                 
               </div>
@@ -381,27 +389,13 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
       
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/" class="category-chain-item">自然语言处理</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
+        <a href="/tags/%E8%B8%A9%E5%9D%91/">#踩坑</a>
+      
     </div>
-  
   
 </div>
 
@@ -411,8 +405,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>npc_gzip笔记</div>
-      <div>https://studyinglover.com/2023/07/18/npc_gzip笔记/</div>
+      <div>matplotlib中文字体渲染</div>
+      <div>https://studyinglover.com/2023/12/04/matplotlib中文字体渲染/</div>
     </div>
     <div class="license-meta">
       
@@ -424,7 +418,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月18日</div>
+          <div>2023年12月4日</div>
         </div>
       
       
@@ -456,18 +450,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/21/Archlinux%E5%AE%89%E8%A3%85scrcpy%E5%8A%A0%E8%BD%BD%E5%85%B1%E4%BA%AB%E5%BA%93%E5%87%BA%E9%94%99/" title="Archlinux安装scrcpy加载共享库出错 error while loading shared libraries:libusb-1.0.so.0:wrong ELF class:ELFCLASS32">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Archlinux安装scrcpy加载共享库出错 error while loading shared libraries:libusb-1.0.so.0:wrong ELF class:ELFCLASS32</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/15/python%E8%B0%83%E7%94%A8c++%E5%87%BD%E6%95%B0/" title="python调用c++函数">
-                        <span class="hidden-mobile">python调用c++函数</span>
+                      <a href="/2023/11/28/TruFor%E7%AC%94%E8%AE%B0%E5%92%8C%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%8E%B0/" title="TruFor笔记和代码复现">
+                        <span class="hidden-mobile">TruFor笔记和代码复现</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -9,8 +9,34 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 28 Nov 2023 09:39:51 GMT</pubDate>
+    <pubDate>Mon, 04 Dec 2023 13:54:40 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>matplotlib中文字体渲染</title>
+      <link>https://studyinglover.com/2023/12/04/matplotlib%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93%E6%B8%B2%E6%9F%93/</link>
+      <guid>https://studyinglover.com/2023/12/04/matplotlib%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93%E6%B8%B2%E6%9F%93/</guid>
+      <pubDate>Mon, 04 Dec 2023 21:52:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;matplotlib中文字体渲染&quot;&gt;matplotlib中文字体渲染&lt;/h1&gt;
+&lt;p&gt;matplotlib 在画图例的时候不可避免的需要使用中文字体，但是有的时候电脑自带的字体不能渲染中文，这就需要我们自己解决字体问题。&lt;/p&gt;
+&lt;p&gt;首先用一个代码看一下系统里的</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="matplotlib中文字体渲染">matplotlib中文字体渲染</h1><p>matplotlib 在画图例的时候不可避免的需要使用中文字体，但是有的时候电脑自带的字体不能渲染中文，这就需要我们自己解决字体问题。</p><p>首先用一个代码看一下系统里的字体哪些可以正常渲染中文字体</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.font_manager <span class="hljs-keyword">as</span> font_manager<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">import</span> time<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">find_chinese_fonts</span>(<span class="hljs-params">test_string</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    This function tests each available font to see if it can render the given Chinese string</span><br><span class="hljs-string">    without causing any rendering issues or noticeable delays.</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    fonts = font_manager.findSystemFonts(fontpaths=<span class="hljs-literal">None</span>, fontext=<span class="hljs-string">&#x27;ttf&#x27;</span>)<br>    working_fonts = []<br><br>    <span class="hljs-keyword">for</span> font <span class="hljs-keyword">in</span> fonts:<br>        <span class="hljs-keyword">try</span>:<br>            prop = font_manager.FontProperties(fname=font)<br>            plt.figure()<br>            start_time = time.time()<br>            plt.text(<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>, test_string, fontproperties=prop, ha=<span class="hljs-string">&#x27;center&#x27;</span>, va=<span class="hljs-string">&#x27;center&#x27;</span>)<br>            plt.close()<br>            end_time = time.time()<br>            render_time = end_time - start_time<br><br>            <span class="hljs-comment"># Check if the rendering time is less than a certain threshold (e.g., 0.5 seconds)</span><br>            <span class="hljs-keyword">if</span> render_time &lt; <span class="hljs-number">5</span>:<br>                working_fonts.append(font)<br><br>        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>            <span class="hljs-comment"># If there&#x27;s an error rendering with this font, skip it</span><br>            <span class="hljs-keyword">continue</span><br><br>    <span class="hljs-keyword">return</span> working_fonts<br><br><span class="hljs-comment"># Test string: &quot;不卡顿&quot;</span><br>test_string = <span class="hljs-string">&quot;不卡顿&quot;</span><br>fonts = find_chinese_fonts(test_string)<br>fonts<br><br></code></pre></td></tr></table></figure><p>假设输出了 <code>'/usr/share/fonts/truetype/liberation/LiberationMono-Bold.ttf'</code></p><p>使用这个字体的代码就是 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> matplotlib.font_manager <span class="hljs-keyword">import</span> FontProperties<br><br><span class="hljs-comment"># 创建一个FontProperties对象，指定字体文件路径</span><br>font = FontProperties(fname=<span class="hljs-string">&#x27;/usr/share/fonts/truetype/liberation/LiberationMono-Bold.ttf&#x27;</span>)<br><br><span class="hljs-comment"># 绘制散点图</span><br>plt.scatter([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>], color=<span class="hljs-string">&quot;red&quot;</span>)<br><br><span class="hljs-comment"># 添加图例，使用指定的字体</span><br>plt.legend([<span class="hljs-string">&quot;例子&quot;</span>], prop=font)<br><br><span class="hljs-comment"># 显示图像</span><br>plt.show()<br></code></pre></td></tr></table></figure></p><p>假如代码没找到可用字体呢？</p><p>手动下载字体。以下是一些中文字体的官方下载页面或者信誉良好的资源：</p><ol type="1"><li><strong>思源宋体（Source Han Serif）</strong>:<ul><li>官方GitHub页面: <a href="https://github.com/adobe-fonts/source-han-serif">Adobe Fonts</a></li><li>选择您需要的语言子集，例如简体中文（SC），并下载相应的 OTF 文件。</li></ul></li><li><strong>思源黑体（Source Han Sans）</strong>:<ul><li>官方GitHub页面: <a href="https://github.com/adobe-fonts/source-han-sans">Adobe Fonts</a></li><li>同样地，选择您需要的语言子集，并下载 OTF 文件。</li></ul></li><li><strong>文泉驿正黑（WenQuanYi Zen Hei）</strong>:<ul><li>官方网站: <a href="http://wenq.org/wqy2/index.cgi?ZenHei">WenQuanYi</a></li><li>可以直接下载 TTF 文件。</li></ul></li></ol><p>下载完成后然后<code>font = FontProperties(fname='/usr/share/fonts/truetype/liberation/LiberationMono-Bold.ttf')</code> 引入即可。</p>]]></content:encoded>
+      
+      
+      
+      <category domain="https://studyinglover.com/tags/%E8%B8%A9%E5%9D%91/">踩坑</category>
+      
+      
+      <comments>https://studyinglover.com/2023/12/04/matplotlib%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93%E6%B8%B2%E6%9F%93/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>TruFor笔记和代码复现</title>
@@ -501,33 +527,6 @@
       
       
       <comments>https://studyinglover.com/2023/08/23/MediaPipe%E5%8D%B3%E5%B0%86%E6%8E%A8%E5%87%BA%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90%E6%9C%8D%E5%8A%A1/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Dual-Stream Diffusion Net for Text-to-Video Generation笔记</title>
-      <link>https://studyinglover.com/2023/08/23/DSDN%E7%AC%94%E8%AE%B0/</link>
-      <guid>https://studyinglover.com/2023/08/23/DSDN%E7%AC%94%E8%AE%B0/</guid>
-      <pubDate>Wed, 23 Aug 2023 10:32:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;dual-stream-diffusion-net-for-text-to-video-generation笔记&quot;&gt;Dual-Stream Diffusion Net for Text-to-Video Generation笔记&lt;/h1&gt;
-&lt;p&gt;这篇论文提出的模型</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="dual-stream-diffusion-net-for-text-to-video-generation笔记">Dual-Stream Diffusion Net for Text-to-Video Generation笔记</h1><p>这篇论文提出的模型架构是Dual-Stream Diffusion Net（DSDN），它是一种双流扩散网络。</p><figure><img src="https://cdn.studyinglover.com/pic/2023/08/3021b6624ee4f2093c6166b6a80cd643.png" alt="" /><figcaption>image.png</figcaption></figure><p>首先，视频内容通过一个一个编码器编码成内容特征和一个动作编码器编码成动作特征，并通过一个增量学习模块进行更新。前向扩散过程没有使用DDPM而是使用了 Hierarchical Text-Conditional Image Generation with CLIP Latents 这篇论文提出的方法。</p><p>为了对齐生成的内容和运动，设计了一个双流转换交互模块来通过交叉注意力实现两个分支之间的信息交互和对齐。</p><p>最后引入了运动合成器来简化运动信息的操作。</p>]]></content:encoded>
-      
-      
-      <category domain="https://studyinglover.com/categories/%E7%AC%94%E8%AE%B0/">笔记</category>
-      
-      
-      <category domain="https://studyinglover.com/tags/%E6%96%87%E5%AD%97%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87/">文字生成图片</category>
-      
-      
-      <comments>https://studyinglover.com/2023/08/23/DSDN%E7%AC%94%E8%AE%B0/#disqus_thread</comments>
       
     </item>
     

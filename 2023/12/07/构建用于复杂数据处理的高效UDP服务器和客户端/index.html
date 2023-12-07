@@ -16,16 +16,17 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="GPTBot介绍 最近，openai公布了GPTBot 的相关信息，并给出了禁止GPTBot的方法。以下是全文翻译。 GPTBot是OpenAI的网络爬虫，可以通过以下User agent和字符串来识别。 12User agent token: GPTBotFull user-agent string: Mozilla&#x2F;5.0 AppleWebKit&#x2F;537.36 (KHTML, like Gec">
+    <meta name="description" content="构建用于复杂数据处理的高效UDP服务器和客户端 引言 在当今快速发展的网络通信世界中，理解和应用各种通信协议至关重要。UDP（用户数据报协议）以其低延迟和高效率的特点，在实时数据传输中扮演着关键角色。本文将详细探讨如何使用Python实现UDP服务器和客户端，以处理复杂数据格式。 第1节: 理解UDP通信基础 UDP是一种无连接协议，提供快速数据包交换服务。它不提供像TCP那样的数据传输可靠性保证">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GPTBot介绍">
-<meta property="og:url" content="https://studyinglover.com/2023/08/11/GPTBot%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:title" content="构建用于复杂数据处理的高效UDP服务器和客户端">
+<meta property="og:url" content="https://studyinglover.com/2023/12/07/%E6%9E%84%E5%BB%BA%E7%94%A8%E4%BA%8E%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%9A%84%E9%AB%98%E6%95%88UDP%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%AE%A2%E6%88%B7%E7%AB%AF/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="GPTBot介绍 最近，openai公布了GPTBot 的相关信息，并给出了禁止GPTBot的方法。以下是全文翻译。 GPTBot是OpenAI的网络爬虫，可以通过以下User agent和字符串来识别。 12User agent token: GPTBotFull user-agent string: Mozilla&#x2F;5.0 AppleWebKit&#x2F;537.36 (KHTML, like Gec">
+<meta property="og:description" content="构建用于复杂数据处理的高效UDP服务器和客户端 引言 在当今快速发展的网络通信世界中，理解和应用各种通信协议至关重要。UDP（用户数据报协议）以其低延迟和高效率的特点，在实时数据传输中扮演着关键角色。本文将详细探讨如何使用Python实现UDP服务器和客户端，以处理复杂数据格式。 第1节: 理解UDP通信基础 UDP是一种无连接协议，提供快速数据包交换服务。它不提供像TCP那样的数据传输可靠性保证">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-08-11T20:58:00.000Z">
-<meta property="article:modified_time" content="2023-12-07T15:05:23.425Z">
+<meta property="article:published_time" content="2023-12-07T23:03:00.000Z">
+<meta property="article:modified_time" content="2023-12-07T15:05:23.429Z">
 <meta property="article:author" content="StudyingLover">
+<meta property="article:tag" content="踩坑">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -33,7 +34,7 @@
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script> <!-- <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>  -->
 
   
-  <title>GPTBot介绍 - plus studio</title>
+  <title>构建用于复杂数据处理的高效UDP服务器和客户端 - plus studio</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -266,13 +267,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://cdn.studyinglover.com/pic/2023/08/e7c591ac6e7423c1c9576ca0716c4d01.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('https://cdn.studyinglover.com/pic/2023/12/334c0c129076533308cbc7e03f8c55be.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="GPTBot介绍"></span>
+            <span id="subtitle" data-typed-text="构建用于复杂数据处理的高效UDP服务器和客户端"></span>
           
         </div>
 
@@ -288,8 +289,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-08-11 20:58" pubdate>
-          2023年8月11日 晚上
+        <time datetime="2023-12-07 23:03" pubdate>
+          2023年12月7日 晚上
         </time>
       </span>
     
@@ -300,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          792 字
+          1.6k 字
         
       </span>
     
@@ -311,7 +312,7 @@
         
         
         
-          7 分钟
+          14 分钟
         
       </span>
     
@@ -349,23 +350,49 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">GPTBot介绍</h1>
+            <h1 style="display: none">构建用于复杂数据处理的高效UDP服务器和客户端</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="gptbot介绍">GPTBot介绍</h1>
-<p>最近，openai公布了<a target="_blank" rel="noopener" href="https://platform.openai.com/docs/gptbot/gptbot">GPTBot</a> 的相关信息，并给出了禁止GPTBot的方法。以下是全文翻译。</p>
-<p>GPTBot是OpenAI的网络爬虫，可以通过以下User agent和字符串来识别。 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">User</span> agent token: GPTBot<br><span class="hljs-attribute">Full</span> user-agent string: Mozilla/<span class="hljs-number">5</span>.<span class="hljs-number">0</span> AppleWebKit/<span class="hljs-number">537</span>.<span class="hljs-number">36</span> (KHTML, like Gecko; compatible; GPTBot/<span class="hljs-number">1</span>.<span class="hljs-number">0</span>; +https://openai.com/gptbot)<br></code></pre></td></tr></table></figure></p>
-<h2 id="使用">使用</h2>
-<p>使用 GPTBot 用户代理爬取的网页可能会用于改进未来的模型，并且会过滤掉需要付费访问、已知收集个人身份信息（PII）或含有违反我们政策的文本的来源。允许 GPTBot 访问您的网站可以帮助 AI 模型变得更准确，提高它们的一般能力和安全性。在下面，我们还分享了如何禁止 GPTBot 访问您的网站。</p>
-<h3 id="禁止-gptbot">禁止 GPTBot</h3>
-<p>要禁止 GPTBot 访问您的网站，您可以将 GPTBot 添加到您网站的 robots.txt： <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-attribute">User-agent</span><span class="hljs-punctuation">: </span>GPTBot<br><span class="hljs-attribute">Disallow</span><span class="hljs-punctuation">: </span>/<br></code></pre></td></tr></table></figure></p>
-<h3 id="自定义-gptbot-访问">自定义 GPTBot 访问</h3>
-<p>要允许 GPTBot 仅访问您网站的部分内容，您可以将 GPTBot 令牌添加到您网站的 robots.txt，如下所示： <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dts">User-agent: GPTBot<br><span class="hljs-symbol">Allow:</span> <span class="hljs-keyword">/directory-1/</span><br><span class="hljs-symbol">Disallow:</span> <span class="hljs-keyword">/directory-2/</span><br></code></pre></td></tr></table></figure></p>
-<h3 id="ip-出口范围">IP 出口范围</h3>
-<p>对于 OpenAI 的爬虫，它会从 <a target="_blank" rel="noopener" href="https://openai.com/gptbot-ranges.txt">OpenAI 网站</a>上记录的 IP 地址段向网站发出请求。</p>
-<p>这里我给出IP 地址段 <figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-number">20.15.240.64</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.240.80</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.240.96</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.240.176</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.241.0</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.242.128</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.242.144</span>/<span class="hljs-number">28</span><br><span class="hljs-number">20.15.242.192</span>/<span class="hljs-number">28</span><br><span class="hljs-number">40.83.2.64</span>/<span class="hljs-number">28</span><br></code></pre></td></tr></table></figure></p>
+                <h1 id="构建用于复杂数据处理的高效udp服务器和客户端">构建用于复杂数据处理的高效UDP服务器和客户端</h1>
+<h2 id="引言">引言</h2>
+<p>在当今快速发展的网络通信世界中，理解和应用各种通信协议至关重要。UDP（用户数据报协议）以其低延迟和高效率的特点，在实时数据传输中扮演着关键角色。本文将详细探讨如何使用Python实现UDP服务器和客户端，以处理复杂数据格式。</p>
+<h2 id="第1节-理解udp通信基础">第1节: 理解UDP通信基础</h2>
+<p>UDP是一种无连接协议，提供快速数据包交换服务。它不提供像TCP那样的数据传输可靠性保证，但其低开销特性使其适用于高速传输和一定丢包率可容忍的场景。</p>
+<h2 id="第2节-设置python环境">第2节: 设置Python环境</h2>
+<p>使用Python的<code>socket</code>库，无需额外安装即可创建UDP服务器和客户端。</p>
+<h2 id="第3节-实现udp服务器">第3节: 实现UDP服务器</h2>
+<p>创建UDP服务器涉及以下关键步骤： - 使用<code>socket.socket(socket.AF_INET, socket.SOCK_DGRAM)</code>创建新的socket对象。 - 通过<code>sock.bind((HOST, PORT))</code>绑定地址和端口。 - 使用<code>sock.recvfrom(1024)</code>接收数据。</p>
+<h3 id="示例代码">示例代码</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> socket<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">start_udp_server</span>(<span class="hljs-params">host, port</span>):<br>    server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)<br>    server_socket.bind((host, port))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;UDP Server started on <span class="hljs-subst">&#123;host&#125;</span>:<span class="hljs-subst">&#123;port&#125;</span>&quot;</span>)<br><br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        data, addr = server_socket.recvfrom(<span class="hljs-number">1024</span>)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Received message: <span class="hljs-subst">&#123;data&#125;</span> from <span class="hljs-subst">&#123;addr&#125;</span>&quot;</span>)<br>        <span class="hljs-comment"># 这里可以添加数据处理逻辑</span><br><br>start_udp_server(<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>, <span class="hljs-number">6000</span>)<br></code></pre></td></tr></table></figure>
+<h3 id="高级应用">高级应用</h3>
+<ul>
+<li><strong>异步处理</strong>：为提高性能，考虑使用异步IO处理数据。</li>
+<li><strong>错误处理</strong>：添加适当的错误处理机制以提高服务器稳定性。</li>
+</ul>
+<h2 id="第4节-实现udp客户端">第4节: 实现UDP客户端</h2>
+<p>客户端的实现重点在于发送数据： - 创建socket。 - 通过<code>sock.sendto(message, (HOST, PORT))</code>发送数据。</p>
+<h3 id="示例代码-1">示例代码</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> socket<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">send_udp_message</span>(<span class="hljs-params">host, port, message</span>):<br>    client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)<br>    client_socket.sendto(message.encode(), (host, port))<br>    data, server = client_socket.recvfrom(<span class="hljs-number">1024</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Received response: <span class="hljs-subst">&#123;data&#125;</span> from <span class="hljs-subst">&#123;server&#125;</span>&quot;</span>)<br><br>send_udp_message(<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>, <span class="hljs-number">6000</span>, <span class="hljs-string">&#x27;Hello, UDP Server!&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h3 id="数据包格式">数据包格式</h3>
+<ul>
+<li><strong>格式设计</strong>：设计符合服务器预期的数据包格式，如对雷达数据的特定编码。</li>
+<li><strong>验证机制</strong>：实现数据包完整性和正确性的验证机制。</li>
+</ul>
+<h2 id="第5节-服务器和客户端的集成">第5节: 服务器和客户端的集成</h2>
+<p>集成测试包括： - 确保数据包格式正确。 - 服务器正确解析数据包。 - 确保通信端口设置正确。</p>
+<h2 id="第6节-高级主题">第6节: 高级主题</h2>
+<ul>
+<li><strong>重传策略</strong>：UDP丢包问题的解决方案，如应用层重传机制。</li>
+<li><strong>安全性</strong>：考虑数据传输的加密和验证机制。</li>
+</ul>
+<h2 id="结论">结论</h2>
+<p>介绍了如何使用Python创建UDP服务器和客户端，并根据不同数据类型处理复杂数据包。虽然UDP不保证数据完整性和顺序，但其速度和效率优势使其成为实时数据处理的理想选择。</p>
+<h2 id="参考文献">参考文献</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/socket.html">Python官方文档 - socket编程</a></li>
+</ul>
 
                 
               </div>
@@ -375,6 +402,13 @@
               <div class="post-metas my-3">
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%B8%A9%E5%9D%91/">#踩坑</a>
+      
+    </div>
+  
 </div>
 
 
@@ -383,8 +417,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>GPTBot介绍</div>
-      <div>https://studyinglover.com/2023/08/11/GPTBot介绍/</div>
+      <div>构建用于复杂数据处理的高效UDP服务器和客户端</div>
+      <div>https://studyinglover.com/2023/12/07/构建用于复杂数据处理的高效UDP服务器和客户端/</div>
     </div>
     <div class="license-meta">
       
@@ -396,7 +430,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年8月11日</div>
+          <div>2023年12月7日</div>
         </div>
       
       
@@ -428,18 +462,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/08/13/%E5%9C%A8%E7%BB%88%E7%AB%AF%E7%BB%98%E5%88%B6GPU%E6%98%BE%E5%AD%98%E4%BD%BF%E7%94%A8%E6%9B%B2%E7%BA%BF/" title="在终端绘制GPU显存使用曲线">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">在终端绘制GPU显存使用曲线</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/08/10/arch%E8%93%9D%E7%89%99%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5/" title="arch蓝牙无法连接">
-                        <span class="hidden-mobile">arch蓝牙无法连接</span>
+                      <a href="/2023/12/04/matplotlib%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93%E6%B8%B2%E6%9F%93/" title="matplotlib中文字体渲染">
+                        <span class="hidden-mobile">matplotlib中文字体渲染</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

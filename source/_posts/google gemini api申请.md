@@ -3,7 +3,7 @@ title: google gemini api申请
 banner_img: https://cdn.studyinglover.com/pic/2023/12/334c0c129076533308cbc7e03f8c55be.png
 date: 2023-12-14 22:40:00
 tags:
-- 踩坑
+- google gemini
 ---
 # google gemini api申请
 首先登陆 https://ai.google.dev/pricing 

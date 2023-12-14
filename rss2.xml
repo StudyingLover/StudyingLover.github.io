@@ -9,8 +9,33 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 07 Dec 2023 15:05:23 GMT</pubDate>
+    <pubDate>Thu, 14 Dec 2023 14:49:14 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>google gemini api申请</title>
+      <link>https://studyinglover.com/2023/12/14/google%20gemini%20api%E7%94%B3%E8%AF%B7/</link>
+      <guid>https://studyinglover.com/2023/12/14/google%20gemini%20api%E7%94%B3%E8%AF%B7/</guid>
+      <pubDate>Thu, 14 Dec 2023 22:40:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;google-gemini-api申请&quot;&gt;google gemini api申请&lt;/h1&gt;
+&lt;p&gt;首先登陆 https://ai.google.dev/pricing &lt;img src=&quot;https://cdn.studyinglover.com/pic/2023</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="google-gemini-api申请">google gemini api申请</h1><p>首先登陆 https://ai.google.dev/pricing <img src="https://cdn.studyinglover.com/pic/2023/12/af1a86c0c368f9368f6d125902d3b610.png" alt="image.png" /></p><p>往下滑，看一看到免费选项，每分钟60词请求对于个人完全够用，点击进入 <img src="https://cdn.studyinglover.com/pic/2023/12/bb87b408e483fe0fa5999a2aacff299a.png" alt="image.png" /></p><p>进入后，先点击<code>Get API key</code>,然后点击<code>Create API kay in new project</code> <img src="https://cdn.studyinglover.com/pic/2023/12/0c224ceeb462739a69a26f9c98b9b76b.png" alt="image.png" /></p><p>接下来可以看到类似的页面 <img src="https://cdn.studyinglover.com/pic/2023/12/262c805af52491f846e38a9d1a2ff533.png" alt="image.png" /></p><p>复制你的key</p><p>在命令行通过下面的方式检查是否正常 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl \ -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \ -d <span class="hljs-string">&#x27;&#123; &quot;prompt&quot;: &#123; &quot;text&quot;: &quot;Write a story about a magic backpack&quot;&#125; &#125;&#x27;</span> \ <span class="hljs-string">&quot;https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText?key=YOUR_API_KEY&quot;</span><br></code></pre></td></tr></table></figure></p><p>可以看到 <img src="https://cdn.studyinglover.com/pic/2023/12/001f17bea345dd0fee9edadbca84c6ed.png" alt="image.png" /></p>]]></content:encoded>
+      
+      
+      
+      <category domain="https://studyinglover.com/tags/%E8%B8%A9%E5%9D%91/">踩坑</category>
+      
+      
+      <comments>https://studyinglover.com/2023/12/14/google%20gemini%20api%E7%94%B3%E8%AF%B7/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>构建用于复杂数据处理的高效UDP服务器和客户端</title>
@@ -507,29 +532,6 @@
       
       
       <comments>https://studyinglover.com/2023/09/01/RoboTAP%E7%AC%94%E8%AE%B0/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>自建obsidian同步服务</title>
-      <link>https://studyinglover.com/2023/08/31/%E8%87%AA%E5%BB%BAobsidian%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/</link>
-      <guid>https://studyinglover.com/2023/08/31/%E8%87%AA%E5%BB%BAobsidian%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/</guid>
-      <pubDate>Thu, 31 Aug 2023 15:47:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;自建obsidian同步服务&quot;&gt;自建obsidian同步服务&lt;/h1&gt;
-&lt;p&gt;最近GitHub上有这样一个项目&lt;a href=&quot;https://github.com/acheong08/rev-obsidian-sync&quot;&gt;rev-obsidian-sync&lt;/a</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="自建obsidian同步服务">自建obsidian同步服务</h1><p>最近GitHub上有这样一个项目<a href="https://github.com/acheong08/rev-obsidian-sync">rev-obsidian-sync</a> ,他逆向了obsidian的同步服务，使其可以在本地运行。</p><h2 id="服务端">服务端</h2><h3 id="安装">安装</h3><p>首先安装服务端， <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/acheong08/rev-obsidian-sync<br><span class="hljs-built_in">cd</span> obsidian-sync<br>go run cmd/obsidian-sync/main.go<br></code></pre></td></tr></table></figure> go会下载一堆依赖，然后你会在最下面看到这个 <img src="https://cdn.studyinglover.com/pic/2023/08/c41aa8aca8c8033d319317ee2dbc3643.png" alt="image.png" /></p><p>当然你也可以自定义域名，设置环境变量，<code>DOMAIN_NAME</code> 设置域名，<code>ADDR_HTTP</code>设置监听端口，<code>DATA_DIR</code> 设置数据保存的文件夹，<code>SIGNUP_KEY</code> 设置注册的密钥。</p><h3 id="创建用户">创建用户</h3><p>需要新建一个用户给自己 <code>go run cmd/signup/main.go</code> 在命令行按照提示输入邮箱密码。</p><p>或者使用http请求的方式 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">curl <span class="hljs-params">--request</span> POST \<br>  <span class="hljs-params">--url</span> https:<span class="hljs-string">//yourdomain.com/user/signup</span> \<br>  <span class="hljs-params">--header</span> &#x27;Content-Type: application/json&#x27; \<br>  <span class="hljs-params">--data</span> &#x27;&#123;<br><span class="hljs-string">&quot;email&quot;</span>: <span class="hljs-string">&quot;example@example.com&quot;</span>,<br><span class="hljs-string">&quot;password&quot;</span>: <span class="hljs-string">&quot;example_password&quot;</span>,<br><span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Example User&quot;</span>,<br><span class="hljs-string">&quot;signup_key&quot;</span>: <span class="hljs-string">&quot;&lt;SIGNUP_KEY&gt;&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure></p><h2 id="客户端">客户端</h2><p>在obsidian仓库打开命令行，然后 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /path/to/vault/.obsidian<br><span class="hljs-built_in">mkdir</span> -p plugins/custom-sync-plugin &amp;&amp; <span class="hljs-built_in">cd</span> plugins/custom-sync-plugin<br>wget https://github.com/acheong08/rev-obsidian-sync-plugin/raw/master/main.js https://github.com/acheong08/rev-obsidian-sync-plugin/raw/master/manifest.json<br></code></pre></td></tr></table></figure> 打开obsidian设置界面，选择第三方插件，启用<code>Custom Native Sync</code> <img src="https://cdn.studyinglover.com/pic/2023/08/0a124be82a4a2fe13b1943ab320c839d.png" alt="image.png" /></p><p>设置服务端地址 <img src="https://cdn.studyinglover.com/pic/2023/08/9b7c177f4b69baed6686fffca3a04df5.png" alt="image.png" /></p><p>同时打开核心插件的同步 <img src="https://cdn.studyinglover.com/pic/2023/08/e3944c723e5b4ea0740f729fdd4a1c73.png" alt="image.png" /> 在点击左侧出现的同步按钮，输入前面设置的账号密码，就可以体验到官方的同步功能了。</p>]]></content:encoded>
-      
-      
-      
-      
-      <comments>https://studyinglover.com/2023/08/31/%E8%87%AA%E5%BB%BAobsidian%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1/#disqus_thread</comments>
       
     </item>
     

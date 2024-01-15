@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>linux下NTFS磁盘报错输入输出错误</title>
+    <link href="/2024/01/15/linux%E4%B8%8BNTFS%E7%A3%81%E7%9B%98%E6%8A%A5%E9%94%99%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%94%99%E8%AF%AF/"/>
+    <url>/2024/01/15/linux%E4%B8%8BNTFS%E7%A3%81%E7%9B%98%E6%8A%A5%E9%94%99%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%94%99%E8%AF%AF/</url>
+    
+    <content type="html"><![CDATA[<h1 id="linux下ntfs磁盘报错输入输出错误">linux下NTFS磁盘报错输入输出错误</h1><p>简单来说就是我在linux下挂载了一个NTFS格式的移动硬盘，然后在使用的时候，今天我想删除一个文件夹，突然给了我一个报错</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">输入/输出错误<br></code></pre></td></tr></table></figure><p>看到这个错误，我开了几个终端，又是<code>ntfsfix</code>修磁盘,又是<code>dmseg</code>看日志,一通操作猛如虎，问题依然没解决</p><p>这个时候我们注意到(attention is all you need)，ntfs是微软的闭源格式，linux下的ntfs-3g是一个开源的ntfs驱动，这个驱动是不是有问题呢？</p><p>关机，打开linux,扫描并修复磁盘，删除，问题解决。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>踩坑</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>手机平板远程访问kvm虚拟机的windows</title>
     <link href="/2023/12/23/%E6%89%8B%E6%9C%BA%E5%B9%B3%E6%9D%BF%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AEkvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84windows/"/>
     <url>/2023/12/23/%E6%89%8B%E6%9C%BA%E5%B9%B3%E6%9D%BF%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AEkvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84windows/</url>

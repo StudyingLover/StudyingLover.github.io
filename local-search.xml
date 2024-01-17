@@ -23,6 +23,44 @@
   
   
   <entry>
+    <title>Venn-Abers 预测器</title>
+    <link href="/2024/01/15/Venn-Abers%20%E9%A2%84%E6%B5%8B%E5%99%A8/"/>
+    <url>/2024/01/15/Venn-Abers%20%E9%A2%84%E6%B5%8B%E5%99%A8/</url>
+    
+    <content type="html"><![CDATA[<h1 id="venn-abers-预测器">Venn-Abers 预测器</h1><p>Venn-Abers 预测器 https://arxiv.org/pdf/1211.0025.pdf</p><p>是一种基于Venn预测器的新的专注于二元预测问题的统计方法。它们生成的是概率类型的预测，这些预测在标准假设下（即观察是从同一分布独立生成的）是很好校准的。这种预测器的一个关键特点是它们输出的是概率区间而不是单一的概率点。Venn-Abers 预测器可以与其他模型结合使用。</p><p>Venn-Abers 预测器 输出的分数映射到经过良好校准的概率。</p><ul><li><strong>输入（Input）</strong><ul><li>数据特征（Data Features）: 模型抽出来的特征</li><li>目标变量（Target Variable): 监督学习的目标</li></ul></li><li><strong>输出（Output）</strong><ul><li>概率预测（Probability Predictions）: Venn-Abers预测器输出的是概率对，而不是单一的概率值。这意味着对于每个预测实例，它会给出一个概率范围，而不是一个具体的概率点。</li><li>校准质量评估（Calibration Quality Assessment）: 此外，还可以通过预期校准误差（ECE）等指标来评估预测的校准质量，这有助于理解模型在不同类别上的预测准确度。</li></ul></li></ul><p>have a try https://github.com/ptocca/VennABERS</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">calibrPts = [(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>),(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>),(<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,<span class="hljs-number">0</span>),(<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,<span class="hljs-number">2</span>),(<span class="hljs-number">5</span>,<span class="hljs-number">5</span>,<span class="hljs-number">1</span>),(<span class="hljs-number">6</span>,<span class="hljs-number">6</span>,<span class="hljs-number">5</span>),(<span class="hljs-number">7</span>,<span class="hljs-number">7</span>,<span class="hljs-number">7</span>)]<br>testScores = [<span class="hljs-number">1.5</span>,<span class="hljs-number">2.5</span>,<span class="hljs-number">3.5</span>,<span class="hljs-number">4.5</span>,<span class="hljs-number">5.5</span>,<span class="hljs-number">6.5</span>]<br><br>p0,p1 = ScoresToMultiProbs(calibrPts,testScores)<br><span class="hljs-built_in">print</span>(p0, p1)<br></code></pre></td></tr></table></figure><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-string">[0.5        1.         1.66666667 2.33333333 3.         3.75      ]</span> <span class="hljs-string">[1. 1. 1. 1. 1. 1.]</span><br></code></pre></td></tr></table></figure><p>两个列表分别代表对应的代表上限和下限。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>机器学习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>基于Venn-Abers预测器的系统日志异常检测方法_顾兆军</title>
+    <link href="/2024/01/15/%E5%9F%BA%E4%BA%8EVenn-Abers%E9%A2%84%E6%B5%8B%E5%99%A8%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%97%A5%E5%BF%97%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E6%96%B9%E6%B3%95_%E9%A1%BE%E5%85%86%E5%86%9B/"/>
+    <url>/2024/01/15/%E5%9F%BA%E4%BA%8EVenn-Abers%E9%A2%84%E6%B5%8B%E5%99%A8%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%97%A5%E5%BF%97%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E6%96%B9%E6%B3%95_%E9%A1%BE%E5%85%86%E5%86%9B/</url>
+    
+    <content type="html"><![CDATA[<h1 id="基于venn-abers预测器的系统日志异常检测方法_顾兆军">基于Venn-Abers预测器的系统日志异常检测方法_顾兆军</h1><p>收集日志信息、日志解析和日志的特征化提，包括收集日志信息、日志解析和日志的特征化提取。</p><p>每条日志都包含时间戳、日志优先级、系统组件和日志条目本身等信息的非结构化数据。日志解析会生成一个生成事件计数矩阵，每个日志事件模板对应一个标识符 ｂｌｏｃｋ＿ｉｄ，用于日志异常检测模型推理。在事件计数矩阵中，将具有相同 ｂｌｏｃｋ 的事件模板放在一行，即每一行代表一个块 ｂｌｏｃｋ，将每一行的事件模板统计出次数，即每一列代表一种事件类型。(因为日志是非结构化的，这样子实际上就合并了不同事件的日志，将其变成一个矩阵用于推理). <span class="math inline">\(X_{i,j}\)</span> 单元格中的值记录事件 ｊ 在块 ｉ 上发生的次数。TF-IDF是信息检索中一种公认的启发式方法，它通常用作信息检索和文本挖掘中文档的特征表示。</p><p>日志异常检测部分是推理一个二分类问题，然后获取分类概率(论文这里说的很复杂，实际上就是做一个二分类然后给一个概率)，接下来成对相邻违反者算法得到一个保序回归 函 数 <span class="math inline">\(f()\)</span> ０ 和 １ 用于测试对象 <span class="math inline">\(x_n\)</span>,<span class="math inline">\(s_0 = (\begin{matrix}z_1,z_2,\cdots,z_{n-1,}&amp;(x_n,0)\end{matrix})\)</span>为<span class="math inline">\(s_0\)</span>评分函数，<span class="math inline">\(s_1 = (z_1,z_2 \cdots,z_{n-1,}(x_n,1))\)</span> 为<span class="math inline">\(s_1\)</span>的评分函数.模型输出<span class="math inline">\((\begin{matrix}p_0,p_1\\\end{matrix})\)</span>,<span class="math inline">\(p_{0}=f_{0}\left(s_{0}\left(x\right)\right)\)</span> ,<span class="math inline">\(p_{1}=f_{1}\left(s_{1}\left(x\right)\right)\)</span></p><p>运行效率优化 实验过程中，发现由训练集标签和训练集对象得到的保序回归序列分布过于密集，不符合预期。ＨＤＦＳ 记录的日志行为单一［１８］ 使不同特征向量之间的差异较小，特征向量高度相似或重复。对于重复的得分，将其标签 <span class="math inline">\(ｙ_i\)</span> 累积求和并取平均值作为该得分新的标签.</p><p>算法有效性评估是平方损失，评估指标是f1</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>机器学习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>手机平板远程访问kvm虚拟机的windows</title>
     <link href="/2023/12/23/%E6%89%8B%E6%9C%BA%E5%B9%B3%E6%9D%BF%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AEkvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84windows/"/>
     <url>/2023/12/23/%E6%89%8B%E6%9C%BA%E5%B9%B3%E6%9D%BF%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AEkvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84windows/</url>

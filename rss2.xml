@@ -9,7 +9,7 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 15 Jan 2024 14:56:20 GMT</pubDate>
+    <pubDate>Wed, 17 Jan 2024 08:41:52 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -35,6 +35,58 @@
       
       
       <comments>https://studyinglover.com/2024/01/15/linux%E4%B8%8BNTFS%E7%A3%81%E7%9B%98%E6%8A%A5%E9%94%99%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%94%99%E8%AF%AF/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Venn-Abers 预测器</title>
+      <link>https://studyinglover.com/2024/01/15/Venn-Abers%20%E9%A2%84%E6%B5%8B%E5%99%A8/</link>
+      <guid>https://studyinglover.com/2024/01/15/Venn-Abers%20%E9%A2%84%E6%B5%8B%E5%99%A8/</guid>
+      <pubDate>Mon, 15 Jan 2024 19:40:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;venn-abers-预测器&quot;&gt;Venn-Abers 预测器&lt;/h1&gt;
+&lt;p&gt;Venn-Abers 预测器 https://arxiv.org/pdf/1211.0025.pdf&lt;/p&gt;
+&lt;p&gt;是一种基于Venn预测器的新的专注于二元预测问题的统计方法。它们生成的</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="venn-abers-预测器">Venn-Abers 预测器</h1><p>Venn-Abers 预测器 https://arxiv.org/pdf/1211.0025.pdf</p><p>是一种基于Venn预测器的新的专注于二元预测问题的统计方法。它们生成的是概率类型的预测，这些预测在标准假设下（即观察是从同一分布独立生成的）是很好校准的。这种预测器的一个关键特点是它们输出的是概率区间而不是单一的概率点。Venn-Abers 预测器可以与其他模型结合使用。</p><p>Venn-Abers 预测器 输出的分数映射到经过良好校准的概率。</p><ul><li><strong>输入（Input）</strong><ul><li>数据特征（Data Features）: 模型抽出来的特征</li><li>目标变量（Target Variable): 监督学习的目标</li></ul></li><li><strong>输出（Output）</strong><ul><li>概率预测（Probability Predictions）: Venn-Abers预测器输出的是概率对，而不是单一的概率值。这意味着对于每个预测实例，它会给出一个概率范围，而不是一个具体的概率点。</li><li>校准质量评估（Calibration Quality Assessment）: 此外，还可以通过预期校准误差（ECE）等指标来评估预测的校准质量，这有助于理解模型在不同类别上的预测准确度。</li></ul></li></ul><p>have a try https://github.com/ptocca/VennABERS</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">calibrPts = [(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>),(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>),(<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,<span class="hljs-number">0</span>),(<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,<span class="hljs-number">2</span>),(<span class="hljs-number">5</span>,<span class="hljs-number">5</span>,<span class="hljs-number">1</span>),(<span class="hljs-number">6</span>,<span class="hljs-number">6</span>,<span class="hljs-number">5</span>),(<span class="hljs-number">7</span>,<span class="hljs-number">7</span>,<span class="hljs-number">7</span>)]<br>testScores = [<span class="hljs-number">1.5</span>,<span class="hljs-number">2.5</span>,<span class="hljs-number">3.5</span>,<span class="hljs-number">4.5</span>,<span class="hljs-number">5.5</span>,<span class="hljs-number">6.5</span>]<br><br>p0,p1 = ScoresToMultiProbs(calibrPts,testScores)<br><span class="hljs-built_in">print</span>(p0, p1)<br></code></pre></td></tr></table></figure><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-string">[0.5        1.         1.66666667 2.33333333 3.         3.75      ]</span> <span class="hljs-string">[1. 1. 1. 1. 1. 1.]</span><br></code></pre></td></tr></table></figure><p>两个列表分别代表对应的代表上限和下限。</p>]]></content:encoded>
+      
+      
+      
+      <category domain="https://studyinglover.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</category>
+      
+      
+      <comments>https://studyinglover.com/2024/01/15/Venn-Abers%20%E9%A2%84%E6%B5%8B%E5%99%A8/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>基于Venn-Abers预测器的系统日志异常检测方法_顾兆军</title>
+      <link>https://studyinglover.com/2024/01/15/%E5%9F%BA%E4%BA%8EVenn-Abers%E9%A2%84%E6%B5%8B%E5%99%A8%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%97%A5%E5%BF%97%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E6%96%B9%E6%B3%95_%E9%A1%BE%E5%85%86%E5%86%9B/</link>
+      <guid>https://studyinglover.com/2024/01/15/%E5%9F%BA%E4%BA%8EVenn-Abers%E9%A2%84%E6%B5%8B%E5%99%A8%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%97%A5%E5%BF%97%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E6%96%B9%E6%B3%95_%E9%A1%BE%E5%85%86%E5%86%9B/</guid>
+      <pubDate>Mon, 15 Jan 2024 19:40:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;基于venn-abers预测器的系统日志异常检测方法_顾兆军&quot;&gt;基于Venn-Abers预测器的系统日志异常检测方法_顾兆军&lt;/h1&gt;
+&lt;p&gt;收集日志信息、日志解析和日志的特征化提，包括收集日志信息、日志解析和日志的特征化提取。&lt;/p&gt;
+&lt;p&gt;每条日志都包含时间戳</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="基于venn-abers预测器的系统日志异常检测方法_顾兆军">基于Venn-Abers预测器的系统日志异常检测方法_顾兆军</h1><p>收集日志信息、日志解析和日志的特征化提，包括收集日志信息、日志解析和日志的特征化提取。</p><p>每条日志都包含时间戳、日志优先级、系统组件和日志条目本身等信息的非结构化数据。日志解析会生成一个生成事件计数矩阵，每个日志事件模板对应一个标识符 ｂｌｏｃｋ＿ｉｄ，用于日志异常检测模型推理。在事件计数矩阵中，将具有相同 ｂｌｏｃｋ 的事件模板放在一行，即每一行代表一个块 ｂｌｏｃｋ，将每一行的事件模板统计出次数，即每一列代表一种事件类型。(因为日志是非结构化的，这样子实际上就合并了不同事件的日志，将其变成一个矩阵用于推理). <span class="math inline">\(X_{i,j}\)</span> 单元格中的值记录事件 ｊ 在块 ｉ 上发生的次数。TF-IDF是信息检索中一种公认的启发式方法，它通常用作信息检索和文本挖掘中文档的特征表示。</p><p>日志异常检测部分是推理一个二分类问题，然后获取分类概率(论文这里说的很复杂，实际上就是做一个二分类然后给一个概率)，接下来成对相邻违反者算法得到一个保序回归 函 数 <span class="math inline">\(f()\)</span> ０ 和 １ 用于测试对象 <span class="math inline">\(x_n\)</span>,<span class="math inline">\(s_0 = (\begin{matrix}z_1,z_2,\cdots,z_{n-1,}&amp;(x_n,0)\end{matrix})\)</span>为<span class="math inline">\(s_0\)</span>评分函数，<span class="math inline">\(s_1 = (z_1,z_2 \cdots,z_{n-1,}(x_n,1))\)</span> 为<span class="math inline">\(s_1\)</span>的评分函数.模型输出<span class="math inline">\((\begin{matrix}p_0,p_1\\\end{matrix})\)</span>,<span class="math inline">\(p_{0}=f_{0}\left(s_{0}\left(x\right)\right)\)</span> ,<span class="math inline">\(p_{1}=f_{1}\left(s_{1}\left(x\right)\right)\)</span></p><p>运行效率优化 实验过程中，发现由训练集标签和训练集对象得到的保序回归序列分布过于密集，不符合预期。ＨＤＦＳ 记录的日志行为单一［１８］ 使不同特征向量之间的差异较小，特征向量高度相似或重复。对于重复的得分，将其标签 <span class="math inline">\(ｙ_i\)</span> 累积求和并取平均值作为该得分新的标签.</p><p>算法有效性评估是平方损失，评估指标是f1</p>]]></content:encoded>
+      
+      
+      
+      <category domain="https://studyinglover.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</category>
+      
+      
+      <comments>https://studyinglover.com/2024/01/15/%E5%9F%BA%E4%BA%8EVenn-Abers%E9%A2%84%E6%B5%8B%E5%99%A8%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%97%A5%E5%BF%97%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E6%96%B9%E6%B3%95_%E9%A1%BE%E5%85%86%E5%86%9B/#disqus_thread</comments>
       
     </item>
     
@@ -472,60 +524,6 @@
       
       
       <comments>https://studyinglover.com/2023/10/01/FreeU-%E6%96%87%E5%AD%97%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%E7%9A%84%E5%85%8D%E8%B4%B9%E5%8D%88%E9%A4%90/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>使用xgboost的c接口推理模型</title>
-      <link>https://studyinglover.com/2023/09/10/%E4%BD%BF%E7%94%A8xgboost%E7%9A%84c%E6%8E%A5%E5%8F%A3%E6%8E%A8%E7%90%86%E6%A8%A1%E5%9E%8B/</link>
-      <guid>https://studyinglover.com/2023/09/10/%E4%BD%BF%E7%94%A8xgboost%E7%9A%84c%E6%8E%A5%E5%8F%A3%E6%8E%A8%E7%90%86%E6%A8%A1%E5%9E%8B/</guid>
-      <pubDate>Sun, 10 Sep 2023 21:10:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;使用xgboost的c接口推理模型&quot;&gt;使用xgboost的c接口推理模型&lt;/h1&gt;
-&lt;p&gt;官方&lt;a href=&quot;https://xgboost.readthedocs.io/en/stable/tutorials/c_api_tutorial.html&quot;&gt;c ap</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="使用xgboost的c接口推理模型">使用xgboost的c接口推理模型</h1><p>官方<a href="https://xgboost.readthedocs.io/en/stable/tutorials/c_api_tutorial.html">c api tutorial</a>和<a href="https://xgboost.readthedocs.io/en/stable/c.html">文档</a>，非常恶心的一点是，tutorial和文档问题很多。</p><p>也参考了不少开源项目，主要有<a href="https://github.com/R-Stalker/xgboost-c-cplusplus">xgboost-c-cplusplus</a>,<a href="https://github.com/EmbolismSoil/xgboostpp">xgboostpp</a>.</p><p>首先导入头文件<code>#include "xgboost/c_api.h"</code> ，接下来xgboost的绝大多数接口都包含在了这个头文件中。</p><p>然后我们需要一个宏，来用它获取xgboost函数使用的情况.在每次调用xgboost函数时都应该调用这个宏。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> safe_xgboost(call) &#123;  \</span><br><span class="hljs-meta">  int err = (call); \</span><br><span class="hljs-meta">  <span class="hljs-keyword">if</span> (err != 0) &#123; \</span><br><span class="hljs-meta">    fprintf(stderr, <span class="hljs-string">&quot;%s:%d: error in %s: %s\n&quot;</span>, __FILE__, __LINE__, #call, XGBGetLastError());  \</span><br><span class="hljs-meta">    exit(1); \</span><br><span class="hljs-meta">  &#125; \</span><br><span class="hljs-meta">&#125;</span><br></code></pre></td></tr></table></figure></p><p>我们使用的模型文件为<code>xgboost_model.bin</code> ,训练数据的输入是 <strong>11</strong> 个元素。</p><p>首先我们声明一个boost模型的句柄<code>BoosterHandle booster;</code> 接着用<code>XGBoosterCreate</code> 函数创建一个模型 。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">BoosterHandle booster;<br>safe_xgboost(XGBoosterCreate(<span class="hljs-literal">NULL</span>, <span class="hljs-number">0</span>, &amp;booster));<br></code></pre></td></tr></table></figure></p><p>设置一个字符串作为模型路径<code>const char *model_path = "../xgboost_model.bin";</code>(<code>../</code>是因为编译出来的可执行文件在build目录下) ， 通过句柄使用<code>XGBoosterLoadModel</code>函数加载模型。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">const</span> <span class="hljs-type">char</span> *model_path = <span class="hljs-string">&quot;../xgboost_model.bin&quot;</span>;<br>XGBoosterLoadModel(booster, model_path)<br></code></pre></td></tr></table></figure></p><p>设置一组数据作为推理测试，这里我选的数据标签是1.接着将输入数据转为xgboost的DMatrix格式。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">float</span> a[<span class="hljs-number">11</span>]= &#123;<span class="hljs-number">14.0</span>,<span class="hljs-number">2.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">12.0</span>,<span class="hljs-number">19010.0</span>,<span class="hljs-number">120.0</span>,<span class="hljs-number">14.0</span>,<span class="hljs-number">0.0</span>,<span class="hljs-number">0.0</span>,<span class="hljs-number">0.0</span>,<span class="hljs-number">0.0</span>&#125;;<br>DMatrixHandle h_test;<br>safe_xgboost(XGDMatrixCreateFromMat(a, <span class="hljs-number">1</span>, <span class="hljs-number">11</span>, <span class="hljs-number">-1</span>, &amp;h_test));<br></code></pre></td></tr></table></figure></p><p>下面就可以进行模型推理了，<code>out_len</code> 代表输出的长度(实际上是一个整型变量)，<code>f</code>的模型推理的结果。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">bst_ulong out_len;<br><span class="hljs-type">const</span> <span class="hljs-type">float</span> *f;<br>safe_xgboost(XGBoosterPredict(booster, h_test, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, &amp;out_len, &amp;f));<br></code></pre></td></tr></table></figure></p><p>我们可以打印输出查看结果 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Value of the variable: %f\n&quot;</span>, f[<span class="hljs-number">0</span>]);<br></code></pre></td></tr></table></figure></p><p>最后记得释放内存 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">XGDMatrixFree(h_test);<br>XGBoosterFree(booster);<br></code></pre></td></tr></table></figure></p><p>完整的代码 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdint.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;math.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;xgboost/c_api.h&quot;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> safe_xgboost(call) &#123;  \</span><br><span class="hljs-meta">  int err = (call); \</span><br><span class="hljs-meta">  <span class="hljs-keyword">if</span> (err != 0) &#123; \</span><br><span class="hljs-meta">    fprintf(stderr, <span class="hljs-string">&quot;%s:%d: error in %s: %s\n&quot;</span>, __FILE__, __LINE__, #call, XGBGetLastError());  \</span><br><span class="hljs-meta">    exit(1); \</span><br><span class="hljs-meta">  &#125; \</span><br><span class="hljs-meta">&#125;</span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> <span class="hljs-type">const</span> *argv[])</span> &#123;<br>    <span class="hljs-type">const</span> <span class="hljs-type">char</span> *model_path = <span class="hljs-string">&quot;../xgboost_model.bin&quot;</span>;<br><br>    <span class="hljs-comment">// create booster handle first</span><br>    BoosterHandle booster;<br>    safe_xgboost(XGBoosterCreate(<span class="hljs-literal">NULL</span>, <span class="hljs-number">0</span>, &amp;booster));<br>    <span class="hljs-comment">// load model</span><br>    safe_xgboost(XGBoosterLoadModel(booster, model_path));<br><br>    <span class="hljs-comment">//generate random data of a a[11],every nuber from 0 to 2</span><br>    <span class="hljs-comment">// float a[11]= &#123;1.0,12.0,1.0,1.0,16134.0,20600.0,0.0,1.0,0.0,0.0,0.0&#125;; // label: 0.0</span><br>    <span class="hljs-type">float</span> a[<span class="hljs-number">11</span>]= &#123;<span class="hljs-number">14.0</span>,<span class="hljs-number">2.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">12.0</span>,<span class="hljs-number">19010.0</span>,<span class="hljs-number">120.0</span>,<span class="hljs-number">14.0</span>,<span class="hljs-number">0.0</span>,<span class="hljs-number">0.0</span>,<span class="hljs-number">0.0</span>,<span class="hljs-number">0.0</span>&#125;; <span class="hljs-comment">// label: 1.0</span><br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">11</span>; i++) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%f, &quot;</span>, a[i]);<br>        <span class="hljs-keyword">if</span> (i == <span class="hljs-number">10</span>) &#123;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">// convert to DMatrix</span><br>    DMatrixHandle h_test;<br>    safe_xgboost(XGDMatrixCreateFromMat(a, <span class="hljs-number">1</span>, <span class="hljs-number">11</span>, <span class="hljs-number">-1</span>, &amp;h_test));<br>    <span class="hljs-comment">// predict</span><br>    bst_ulong out_len;<br>    <span class="hljs-type">const</span> <span class="hljs-type">float</span> *f;<br>    safe_xgboost(XGBoosterPredict(booster, h_test, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, &amp;out_len, &amp;f));<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Value of the variable: %f\n&quot;</span>, f[<span class="hljs-number">0</span>]);<br><br>    XGDMatrixFree(h_test);<br>    XGBoosterFree(booster);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></p><p>使用cmake编译 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs CMakeLists.txt">cmake_minimum_required(VERSION 3.18)<br>project(project_name LANGUAGES C CXX VERSION 0.1)<br>set(xgboost_DIR &quot;/usr/include/xgboost&quot;)<br><br>include_directories($&#123;xgboost_DIR&#125;)<br>link_directories($&#123;xgboost_DIR&#125;)<br><br>add_executable(project_name test.c)<br>target_link_libraries(project_name xgboost)<br></code></pre></td></tr></table></figure></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> build<br><span class="hljs-built_in">cd</span> ./build<br>cmake ..<br>make .<br>./project_name<br></code></pre></td></tr></table></figure>]]></content:encoded>
-      
-      
-      <category domain="https://studyinglover.com/categories/%E8%B8%A9%E5%9D%91/">踩坑</category>
-      
-      
-      <category domain="https://studyinglover.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</category>
-      
-      
-      <comments>https://studyinglover.com/2023/09/10/%E4%BD%BF%E7%94%A8xgboost%E7%9A%84c%E6%8E%A5%E5%8F%A3%E6%8E%A8%E7%90%86%E6%A8%A1%E5%9E%8B/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Archlinux使用CMake调用xgboost的c接口</title>
-      <link>https://studyinglover.com/2023/09/09/Archlinux%E4%BD%BF%E7%94%A8CMake%E8%B0%83%E7%94%A8xgboost%E7%9A%84c%E6%8E%A5%E5%8F%A3/</link>
-      <guid>https://studyinglover.com/2023/09/09/Archlinux%E4%BD%BF%E7%94%A8CMake%E8%B0%83%E7%94%A8xgboost%E7%9A%84c%E6%8E%A5%E5%8F%A3/</guid>
-      <pubDate>Sat, 09 Sep 2023 20:53:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;archlinux使用cmake调用xgboost的c接口&quot;&gt;Archlinux使用CMake调用xgboost的c接口&lt;/h1&gt;
-&lt;p&gt;平台Archlinux,直接&lt;code&gt;yay&lt;/code&gt; 安装xgboost,相关的.h文件会被直接安装到&lt;code&gt;/u</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="archlinux使用cmake调用xgboost的c接口">Archlinux使用CMake调用xgboost的c接口</h1><p>平台Archlinux,直接<code>yay</code> 安装xgboost,相关的.h文件会被直接安装到<code>/usr/include/xgboost</code> 路径下，所有在<code>CMakeLists.txt</code> 设置<code>include_directories</code> 到该路径下即可。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs CMakeLists.txt">cmake_minimum_required(VERSION 3.18)<br>project(project_name LANGUAGES C CXX VERSION 0.1)<br>set(xgboost_DIR &quot;/usr/include/xgboost&quot;)<br><br>include_directories($&#123;xgboost_DIR&#125;)<br>link_directories($&#123;xgboost_DIR&#125;)<br><br>add_executable(project_name test.c)<br>target_link_libraries(project_name xgboost)<br></code></pre></td></tr></table></figure><p>在c文件中直接调用头文件 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;xgboost/c_api.h&quot;</span></span><br></code></pre></td></tr></table></figure></p><p>编译使用cmake <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> build<br><span class="hljs-built_in">cd</span> ./build<br>cmake ..<br>make <br>./project_name<br></code></pre></td></tr></table></figure></p>]]></content:encoded>
-      
-      
-      <category domain="https://studyinglover.com/categories/%E8%B8%A9%E5%9D%91/">踩坑</category>
-      
-      
-      <category domain="https://studyinglover.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</category>
-      
-      
-      <comments>https://studyinglover.com/2023/09/09/Archlinux%E4%BD%BF%E7%94%A8CMake%E8%B0%83%E7%94%A8xgboost%E7%9A%84c%E6%8E%A5%E5%8F%A3/#disqus_thread</comments>
       
     </item>
     

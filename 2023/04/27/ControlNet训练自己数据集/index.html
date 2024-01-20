@@ -16,18 +16,18 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="ControlNet训练自己数据集 从官方仓库训练 官方教程 https:&#x2F;&#x2F;github.com&#x2F;lllyasviel&#x2F;ControlNet&#x2F;blob&#x2F;main&#x2F;docs&#x2F;train.md 环境配置 先看一下有没有显卡 1nvidia-smi 首先下载整个仓库 1git clone https:&#x2F;&#x2F;github.com&#x2F;lllyasviel&#x2F;ControlNet.git 然后创建conda虚拟环">
+    <meta name="description" content="ControlNet训练自己数据集  2024.1.20更新 controlnet发布快一年了，diffusers已经有了很完整的生态，建议直接使用第二种方式diffusers进行训练+推理  从官方仓库训练 官方教程 https:&#x2F;&#x2F;github.com&#x2F;lllyasviel&#x2F;ControlNet&#x2F;blob&#x2F;main&#x2F;docs&#x2F;train.md 环境配置 先看一下有没有显卡 1nvidia-sm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ControlNet训练自己数据集">
 <meta property="og:url" content="https://studyinglover.com/2023/04/27/ControlNet%E8%AE%AD%E7%BB%83%E8%87%AA%E5%B7%B1%E6%95%B0%E6%8D%AE%E9%9B%86/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="ControlNet训练自己数据集 从官方仓库训练 官方教程 https:&#x2F;&#x2F;github.com&#x2F;lllyasviel&#x2F;ControlNet&#x2F;blob&#x2F;main&#x2F;docs&#x2F;train.md 环境配置 先看一下有没有显卡 1nvidia-smi 首先下载整个仓库 1git clone https:&#x2F;&#x2F;github.com&#x2F;lllyasviel&#x2F;ControlNet.git 然后创建conda虚拟环">
+<meta property="og:description" content="ControlNet训练自己数据集  2024.1.20更新 controlnet发布快一年了，diffusers已经有了很完整的生态，建议直接使用第二种方式diffusers进行训练+推理  从官方仓库训练 官方教程 https:&#x2F;&#x2F;github.com&#x2F;lllyasviel&#x2F;ControlNet&#x2F;blob&#x2F;main&#x2F;docs&#x2F;train.md 环境配置 先看一下有没有显卡 1nvidia-sm">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://proxy.thisis.plus/20230427191856.png">
 <meta property="og:image" content="https://proxy.thisis.plus/20230427191937.png">
 <meta property="og:image" content="https://proxy.thisis.plus/202304272229714.png">
 <meta property="article:published_time" content="2023-04-27T19:36:00.000Z">
-<meta property="article:modified_time" content="2024-01-17T08:41:52.473Z">
+<meta property="article:modified_time" content="2024-01-20T09:29:06.228Z">
 <meta property="article:author" content="StudyingLover">
 <meta property="article:tag" content="文字生成图片">
 <meta name="twitter:card" content="summary_large_image">
@@ -305,7 +305,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.1k 字
+          7.3k 字
         
       </span>
     
@@ -316,7 +316,7 @@
         
         
         
-          60 分钟
+          61 分钟
         
       </span>
     
@@ -360,6 +360,9 @@
               <div class="markdown-body">
                 
                 <h1 id="controlnet训练自己数据集">ControlNet训练自己数据集</h1>
+<blockquote>
+<p>2024.1.20更新 controlnet发布快一年了，diffusers已经有了很完整的生态，建议直接使用第二种方式diffusers进行训练+推理</p>
+</blockquote>
 <h2 id="从官方仓库训练">从官方仓库训练</h2>
 <p>官方教程 https://github.com/lllyasviel/ControlNet/blob/main/docs/train.md</p>
 <h3 id="环境配置">环境配置</h3>
@@ -379,6 +382,8 @@
 <figure>
 <img src="https://proxy.thisis.plus/20230427191937.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image.png</figcaption>
 </figure>
+<h3 id="推理">推理</h3>
+<p>原作者没有给出怎么推理代码的方式，但是有人给出了一个脚本 <a target="_blank" rel="noopener" href="https://github.com/huggingface/diffusers/blob/main/scripts/convert_original_controlnet_to_diffusers.py">GitHub</a> 将你训练出来的模型转换成diffusers，接着你就可以中下面diffusers的方式推理模型了。</p>
 <h3 id="踩坑解决">踩坑解决</h3>
 <h4 id="out-of-memoryoom">out of memory(oom)</h4>
 <p>首先开启<code>save_memory</code>模式，将<code>config.py</code> 中False改为True</p>
@@ -398,7 +403,7 @@
 <p>我们需要测试数据集 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/controlnet_training/conditioning_image_1.png<br><br>wget https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/controlnet_training/conditioning_image_2.png<br></code></pre></td></tr></table></figure></p>
 <p>接着运行，设置基础模型和模型输出目录 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> OUTPUT_DIR=<span class="hljs-string">&quot;./out_models&quot;</span><br><span class="hljs-built_in">export</span> MODEL_DIR=<span class="hljs-string">&quot;runwayml/stable-diffusion-v1-5&quot;</span><br></code></pre></td></tr></table></figure></p>
 <p>运行代码，这里epoch=1，steps=1 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">/home/ubuntu/.local/bin/accelerate launch train_controlnet.py   --pretrained_model_name_or_path=<span class="hljs-variable">$MODEL_DIR</span>  --output_dir=<span class="hljs-variable">$OUTPUT_DIR</span>   --dataset_name=fusing/fill50k   --resolution=512   --learning_rate=1e-5   --validation_image <span class="hljs-string">&quot;./conditioning_image_1.png&quot;</span> <span class="hljs-string">&quot;./conditioning_image_2.png&quot;</span>   --validation_prompt <span class="hljs-string">&quot;red circle with blue background&quot;</span> <span class="hljs-string">&quot;cyan circle with brown floral background&quot;</span>   --train_batch_size=4 --num_train_epochs=1 --max_train_steps=1<br></code></pre></td></tr></table></figure></p>
-<h3 id="推理">推理</h3>
+<h3 id="推理-1">推理</h3>
 <p>新建一个文件<code>inference.py</code> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> diffusers <span class="hljs-keyword">import</span> StableDiffusionControlNetPipeline, ControlNetModel, UniPCMultistepScheduler<br><span class="hljs-keyword">from</span> diffusers.utils <span class="hljs-keyword">import</span> load_image<br><span class="hljs-keyword">import</span> torch<br><br>base_model_path = <span class="hljs-string">&quot;path to model&quot;</span><br>controlnet_path = <span class="hljs-string">&quot;path to controlnet&quot;</span><br><br>controlnet = ControlNetModel.from_pretrained(controlnet_path, torch_dtype=torch.float16)<br>pipe = StableDiffusionControlNetPipeline.from_pretrained(<br>    base_model_path, controlnet=controlnet, torch_dtype=torch.float16<br>)<br><br><span class="hljs-comment"># speed up diffusion process with faster scheduler and memory optimization</span><br>pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)<br><span class="hljs-comment"># remove following line if xformers is not installed</span><br>pipe.enable_xformers_memory_efficient_attention()<br><br>pipe.enable_model_cpu_offload()<br><br>control_image = load_image(<span class="hljs-string">&quot;./conditioning_image_1.png&quot;</span>)<br>prompt = <span class="hljs-string">&quot;pale golden rod circle with old lace background&quot;</span><br><br><span class="hljs-comment"># generate image</span><br>generator = torch.manual_seed(<span class="hljs-number">0</span>)<br>image = pipe(<br>     prompt, num_inference_steps=<span class="hljs-number">20</span>, generator=generator, image=control_image<br>).images[<span class="hljs-number">0</span>]<br><br>image.save(<span class="hljs-string">&quot;./output.png&quot;</span>)<br></code></pre></td></tr></table></figure></p>
 <p>这里的base_model_path 和 controlnet_path 改成之前设置的MODEL_DIR和OUTPUT_DIR(注意顺序)</p>
 <p>接下来运行就可 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python inference.py<br></code></pre></td></tr></table></figure></p>

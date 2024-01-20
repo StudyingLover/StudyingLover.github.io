@@ -6,6 +6,10 @@ tags:
 - 文字生成图片
 ---
 # ControlNet训练自己数据集
+
+>2024.1.20更新
+> controlnet发布快一年了，diffusers已经有了很完整的生态，建议直接使用第二种方式diffusers进行训练+推理
+
 ## 从官方仓库训练
 官方教程
 https://github.com/lllyasviel/ControlNet/blob/main/docs/train.md
@@ -89,6 +93,9 @@ python tutorial_train.py
 
 ![image.png](https://proxy.thisis.plus/20230427191937.png)
 
+### 推理
+ 原作者没有给出怎么推理代码的方式，但是有人给出了一个脚本 [GitHub](https://github.com/huggingface/diffusers/blob/main/scripts/convert_original_controlnet_to_diffusers.py) 将你训练出来的模型转换成diffusers，接着你就可以中下面diffusers的方式推理模型了。
+
 
 ### 踩坑解决
 
@@ -123,6 +130,10 @@ def on_train_batch_end(self, trainer, pl_module, outputs, batch, batch_idx, data
 ```python
 def on_train_batch_end(self, trainer, pl_module, outputs, batch, batch_idx):
 ```
+
+
+
+
 
 ## Diffusers 训练
 [Diffusers](https://github.com/huggingface/diffusers) 是一个huggingface 推出的扩散模型的封装库,同时也对ControlNet做了封装，https://github.com/huggingface/diffusers/tree/main/examples/controlnet

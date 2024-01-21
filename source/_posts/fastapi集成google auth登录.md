@@ -164,7 +164,40 @@ if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
 ```
 
-同时我们需要一个前端，这里我们只有一个按钮来用于google登陆，点击按钮你会进入平时你看到的google登陆的流程，流程成功后你会在前端页面看到用户的信息
+同时我们需要一个前端，这里我们只有一个按钮来用于google登陆
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login with Google</title>
+    <script>
+        async function handleLogin() {
+            const response = await fetch('http://localhost:8000/login/google');
+            const data = await response.json();
+            window.location.href = data.url;
+        }
+
+        async function handleRedirect() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            if (code) {
+                const response = await fetch(`http://localhost:8000/auth/google?code=${code}`);
+                const userData = await response.json();
+                document.getElementById('user-info').textContent = JSON.stringify(userData, null, 2);
+            }
+        }
+    </script>
+</head>
+<body onload="handleRedirect()">
+    <button onclick="handleLogin()">Login with Google</button>
+    <pre id="user-info"></pre>
+</body>
+</html>
+
+```
+
+点击按钮你会进入平时你看到的google登陆的流程，流程成功后你会在前端页面看到用户的信息
 
 就像这样
 ```json

@@ -1074,6 +1074,12 @@ links:
       link: "https://jiahuan.tech",
       avatar: "https://hexo.fluid-dev.com/img/favicon.png"
     }
+    - {
+      title: "纸鹿摸鱼处",
+      intro: "纸鹿至麓不知路，支炉制露不止漉",
+      link: "https://blog.zhilu.cyou",
+      avatar: "https://cravatar.cn/avatar/13aa912754e6bb5e671f3e6654e4712d?s=640"
+    }
 
   # 当成员头像加载失败时，替换为指定图片
   # When the member avatar fails to load, replace the specified image

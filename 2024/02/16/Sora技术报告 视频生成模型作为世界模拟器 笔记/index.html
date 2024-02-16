@@ -16,16 +16,16 @@
   <meta name="author" content="StudyingLover">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Sora技术报告 视频生成模型作为世界模拟器 笔记 技术报告原题目叫做 Video generation models as world simulators，翻译一下就是 视频生成模型作为世界模拟器，地址在这里 。我写的时候是翻译和笔记并行，翻译感谢gpt4出色的翻译能力。 这篇博客介绍了OpenAI在视频数据上大规模训练生成模型的探索，特别是在视频和图像上联合训练文本条件扩散模型，这些视频和图">
+    <meta name="description" content="Sora技术报告 视频生成模型作为世界模拟器 笔记 技术报告原题目叫做 Video generation models as world simulators，翻译一下就是 视频生成模型作为世界模拟器，地址在这里 。我写的时候是翻译和笔记并行，翻译感谢gpt4出色的翻译能力。 技术报告介绍了OpenAI在视频数据上大规模训练生成模型的探索，特别是在视频和图像上联合训练文本条件扩散模型，这些视频和图">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Sora技术报告 视频生成模型作为世界模拟器 笔记">
 <meta property="og:url" content="https://studyinglover.com/2024/02/16/Sora%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A%20%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E4%BD%9C%E4%B8%BA%E4%B8%96%E7%95%8C%E6%A8%A1%E6%8B%9F%E5%99%A8%20%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="plus studio">
-<meta property="og:description" content="Sora技术报告 视频生成模型作为世界模拟器 笔记 技术报告原题目叫做 Video generation models as world simulators，翻译一下就是 视频生成模型作为世界模拟器，地址在这里 。我写的时候是翻译和笔记并行，翻译感谢gpt4出色的翻译能力。 这篇博客介绍了OpenAI在视频数据上大规模训练生成模型的探索，特别是在视频和图像上联合训练文本条件扩散模型，这些视频和图">
+<meta property="og:description" content="Sora技术报告 视频生成模型作为世界模拟器 笔记 技术报告原题目叫做 Video generation models as world simulators，翻译一下就是 视频生成模型作为世界模拟器，地址在这里 。我写的时候是翻译和笔记并行，翻译感谢gpt4出色的翻译能力。 技术报告介绍了OpenAI在视频数据上大规模训练生成模型的探索，特别是在视频和图像上联合训练文本条件扩散模型，这些视频和图">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.studyinglover.com/pic/2024/02/f76b1abdeee15868647eca59c2a484f4.png">
 <meta property="article:published_time" content="2024-02-16T17:55:00.000Z">
-<meta property="article:modified_time" content="2024-02-16T10:00:51.494Z">
+<meta property="article:modified_time" content="2024-02-16T15:05:26.542Z">
 <meta property="article:author" content="StudyingLover">
 <meta property="article:tag" content="笔记">
 <meta property="article:tag" content="文字生成视频">
@@ -304,7 +304,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3k 字
+          3.3k 字
         
       </span>
     
@@ -315,7 +315,7 @@
         
         
         
-          26 分钟
+          28 分钟
         
       </span>
     
@@ -360,7 +360,7 @@
                 
                 <h1 id="sora技术报告-视频生成模型作为世界模拟器-笔记">Sora技术报告 视频生成模型作为世界模拟器 笔记</h1>
 <p>技术报告原题目叫做 Video generation models as world simulators，翻译一下就是 <strong>视频生成模型作为世界模拟器</strong>，地址在<a target="_blank" rel="noopener" href="https://openai.com/research/video-generation-models-as-world-simulators">这里</a> 。我写的时候是翻译和笔记并行，翻译感谢gpt4出色的翻译能力。</p>
-<p>这篇博客介绍了OpenAI在视频数据上大规模训练生成模型的探索，特别是在视频和图像上联合训练文本条件扩散模型，这些视频和图像具有不同的持续时间、分辨率和宽高比。通过利用在视频和图像潜码的时空补丁上操作的变压器架构，OpenAI的最大模型Sora能够生成高保真度的一分钟视频。研究结果表明，扩大视频生成模型的规模是构建物理世界通用模拟器的一个有前景的路径。</p>
+<p>技术报告介绍了OpenAI在视频数据上大规模训练生成模型的探索，特别是在视频和图像上联合训练文本条件扩散模型，这些视频和图像具有不同的持续时间、分辨率和宽高比。通过利用在视频和图像潜码的时空补丁上操作的变压器架构，OpenAI的最大模型Sora能够生成高保真度的一分钟视频。研究结果表明，扩大视频生成模型的规模是构建物理世界通用模拟器的一个有前景的路径。</p>
 <h2 id="主要内容">主要内容</h2>
 <h3 id="视频数据的生成模型"><strong>视频数据的生成模型</strong></h3>
 <p>之前的研究主要集中在使用各种方法（如循环网络、生成对抗网络、自回归变换器和扩散模型）对视频数据进行建模。Sora作为一个通用的视觉数据模型，能够生成持续时间、宽高比和分辨率各异的视频和图像，最长可达一分钟的高清视频。 <video controls="" loop="" muted="" playsinline="true" src="https://cdn.openai.com/tmp/s/title_0.mp4"></video></p>
@@ -371,6 +371,9 @@
 <p>通过训练一个降低视觉数据维度的网络，Sora在这个压缩的潜在空间内进行训练并生成视频。同时，还训练了一个相应的解码器模型，将生成的潜在表示映射回像素空间。</p>
 <p>在去年前年文字生成图片爆火的一段时间中，stable diffusion已经证明了在latent space生成图片效果很好，就是这张经典的图 <img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230420095529.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
 <p>迁移到视频生成上面，在latent space生成一个视频，然后用一个类似VAE decoder的结构解码成正常的视频。(合理猜测是已经有论文做过了，但是我论文读的不多不清楚)</p>
+<h3 id="spacetime-latent-patches">Spacetime Latent Patches</h3>
+<p>给定一个压缩的输入视频，我们提取一系列时空补丁，这些补丁作为变换器令牌。这个方案也适用于图像，因为图像只是带有单一帧的视频。我们基于补丁的表示法使得Sora能够训练具有可变分辨率、持续时间和宽高比的视频和图像。在推理时，我们可以通过在一个适当大小的网格中随机初始化补丁来控制生成视频的大小。</p>
+<p>这个不太好翻译，我只能翻译成时空上的隐空间，就是前面encoder抽出来的一串token, 和nlp的token类似，但是已经是好多个了，所以叫patch。通过初始化patch来控制视频大小我没太理解，蹲一个大佬的讲解或者实现</p>
 <h3 id="scaling-transformers用于视频生成"><strong>Scaling transformers用于视频生成</strong></h3>
 <p>Sora是一个扩散模型，通过预测原始“干净”补丁，训练接收噪声补丁（和条件信息，如文本提示）的输入。作为一个扩散变换器，Sora展示了在视频模型上的有效扩展。 <img src="https://cdn.studyinglover.com/pic/2024/02/c477b8b4601f9fbc924309f318ebff08.png" srcset="/img/loading.gif" lazyload /></p>
 <p>读到这他已经承认他是一个diffusion模型了，给出的这个示例也能看出来去噪的过程</p>

@@ -1080,6 +1080,18 @@ links:
       link: "https://blog.zhilu.cyou",
       avatar: "https://cravatar.cn/avatar/13aa912754e6bb5e671f3e6654e4712d?s=640"
     }
+    - {
+      title: "MisakaNo の 小破站",
+      intro: "这只是一个小破站而已！",
+      link: "https://www.misaka.rest/",
+      avatar: "https://imgs.misaka.cloudns.biz/20230115115530.png",
+    }
+    - {
+      title: "Katelya",
+      intro: "一名平平无奇的网络打工人，这是我在网络上留下过痕迹的一个证明，为别人更为了自己。",
+      link: "https://katelya.link/",
+      avatar: "https://katelya.link/favicon.ico",
+    }
 
   # 当成员头像加载失败时，替换为指定图片
   # When the member avatar fails to load, replace the specified image

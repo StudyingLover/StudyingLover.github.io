@@ -10,7 +10,7 @@ tags:
 
 # Sora技术报告 视频生成模型作为世界模拟器 笔记
 
-博客原题目叫做 Video generation models as world simulators，翻译一下就是 **视频生成模型作为世界模拟器**，博客地址在[这里](https://openai.com/research/video-generation-models-as-world-simulators) 。我写的时候是翻译和笔记并行，翻译感谢gpt4出色的翻译能力。
+技术报告原题目叫做 Video generation models as world simulators，翻译一下就是 **视频生成模型作为世界模拟器**，地址在[这里](https://openai.com/research/video-generation-models-as-world-simulators) 。我写的时候是翻译和笔记并行，翻译感谢gpt4出色的翻译能力。
 
 这篇博客介绍了OpenAI在视频数据上大规模训练生成模型的探索，特别是在视频和图像上联合训练文本条件扩散模型，这些视频和图像具有不同的持续时间、分辨率和宽高比。通过利用在视频和图像潜码的时空补丁上操作的变压器架构，OpenAI的最大模型Sora能够生成高保真度的一分钟视频。研究结果表明，扩大视频生成模型的规模是构建物理世界通用模拟器的一个有前景的路径。
 

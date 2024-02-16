@@ -1,0 +1,864 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://proxy.thisis.plus/favicon.ico">
+  <link rel="icon" href="https://proxy.thisis.plus/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="StudyingLover">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Sora技术报告 视频生成模型作为世界模拟器 笔记 博客原题目叫做 Video generation models as world simulators，翻译一下就是 视频生成模型作为世界模拟器，博客地址在这里 。我写的时候是翻译和笔记并行，翻译感谢gpt4出色的翻译能力。 这篇博客介绍了OpenAI在视频数据上大规模训练生成模型的探索，特别是在视频和图像上联合训练文本条件扩散模型，这些视频和图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sora技术报告 视频生成模型作为世界模拟器 笔记">
+<meta property="og:url" content="https://studyinglover.com/2024/02/16/Sora%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A%20%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E4%BD%9C%E4%B8%BA%E4%B8%96%E7%95%8C%E6%A8%A1%E6%8B%9F%E5%99%A8%20%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="plus studio">
+<meta property="og:description" content="Sora技术报告 视频生成模型作为世界模拟器 笔记 博客原题目叫做 Video generation models as world simulators，翻译一下就是 视频生成模型作为世界模拟器，博客地址在这里 。我写的时候是翻译和笔记并行，翻译感谢gpt4出色的翻译能力。 这篇博客介绍了OpenAI在视频数据上大规模训练生成模型的探索，特别是在视频和图像上联合训练文本条件扩散模型，这些视频和图">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.studyinglover.com/pic/2024/02/f76b1abdeee15868647eca59c2a484f4.png">
+<meta property="article:published_time" content="2024-02-16T17:55:00.000Z">
+<meta property="article:modified_time" content="2024-02-16T09:59:12.548Z">
+<meta property="article:author" content="StudyingLover">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="文字生成视频">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.studyinglover.com/pic/2024/02/f76b1abdeee15868647eca59c2a484f4.png">
+  
+  
+  
+     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script> <!-- <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>  -->
+
+  
+  <title>Sora技术报告 视频生成模型作为世界模拟器 笔记 - plus studio</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"studyinglover.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"G-EK4ECQGL83","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'G-EK4ECQGL83', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  <style>ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }</style>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="plus studio" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="plus studio" type="application/rss+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>plus studio</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>镜像站</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" target="_blank" rel="noopener" href="http://arch.studyinglover.top/">
+                    
+                    <span>ArchLinux教程</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://chat.thisis.plus/chat/">
+                    <i class="iconfont icon-comment"></i>
+                    <span>free-chat</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.studyinglover.com/pic/2024/02/f76b1abdeee15868647eca59c2a484f4.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Sora技术报告 视频生成模型作为世界模拟器 笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        StudyingLover
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-02-16 17:55" pubdate>
+          2024年2月16日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          26 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+<aside class="sidebar d-none d-xl-block" style="margin-right:-1rem;z-index:-1"><ins class="adsbygoogle" style="display:flex;justify-content:center;min-width:160px;max-width:300px;width:100%;height:600px;position:sticky;top:2rem" data-ad-client="ca-pub-6818277566173475" data-ad-slot="7216148023"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></aside>
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Sora技术报告 视频生成模型作为世界模拟器 笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="sora技术报告-视频生成模型作为世界模拟器-笔记">Sora技术报告 视频生成模型作为世界模拟器 笔记</h1>
+<p>博客原题目叫做 Video generation models as world simulators，翻译一下就是 <strong>视频生成模型作为世界模拟器</strong>，博客地址在<a target="_blank" rel="noopener" href="https://openai.com/research/video-generation-models-as-world-simulators">这里</a> 。我写的时候是翻译和笔记并行，翻译感谢gpt4出色的翻译能力。</p>
+<p>这篇博客介绍了OpenAI在视频数据上大规模训练生成模型的探索，特别是在视频和图像上联合训练文本条件扩散模型，这些视频和图像具有不同的持续时间、分辨率和宽高比。通过利用在视频和图像潜码的时空补丁上操作的变压器架构，OpenAI的最大模型Sora能够生成高保真度的一分钟视频。研究结果表明，扩大视频生成模型的规模是构建物理世界通用模拟器的一个有前景的路径。</p>
+<h2 id="主要内容">主要内容</h2>
+<h3 id="视频数据的生成模型"><strong>视频数据的生成模型</strong></h3>
+<p>之前的研究主要集中在使用各种方法（如循环网络、生成对抗网络、自回归变换器和扩散模型）对视频数据进行建模。Sora作为一个通用的视觉数据模型，能够生成持续时间、宽高比和分辨率各异的视频和图像，最长可达一分钟的高清视频。 <video controls="" loop="" muted="" playsinline="true" src="https://cdn.openai.com/tmp/s/title_0.mp4"></video></p>
+<h3 id="将视觉数据转换为补丁"><strong>将视觉数据转换为补丁</strong></h3>
+<p>受到大型语言模型在互联网规模数据上训练获得通用能力的启发，Sora采用视觉补丁作为有效的表示形式，将视频压缩成低维潜在空间，并将这些表示分解为时空补丁。 <img src="https://cdn.studyinglover.com/pic/2024/02/f76b1abdeee15868647eca59c2a484f4.png" srcset="/img/loading.gif" lazyload /></p>
+<p>看到这里我们就能发现这很openai, 把文字或者视频变成一个token，那接下来就能用上openai的看家本领gpt了。这里的视觉编码器我猜测是 I3D(Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset, 一个视频理解模型，采用双流网络的架构，他的核心贡献是提出了如何对2d网络进行膨胀操作，同时提出了一个新的数据集 Kinetics)</p>
+<h3 id="视频压缩网络"><strong>视频压缩网络</strong></h3>
+<p>通过训练一个降低视觉数据维度的网络，Sora在这个压缩的潜在空间内进行训练并生成视频。同时，还训练了一个相应的解码器模型，将生成的潜在表示映射回像素空间。</p>
+<p>在去年前年文字生成图片爆火的一段时间中，stable diffusion已经证明了在latent space生成图片效果很好，就是这张经典的图 <img src="https://cdn.jsdelivr.net/gh/StudyingLover/anything/20230420095529.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
+<p>迁移到视频生成上面，在latent space生成一个视频，然后用一个类似VAE decoder的结构解码成正常的视频。(合理猜测是已经有论文做过了，但是我论文读的不多不清楚)</p>
+<h3 id="scaling-transformers用于视频生成"><strong>Scaling transformers用于视频生成</strong></h3>
+<p>Sora是一个扩散模型，通过预测原始“干净”补丁，训练接收噪声补丁（和条件信息，如文本提示）的输入。作为一个扩散变换器，Sora展示了在视频模型上的有效扩展。 <img src="https://cdn.studyinglover.com/pic/2024/02/c477b8b4601f9fbc924309f318ebff08.png" srcset="/img/loading.gif" lazyload /></p>
+<p>读到这他已经承认他是一个diffusion模型了，给出的这个示例也能看出来去噪的过程</p>
+<h3 id="变量持续时间分辨率宽高比"><strong>变量持续时间、分辨率、宽高比</strong></h3>
+<p>过去的图像和视频生成方法通常会将视频调整大小、裁剪或修剪为标准尺寸，例如，分辨率为 256x256 的 4 秒视频。与传统方法不同，Sora在其原生大小的数据上进行训练，提供了采样的灵活性，改善了构图和画面布局。对原始大小的数据进行训练有几个好处。</p>
+<h4 id="语言理解"><strong>语言理解</strong></h4>
+<p>通过对视频进行高度描述性的字幕训练，Sora能够生成高质量的视频，准确地遵循用户提示。</p>
+<h4 id="图像和视频的提示"><strong>图像和视频的提示</strong></h4>
+<p>Sora不仅可以根据文本提示生成视频，还可以接受现有图像或视频作为输入，执行一系列图像和视频编辑任务。</p>
+<h4 id="模拟能力"><strong>模拟能力</strong></h4>
+<p>Sora展示了一些有趣的模拟能力，如3D一致性、长期连贯性和对象持久性，以及与物理世界的简单交互模拟。</p>
+<p>好吧我不理解，为啥直接在原视频训练效果就好了？难道openai卡多跑了所有可能？这让我想起来了CLIP那张整整一页的大图 <img src="https://cdn.studyinglover.com/pic/2024/02/f4f404c3b31a85c7a9f68139e5255b80.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="通过图像和视频进行提示">通过图像和视频进行提示</h3>
+<h4 id="dalle-图像动画">DALL·E 图像动画</h4>
+<p>Sora 能够生成提供图像和提示作为输入的视频。下面我们展示基于<a target="_blank" rel="noopener" href="https://openai.com/research/video-generation-models-as-world-simulators#fn-31">DALL·E 2</a>生成的示例视频和<a target="_blank" rel="noopener" href="https://openai.com/research/video-generation-models-as-world-simulators#fn-30">DALL·E 3</a>图片。</p>
+<p>我合理猜测下，这里和stable diffusion 图生图的方法差不多，最开始的采样不是一个纯粹的高斯噪声，而是将输入的图片过一个VAE的encoder(不一定是这个架构),接着继续采样</p>
+<h4 id="扩展生成的视频">扩展生成的视频</h4>
+<p>Sora 还能够在时间上向前或向后扩展视频。下面是四个视频，它们都是从生成的视频片段开始向后延伸的。因此，这四个视频的开头都不同，但所有四个视频的结局都是相同的。</p>
+<p>和stable diffusion 图生图的方法应该也差不多？最开始的采样不是一个纯粹的高斯噪声，而是将输入的视频过一个视频的encoder(猜测I3D),接着继续采样。但是我很好奇怎么向前扩展？依然是预测一个噪声然后减去，只是训练的时候不训练去噪声过程训练加噪声过程？</p>
+<h3 id="视频到视频编辑">视频到视频编辑</h3>
+<p>扩散模型启用了多种根据文本提示编辑图像和视频的方法。下面我们应用其中一种方法，SDEdit，到Sora。这项技术使 Sora 能够零镜头地改变输入视频的风格和环境。</p>
+<p>还是迁移了文字生成图片的方法，但是我没读过SDEdit这个论文</p>
+<h3 id="连接视频">连接视频</h3>
+<p>我们还可以使用 Sora 在两个输入视频之间逐渐进行插值，从而在具有完全不同主题和场景构成的视频之间创建无缝过渡。在下面的示例中，中心的视频插值在左侧和右侧的相应视频之间。</p>
+<p>应该是第一个视频不断采样直到采样到有一帧和下一个视频第一帧相似度接近1或者差距很小？这里的评价指标应该是PSNR？显然这里不适合语义的指标</p>
+<h2 id="图像生成能力">图像生成能力</h2>
+<p>Sora 还能够生成图像。我们通过在时间范围为一帧的空间网格中排列高斯噪声块来实现这一点。该模型可以生成各种尺寸的图像，分辨率高达 2048x2048。</p>
+<p>我猜测已经zero shot了</p>
+<h2 id="新兴的模拟功能">新兴的模拟功能</h2>
+<p>我们发现，视频模型在大规模训练时表现出许多有趣的新兴功能。这些功能使 Sora 能够模拟现实世界中人、动物和环境的某些方面。这些属性的出现对 3D、物体等没有任何明确的归纳偏差——它们纯粹是尺度现象。</p>
+<p><strong>3D 一致性。</strong> Sora 可以生成带有动态摄像机运动的视频。随着摄像机的移动和旋转，人和场景元素在三维空间中一致移动。</p>
+<p><strong>远程相干性和物体持久性。</strong> 视频生成系统面临的一个重大挑战是在采样长视频时保持时间一致性。我们发现 Sora 通常（尽管并非总是）能够有效地对短期和长期依赖关系进行建模。例如，我们的模型可以保留人、动物和物体，即使它们被遮挡或离开框架。同样，它可以在单个样本中生成同一角色的多个镜头，并在整个视频中保持其外观。</p>
+<p><strong>与世界互动。</strong> 索拉有时可以用简单的方式模拟影响世界状况的动作。例如，画家可以在画布上留下新的笔触，并随着时间的推移而持续存在，或者一个人可以吃汉堡并留下咬痕。</p>
+<p><strong>模拟数字世界。</strong> Sora 还能够模拟人工过程——一个例子是视频游戏。Sora 可以同时通过基本策略控制《我的世界》中的玩家，同时以高保真度渲染世界及其动态。这些能力可以通过用提及“我的世界”的标题提示 Sora 来零射击。</p>
+<p>这些功能表明，视频模型的持续扩展是开发物理和数字世界以及生活在其中的物体、动物和人的高性能模拟器的一条有前途的道路。</p>
+<h2 id="讨论">讨论</h2>
+<p>Sora 目前作为模拟器表现出许多局限性。例如，它不能准确地模拟许多基本相互作用的物理过程，例如玻璃破碎。其他交互（例如吃食物）并不总是会产生对象状态的正确变化。<a target="_blank" rel="noopener" href="https://openai.com/sora">我们在登陆页面</a>中列举了模型的其他常见故障模式，例如长时间样本中出现的不连贯性或对象的自发出现。</p>
+<p>我们相信，Sora 今天所拥有的能力表明，视频模型的持续扩展是开发物理和数字世界以及生活在其中的物体、动物和人的强大模拟器的一条有前途的道路。</p>
+<h3 id="结论">结论</h3>
+<p>OpenAI认为，继续扩大视频模型的规模是开发能够模拟物理和数字世界及其中的对象、动物和人的高能力模拟器的有前景的路径。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%AC%94%E8%AE%B0/">#笔记</a>
+      
+        <a href="/tags/%E6%96%87%E5%AD%97%E7%94%9F%E6%88%90%E8%A7%86%E9%A2%91/">#文字生成视频</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Sora技术报告 视频生成模型作为世界模拟器 笔记</div>
+      <div>https://studyinglover.com/2024/02/16/Sora技术报告 视频生成模型作为世界模拟器 笔记/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>StudyingLover</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年2月16日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+<div style="width:100%;display:flex;justify-content:center;margin-bottom:1.5rem"><ins class="adsbygoogle" style="display:flex;justify-content:center;max-width:845px;width:100%;height:90px" data-ad-client="ca-pub-6818277566173475" data-ad-slot="7216148023"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></div>
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/02/10/archlinux%20flutter%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91/" title="archlinux flutter开发踩坑">
+                        <span class="hidden-mobile">archlinux flutter开发踩坑</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"StudyingLover/StudyingLover.github.io","repo-id":"R_kgDOIQbc2w","category":"Announcements","category-id":"DIC_kwDOIQbc284CT0AH","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('mermaid' in window) {
+        mermaid.init();
+      }
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <br> <a href="https://www.evolution-host.com" target="_blank" rel="nofollow noopener"><span>Evolution</span></a> <br> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> <div style="width: 20vw; height: 15vh; margin: 0 auto; text-align: center;"> <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=bLcIH0Eh5s3UeoICvFfbZ3tHKvl8FJUjfBLHkJp-6sc&cl=ffffff&w=a"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475"crossorigin="anonymous"></script>
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,862 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://proxy.thisis.plus/favicon.ico">
+  <link rel="icon" href="https://proxy.thisis.plus/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="StudyingLover">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Google开源了新的大模型 Gemma ，Gemma是一系列轻量级、最先进的开放式模型，采用与创建Gemini模型相同的研究和技术而构建。Gemma 由 Google DeepMind 和 Google 的其他团队开发，其灵感来自 Gemini，其名称反映了拉丁语_gemma_，意思是“宝石”。除了模型权重之外，我们还发布了工具来支持开发人员创新、促进协作并指导负责任地使用 Gemma 模型。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="colab运行google最新开源模型Gemma">
+<meta property="og:url" content="https://studyinglover.com/2024/02/22/colab%E8%BF%90%E8%A1%8Cgoogle%E6%9C%80%E6%96%B0%E5%BC%80%E6%BA%90%E6%A8%A1%E5%9E%8BGemma/index.html">
+<meta property="og:site_name" content="plus studio">
+<meta property="og:description" content="Google开源了新的大模型 Gemma ，Gemma是一系列轻量级、最先进的开放式模型，采用与创建Gemini模型相同的研究和技术而构建。Gemma 由 Google DeepMind 和 Google 的其他团队开发，其灵感来自 Gemini，其名称反映了拉丁语_gemma_，意思是“宝石”。除了模型权重之外，我们还发布了工具来支持开发人员创新、促进协作并指导负责任地使用 Gemma 模型。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.studyinglover.com/pic/2024/02/e770e5ca6a8c87a9367efda0d48f306b.png">
+<meta property="article:published_time" content="2024-02-22T14:00:00.000Z">
+<meta property="article:modified_time" content="2024-02-22T06:03:32.546Z">
+<meta property="article:author" content="StudyingLover">
+<meta property="article:tag" content="Gemma">
+<meta property="article:tag" content="Google">
+<meta property="article:tag" content="大模型">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.studyinglover.com/pic/2024/02/e770e5ca6a8c87a9367efda0d48f306b.png">
+  
+  
+  
+     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script> <!-- <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>  -->
+
+  
+  <title>colab运行google最新开源模型Gemma - plus studio</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"studyinglover.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"G-EK4ECQGL83","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'G-EK4ECQGL83', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  <style>ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }</style>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="plus studio" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="plus studio" type="application/rss+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>plus studio</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>镜像站</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" target="_blank" rel="noopener" href="http://arch.studyinglover.top/">
+                    
+                    <span>ArchLinux教程</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://chat.thisis.plus/chat/">
+                    <i class="iconfont icon-comment"></i>
+                    <span>free-chat</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.studyinglover.com/pic/2024/02/e770e5ca6a8c87a9367efda0d48f306b.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="colab运行google最新开源模型Gemma"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        StudyingLover
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-02-22 14:00" pubdate>
+          2024年2月22日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+<aside class="sidebar d-none d-xl-block" style="margin-right:-1rem;z-index:-1"><ins class="adsbygoogle" style="display:flex;justify-content:center;min-width:160px;max-width:300px;width:100%;height:600px;position:sticky;top:2rem" data-ad-client="ca-pub-6818277566173475" data-ad-slot="7216148023"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></aside>
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">colab运行google最新开源模型Gemma</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>Google开源了新的大模型 <a target="_blank" rel="noopener" href="https://blog.google/technology/developers/gemma-open-models/">Gemma</a> ，<a target="_blank" rel="noopener" href="https://ai.google.dev/gemma/?utm_source=keyword&amp;utm_medium=referral&amp;utm_campaign=gemma_cta&amp;utm_content=">Gemma</a>是一系列轻量级、最先进的开放式<a target="_blank" rel="noopener" href="https://opensource.googleblog.com/2024/02/building-open-models-responsibly-gemini-era.html">模型，</a>采用与创建<a target="_blank" rel="noopener" href="https://deepmind.google/technologies/gemini/#introduction">Gemini</a>模型相同的研究和技术而构建。Gemma 由 Google DeepMind 和 Google 的其他团队开发，其灵感来自 Gemini，其名称反映了拉丁语_gemma_，意思是“宝石”。除了模型权重之外，我们还发布了工具来支持开发人员创新、促进协作并指导负责任地使用 Gemma 模型。</p>
+<p>Gemma 是为推动人工智能创新的开发人员和研究人员的开放社区而构建的。您今天就可以开始与 Gemma 合作，使用 Kaggle 中的免费访问权限、Colab 笔记本的免费套餐以及首次使用 Google Cloud 用户的 300 美元积分。研究人员还可以申请高达 50 万美元的<a target="_blank" rel="noopener" href="https://docs.google.com/forms/d/e/1FAIpQLSe0grG6mRFW6dNF3Rb1h_YvKqUp2GaXiglZBgA2Os5iTLWlcg/viewform">Google Cloud 积分来加速他们的项目。</a></p>
+<p>google提供了keras3.0来提供跨所有主要框架的推理和监督微调 (SFT) 工具链：JAX、PyTorch 和 TensorFlow 。还有 即用型<a target="_blank" rel="noopener" href="http://ai.google.dev/gemma/docs/get_started">Colab</a>和<a target="_blank" rel="noopener" href="https://www.kaggle.com/models/google/gemma/code">Kaggle 笔记本</a>，以及与<a target="_blank" rel="noopener" href="http://huggingface.co/google">Hugging Face</a>、<a target="_blank" rel="noopener" href="https://github.com/google/maxtext">MaxText</a>、<a target="_blank" rel="noopener" href="https://github.com/NVIDIA/GenerativeAIExamples/tree/main/models/Gemma">NVIDIA NeMo</a>和<a target="_blank" rel="noopener" href="https://github.com/NVIDIA/TensorRT-LLM">TensorRT-LLM</a>等流行工具的集成，让您可以轻松开始使用 Gemma。</p>
+<p>google也提供了一个快速指南来使用<a target="_blank" rel="noopener" href="http://ai.google.dev/gemma">ai.google.dev/gemma</a></p>
+<h2 id="kaggle-获取访问权限">kaggle 获取访问权限</h2>
+<p>首先访问<a target="_blank" rel="noopener" href="https://www.kaggle.com/models/google/gemma">Gemma在kaggle的页面</a>，登陆你的kaggle账号</p>
+<figure>
+<img src="https://cdn.studyinglover.com/pic/2024/02/e770e5ca6a8c87a9367efda0d48f306b.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image.png</figcaption>
+</figure>
+<p>这里会有一个 Request Access,点击(我这是已经有访问权限了，你点了之后也变成这样说明就成功了)</p>
+<p>然后我们点击kaggle的设置，按照我的截图依次点击 <img src="https://cdn.studyinglover.com/pic/2024/02/0676b9c3968534cf2f0a24fc3efa121e.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
+<p><img src="https://cdn.studyinglover.com/pic/2024/02/d31235cf85326598d78a01d3d2a179c3.png" srcset="/img/loading.gif" lazyload alt="image.png" /> <img src="https://cdn.studyinglover.com/pic/2024/02/ee052cc9137ba36a42f363d492108f73.png" srcset="/img/loading.gif" lazyload alt="image.png" /> 你的浏览器会下载一个json文件，例如就像下面这样 <img src="https://cdn.studyinglover.com/pic/2024/02/8c67107479ef55d6358110e4d46778fb.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
+<h2 id="colab运行">colab运行</h2>
+<p>如果你有google账号那就直接打开<a target="_blank" rel="noopener" href="https://colab.research.google.com/github/google/generative-ai-docs/blob/main/site/en/gemma/docs/lora_tuning.ipynb?utm_source=agd&amp;utm_medium=referral&amp;utm_campaign=open-in-colab&amp;hl=zh-cn">Gemma的colab页面</a> (没有的话就注册一个啦)</p>
+<p>不出意外你会看到这样一个页面 <img src="https://cdn.studyinglover.com/pic/2024/02/7fc668b963da87075d5e3a2eab1f125a.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
+<p>接下来点击右上角，按照我的截图顺序，选择显卡为t4 <img src="https://cdn.studyinglover.com/pic/2024/02/c5836766b7819385e337ce5877114a5b.png" srcset="/img/loading.gif" lazyload alt="image.png" /> <img src="https://cdn.studyinglover.com/pic/2024/02/ded1ab56213ab089e2347ee0729ffab3.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
+<p><img src="https://cdn.studyinglover.com/pic/2024/02/15fdbd16664eb511e1ec7c5653e267b8.png" srcset="/img/loading.gif" lazyload alt="image.png" /> 点击保存，等待右上角变成这样，代表成功 <img src="https://cdn.studyinglover.com/pic/2024/02/5660f6ffaf4ce5a8e49f37753875194a.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
+<p>接下来点击左侧 <img src="https://cdn.studyinglover.com/pic/2024/02/6ef657aa2cb9c7becdc67cdcc2dbc20d.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
+<p>选择新建新密钥 <img src="https://cdn.studyinglover.com/pic/2024/02/c8f82c0c604a443f5af650b74f069e8b.png" srcset="/img/loading.gif" lazyload alt="image.png" /> 先添加一个叫做 KAGGLE_USERNAME， 值写我们刚下载的json里面的username字段对应的值，</p>
+<p>举个例子,加入我们下载的json是这样，那就填入的是example_username <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><span class="hljs-attr">&quot;username&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;example_username&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;12345678901112131415&quot;</span><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure> <img src="https://cdn.studyinglover.com/pic/2024/02/89f8465de454aa8118ed3cf6cd0c6a3c.png" srcset="/img/loading.gif" lazyload alt="image.png" /> 再添加一个KAGGLE_KEY，值填写的是key对应的值，在刚才的例子那就是写12345678901112131415</p>
+<figure>
+<img src="https://cdn.studyinglover.com/pic/2024/02/2879bf0a0d806662d496fb33562a6a58.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>image.png</figcaption>
+</figure>
+<p>记着打开两个的访问权限 ## 运行colab 运行notebook即可，就是点击这里的开始按钮就会执行这个小方格里的代码 <img src="https://cdn.studyinglover.com/pic/2024/02/b9bd6ed422800307321d8f7a0afa18b6.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
+<p>里面有推理和微调的示例，感兴趣的同学可以自己实践</p>
+<h2 id="评测">评测</h2>
+<p>我这边运行了几个2b模型的例子，效果是实话实说，emmmmmmmmmmmm,一言难尽，可能是2b太拉胯了吧 <img src="https://cdn.studyinglover.com/pic/2024/02/a756dd4d922af5b0f45b40cdd649f646.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Gemma/">#Gemma</a>
+      
+        <a href="/tags/Google/">#Google</a>
+      
+        <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">#大模型</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>colab运行google最新开源模型Gemma</div>
+      <div>https://studyinglover.com/2024/02/22/colab运行google最新开源模型Gemma/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>StudyingLover</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年2月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+<div style="width:100%;display:flex;justify-content:center;margin-bottom:1.5rem"><ins class="adsbygoogle" style="display:flex;justify-content:center;max-width:845px;width:100%;height:90px" data-ad-client="ca-pub-6818277566173475" data-ad-slot="7216148023"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></div>
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/02/16/Sora%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A%20%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E4%BD%9C%E4%B8%BA%E4%B8%96%E7%95%8C%E6%A8%A1%E6%8B%9F%E5%99%A8%20%E7%AC%94%E8%AE%B0/" title="Sora技术报告 视频生成模型作为世界模拟器 笔记">
+                        <span class="hidden-mobile">Sora技术报告 视频生成模型作为世界模拟器 笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"StudyingLover/StudyingLover.github.io","repo-id":"R_kgDOIQbc2w","category":"Announcements","category-id":"DIC_kwDOIQbc284CT0AH","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('mermaid' in window) {
+        mermaid.init();
+      }
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <br> <a href="https://www.evolution-host.com" target="_blank" rel="nofollow noopener"><span>Evolution</span></a> <br> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> <div style="width: 20vw; height: 15vh; margin: 0 auto; text-align: center;"> <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=bLcIH0Eh5s3UeoICvFfbZ3tHKvl8FJUjfBLHkJp-6sc&cl=ffffff&w=a"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475"crossorigin="anonymous"></script>
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

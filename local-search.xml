@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>colab运行google最新开源模型Gemma</title>
+    <link href="/2024/02/22/colab%E8%BF%90%E8%A1%8Cgoogle%E6%9C%80%E6%96%B0%E5%BC%80%E6%BA%90%E6%A8%A1%E5%9E%8BGemma/"/>
+    <url>/2024/02/22/colab%E8%BF%90%E8%A1%8Cgoogle%E6%9C%80%E6%96%B0%E5%BC%80%E6%BA%90%E6%A8%A1%E5%9E%8BGemma/</url>
+    
+    <content type="html"><![CDATA[<p>Google开源了新的大模型 <a href="https://blog.google/technology/developers/gemma-open-models/">Gemma</a> ，<a href="https://ai.google.dev/gemma/?utm_source=keyword&amp;utm_medium=referral&amp;utm_campaign=gemma_cta&amp;utm_content=">Gemma</a>是一系列轻量级、最先进的开放式<a href="https://opensource.googleblog.com/2024/02/building-open-models-responsibly-gemini-era.html">模型，</a>采用与创建<a href="https://deepmind.google/technologies/gemini/#introduction">Gemini</a>模型相同的研究和技术而构建。Gemma 由 Google DeepMind 和 Google 的其他团队开发，其灵感来自 Gemini，其名称反映了拉丁语_gemma_，意思是“宝石”。除了模型权重之外，我们还发布了工具来支持开发人员创新、促进协作并指导负责任地使用 Gemma 模型。</p><p>Gemma 是为推动人工智能创新的开发人员和研究人员的开放社区而构建的。您今天就可以开始与 Gemma 合作，使用 Kaggle 中的免费访问权限、Colab 笔记本的免费套餐以及首次使用 Google Cloud 用户的 300 美元积分。研究人员还可以申请高达 50 万美元的<a href="https://docs.google.com/forms/d/e/1FAIpQLSe0grG6mRFW6dNF3Rb1h_YvKqUp2GaXiglZBgA2Os5iTLWlcg/viewform">Google Cloud 积分来加速他们的项目。</a></p><p>google提供了keras3.0来提供跨所有主要框架的推理和监督微调 (SFT) 工具链：JAX、PyTorch 和 TensorFlow 。还有 即用型<a href="http://ai.google.dev/gemma/docs/get_started">Colab</a>和<a href="https://www.kaggle.com/models/google/gemma/code">Kaggle 笔记本</a>，以及与<a href="http://huggingface.co/google">Hugging Face</a>、<a href="https://github.com/google/maxtext">MaxText</a>、<a href="https://github.com/NVIDIA/GenerativeAIExamples/tree/main/models/Gemma">NVIDIA NeMo</a>和<a href="https://github.com/NVIDIA/TensorRT-LLM">TensorRT-LLM</a>等流行工具的集成，让您可以轻松开始使用 Gemma。</p><p>google也提供了一个快速指南来使用<a href="http://ai.google.dev/gemma">ai.google.dev/gemma</a></p><h2 id="kaggle-获取访问权限">kaggle 获取访问权限</h2><p>首先访问<a href="https://www.kaggle.com/models/google/gemma">Gemma在kaggle的页面</a>，登陆你的kaggle账号</p><figure><img src="https://cdn.studyinglover.com/pic/2024/02/e770e5ca6a8c87a9367efda0d48f306b.png" alt="" /><figcaption>image.png</figcaption></figure><p>这里会有一个 Request Access,点击(我这是已经有访问权限了，你点了之后也变成这样说明就成功了)</p><p>然后我们点击kaggle的设置，按照我的截图依次点击 <img src="https://cdn.studyinglover.com/pic/2024/02/0676b9c3968534cf2f0a24fc3efa121e.png" alt="image.png" /></p><p><img src="https://cdn.studyinglover.com/pic/2024/02/d31235cf85326598d78a01d3d2a179c3.png" alt="image.png" /> <img src="https://cdn.studyinglover.com/pic/2024/02/ee052cc9137ba36a42f363d492108f73.png" alt="image.png" /> 你的浏览器会下载一个json文件，例如就像下面这样 <img src="https://cdn.studyinglover.com/pic/2024/02/8c67107479ef55d6358110e4d46778fb.png" alt="image.png" /></p><h2 id="colab运行">colab运行</h2><p>如果你有google账号那就直接打开<a href="https://colab.research.google.com/github/google/generative-ai-docs/blob/main/site/en/gemma/docs/lora_tuning.ipynb?utm_source=agd&amp;utm_medium=referral&amp;utm_campaign=open-in-colab&amp;hl=zh-cn">Gemma的colab页面</a> (没有的话就注册一个啦)</p><p>不出意外你会看到这样一个页面 <img src="https://cdn.studyinglover.com/pic/2024/02/7fc668b963da87075d5e3a2eab1f125a.png" alt="image.png" /></p><p>接下来点击右上角，按照我的截图顺序，选择显卡为t4 <img src="https://cdn.studyinglover.com/pic/2024/02/c5836766b7819385e337ce5877114a5b.png" alt="image.png" /> <img src="https://cdn.studyinglover.com/pic/2024/02/ded1ab56213ab089e2347ee0729ffab3.png" alt="image.png" /></p><p><img src="https://cdn.studyinglover.com/pic/2024/02/15fdbd16664eb511e1ec7c5653e267b8.png" alt="image.png" /> 点击保存，等待右上角变成这样，代表成功 <img src="https://cdn.studyinglover.com/pic/2024/02/5660f6ffaf4ce5a8e49f37753875194a.png" alt="image.png" /></p><p>接下来点击左侧 <img src="https://cdn.studyinglover.com/pic/2024/02/6ef657aa2cb9c7becdc67cdcc2dbc20d.png" alt="image.png" /></p><p>选择新建新密钥 <img src="https://cdn.studyinglover.com/pic/2024/02/c8f82c0c604a443f5af650b74f069e8b.png" alt="image.png" /> 先添加一个叫做 KAGGLE_USERNAME， 值写我们刚下载的json里面的username字段对应的值，</p><p>举个例子,加入我们下载的json是这样，那就填入的是example_username <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><span class="hljs-attr">&quot;username&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;example_username&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;12345678901112131415&quot;</span><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure> <img src="https://cdn.studyinglover.com/pic/2024/02/89f8465de454aa8118ed3cf6cd0c6a3c.png" alt="image.png" /> 再添加一个KAGGLE_KEY，值填写的是key对应的值，在刚才的例子那就是写12345678901112131415</p><figure><img src="https://cdn.studyinglover.com/pic/2024/02/2879bf0a0d806662d496fb33562a6a58.png" alt="" /><figcaption>image.png</figcaption></figure><p>记着打开两个的访问权限 ## 运行colab 运行notebook即可，就是点击这里的开始按钮就会执行这个小方格里的代码 <img src="https://cdn.studyinglover.com/pic/2024/02/b9bd6ed422800307321d8f7a0afa18b6.png" alt="image.png" /></p><p>里面有推理和微调的示例，感兴趣的同学可以自己实践</p><h2 id="评测">评测</h2><p>我这边运行了几个2b模型的例子，效果是实话实说，emmmmmmmmmmmm,一言难尽，可能是2b太拉胯了吧 <img src="https://cdn.studyinglover.com/pic/2024/02/a756dd4d922af5b0f45b40cdd649f646.png" alt="image.png" /></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>笔记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Gemma</tag>
+      
+      <tag>Google</tag>
+      
+      <tag>大模型</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Sora技术报告 视频生成模型作为世界模拟器 笔记</title>
     <link href="/2024/02/16/Sora%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A%20%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E4%BD%9C%E4%B8%BA%E4%B8%96%E7%95%8C%E6%A8%A1%E6%8B%9F%E5%99%A8%20%E7%AC%94%E8%AE%B0/"/>
     <url>/2024/02/16/Sora%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A%20%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E4%BD%9C%E4%B8%BA%E4%B8%96%E7%95%8C%E6%A8%A1%E6%8B%9F%E5%99%A8%20%E7%AC%94%E8%AE%B0/</url>
@@ -157,9 +186,9 @@
     
     <tags>
       
-      <tag>phi-2</tag>
-      
       <tag>大模型</tag>
+      
+      <tag>phi-2</tag>
       
     </tags>
     

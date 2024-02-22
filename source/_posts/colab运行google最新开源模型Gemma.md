@@ -78,3 +78,6 @@ google也提供了一个快速指南来使用[ai.google.dev/gemma](http://ai.goo
 ## 评测
 我这边运行了几个2b模型的例子，效果是实话实说，emmmmmmmmmmmm,一言难尽，可能是2b太拉胯了吧
 ![image.png](https://cdn.studyinglover.com/pic/2024/02/a756dd4d922af5b0f45b40cdd649f646.png)
+
+经过微调之后效果好了不少
+![image.png](https://cdn.studyinglover.com/pic/2024/02/d378a5211dd1157b013d61446bb8a946.png)

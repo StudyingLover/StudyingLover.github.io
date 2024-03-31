@@ -9,8 +9,75 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sun, 31 Mar 2024 11:14:05 GMT</pubDate>
+    <pubDate>Sun, 31 Mar 2024 11:19:06 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>coze+coze-discord-proxy+ChatNextWebUI实现AI自由</title>
+      <link>https://studyinglover.com/2024/03/31/coze+coze-discord-proxy+ChatNextWebUI%E5%AE%9E%E7%8E%B0AI%E8%87%AA%E7%94%B1/</link>
+      <guid>https://studyinglover.com/2024/03/31/coze+coze-discord-proxy+ChatNextWebUI%E5%AE%9E%E7%8E%B0AI%E8%87%AA%E7%94%B1/</guid>
+      <pubDate>Sun, 31 Mar 2024 19:12:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;cozecoze-discord-proxychatnextwebui实现ai自由&quot;&gt;coze+coze-discord-proxy+ChatNextWebUI实现AI自由&lt;/h1&gt;
+&lt;p&gt;前不久我的openai账号被封了，还亏了这个月的20刀gpt4月费，可谓是</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="cozecoze-discord-proxychatnextwebui实现ai自由">coze+coze-discord-proxy+ChatNextWebUI实现AI自由</h1><p>前不久我的openai账号被封了，还亏了这个月的20刀gpt4月费，可谓是亏麻了。为了继续使用gpt4,我们需要注册一个账号，找到一个接口或者去折腾gpt4free,但是有没有更加轻松的方式呢？</p><p>诶，实际上真的有，那就是字节的 <a href="coze.com">扣子(coze)</a>,可以自己构建知识库，加入插件，工作流，还有很多功能，更重要的是，我们可以白嫖gpt4 128k上下文版本！就决定是他了，开始白嫖</p><h2 id="注册coze并构建机器人">注册coze并构建机器人</h2><p>首先开<strong>全局代理</strong>然后访问 <a href="coze.com">海外版扣子</a>,</p><p>可以参考知乎的这个回答，给自己构建一个完整的gpt助手.<a href="https://zhuanlan.zhihu.com/p/682435326?utm_campaign=shareopn&amp;utm_medium=social&amp;utm_psn=1755880631257821184&amp;utm_source=wechat_session"># Coze揭秘：零基础如何打造专属AI，完全免费！</a></p><h2 id="搭建coze-discord-proxy">搭建coze-discord-proxy</h2><p>官方<a href="https://github.com/deanxv/coze-discord-proxy">repo</a> . 也可以参考这个教程进行部署<a href="https://www.dqzboy.com/16532.html">通过接口调用Coze托管的discord-bot，实现免费使用GPT4和绘画</a></p><p>这里我解释一下这个项目是怎么工作的</p><p>如图所示，我们知道discord是允许机器人对话的，那我们构建两个机器人COZE-BOT和CDP-BOT。COZE-BOT和coze服务器对话，CDP-BOT和api接口对话，将信息转发，就实现了一个gpt的接口。</p><figure><img src="https://cdn.studyinglover.com/pic/2024/03/867127c0de08acc84d6f70bcae8a04f7.png" alt="" /><figcaption>image.png</figcaption></figure><h2 id="宝塔搭建反向代理cloudflare代理">宝塔搭建反向代理+cloudflare代理</h2><p>我们首先将域名托管到cloudflare, 添加一个解析到我们的服务器，然后选择左侧的Origin Server, 给刚才解析的域名添加一个15年的证书，然后保存。 <img src="https://cdn.studyinglover.com/pic/2024/03/f3717de1caed3352219a4f07c0b5369f.png" alt="image.png" /></p><p>假设我们coze-discord-proxy的端口是2077,打开宝塔面板，添加一个网站，设置反向代理到localhost:7077,然后打开ssl,填入刚才获取的cloudflare15年证书，成功后应该能看到这个 <img src="https://cdn.studyinglover.com/pic/2024/03/7051490e8c5e49cdb507e9e6d8b401ea.png" alt="image.png" /></p><p>我们访问 <code>https://域名/swagger/index.html</code> 应该就能看到swagger文档了。</p><h2 id="chatnextwebui集成">ChatNextWebUI集成</h2><p>我们可以将这个接口当作正常的openai接口用，base url就是我们的域名，api key是在前面部署coze-discord-proxy的时候指定的PROXY_SECRET参数</p>]]></content:encoded>
+      
+      
+      <category domain="https://studyinglover.com/categories/%E8%B8%A9%E5%9D%91/">踩坑</category>
+      
+      
+      <category domain="https://studyinglover.com/tags/%E5%85%8D%E8%B4%B9gpt/">免费gpt</category>
+      
+      <category domain="https://studyinglover.com/tags/coze/">coze</category>
+      
+      <category domain="https://studyinglover.com/tags/coze-discord-proxy/">coze-discord-proxy</category>
+      
+      <category domain="https://studyinglover.com/tags/ChatNextWebUI/">ChatNextWebUI</category>
+      
+      <category domain="https://studyinglover.com/tags/AI/">AI</category>
+      
+      
+      <comments>https://studyinglover.com/2024/03/31/coze+coze-discord-proxy+ChatNextWebUI%E5%AE%9E%E7%8E%B0AI%E8%87%AA%E7%94%B1/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>安卓内核时间使用的是UTC时间</title>
+      <link>https://studyinglover.com/2024/03/30/%E5%AE%89%E5%8D%93%E5%86%85%E6%A0%B8%E6%97%B6%E9%97%B4%E4%BD%BF%E7%94%A8%E7%9A%84%E6%98%AFUTC%E6%97%B6%E9%97%B4/</link>
+      <guid>https://studyinglover.com/2024/03/30/%E5%AE%89%E5%8D%93%E5%86%85%E6%A0%B8%E6%97%B6%E9%97%B4%E4%BD%BF%E7%94%A8%E7%9A%84%E6%98%AFUTC%E6%97%B6%E9%97%B4/</guid>
+      <pubDate>Sat, 30 Mar 2024 20:12:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;安卓内核时间使用的是utc时间&quot;&gt;安卓内核时间使用的是UTC时间&lt;/h1&gt;
+&lt;p&gt;安卓内核时间使用的是UTC时间，比北京时间晚8个小时&lt;/p&gt;
+</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="安卓内核时间使用的是utc时间">安卓内核时间使用的是UTC时间</h1><p>安卓内核时间使用的是UTC时间，比北京时间晚8个小时</p>]]></content:encoded>
+      
+      
+      <category domain="https://studyinglover.com/categories/%E8%B8%A9%E5%9D%91/">踩坑</category>
+      
+      
+      <category domain="https://studyinglover.com/tags/%E5%86%85%E6%A0%B8/">内核</category>
+      
+      <category domain="https://studyinglover.com/tags/%E5%AE%89%E5%8D%93%E5%86%85%E6%A0%B8/">安卓内核</category>
+      
+      <category domain="https://studyinglover.com/tags/UTC/">UTC</category>
+      
+      
+      <comments>https://studyinglover.com/2024/03/30/%E5%AE%89%E5%8D%93%E5%86%85%E6%A0%B8%E6%97%B6%E9%97%B4%E4%BD%BF%E7%94%A8%E7%9A%84%E6%98%AFUTC%E6%97%B6%E9%97%B4/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>colab运行google最新开源模型Gemma</title>
@@ -484,60 +551,6 @@
       
       
       <comments>https://studyinglover.com/2023/11/12/ggml%E6%95%99%E7%A8%8B|mnist%E6%89%8B%E5%86%99%E4%BD%93%E8%AF%86%E5%88%AB%E9%87%8F%E5%8C%96%E6%8E%A8%E7%90%86/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>xgboost2.0最佳实践</title>
-      <link>https://studyinglover.com/2023/10/19/xgboost2.0%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</link>
-      <guid>https://studyinglover.com/2023/10/19/xgboost2.0%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</guid>
-      <pubDate>Thu, 19 Oct 2023 08:30:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;xgboost2.0最佳实践&quot;&gt;xgboost2.0最佳实践&lt;/h1&gt;
-&lt;p&gt;首先更新xgboost到2.0.0 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span cla</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="xgboost2.0最佳实践">xgboost2.0最佳实践</h1><p>首先更新xgboost到2.0.0 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install xgboost -U <br></code></pre></td></tr></table></figure></p><p>在最新版本的训练中，参数可以使用字典传递。同时数据和样本需要先合并成一个<code>xgb.DMatrix</code> 对象 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 设置参数</span><br>params = &#123;<br>    <span class="hljs-string">&quot;device&quot;</span>: <span class="hljs-string">&quot;cuda&quot;</span>,<br>&#125;<br><br><span class="hljs-comment"># 创建DMatrix对象</span><br>Xy = xgb.DMatrix(X_train, y_train)<br><br><span class="hljs-comment"># 训练模型</span><br>model = xgb.train(params, Xy)<br></code></pre></td></tr></table></figure></p><p>进行分类任务是，需要传递类别数，而不是像之前版本那样自动检测类别 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 设置参数</span><br>params = &#123;<br>    <span class="hljs-string">&quot;device&quot;</span>: <span class="hljs-string">&quot;cuda&quot;</span>,<br>    <span class="hljs-string">&quot;num_class&quot;</span>: <span class="hljs-number">5</span><br>&#125;<br></code></pre></td></tr></table></figure></p><p>根据xgboost路线图<a href="https://github.com/dmlc/xgboost/issues/7547">Roadmap Phasing out the support for old binary format.</a>，在2.2版本将删除对保存旧二进制格式的支持，删除对旧 JSON 模型的支持。在2.3版本将删除对加载旧二进制格式的支持。最新保存模型的方式是 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">xgb.save(bst, <span class="hljs-string">&#x27;model_file_name.json&#x27;</span>)<br></code></pre></td></tr></table></figure></p>]]></content:encoded>
-      
-      
-      <category domain="https://studyinglover.com/categories/%E8%B8%A9%E5%9D%91/">踩坑</category>
-      
-      
-      <category domain="https://studyinglover.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</category>
-      
-      
-      <comments>https://studyinglover.com/2023/10/19/xgboost2.0%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>xgboost使用GPU最佳实践</title>
-      <link>https://studyinglover.com/2023/10/18/xgboost%E4%BD%BF%E7%94%A8GPU%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</link>
-      <guid>https://studyinglover.com/2023/10/18/xgboost%E4%BD%BF%E7%94%A8GPU%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</guid>
-      <pubDate>Wed, 18 Oct 2023 18:50:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;xgboost使用gpu最佳实践&quot;&gt;xgboost使用GPU最佳实践&lt;/h1&gt;
-&lt;p&gt;首先更新xgboost到2.0.0 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="xgboost使用gpu最佳实践">xgboost使用GPU最佳实践</h1><p>首先更新xgboost到2.0.0 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install xgboost -U <br></code></pre></td></tr></table></figure></p><p>这里给出一个使用GPU的例子，使用的是nvidia显卡 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> xgboost<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">from</span> scipy <span class="hljs-keyword">import</span> stats<br><br><span class="hljs-comment"># 生成示例数据</span><br>np.random.seed(<span class="hljs-number">114514</span>)<br>X = np.random.randn(<span class="hljs-number">100</span>, <span class="hljs-number">3</span>)  <span class="hljs-comment"># 生成100个样本，每个样本有3个特征</span><br>y = stats.bernoulli.rvs(<span class="hljs-number">0.5</span>, size=<span class="hljs-number">100</span>)  <span class="hljs-comment"># 生成二分类标签，概率为0.5</span><br><br><span class="hljs-comment"># 设置参数</span><br>params = &#123;<br>    <span class="hljs-string">&quot;device&quot;</span>: <span class="hljs-string">&quot;cuda&quot;</span><br>&#125;<br><br><span class="hljs-comment"># 创建DMatrix对象</span><br>Xy = xgboost.DMatrix(X, y)<br><br><span class="hljs-comment"># 训练模型</span><br>model = xgboost.train(params, Xy)<br><br><span class="hljs-comment"># 测试模型</span><br>test_array = np.random.randn(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>)<br>dtest = xgboost.DMatrix(test_array)<br>pred = model.predict(dtest)<br><span class="hljs-built_in">print</span>(pred)<br></code></pre></td></tr></table></figure></p>]]></content:encoded>
-      
-      
-      <category domain="https://studyinglover.com/categories/%E8%B8%A9%E5%9D%91/">踩坑</category>
-      
-      
-      <category domain="https://studyinglover.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</category>
-      
-      
-      <comments>https://studyinglover.com/2023/10/18/xgboost%E4%BD%BF%E7%94%A8GPU%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/#disqus_thread</comments>
       
     </item>
     

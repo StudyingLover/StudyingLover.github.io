@@ -1,7 +1,7 @@
 ---
 title: coze+coze-discord-proxy+ChatNextWebUI实现AI自由
 banner_img: https://cdn.studyinglover.com/pic/2023/07/b5c4ecf9aa476ca1073f99b22fe9605e.jpg
-date: 2023-3-31 19:12:00
+date: 2024-3-31 19:12:00
 categories:
 - 踩坑
 tags:

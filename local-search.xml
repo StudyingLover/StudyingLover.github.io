@@ -1499,6 +1499,39 @@
   
   
   <entry>
+    <title>coze+coze-discord-proxy+ChatNextWebUI实现AI自由</title>
+    <link href="/2023/03/31/coze+coze-discord-proxy+ChatNextWebUI%E5%AE%9E%E7%8E%B0AI%E8%87%AA%E7%94%B1/"/>
+    <url>/2023/03/31/coze+coze-discord-proxy+ChatNextWebUI%E5%AE%9E%E7%8E%B0AI%E8%87%AA%E7%94%B1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="cozecoze-discord-proxychatnextwebui实现ai自由">coze+coze-discord-proxy+ChatNextWebUI实现AI自由</h1><p>前不久我的openai账号被封了，还亏了这个月的20刀gpt4月费，可谓是亏麻了。为了继续使用gpt4,我们需要注册一个账号，找到一个接口或者去折腾gpt4free,但是有没有更加轻松的方式呢？</p><p>诶，实际上真的有，那就是字节的 <a href="coze.com">扣子(coze)</a>,可以自己构建知识库，加入插件，工作流，还有很多功能，更重要的是，我们可以白嫖gpt4 128k上下文版本！就决定是他了，开始白嫖</p><h2 id="注册coze并构建机器人">注册coze并构建机器人</h2><p>首先开<strong>全局代理</strong>然后访问 <a href="coze.com">海外版扣子</a>,</p><p>可以参考知乎的这个回答，给自己构建一个完整的gpt助手.<a href="https://zhuanlan.zhihu.com/p/682435326?utm_campaign=shareopn&amp;utm_medium=social&amp;utm_psn=1755880631257821184&amp;utm_source=wechat_session"># Coze揭秘：零基础如何打造专属AI，完全免费！</a></p><h2 id="搭建coze-discord-proxy">搭建coze-discord-proxy</h2><p>官方<a href="https://github.com/deanxv/coze-discord-proxy">repo</a> . 也可以参考这个教程进行部署<a href="https://www.dqzboy.com/16532.html">通过接口调用Coze托管的discord-bot，实现免费使用GPT4和绘画</a></p><p>这里我解释一下这个项目是怎么工作的</p><p>如图所示，我们知道discord是允许机器人对话的，那我们构建两个机器人COZE-BOT和CDP-BOT。COZE-BOT和coze服务器对话，CDP-BOT和api接口对话，将信息转发，就实现了一个gpt的接口。</p><figure><img src="https://cdn.studyinglover.com/pic/2024/03/867127c0de08acc84d6f70bcae8a04f7.png" alt="" /><figcaption>image.png</figcaption></figure><h2 id="宝塔搭建反向代理cloudflare代理">宝塔搭建反向代理+cloudflare代理</h2><p>我们首先将域名托管到cloudflare, 添加一个解析到我们的服务器，然后选择左侧的Origin Server, 给刚才解析的域名添加一个15年的证书，然后保存。 <img src="https://cdn.studyinglover.com/pic/2024/03/f3717de1caed3352219a4f07c0b5369f.png" alt="image.png" /></p><p>假设我们coze-discord-proxy的端口是2077,打开宝塔面板，添加一个网站，设置反向代理到localhost:7077,然后打开ssl,填入刚才获取的cloudflare15年证书，成功后应该能看到这个 <img src="https://cdn.studyinglover.com/pic/2024/03/7051490e8c5e49cdb507e9e6d8b401ea.png" alt="image.png" /></p><p>我们访问 <code>https://域名/swagger/index.html</code> 应该就能看到swagger文档了。</p><h2 id="chatnextwebui集成">ChatNextWebUI集成</h2><p>我们可以将这个接口当作正常的openai接口用，base url就是我们的域名，api key是在前面部署coze-discord-proxy的时候指定的PROXY_SECRET参数</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>踩坑</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>免费gpt</tag>
+      
+      <tag>coze</tag>
+      
+      <tag>coze-discord-proxy</tag>
+      
+      <tag>ChatNextWebUI</tag>
+      
+      <tag>AI</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Imagic笔记</title>
     <link href="/2023/03/29/Imagic%E7%AC%94%E8%AE%B0/"/>
     <url>/2023/03/29/Imagic%E7%AC%94%E8%AE%B0/</url>

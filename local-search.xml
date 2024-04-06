@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>clion搭建libbpf-bootstrap开发环境</title>
+    <link href="/2024/04/06/clion%E6%90%AD%E5%BB%BAlibbpf-bootstrap%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
+    <url>/2024/04/06/clion%E6%90%AD%E5%BB%BAlibbpf-bootstrap%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
+    
+    <content type="html"><![CDATA[<h1 id="clion搭建libbpf-bootstrap开发环境">clion搭建libbpf-bootstrap开发环境</h1><p>首先用clion打开libbpf-bootstrap目录，将<code>example/c</code>下的<code>CMakeLists.txt</code>导入</p><p>这个时候你会发现代码不能用clion自带的可视化界面debug,这是因为libbpf-bootstrap目录结构太离谱了，我们只需要做一个小小的更改</p><p>将<strong>73</strong>行的 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CMakeLists.txt">set(LIBBPF_LIBRARIES $&#123;CMAKE_CURRENT_BINARY_DIR&#125;/libbpf/libbpf.a)<br></code></pre></td></tr></table></figure></p><p>改成 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CMakeLists.txt">set(LIBBPF_LIBRARIES $&#123;CMAKE_CURRENT_BINARY_DIR&#125;/../../../libbpf/src/libbpf.a)<br></code></pre></td></tr></table></figure></p><p>结束，享受clion的优秀</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>踩坑</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>libbpf-bootstrap</tag>
+      
+      <tag>ebpf</tag>
+      
+      <tag>clion</tag>
+      
+      <tag>Clion</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>coze+coze-discord-proxy+ChatNextWebUI实现AI自由</title>
     <link href="/2024/03/31/coze+coze-discord-proxy+ChatNextWebUI%E5%AE%9E%E7%8E%B0AI%E8%87%AA%E7%94%B1/"/>
     <url>/2024/03/31/coze+coze-discord-proxy+ChatNextWebUI%E5%AE%9E%E7%8E%B0AI%E8%87%AA%E7%94%B1/</url>

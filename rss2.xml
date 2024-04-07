@@ -9,7 +9,7 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 06 Apr 2024 13:46:48 GMT</pubDate>
+    <pubDate>Sun, 07 Apr 2024 08:20:08 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -90,12 +90,13 @@
         
       <description>&lt;h1 id=&quot;安卓内核时间使用的是utc时间&quot;&gt;安卓内核时间使用的是UTC时间&lt;/h1&gt;
 &lt;p&gt;安卓内核时间使用的是UTC时间，比北京时间晚8个小时&lt;/p&gt;
+&lt;p&gt;也不一定，看实际情况&lt;/p&gt;
 </description>
         
       
       
       
-      <content:encoded><![CDATA[<h1 id="安卓内核时间使用的是utc时间">安卓内核时间使用的是UTC时间</h1><p>安卓内核时间使用的是UTC时间，比北京时间晚8个小时</p>]]></content:encoded>
+      <content:encoded><![CDATA[<h1 id="安卓内核时间使用的是utc时间">安卓内核时间使用的是UTC时间</h1><p>安卓内核时间使用的是UTC时间，比北京时间晚8个小时</p><p>也不一定，看实际情况</p>]]></content:encoded>
       
       
       <category domain="https://studyinglover.com/categories/%E8%B8%A9%E5%9D%91/">踩坑</category>

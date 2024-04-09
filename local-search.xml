@@ -4,6 +4,47 @@
   
   
   <entry>
+    <title>在docker部署fastapi宝塔里使用nginx反代套上cloudflare获取请求的真实ip</title>
+    <link href="/2024/04/09/%E5%9C%A8docker%E9%83%A8%E7%BD%B2fastapi%E5%AE%9D%E5%A1%94%E9%87%8C%E4%BD%BF%E7%94%A8nginx%E5%8F%8D%E4%BB%A3%E5%A5%97%E4%B8%8Acloudflare%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E7%9A%84%E7%9C%9F%E5%AE%9Eip/"/>
+    <url>/2024/04/09/%E5%9C%A8docker%E9%83%A8%E7%BD%B2fastapi%E5%AE%9D%E5%A1%94%E9%87%8C%E4%BD%BF%E7%94%A8nginx%E5%8F%8D%E4%BB%A3%E5%A5%97%E4%B8%8Acloudflare%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E7%9A%84%E7%9C%9F%E5%AE%9Eip/</url>
+    
+    <content type="html"><![CDATA[<h1 id="在docker部署fastapi宝塔里使用nginx反代套上cloudflare获取请求的真实ip">在docker部署fastapi宝塔里使用nginx反代套上cloudflare获取请求的真实ip</h1><p>背景是这样的，我使用docker部署了一个fastapi部署了一个应用，使用<code>request.client.host</code>获取请求的来源ip,但是获取到的都是<code>172.17.0.1</code>这显然是不是正常的，是docker网络下的ip,所以我们需要在nginx进行设置转发真实ip</p><p>首先点击宝塔<strong>应用商店</strong>，找到nginx，点击右边的<strong>设置</strong>，在<strong>配置修改</strong>中，找到<code>http</code>模块中的<code>include luawaf.conf;</code>，在下面添加如下两段代码，重载nginx <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs conf">set_real_ip_from 0.0.0.0/0;<br>real_ip_header X-Forwarded-For;<br></code></pre></td></tr></table></figure></p><p>同时在<code>/www/server/panel/vhost/nginx/proxy/你的网站</code> 这里路径下面能找到一个配置文件，在<code>location /</code>加上 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs conf">location / &#123;<br>    proxy_set_header Host $host;<br>    proxy_set_header X-Real-IP $remote_addr;<br>    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;<br>    proxy_set_header X-Forwarded-Proto $scheme;<br>    proxy_pass http://your_fastapi_app;<br>&#125;<br></code></pre></td></tr></table></figure></p><p>在fastapi中，我们将获取ip的代码改成下面这样 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">ip_address = request.headers.get(<span class="hljs-string">&quot;X-Real-IP&quot;</span>) <span class="hljs-keyword">if</span> request.headers.get(<span class="hljs-string">&quot;X-Real-IP&quot;</span>) <span class="hljs-keyword">else</span> (request.headers.get(<span class="hljs-string">&quot;X-Forwarded-For&quot;</span>) <span class="hljs-keyword">if</span> request.headers.get(<span class="hljs-string">&quot;X-Forwarded-For&quot;</span>) <span class="hljs-keyword">else</span> request.client.host)<br></code></pre></td></tr></table></figure></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>踩坑</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>fastapi</tag>
+      
+      <tag>docker</tag>
+      
+      <tag>nginx</tag>
+      
+      <tag>cloudflare</tag>
+      
+      <tag>宝塔</tag>
+      
+      <tag>真实ip</tag>
+      
+      <tag>fastapi 反向代理</tag>
+      
+      <tag>反向代理</tag>
+      
+      <tag>docker 172.17.0.1</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>clion搭建libbpf-bootstrap开发环境</title>
     <link href="/2024/04/06/clion%E6%90%AD%E5%BB%BAlibbpf-bootstrap%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
     <url>/2024/04/06/clion%E6%90%AD%E5%BB%BAlibbpf-bootstrap%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>

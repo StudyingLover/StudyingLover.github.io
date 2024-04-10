@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>zhipuAI接口兼容openai</title>
+    <link href="/2024/04/10/zhipuAI%E6%8E%A5%E5%8F%A3%E5%85%BC%E5%AE%B9openai/"/>
+    <url>/2024/04/10/zhipuAI%E6%8E%A5%E5%8F%A3%E5%85%BC%E5%AE%B9openai/</url>
+    
+    <content type="html"><![CDATA[<h1 id="zhipuai接口兼容openai">zhipuAI接口兼容openai</h1><p>最近debug发现质谱AI的接口是兼容openai这个库的</p><p>首先访问 <a href="https://open.bigmodel.cn/">官网</a> ,获取一个key</p><p>然后使用下面的代码生成jwt token, apikey天获取的key, exp_seconds是过期时间 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_token</span>(<span class="hljs-params">apikey: <span class="hljs-built_in">str</span>, exp_seconds: <span class="hljs-built_in">int</span></span>):<br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-built_in">id</span>, secret = apikey.split(<span class="hljs-string">&quot;.&quot;</span>)<br>    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>        <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">&quot;invalid apikey&quot;</span>, e)<br><br>    payload = &#123;<br>        <span class="hljs-string">&quot;api_key&quot;</span>: <span class="hljs-built_in">id</span>,<br>        <span class="hljs-string">&quot;exp&quot;</span>: <span class="hljs-built_in">int</span>(<span class="hljs-built_in">round</span>(time.time() * <span class="hljs-number">1000</span>)) + exp_seconds * <span class="hljs-number">1000</span>,<br>        <span class="hljs-string">&quot;timestamp&quot;</span>: <span class="hljs-built_in">int</span>(<span class="hljs-built_in">round</span>(time.time() * <span class="hljs-number">1000</span>)),<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> jwt.encode(<br>        payload,<br>        secret,<br>        algorithm=<span class="hljs-string">&quot;HS256&quot;</span>,<br>        headers=&#123;<span class="hljs-string">&quot;alg&quot;</span>: <span class="hljs-string">&quot;HS256&quot;</span>, <span class="hljs-string">&quot;sign_type&quot;</span>: <span class="hljs-string">&quot;SIGN&quot;</span>&#125;,<br>    )<br></code></pre></td></tr></table></figure></p><p>生成之后就可以按照下面的形式创建一个openai客户端 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI<br><br>client = OpenAI(base_url=<span class="hljs-string">&quot;https://open.bigmodel.cn/api/paas/v4&quot;</span>, api_key=刚才生成的jwt token)<br></code></pre></td></tr></table></figure></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>踩坑</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>大模型</tag>
+      
+      <tag>zhipu</tag>
+      
+      <tag>openai</tag>
+      
+      <tag>质谱AI</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>在docker部署fastapi宝塔里使用nginx反代套上cloudflare获取请求的真实ip</title>
     <link href="/2024/04/09/%E5%9C%A8docker%E9%83%A8%E7%BD%B2fastapi%E5%AE%9D%E5%A1%94%E9%87%8C%E4%BD%BF%E7%94%A8nginx%E5%8F%8D%E4%BB%A3%E5%A5%97%E4%B8%8Acloudflare%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E7%9A%84%E7%9C%9F%E5%AE%9Eip/"/>
     <url>/2024/04/09/%E5%9C%A8docker%E9%83%A8%E7%BD%B2fastapi%E5%AE%9D%E5%A1%94%E9%87%8C%E4%BD%BF%E7%94%A8nginx%E5%8F%8D%E4%BB%A3%E5%A5%97%E4%B8%8Acloudflare%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E7%9A%84%E7%9C%9F%E5%AE%9Eip/</url>

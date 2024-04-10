@@ -9,8 +9,42 @@
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 09 Apr 2024 10:26:16 GMT</pubDate>
+    <pubDate>Wed, 10 Apr 2024 10:05:36 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>zhipuAI接口兼容openai</title>
+      <link>https://studyinglover.com/2024/04/10/zhipuAI%E6%8E%A5%E5%8F%A3%E5%85%BC%E5%AE%B9openai/</link>
+      <guid>https://studyinglover.com/2024/04/10/zhipuAI%E6%8E%A5%E5%8F%A3%E5%85%BC%E5%AE%B9openai/</guid>
+      <pubDate>Wed, 10 Apr 2024 18:04:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;zhipuai接口兼容openai&quot;&gt;zhipuAI接口兼容openai&lt;/h1&gt;
+&lt;p&gt;最近debug发现质谱AI的接口是兼容openai这个库的&lt;/p&gt;
+&lt;p&gt;首先访问 &lt;a href=&quot;https://open.bigmodel.cn/&quot;&gt;官网&lt;/a&gt; ,获</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="zhipuai接口兼容openai">zhipuAI接口兼容openai</h1><p>最近debug发现质谱AI的接口是兼容openai这个库的</p><p>首先访问 <a href="https://open.bigmodel.cn/">官网</a> ,获取一个key</p><p>然后使用下面的代码生成jwt token, apikey天获取的key, exp_seconds是过期时间 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_token</span>(<span class="hljs-params">apikey: <span class="hljs-built_in">str</span>, exp_seconds: <span class="hljs-built_in">int</span></span>):<br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-built_in">id</span>, secret = apikey.split(<span class="hljs-string">&quot;.&quot;</span>)<br>    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>        <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">&quot;invalid apikey&quot;</span>, e)<br><br>    payload = &#123;<br>        <span class="hljs-string">&quot;api_key&quot;</span>: <span class="hljs-built_in">id</span>,<br>        <span class="hljs-string">&quot;exp&quot;</span>: <span class="hljs-built_in">int</span>(<span class="hljs-built_in">round</span>(time.time() * <span class="hljs-number">1000</span>)) + exp_seconds * <span class="hljs-number">1000</span>,<br>        <span class="hljs-string">&quot;timestamp&quot;</span>: <span class="hljs-built_in">int</span>(<span class="hljs-built_in">round</span>(time.time() * <span class="hljs-number">1000</span>)),<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> jwt.encode(<br>        payload,<br>        secret,<br>        algorithm=<span class="hljs-string">&quot;HS256&quot;</span>,<br>        headers=&#123;<span class="hljs-string">&quot;alg&quot;</span>: <span class="hljs-string">&quot;HS256&quot;</span>, <span class="hljs-string">&quot;sign_type&quot;</span>: <span class="hljs-string">&quot;SIGN&quot;</span>&#125;,<br>    )<br></code></pre></td></tr></table></figure></p><p>生成之后就可以按照下面的形式创建一个openai客户端 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI<br><br>client = OpenAI(base_url=<span class="hljs-string">&quot;https://open.bigmodel.cn/api/paas/v4&quot;</span>, api_key=刚才生成的jwt token)<br></code></pre></td></tr></table></figure></p>]]></content:encoded>
+      
+      
+      <category domain="https://studyinglover.com/categories/%E8%B8%A9%E5%9D%91/">踩坑</category>
+      
+      
+      <category domain="https://studyinglover.com/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">大模型</category>
+      
+      <category domain="https://studyinglover.com/tags/zhipu/">zhipu</category>
+      
+      <category domain="https://studyinglover.com/tags/openai/">openai</category>
+      
+      <category domain="https://studyinglover.com/tags/%E8%B4%A8%E8%B0%B1AI/">质谱AI</category>
+      
+      
+      <comments>https://studyinglover.com/2024/04/10/zhipuAI%E6%8E%A5%E5%8F%A3%E5%85%BC%E5%AE%B9openai/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>在docker部署fastapi宝塔里使用nginx反代套上cloudflare获取请求的真实ip</title>
@@ -557,32 +591,6 @@
       
       
       <comments>https://studyinglover.com/2023/11/28/TruFor%E7%AC%94%E8%AE%B0%E5%92%8C%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%8E%B0/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>深入分析：GitHub Trending 项目 &quot;multipleWindow3dScene&quot;</title>
-      <link>https://studyinglover.com/2023/11/27/multipleWindow3dScene%E4%BB%A3%E7%A0%81%E8%A7%A3%E9%87%8A/</link>
-      <guid>https://studyinglover.com/2023/11/27/multipleWindow3dScene%E4%BB%A3%E7%A0%81%E8%A7%A3%E9%87%8A/</guid>
-      <pubDate>Mon, 27 Nov 2023 19:18:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;这是由chatGPT生成的文章，内容是关于GitHub Trending 项目 &quot;multipleWindow3dScene&quot;的深入分析，分享链接&lt;a href=&quot;https://chat.openai.com/share/289860f7-6e7e-458c-b3a8-f</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<p>这是由chatGPT生成的文章，内容是关于GitHub Trending 项目 "multipleWindow3dScene"的深入分析，分享链接<a href="https://chat.openai.com/share/289860f7-6e7e-458c-b3a8-fe97d01e63bd">ChatGPT</a></p><p>其实作者用的技术并不是很新的东西，treejs已经被使用很多年了，跨窗口同步状态也有很多讲解，但是作者把这两个东西结合起来，做出了一个很有意思的东西。</p><p>项目地址 <a href="https://github.com/bgstaal/multipleWindow3dScene">GitHub</a></p><h1 id="深入分析github-trending-项目-multiplewindow3dscene">深入分析：GitHub Trending 项目 "multipleWindow3dScene"</h1><p>GitHub上备受瞩目的 "multipleWindow3dScene" 项目，是一个创新的尝试，通过 <code>three.js</code> 和 <code>localStorage</code> 在多个浏览器窗口之间同步3D场景。我们将详细探讨其技术实现。</p><h2 id="main.js-文件解析"><code>main.js</code> 文件解析</h2><h3 id="初始化与场景建立">初始化与场景建立</h3><ol type="1"><li><strong>引入 <code>WindowManager</code></strong>: <code>main.js</code> 首先导入 <code>WindowManager.js</code>，用于跨窗口同步状态。</li><li><strong>场景和相机配置</strong>:<ul><li>使用 <code>three.js</code> 创建了一个3D场景。</li><li>初始化了一个正交摄像头，设置其位置，以便在3D场景中正确观察对象。</li></ul></li><li><strong>渲染器配置</strong>:<ul><li>采用 <code>three.js</code> 的 WebGL 渲染器渲染场景。</li><li>渲染器的元素被添加到文档体中，用于显示3D内容。</li></ul></li></ol><h3 id="动态调整和事件处理">动态调整和事件处理</h3><ol type="1"><li><strong>窗口尺寸调整</strong>: 代码监听浏览器窗口的 <code>resize</code> 事件，以便动态调整3D场景的大小。</li></ol><h2 id="windowmanager.js-文件解析"><code>WindowManager.js</code> 文件解析</h2><h3 id="跨窗口状态管理">跨窗口状态管理</h3><ol type="1"><li><strong>存储窗口信息</strong>: <code>#windows</code> 私有属性存储了所有打开窗口的信息（尺寸、位置和唯一标识符）。</li><li><strong>事件监听</strong>:<ul><li><code>storage</code> 事件监听器用于在其他窗口更新 <code>localStorage</code> 时接收通知。</li><li><code>beforeunload</code> 事件监听器在窗口关闭前，从 <code>localStorage</code> 中移除该窗口的信息。</li></ul></li></ol><h3 id="状态同步">状态同步</h3><ol type="1"><li><strong>初始化和状态更新</strong>: 窗口创建时，窗口信息被初始化并保存在 <code>localStorage</code>。</li><li><strong>跨窗口通信</strong>: 更新 <code>localStorage</code> 并监听 <code>storage</code> 事件，以实现窗口间状态的实时同步。</li></ol><h2 id="应用实例">应用实例</h2><h3 id="多窗口3d场景交互">多窗口3D场景交互</h3><p>在一个窗口中对3D对象进行的操作会通过 <code>localStorage</code> 更新到其他所有窗口。其他窗口监听到 <code>storage</code> 事件后，更新其3D场景以反映出这些变化。</p><h3 id="窗口状态同步">窗口状态同步</h3><p>项目能够实时跟踪每个窗口的状态。当用户调整其中一个窗口的大小或位置时，这种变化会通过 <code>localStorage</code> 及时反映到其他窗口中。</p><h2 id="结论">结论</h2><p>"multipleWindow3dScene" 展示了如何在不同浏览器窗口间同步复杂的3D场景。这种方法开辟了多窗口Web应用的新可能性，为创造连贯且互动的用户体验提供了强大工具。</p>]]></content:encoded>
-      
-      
-      
-      <category domain="https://studyinglover.com/tags/threejs/">threejs</category>
-      
-      <category domain="https://studyinglover.com/tags/%E5%89%8D%E7%AB%AF/">前端</category>
-      
-      
-      <comments>https://studyinglover.com/2023/11/27/multipleWindow3dScene%E4%BB%A3%E7%A0%81%E8%A7%A3%E9%87%8A/#disqus_thread</comments>
       
     </item>
     

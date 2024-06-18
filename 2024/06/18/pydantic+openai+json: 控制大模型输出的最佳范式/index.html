@@ -1,0 +1,839 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://proxy.thisis.plus/favicon.ico">
+  <link rel="icon" href="https://proxy.thisis.plus/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="StudyingLover">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="调用大模型已经是如今做 ai 项目习以为常的工作的，但是大模型的输出很多时候是不可控的，我们又需要使用大模型去做各种下游任务，实现可控可解析的输出。我们探索了一种和 python 开发可以紧密合作的开发方法。 所有的代码都开源在了GitHub 大模型输出是按照 token 逐个预测然后解码成文本，就跟说话一样，但是有的时候我们需要用大模型做一些垂直领域的工作，例如给定一段文本，我们想知道他属于正向">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pydantic+openai+json 控制大模型输出的最佳范式">
+<meta property="og:url" content="https://studyinglover.com/2024/06/18/pydantic+openai+json:%20%E6%8E%A7%E5%88%B6%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%87%BA%E7%9A%84%E6%9C%80%E4%BD%B3%E8%8C%83%E5%BC%8F/index.html">
+<meta property="og:site_name" content="plus studio">
+<meta property="og:description" content="调用大模型已经是如今做 ai 项目习以为常的工作的，但是大模型的输出很多时候是不可控的，我们又需要使用大模型去做各种下游任务，实现可控可解析的输出。我们探索了一种和 python 开发可以紧密合作的开发方法。 所有的代码都开源在了GitHub 大模型输出是按照 token 逐个预测然后解码成文本，就跟说话一样，但是有的时候我们需要用大模型做一些垂直领域的工作，例如给定一段文本，我们想知道他属于正向">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-06-18T12:28:00.000Z">
+<meta property="article:modified_time" content="2024-06-18T04:36:07.386Z">
+<meta property="article:author" content="StudyingLover">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475" crossorigin="anonymous"></script> <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-EK4ECQGL83"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}
+</script>
+
+  
+  <title>pydantic+openai+json 控制大模型输出的最佳范式 - plus studio</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"studyinglover.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"G-EK4ECQGL83","gtag":"G-EK4ECQGL83","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'G-EK4ECQGL83', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.googletagmanager.com/gtag/js?id=G-EK4ECQGL83', function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EK4ECQGL83');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  <style>ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }</style>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="plus studio" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="plus studio" type="application/rss+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>plus studio</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                <span>镜像站</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" target="_blank" rel="noopener" href="http://arch.studyinglover.top/">
+                    
+                    <span>ArchLinux教程</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://chat.thisis.plus/chat/">
+                    <i class="iconfont icon-comment"></i>
+                    <span>free-chat</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.studyinglover.com/pic/2023/11/fa14d6dfd95fb9d38276a50a5519e2d2.webp') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="pydantic+openai+json 控制大模型输出的最佳范式"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        StudyingLover
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-06-18 12:28" pubdate>
+          2024年6月18日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          60 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+<aside class="sidebar d-none d-xl-block" style="margin-right:-1rem;z-index:-1"><ins class="adsbygoogle" style="display:flex;justify-content:center;min-width:160px;max-width:300px;width:100%;height:600px;position:sticky;top:2rem" data-ad-client="ca-pub-6818277566173475" data-ad-slot="7216148023"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></aside>
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">pydantic+openai+json 控制大模型输出的最佳范式</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>调用大模型已经是如今做 ai 项目习以为常的工作的，但是大模型的输出很多时候是不可控的，我们又需要使用大模型去做各种下游任务，实现可控可解析的输出。我们探索了一种和 python 开发可以紧密合作的开发方法。</p>
+<p>所有的代码都开源在了<a target="_blank" rel="noopener" href="https://github.com/StudyingLover/llm-pydantic-openai-json">GitHub</a></p>
+<p>大模型输出是按照 token 逐个预测然后解码成文本，就跟说话一样，但是有的时候我们需要用大模型做一些垂直领域的工作，例如给定一段文本，我们想知道他属于正向的还是负向的？最简单的方法就是给大模型写一段 prompt 告诉大模型请你告诉我这段文本是正向的还是负向的，只输出正向的还是负向的不要输出多余的东西。这种方法其实有两个问题</p>
+<ol type="1">
+<li>大模型有的时候挺犟的，你告诉他不要输出多余的他会说好的我不会输出多余的，这段文本的正向的/负向的</li>
+<li>如果我们希望同时有多个输出，例如正向的还是负向的，以及对应的分数，这样的输出会很麻烦</li>
+</ol>
+<p>所以，我们需要一种格式，大模型很擅长写，我们解析起来很方便，我们使用 python 开发的话也很方便，有没有呢？还真有，python 有一个库叫 pydantic，可以实现类-&gt;json-&gt;类的转换。</p>
+<p>这里补充一个知识叫做 json scheme 是一种基于 JSON 的格式，用来描述 JSON 数据的结构。它提供了一种声明性的方式来验证 JSON 数据是否符合某种结构，这对于数据交换、数据存储以及 API 的交互等方面都非常有用。一个 JSON Schema 本身也是一个 JSON 对象，它定义了一系列的规则，这些规则说明了 JSON 数据应该满足的条件。例如，它可以指定一个 JSON 对象中必须包含哪些属性，这些属性的数据类型是什么，是否有默认值，以及其他一些约束条件。下面是一个 json scheme 的例子。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;$schema&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;object&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;properties&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;age&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;integer&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;minimum&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;email&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;email&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;required&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;name&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;age&quot;</span><span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+<p>ok，那怎么得到一个 json scheme，我们可以给描述或者一段 json 让大模型写，但是不够优雅，每次需要打开一个网页写写写然后复制粘贴回来。一种更优雅的方式是用 pydantic 导出，下面是一个例子, 定义一个<code>Item</code> 类然后使用<code>Item.model_json_scheme()</code>可以导出这个类的 json scheme 描述</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pydantic <span class="hljs-keyword">import</span> BaseModel<br><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Point</span>(<span class="hljs-title class_ inherited__">BaseModel</span>):<br>    x: <span class="hljs-built_in">float</span><br>    y: <span class="hljs-built_in">float</span><br>    z: <span class="hljs-built_in">float</span><br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Item</span>(<span class="hljs-title class_ inherited__">BaseModel</span>):<br>    <span class="hljs-built_in">id</span>: <span class="hljs-built_in">int</span><br>    name: <span class="hljs-built_in">str</span><br>    description: <span class="hljs-built_in">str</span><br>    number: <span class="hljs-built_in">int</span><br>    price: <span class="hljs-built_in">float</span><br>    position: <span class="hljs-type">List</span>[Point]<br><br><span class="hljs-built_in">print</span>(Item.model_json_schema())<br></code></pre></td></tr></table></figure>
+<p>他的输出是</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;$defs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;Point&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;properties&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;x&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>          <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;X&quot;</span><span class="hljs-punctuation">,</span><br>          <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;number&quot;</span><br>        <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;y&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>          <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Y&quot;</span><span class="hljs-punctuation">,</span><br>          <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;number&quot;</span><br>        <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;z&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>          <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Z&quot;</span><span class="hljs-punctuation">,</span><br>          <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;number&quot;</span><br>        <span class="hljs-punctuation">&#125;</span><br>      <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;required&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;x&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;y&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;z&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Point&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;object&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;properties&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Id&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;integer&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Name&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Description&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;number&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Number&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;integer&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Price&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;number&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;position&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;items&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;$ref&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#/$defs/Point&quot;</span><br>      <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Position&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;array&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;required&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;id&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;name&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;description&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;number&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;price&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;position&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Item&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;object&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+<p>通过这种方式我们可以解决前面提出的第二个问题，将我们需要的多个答案写成一个 pydantic 的类，然后将 json scheme 以及问题描述作为 prompt 给大模型例如下面的这个 prompt</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python">user_prompt = <span class="hljs-string">f&quot;&quot;&quot;</span><br><span class="hljs-string">请帮我把这个物品的描述转换成json格式的数据，</span><br><span class="hljs-string">json scheme格式如下：</span><br><span class="hljs-string"><span class="hljs-subst">&#123;Item.model_json_schema()&#125;</span></span><br><span class="hljs-string">物品描述如下：</span><br><span class="hljs-string"><span class="hljs-subst">&#123;item_desc&#125;</span></span><br><span class="hljs-string">请你分析上面的描述，按照json schema，填写信息。请一定要按照json schema的格式填写，否则会导致数据无法解析，你会被狠狠地批评的。</span><br><span class="hljs-string">只需要输出可以被解析的json就够了，不需要输出其他内容。</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br></code></pre></td></tr></table></figure>
+<p>那第一个问题怎么解决呢？首先是大模型不止输出 json 还会输出一堆废话，我们可以观察到 json 前后是大括号，这个符号是一般不会出现的，所有我们可以从输出的字符串前后开始遍历，分别找到一个前大括号和一个后大括号，然后舍弃掉无关的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">extract_json</span>(<span class="hljs-params">text</span>):<br>    <span class="hljs-keyword">try</span>:<br>        json_start = text.find(<span class="hljs-string">&quot;&#123;&quot;</span>)<br>        json_end = text.rfind(<span class="hljs-string">&quot;&#125;&quot;</span>) + <span class="hljs-number">1</span><br>        json_content = text[json_start:json_end].replace(<span class="hljs-string">&quot;\\_&quot;</span>, <span class="hljs-string">&quot;_&quot;</span>)<br>        <span class="hljs-keyword">return</span> json_content<br>    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">f&quot;Error extracting JSON: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span><br><br></code></pre></td></tr></table></figure>
+<p>获取到 json 之后，使用<code>Item.model_validate_json(json字符串)</code> 来构造一个实体类</p>
+<p>当然我们也可以定义一个对象然后将他转换成 json</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pydantic <span class="hljs-keyword">import</span> BaseModel<br><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span><br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Point</span>(<span class="hljs-title class_ inherited__">BaseModel</span>):<br>    x: <span class="hljs-built_in">float</span><br>    y: <span class="hljs-built_in">float</span><br>    z: <span class="hljs-built_in">float</span><br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Item</span>(<span class="hljs-title class_ inherited__">BaseModel</span>):<br>    <span class="hljs-built_in">id</span>: <span class="hljs-built_in">int</span><br>    name: <span class="hljs-built_in">str</span><br>    description: <span class="hljs-built_in">str</span><br>    number: <span class="hljs-built_in">int</span><br>    price: <span class="hljs-built_in">float</span><br>    position: <span class="hljs-type">List</span>[Point]<br><br><br>item = Item(<br>    <span class="hljs-built_in">id</span>=<span class="hljs-number">1</span>,<br>    name=<span class="hljs-string">&quot;example&quot;</span>,<br>    description=<span class="hljs-string">&quot;example description&quot;</span>,<br>    number=<span class="hljs-number">1</span>,<br>    price=<span class="hljs-number">1.0</span>,<br>    position=[Point(x=<span class="hljs-number">1.0</span>, y=<span class="hljs-number">2.0</span>, z=<span class="hljs-number">3.0</span>)],<br>)<br><span class="hljs-built_in">print</span>(item.model_dump_json())<br><br></code></pre></td></tr></table></figure>
+<p>输出是</p>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Plain">&#123;&quot;id&quot;:1,&quot;name&quot;:&quot;example&quot;,&quot;description&quot;:&quot;example description&quot;,&quot;number&quot;:1,&quot;price&quot;:1.0,&quot;position&quot;:[&#123;&quot;x&quot;:1.0,&quot;y&quot;:2.0,&quot;z&quot;:3.0&#125;]&#125;<br></code></pre></td></tr></table></figure>
+<p>下面我给出了一个完整的例子，使用质谱的 glm-4-air 模型，解析一个物体的描述</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum<br><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span><br><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI<br><span class="hljs-keyword">from</span> pydantic <span class="hljs-keyword">import</span> BaseModel<br><span class="hljs-keyword">from</span> dotenv <span class="hljs-keyword">import</span> load_dotenv<br><span class="hljs-keyword">from</span> pydantic_settings <span class="hljs-keyword">import</span> BaseSettings<br><br>load_dotenv()<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">EnvSettings</span>(<span class="hljs-title class_ inherited__">BaseSettings</span>):<br>    OPENAI_API_KEY: <span class="hljs-built_in">str</span><br>    OPENAI_API_BASE: <span class="hljs-built_in">str</span><br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Point</span>(<span class="hljs-title class_ inherited__">BaseModel</span>):<br>    x: <span class="hljs-built_in">float</span><br>    y: <span class="hljs-built_in">float</span><br>    z: <span class="hljs-built_in">float</span><br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">ChatRole</span>(<span class="hljs-built_in">str</span>, Enum):<br>    SYSTEM = <span class="hljs-string">&quot;system&quot;</span><br>    USER = <span class="hljs-string">&quot;user&quot;</span><br>    ASSISTANT = <span class="hljs-string">&quot;assistant&quot;</span><br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Item</span>(<span class="hljs-title class_ inherited__">BaseModel</span>):<br>    <span class="hljs-built_in">id</span>: <span class="hljs-built_in">int</span><br>    name: <span class="hljs-built_in">str</span><br>    description: <span class="hljs-built_in">str</span><br>    number: <span class="hljs-built_in">int</span><br>    price: <span class="hljs-built_in">float</span><br>    position: <span class="hljs-type">List</span>[Point]<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">extract_json</span>(<span class="hljs-params">text</span>):<br>    <span class="hljs-keyword">try</span>:<br>        json_start = text.find(<span class="hljs-string">&quot;&#123;&quot;</span>)<br>        json_end = text.rfind(<span class="hljs-string">&quot;&#125;&quot;</span>) + <span class="hljs-number">1</span><br>        json_content = text[json_start:json_end].replace(<span class="hljs-string">&quot;\\_&quot;</span>, <span class="hljs-string">&quot;_&quot;</span>)<br>        <span class="hljs-keyword">return</span> json_content<br>    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">f&quot;Error extracting JSON: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span><br><br><br>env_settings = EnvSettings()<br>client = OpenAI(<br>    api_key=env_settings.OPENAI_API_KEY, base_url=env_settings.OPENAI_API_BASE<br>)<br><br>item_desc = <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">这个物品是戒指，它非常受人欢迎，它的价格是1000.7美元，编号是123456，现在还有23个库存，他的位置在(1.0, 2.0, 3.0)，非常值得购买。</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br>user_prompt = <span class="hljs-string">f&quot;&quot;&quot;</span><br><span class="hljs-string">请帮我把这个物品的描述转换成json格式的数据，</span><br><span class="hljs-string">json scheme格式如下：</span><br><span class="hljs-string"><span class="hljs-subst">&#123;Item.model_json_schema()&#125;</span></span><br><span class="hljs-string">物品描述如下：</span><br><span class="hljs-string"><span class="hljs-subst">&#123;item_desc&#125;</span></span><br><span class="hljs-string">请你分析上面的描述，按照json schema，填写信息。请一定要按照json schema的格式填写，否则会导致数据无法解析，你会被狠狠地批评的。</span><br><span class="hljs-string">只需要输出可以被解析的json就够了，不需要输出其他内容。</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br>resp = client.chat.completions.create(<br>    model=<span class="hljs-string">&quot;glm-4-air&quot;</span>,<br>    messages=[<br>        &#123;<br>            <span class="hljs-string">&quot;role&quot;</span>: ChatRole.SYSTEM,<br>            <span class="hljs-string">&quot;content&quot;</span>: <span class="hljs-string">&quot;你是一个结构化数据的处理器，你精通json格式的数据，并且可以输出结构化的json数据。你可以根据给定的文字和json scheme，输出符合scheme的json数据。请注意，你的输出会直接被解析，如果格式不正确，会导致解析失败，你会被狠狠地批评的。&quot;</span>,<br>        &#125;,<br>        &#123;<span class="hljs-string">&quot;role&quot;</span>: ChatRole.USER, <span class="hljs-string">&quot;content&quot;</span>: user_prompt&#125;,<br>    ],<br>)<br><br>item = Item.model_validate_json(extract_json(resp.choices[<span class="hljs-number">0</span>].message.content))<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;解析的物品信息：<span class="hljs-subst">&#123;item&#125;</span>&quot;</span>)<br><br>json_item = item.model_dump_json()<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;转换成json格式：<span class="hljs-subst">&#123;json_item&#125;</span>&quot;</span>)<br><br></code></pre></td></tr></table></figure>
+<p>输出是</p>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Plain">解析的物品信息：id=123456 name=&#x27;戒指&#x27; description=&#x27;这个物品是戒指，它非常受人欢迎，它的价格是1000.7美元，编号是123456，现在还有23个库存，他的位置在(1.0, 2.0, 3.0)，非常值得购买。&#x27; number=23 price=1000.7 position=[Point(x=1.0, y=2.0, z=3.0)]<br>转换成json格式：&#123;&quot;id&quot;:123456,&quot;name&quot;:&quot;戒指&quot;,&quot;description&quot;:&quot;这个物品是戒指，它非常受人欢迎，它的价格是1000.7美元，编号是123456，现在还有23个库存，他的位置在(1.0, 2.0, 3.0)，非常值得购买。&quot;,&quot;number&quot;:23,&quot;price&quot;:1000.7,&quot;position&quot;:[&#123;&quot;x&quot;:1.0,&quot;y&quot;:2.0,&quot;z&quot;:3.0&#125;]&#125;<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>pydantic+openai+json 控制大模型输出的最佳范式</div>
+      <div>https://studyinglover.com/2024/06/18/pydantic+openai+json: 控制大模型输出的最佳范式/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>StudyingLover</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年6月18日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+<div style="width:100%;display:flex;justify-content:center;margin-bottom:1.5rem"><ins class="adsbygoogle" style="display:flex;justify-content:center;max-width:845px;width:100%;height:90px" data-ad-client="ca-pub-6818277566173475" data-ad-slot="7216148023"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></div>
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/04/10/roofline%20model/" title="roofline model">
+                        <span class="hidden-mobile">roofline model</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"StudyingLover/StudyingLover.github.io","repo-id":"R_kgDOIQbc2w","category":"Announcements","category-id":"DIC_kwDOIQbc284CT0AH","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('mermaid' in window) {
+        mermaid.init();
+      }
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div>我的博客即将同步至腾讯云开发者社区，邀请大家一同入驻：https://cloud.tencent.com/developer/support-plan?invite_code=1rveyza1u1lrt</div> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <br> <a href="https://www.evolution-host.com" target="_blank" rel="nofollow noopener"><span>Evolution</span></a> <br> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> <div style="width: 20vw; height: 15vh; margin: 0 auto; text-align: center;"> <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=bLcIH0Eh5s3UeoICvFfbZ3tHKvl8FJUjfBLHkJp-6sc&cl=ffffff&w=a"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818277566173475"crossorigin="anonymous"></script>
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

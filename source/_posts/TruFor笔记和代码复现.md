@@ -1,5 +1,6 @@
 ---
 title: TruFor笔记和代码复现
+excerpt: 探索TruFor图像伪造检测框架，复现Google AI技术，详细笔记和代码指南。
 banner_img: "https://cdn.studyinglover.com/pic/2023/11/35a3ffa0a81b1791e692c591a92b9256.png"
 tags:
   - 图像伪造检测和定位

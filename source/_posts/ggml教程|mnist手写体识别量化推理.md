@@ -1,17 +1,22 @@
 ---
 title: ggml教程|mnist手写体识别量化推理
+excerpt: Learn to use ggml for MNIST handwritten digit recognition with quantization and inference in this detailed tutorial, featuring PyTorch and ggml integration.
 banner_img: https://cdn.studyinglover.com/pic/2023/11/fa14d6dfd95fb9d38276a50a5519e2d2.webp
 date: 2023-11-12 18:49:00
 ---
-# ggml教程|mnist手写体识别量化推理
-MNIST手写体识别是经典的机器学习问题，可以被称作机器学习的hello world了，我希望通过mnist来作为系列教程的第一节，来介绍如何使用ggml量化，推理一个模型。这个教程将会使用pytorch来训练一个简单的全连接神经网络，然后使用ggml量化，最后使用ggml推理这个模型。
+
+# ggml 教程|mnist 手写体识别量化推理
+
+MNIST 手写体识别是经典的机器学习问题，可以被称作机器学习的 hello world 了，我希望通过 mnist 来作为系列教程的第一节，来介绍如何使用 ggml 量化，推理一个模型。这个教程将会使用 pytorch 来训练一个简单的全连接神经网络，然后使用 ggml 量化，最后使用 ggml 推理这个模型。
 
 代码开源在仓库[ggml-tutorial](https://github.com/StudyingLover/ggml-tutorial)
 
-## 训练模型 
-首先我们使用pytorch来训练一个简单的全连接神经网络，代码在`train.py` 文件中，训练好的模型会被保存到`model/mnist_model.pth` 文件中。代码是非常简单的torch代码
+## 训练模型
+
+首先我们使用 pytorch 来训练一个简单的全连接神经网络，代码在`train.py` 文件中，训练好的模型会被保存到`model/mnist_model.pth` 文件中。代码是非常简单的 torch 代码
 
 这里我们需要强调一下模型结构
+
 ```python
 class SimpleNN(nn.Module):
     def __init__(self):
@@ -25,16 +30,20 @@ class SimpleNN(nn.Module):
         x = self.fc2(x)
         return x
 ```
-模型由两个全连接层组成，第一个全连接层的输入是784维，输出是128维，第二个全连接层的输入是128维，输出是10维。我们需要知道这个结构，因为我们需要在量化模型时知道各个层的名字。
 
-前向传播过程是先将输入reshape成2d的张量，然后进行矩阵乘法，然后加上偏置，然后relu，然后再进行矩阵乘法，然后再加上偏置，最后得到结果。
+模型由两个全连接层组成，第一个全连接层的输入是 784 维，输出是 128 维，第二个全连接层的输入是 128 维，输出是 10 维。我们需要知道这个结构，因为我们需要在量化模型时知道各个层的名字。
+
+前向传播过程是先将输入 reshape 成 2d 的张量，然后进行矩阵乘法，然后加上偏置，然后 relu，然后再进行矩阵乘法，然后再加上偏置，最后得到结果。
 
 ## 量化
-我们需要使用ggml对模型进行量化，代码在`convert-pth-to-ggml.py` 文件中,使用`python convert-pth-to-ggml.py model/mnist_model.pth`进行转换，量化后的模型会被保存到`model/mnist-ggml-model-f32.pth` 文件中。
+
+我们需要使用 ggml 对模型进行量化，代码在`convert-pth-to-ggml.py` 文件中,使用`python convert-pth-to-ggml.py model/mnist_model.pth`进行转换，量化后的模型会被保存到`model/mnist-ggml-model-f32.pth` 文件中。
 
 这里需要对很多细节作出解释：
-1. ggml量化的模型格式叫做gguf,文件开头有一个魔数标记了这个文件是gguf文件，接下来是模型的各种数据，具体细节可以查看[官方文档](https://github.com/ggerganov/ggml/blob/master/docs/gguf.md)。为了方便，作者提供了一个python库来读写gguf文件，使用`pip install gguf` 就可以安装。
-2. 我们需要知道模型中各个层数据的名字，使用`model.keys()` 就可以知道了。知道各个层的名字之后我们就可以取出各个层的数据，并对需要的层进行量化，也就是下面这段代码，我对weights进行了量化，转换成了`float16`
+
+1. ggml 量化的模型格式叫做 gguf,文件开头有一个魔数标记了这个文件是 gguf 文件，接下来是模型的各种数据，具体细节可以查看[官方文档](https://github.com/ggerganov/ggml/blob/master/docs/gguf.md)。为了方便，作者提供了一个 python 库来读写 gguf 文件，使用`pip install gguf` 就可以安装。
+2. 我们需要知道模型中各个层数据的名字，使用`model.keys()` 就可以知道了。知道各个层的名字之后我们就可以取出各个层的数据，并对需要的层进行量化，也就是下面这段代码，我对 weights 进行了量化，转换成了`float16`
+
 ```
 fc1_weights = model["fc1.weight"].data.numpy()
 fc1_weights = fc1_weights.astype(np.float16)
@@ -52,6 +61,7 @@ gguf_writer.add_tensor("fc2_bias", fc2_bias)
 ```
 
 3. 保存模型按照代码特定顺序执行就可以了
+
 ```
 gguf_writer = gguf.GGUFWriter(fname_out, "simple-nn")
 
@@ -75,12 +85,14 @@ gguf_writer.write_tensors_to_file()
 gguf_writer.close()
 ```
 
-我们可以看到，原本模型大小是399.18kb,现在的大小是199.31kb，确实是缩小了很多的。
+我们可以看到，原本模型大小是 399.18kb,现在的大小是 199.31kb，确实是缩小了很多的。
 
 ## 推理
-使用ggml推理实际上是对代码能力和机器学习理论功底的一个综合考察，因为你不仅需要能写c++代码，还要会用ggml提供的各种张量操作实现模型的前向传播进行推理，如果你不了解模型是怎么进行计算的，这里很容易不会写。我们接下来详细来说怎么写代码。
 
-首先按照我们torch定义的模型，我们定义一个结构体来存储模型权重
+使用 ggml 推理实际上是对代码能力和机器学习理论功底的一个综合考察，因为你不仅需要能写 c++代码，还要会用 ggml 提供的各种张量操作实现模型的前向传播进行推理，如果你不了解模型是怎么进行计算的，这里很容易不会写。我们接下来详细来说怎么写代码。
+
+首先按照我们 torch 定义的模型，我们定义一个结构体来存储模型权重
+
 ```c++
 struct mnist_model {
     struct ggml_tensor * fc1_weight;
@@ -91,7 +103,8 @@ struct mnist_model {
 };
 ```
 
-接下来加载模型,传入两个参数，模型地址和模型结构体。gguf_init_params 是模型初始化时的两个参数，分别代表是否**不加载模型**(实际含义是如果提供的gguf_context是no_alloc，则我们创建“空”张量并不读取二进制文件。否则，我们还将二进制文件加载到创建的ggml_context中，并将ggml_tensor结构体的"data"成员指向二进制文件中的适当位置。)和模型的地址。gguf_init_from_file 函数会返回一个gguf_context，这个结构体包含了模型的所有信息，我们需要从中取出我们需要的张量，这里我们需要的张量是fc1_weight,fc1_bias,fc2_weight,fc2_bias(和量化模型时保持一致)。
+接下来加载模型,传入两个参数，模型地址和模型结构体。gguf_init_params 是模型初始化时的两个参数，分别代表是否**不加载模型**(实际含义是如果提供的 gguf_context 是 no_alloc，则我们创建“空”张量并不读取二进制文件。否则，我们还将二进制文件加载到创建的 ggml_context 中，并将 ggml_tensor 结构体的"data"成员指向二进制文件中的适当位置。)和模型的地址。gguf_init_from_file 函数会返回一个 gguf_context，这个结构体包含了模型的所有信息，我们需要从中取出我们需要的张量，这里我们需要的张量是 fc1_weight,fc1_bias,fc2_weight,fc2_bias(和量化模型时保持一致)。
+
 ```c++
 bool mnist_model_load(const std::string & fname, mnist_model & model) {
     struct gguf_init_params params = {
@@ -114,6 +127,7 @@ bool mnist_model_load(const std::string & fname, mnist_model & model) {
 接下来我们写模型的前向传播,完整代码在`main-torch.cpp`。传入的参数是模型的地址，线程数，数据和是否导出计算图(这个我们先不讨论)。
 
 首先初始化模型和数据
+
 ```c++
 static size_t buf_size = 100000 * sizeof(float) * 4;
 static void * buf = malloc(buf_size);
@@ -130,7 +144,7 @@ struct ggml_cgraph * gf = ggml_new_graph(ctx0);
 
 我们先复习一下全连接层的计算。每个全连接层有两个参数$W$和$B$，对于一个输出数据$X$,只需要$WX+B$就是一层前向传播的结果。
 
-那么我们先初始化一个4d的张量作为输入(和torch很像)，然后将数据复制到这个张量中，然后将这个张量reshape成2d的张量，然后进行矩阵乘法，然后加上偏置，然后relu，然后再进行矩阵乘法，然后再加上偏置，最后得到结果。
+那么我们先初始化一个 4d 的张量作为输入(和 torch 很像)，然后将数据复制到这个张量中，然后将这个张量 reshape 成 2d 的张量，然后进行矩阵乘法，然后加上偏置，然后 relu，然后再进行矩阵乘法，然后再加上偏置，最后得到结果。
 
 ```c++
 struct ggml_tensor * input = ggml_new_tensor_4d(ctx0, GGML_TYPE_F32, 28, 28, 1, 1);
@@ -147,20 +161,22 @@ struct ggml_tensor * input = ggml_new_tensor_4d(ctx0, GGML_TYPE_F32, 28, 28, 1, 
     cur = ggml_add(ctx0, cur, model.fc2_bias);
 ```
 
-接下来通过计算图计算出结果，ggml已经提供了api
+接下来通过计算图计算出结果，ggml 已经提供了 api
+
 ```
 ggml_build_forward_expand(gf, result);
 ggml_graph_compute_with_ctx(ctx0, gf, n_threads);
 ```
 
+我们需要将结果 reshape 成 1d 的张量，然后取出最大值，这个最大值就是我们的预测结果。
 
-我们需要将结果reshape成1d的张量，然后取出最大值，这个最大值就是我们的预测结果。
 ```c++
 const int prediction = std::max_element(probs_data, probs_data + 10) - probs_data;
 const float * probs_data = ggml_get_data_f32(result);
 ```
 
 我们可以将计算图进行存储,这部分代码我们先不讨论
+
 ```c++
 //ggml_graph_print(&gf);
 ggml_graph_dump_dot(gf, NULL, "mnist-cnn.dot");
@@ -175,12 +191,15 @@ if (fname_cgraph) {
 ```
 
 最后记得释放内存
+
 ```
 ggml_free(ctx0);
 ```
 
 ## 图片读取
+
 我们这里要用到`stb_image.h`这个头文件，我们通过下面的代码导入
+
 ```c++
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -188,6 +207,7 @@ ggml_free(ctx0);
 ```
 
 我们定义一个结构体来存储图片
+
 ```c++
 struct image_u8 {
     int nx;
@@ -198,6 +218,7 @@ struct image_u8 {
 ```
 
 接下来我们写一个函数来读取图片，两个参数分别是图片地址和图片结构体
+
 ```c++
 bool image_load_from_file(const std::string & fname, image_u8 & img) {
     int nx, ny, nc;
@@ -219,12 +240,15 @@ bool image_load_from_file(const std::string & fname, image_u8 & img) {
 ```
 
 ## 运行
-首先初始化ggml
+
+首先初始化 ggml
+
 ```c++
 ggml_time_init();
 ```
 
 接下来加载模型
+
 ```c++
 mnist_model model;
 // load the model
@@ -234,7 +258,7 @@ mnist_model model;
         fprintf(stderr, "%s: failed to load model from '%s'\n", __func__, argv[1]);
         return 1;
     }
-    
+
 
     const int64_t t_load_us = ggml_time_us() - t_start_us;
 
@@ -243,6 +267,7 @@ mnist_model model;
 ```
 
 接下来读取图片并存储为特定格式
+
 ```c++
 // read a img from a file
 
@@ -275,15 +300,20 @@ fprintf(stdout, "%s: converted image to digit in %8.2f ms\n", __func__, t_conver
 ```
 
 接下来进行推理
+
 ```c++
 const int prediction = mnist_eval(model, 1, digit, nullptr);
 fprintf(stdout, "%s: predicted digit is %d\n", __func__, prediction);
 ```
+
 最后记得释放内存
+
 ```c++
 ggml_free(model.ctx);
 ```
+
 ## 使用
+
 在`examples/CMakeLists.txt`最后一行加入`add_subdirectory(mnist-torch)`
 
 然后运行`mkdir build && cd build && cmake .. && make mnist-torch -j8`

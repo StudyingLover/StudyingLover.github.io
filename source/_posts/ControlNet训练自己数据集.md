@@ -1,6 +1,6 @@
 ---
 title: ControlNet训练自己数据集
-excerpt: 使用diffusers在自己的数据集上训练ControlNet.包括从官方仓库训练和使用diffusers训练两种方式，同时包括训练和推理的过程.Train ControlNet on your own dataset using diffusers, including both training from the official repository and training with diffusers. This encompasses both the training and inference processes.
+excerpt: Learn to train ControlNet with your own datasets using detailed guides and scripts on StudyingLover's blog.
 banner_img: https://proxy.thisis.plus/202304271933740.png
 date: 2023-4-27 19:36:00
 tags:

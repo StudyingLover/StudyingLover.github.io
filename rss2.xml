@@ -3,13 +3,13 @@
   xmlns:atom="http://www.w3.org/2005/Atom"
   xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>plus studio</title>
+    <title>plus studio - StudyingLover</title>
     <link>https://studyinglover.com/</link>
     
     <atom:link href="https://studyinglover.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
-    <description></description>
-    <pubDate>Mon, 22 Jul 2024 14:45:28 GMT</pubDate>
+    <description>StudyingLover 是一个专注于 AI、机器学习和深度学习的技术博客，提供丰富的教程、项目展示和学习笔记，帮助开发者提升技能。</description>
+    <pubDate>Mon, 22 Jul 2024 15:12:50 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>

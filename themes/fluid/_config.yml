@@ -45,6 +45,7 @@ custom_head: '
   function gtag(){dataLayer.push(arguments);}
 
 </script>
+<link rel="canonical" href="https://studyinglover.com" />
 
 '
 

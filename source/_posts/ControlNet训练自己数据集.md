@@ -1,6 +1,6 @@
 ---
-title: ControlNet训练自己数据集
-excerpt: Learn to train ControlNet with your own datasets using detailed guides and scripts on StudyingLover's blog.
+title: ControlNet训练和微调自己数据集
+excerpt: Learn to train and fine-tune ControlNet with your own datasets using detailed guides and scripts on StudyingLover's blog.
 banner_img: https://proxy.thisis.plus/202304271933740.png
 date: 2023-4-27 19:36:00
 tags:
@@ -8,6 +8,8 @@ tags:
 ---
 
 # ControlNet 训练自己数据集
+
+训练和微调在这里是一件事情，我们下面就统一用训练这个词。
 
 > 2024.1.20 更新
 > controlnet 发布快一年了，diffusers 已经有了很完整的生态，建议直接使用第二种方式 diffusers 进行训练+推理

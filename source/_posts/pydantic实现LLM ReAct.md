@@ -2,7 +2,7 @@
 title: pydantic实现的LLM ReAct
 excerpt: Learn to how to use pydantic to implement LLM ReAct with detailed guides and scripts on StudyingLover's blog.
 banner_img: https://opengraph.githubassets.com/205b842766ab7964be2914a777ebec11a0b407d51163268fc1faf62b51edc881/StudyingLover/learn-llm-ReAct
-date: 2023-4-27 19:36:00
+date: 2024-8-10 21:36:00
 tags:
   - 大模型
   - LLM

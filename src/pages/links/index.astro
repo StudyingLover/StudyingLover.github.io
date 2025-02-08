@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FriendList from '../../components/FriendList.astro';
+import { friends } from '../../pages/links/links'; // 导入友链数据
+---
+
+<BaseLayout>
+  <div class='container'>
+    <div class='w-full mb-10'>
+      <h1 class="text-4xl font-bold mb-4">Friends</h1>
+      <FriendList friends={friends} />
+    </div>
+  </div>
+</BaseLayout>

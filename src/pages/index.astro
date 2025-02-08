@@ -1,0 +1,65 @@
+---
+import { SITE_TITLE, SITE_TAGLINE, SITE_DESCRIPTION } from '../consts';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import Prose from '../components/Prose.astro';
+import { projects } from './projects/projects';
+import ProjectList from '../components/ProjectList.astro'
+import PostItem from '../components/PostItem.astro';
+import { getAllPosts } from '@src/utils';
+
+
+const top6Projects = projects.slice(0, 6);
+
+const allPosts = (await getAllPosts()).slice(0, 10);
+
+
+const ava = "https://avatars.githubusercontent.com/u/68844494?v=4"
+---
+
+<BaseLayout title={SITE_TITLE + ' - ' + SITE_TAGLINE} description={SITE_DESCRIPTION}>
+	<div class='container'>
+		<div class='w-full md:flex md:items-center gap-16 mb-10'>
+      <div class="text-pretty leading-9">
+        <h1 class="text-4xl font-bold mb-4">Hi There 👋, StudyingLover Here! </h1>
+        <Prose>
+          <div class="text-lg">
+            <p>我是StudyingLover, 计算机科学与技术专业本科生。</p>
+            <p>我目前研究的方向是计算机视觉, 文字生成图片, 大语言模型, eBPF</p>  
+          </div>
+        </Prose>
+      </div>
+      <Image src={ava} alt="Avator" width={300} height={300} loading="eager" class="rounded-3xl rotate-3 mx-4 md:mx-0"/>
+		</div>
+		<main>
+      <div class='mt-6 mb-12'>
+        <div class="flex justify-between gap-2 border-b mb-1 dark:border-b-zinc-700">
+          <h2 class="text-lg font-bold mb-3">Recent Posts</h2>
+          <a href="/posts/" class="inline-block py-2 underline dark:prose-invert">All posts &raquo;</a>
+        </div>
+        <div>
+          {
+            allPosts.map((post) => (
+              <PostItem post={post} />
+            ))
+          }      
+        </div>
+        <div class="text-right">
+        </div>
+      </div>
+
+      <div class="mb-8">
+        <div class="flex justify-between gap-2 mb-1">
+          <h2 class="text-lg font-bold mb-3">My Projects</h2>
+          <a href="/projects/" class="inline-block py-2 underline dark:prose-invert">All projects &raquo;</a>
+        </div>
+        <ProjectList projects={top6Projects}/>
+      </div>
+
+      
+
+		</main>
+	</div>
+</BaseLayout>

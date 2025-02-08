@@ -1,0 +1,123 @@
+---
+import HeaderLink from './HeaderLink.astro';
+import { Image } from 'astro:assets';
+import ThemeToggle from '@src/components/ThemeToggle.astro';
+
+const menu = [
+  {
+		link: '/about/',
+		label: '关于'
+	},
+	{
+		link: '/posts/',
+		label: '博客'
+	},
+	{
+		link: '/projects/',
+		label: '项目'
+	},
+	{
+		link: '/links/',
+		label: '友链'
+	},
+];
+
+const AvaLogo = "https://avatars.githubusercontent.com/u/68844494?v=4"
+---
+
+<header
+	id='site-header'
+	class:list={[
+		'flex items-center w-full transition duration-300 z-[999] border-[var(--soft-border-color)]'
+	]}
+>
+	<div class='container'>
+		<nav class='flex gap-4 items-center justify-between py-3'>
+			<h2 class='m-0'>
+				<a href='/' class='flex gap-4 items-center text-xl font-black uppercase'>
+					<!-- You can use your site logo, rounded ava or simply your site name here-->
+		  <Image src={AvaLogo} alt='Your site name' width={44} height={44} class="rounded-full w-11 border-white border-2 shadow-lg"/> 
+					<!-- {SITE_TITLE} -->
+				</a>
+			</h2>
+			<div class='flex'>
+				
+				<button class='p-3' id='themeToggle' aria-label='Theme mode'>
+					<ThemeToggle class="theme-toggle"/>
+				</button>
+			</div>
+		</nav>
+    <div class='fixed top-3 w-auto max-w-full px-3 left-1/2 -translate-x-1/2 z-[999]'>
+      <div class="flex px-2.5 bg-white/90 dark:bg-zinc-900/75 backdrop-blur-md leading-tight rounded-full border dark:border-zinc-700">
+        <div class="px-2.5 text-sm">
+          <HeaderLink class="py-3 flex items-center" href="/" aria-label="Home">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          </HeaderLink>
+        </div>
+        {
+          menu.map((item) => (
+            <div class='px-2.5 text-sm'>
+              <HeaderLink class="py-3 flex items-center" href={item.link}>
+                {item.label}
+              </HeaderLink>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+	</div>
+
+
+
+	<script is:inline>
+		const theme = (() => {
+			if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				return 'dark';
+			}
+			if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+				return localStorage.getItem('theme');
+			}
+			return 'light';
+		})();
+
+		if (theme === 'light') {
+			document.documentElement.classList.remove('dark');
+			
+		} else {
+			document.documentElement.classList.add('dark');
+			
+		}
+
+		window.localStorage.setItem('theme', theme || '');
+
+		function sendMessage(message) {
+			const iframe = document.querySelector('iframe.giscus-frame');
+			if (!iframe) return;
+			iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+		}
+
+		const handleToggleClick = () => {
+			const element = document.documentElement;
+			element.classList.toggle('dark');
+
+			const isDark = element.classList.contains('dark');
+			if (isDark) {
+				sendMessage({
+					setConfig: {
+						theme: 'dark_dimmed'
+					}
+				});
+			} else {
+				sendMessage({
+					setConfig: {
+						theme: 'light'
+					}
+				});
+			}
+			localStorage.setItem('theme', isDark ? 'dark' : 'light');
+		};
+		document.getElementById('themeToggle')?.addEventListener('click', handleToggleClick);
+	</script>
+
+	
+</header>

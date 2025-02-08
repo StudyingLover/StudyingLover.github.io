@@ -1,0 +1,79 @@
+---
+import { Image } from 'astro:assets';
+import type { Friend } from '../pages/links/links'; // 假设你有一个 friends 数据文件
+import GithubWhite from '@src/assets/img/github-mark-white.svg';
+import GithubBlack from '@src/assets/img/github-mark.svg';
+
+const { friends } = Astro.props; // 从父组件传递过来的友链数据
+---
+
+<div class="grid grid-cols-12 gap-5">
+  {
+    friends.map((friend: Friend) => (
+      <div class="col-span-12 sm:col-span-6 lg:col-span-4 border dark:border-zinc-700 rounded-xl shadow-sm p-5">
+        <div class="flex justify-between items-center">
+          <div class='flex gap-2'>
+            {
+              (friend.tags || []).map((tag: string) => (
+                <span
+                  class='border border-zinc-300 dark:border-zinc-700 rounded-2xl
+                    text-sm text-zinc-700 dark:text-zinc-300 no-underline px-2 py-0.5
+                    transition-all duration-700
+                  hover:border-zinc-700 dark:hover:border-zinc-300'
+                >
+                  {tag}
+                </span>
+              ))
+            }
+          </div>
+
+          {friend.github && (
+            <div class='shrink-0'>
+              <a
+                href={friend.github}
+                target="_blank"
+                class='border border-zinc-300 dark:border-zinc-700 rounded-2xl
+                    text-xs text-zinc-700 dark:text-zinc-300 no-underline px-2 py-0.5
+                    transition-all duration-700
+                  hover:border-zinc-700 dark:hover:border-zinc-300
+                    flex items-center gap-1
+              '>
+                <Image src={GithubBlack} height={12} class='dark:hidden' alt='Github' />
+                <Image src={GithubWhite} height={12} class='hidden dark:block' alt='Github' />
+                GitHub
+              </a>
+            </div>
+          )}
+        </div>
+        <div class="flex items-center gap-3 my-4">
+          <Image
+            src={friend.avatar}
+            alt={friend.name}
+            width={50}
+            height={50}
+            class="rounded-full"
+          />
+          <h3 class="font-semibold text-lg">
+            {friend.name}
+          </h3>
+        </div>
+        <div class="line-clamp-3 text-zinc-600 dark:text-zinc-300 mb-4 min-h-[60px]">
+          <p>{friend.description}</p>
+        </div>
+        <div class="flex justify-end gap-3">
+          {
+            friend.link &&
+            <a class="underline flex items-center gap-2" href={friend.link} target="_blank" rel="noopener noreferrer">
+              Visit
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link">
+                <path d="M15 3h6v6"/>
+                <path d="M10 14 21 3"/>
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              </svg>
+            </a>
+          }
+        </div>
+      </div>
+    ))
+  }
+</div>

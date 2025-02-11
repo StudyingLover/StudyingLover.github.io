@@ -4,15 +4,19 @@ banner_img: https://cdn.studyinglover.com/pic/2024/02/f97c1d1abcf0ccef12d75c12f2
 index_img: https://cdn.studyinglover.com/pic/2024/02/f97c1d1abcf0ccef12d75c12f2201d85.png
 date: 2024-2-10 22:37:00
 tags:
-- 踩坑
-- flutter
-- archlinux
+  - 踩坑
+  - flutter
+  - archlinux
 ---
 
 # archlinux flutter开发踩坑
+
 archlinux是个好东西，但是开发flutter坑不少。2023年5月我配置了flutter,后来用得不多，23年11月还尝试过但是失败，最近又要使用，就来解决下。
+
 ## 20230210
+
 今天需要写一个手机app,突然发现构建不出来了，报错
+
 ```
 > Failed to create parent directory '/opt/flutter/packages/flutter_tools/gradle/.gradle' when creating directory '/opt/flutter/packages/flutter_tools/gradle/.gradle/buildOutputCleanup'
 
@@ -30,6 +34,7 @@ Exception: Gradle task assembleDebug failed with exit code 1
 你他妈别说，这问题还麻烦，只看这个还看不出来
 
 先sudo运行一下，运行的时候保留环境变量
+
 ```bash
 sudo -E flutter run
 ```
@@ -37,16 +42,19 @@ sudo -E flutter run
 失败了，同样问题。然后单独在Android下面跑一个`./gradlew clean`
 
 报错
+
 ```
 Welcome to Gradle 7.5! Here are the highlights of this release: - Support for Java 18 - Support for building with Groovy 4 - Much more responsive continuous builds - Improved diagnostics for dependency resolution For more details see https://docs.gradle.org/7.5/release-notes.html Starting a Gradle Daemon, 1 incompatible Daemon could not be reused, use --status for details FAILURE: Build failed with an exception. * Where: Settings file '/home/client/android/settings.gradle' line: 25 * What went wrong: Error resolving plugin [id: 'dev.flutter.flutter-plugin-loader', version: '1.0.0'] > A problem occurred configuring project ':gradle'. > Could not create service of type OutputFilesRepository using ExecutionGradleServices.createOutputFilesRepository(). > java.io.FileNotFoundException: /opt/flutter/packages/flutter_tools/gradle/.gradle/buildOutputCleanup/buildOutputCleanup.lock (权限不够) * Try: > Run with --stacktrace option to get the stack trace. > Run with --info or --debug option to get more log output. > Run with --scan to get full insights. * Get more help at https://help.gradle.org BUILD FAILED in 1s
 ```
 
 写的很明显权限不够，给当前用户上权限
+
 ```bash
 sudo chown -R $(whoami) /opt/flutter
 ```
 
 再次运行
+
 ```
 FAILURE: Build failed with an exception.
 
@@ -141,9 +149,11 @@ Could not resolve all files for configuration 'classpath'.
 BUILD FAILED in 54s
 4 actionable tasks: 4 executed
 ```
+
 网络问题，先看一下java版本
+
 ```bash
-java -version 
+java -version
 ```
 
 ```
@@ -153,6 +163,7 @@ OpenJDK 64-Bit Server VM (build 17.0.10+7, mixed mode)
 ```
 
 可以显式地配置Gradle使用TLS协议,在gradle.properties文件
+
 ```gradle.properties
 systemProp.jdk.tls.client.protocols=TLSv1.2,TLSv1.3
 

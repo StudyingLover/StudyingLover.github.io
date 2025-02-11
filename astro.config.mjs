@@ -8,10 +8,12 @@ import partytown from "@astrojs/partytown";
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
+import react from '@astrojs/react';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.studyinglover.com',
-  integrations: [mdx(), sitemap(), tailwind(), partytown()],
+  integrations: [mdx(), sitemap(), tailwind(), partytown(), react()],
   markdown: {
     extendDefaultPlugins: true,
     rehypePlugins: [

@@ -1,13 +1,13 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from '@src/layouts/BaseLayout.astro';
-import PostsByYear from '@src/components/PostsByYear.astro';
-import { getAllPosts } from '@src/utils/blog';
+import FluidPostsByYear from '@src/components/FluidPostsByYear.astro';
+import { getFluidPosts } from '@src/utils/blog';
 
-const title = 'All posts'
-const description = 'Articles, guides, tutorials about front-end development.'
+const title = 'All Fluid Posts Archives'
+const description = 'Fluid Posts Archives'
 
-const allPosts = await getAllPosts();
+const allFluidPosts = await getFluidPosts();
 
 ---
 
@@ -20,6 +20,6 @@ const allPosts = await getAllPosts();
       <h1 class="text-3xl font-bold mb-2">{title}</h1>
       <p class="text-zinc-700 dark:text-zinc-300 text-lg">{description}</p>
     </div>
-    <PostsByYear posts={allPosts}/>
+    <FluidPostsByYear posts={allFluidPosts}/>
   </div>
 </BaseLayout>

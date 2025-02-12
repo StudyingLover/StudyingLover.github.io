@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Prose from '../components/Prose.astro';
-const ava = "https://avatars.githubusercontent.com/u/68844494?v=4"
+import Ava from '@src/assets/img/favicon.png'
 
 ---
 
@@ -19,11 +19,11 @@ const ava = "https://avatars.githubusercontent.com/u/68844494?v=4"
             <Prose>
               <div class="text-lg">
                 <p>我是StudyingLover, 计算机科学与技术专业本科生。</p>
-                <p>我目前研究的方向是计算机视觉, 文字生成图片, 大语言模型, eBPF</p>  
+                <p>我目前研究的方向是计算机视觉, 文字生成图片, 大语言模型, eBPF。</p>  
           </div>
             </Prose>
           </div>
-          <Image src={ava} alt="Muhammad Syakirurohman" width={300} height={300} class="rounded-3xl rotate-3 mx-4 md:mx-0"/>
+          <Image src={Ava} alt="Avator" width={300} height={300} class="rounded-3xl rotate-3 mx-4 md:mx-0"/>
         </div>     
         <div>
           <!-- <p>

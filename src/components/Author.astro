@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-
-const ava = "https://avatars.githubusercontent.com/u/68844494?v=4"
+import Ava from '@src/assets/img/favicon.png'
 
 type PicSize = 'sm' | 'md' | 'lg';
 interface Props {
@@ -22,7 +21,7 @@ const { picSize } = Astro.props;
 			{ 'w-[90px] h-[90px]': picSize === 'lg' }
 		]}
 	>
-		<Image src={ava} alt='Muhammad Syakirurohman' width={400} height={400} />
+		<Image src={Ava} alt='Muhammad Syakirurohman' width={400} height={400} />
 	</a>
 	<div>
 		<div>

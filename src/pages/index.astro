@@ -8,15 +8,15 @@ import Prose from '../components/Prose.astro';
 import { projects } from './projects/projects';
 import ProjectList from '../components/ProjectList.astro'
 import PostItem from '../components/PostItem.astro';
-import { getAllPosts } from '@src/utils';
-
+import FluidPostItem from '../components/FluidPostItem.astro';
+import { getAllPosts, getFluidPosts } from '@src/utils/blog';
+import Ava from '@src/assets/img/favicon.png'
 
 const top6Projects = projects.slice(0, 6);
 
 const allPosts = (await getAllPosts()).slice(0, 10);
+const allFluidPosts = (await getFluidPosts()).slice(0, 6);
 
-
-const ava = "https://avatars.githubusercontent.com/u/68844494?v=4"
 ---
 
 <BaseLayout title={SITE_TITLE + ' - ' + SITE_TAGLINE} description={SITE_DESCRIPTION}>
@@ -27,11 +27,11 @@ const ava = "https://avatars.githubusercontent.com/u/68844494?v=4"
         <Prose>
           <div class="text-lg">
             <p>我是StudyingLover, 计算机科学与技术专业本科生。</p>
-            <p>我目前研究的方向是计算机视觉, 文字生成图片, 大语言模型, eBPF</p>  
+            <p>我目前研究的方向是计算机视觉, 文字生成图片, 大语言模型, eBPF。</p>  
           </div>
         </Prose>
       </div>
-      <Image src={ava} alt="Avator" width={300} height={300} loading="eager" class="rounded-3xl rotate-3 mx-4 md:mx-0"/>
+      <Image src={Ava} alt="Avator" width={300} height={300} loading="eager" class="rounded-3xl rotate-3 mx-4 md:mx-0"/>
 		</div>
 		<main>
       <div class='mt-6 mb-12'>
@@ -43,6 +43,23 @@ const ava = "https://avatars.githubusercontent.com/u/68844494?v=4"
           {
             allPosts.map((post) => (
               <PostItem post={post} />
+            ))
+          }      
+        </div>
+        <div class="text-right">
+        </div>
+      </div>
+
+
+      <div class='mt-6 mb-12'>
+        <div class="flex justify-between gap-2 border-b mb-1 dark:border-b-zinc-700">
+          <h2 class="text-lg font-bold mb-3">Fluid Posts Archives</h2>
+          <a href="/archive/fluid" class="inline-block py-2 underline dark:prose-invert">All Fluid Posts &raquo;</a>
+        </div>
+        <div>
+          {
+            allFluidPosts.map((post) => (
+              <FluidPostItem post={post} />
             ))
           }      
         </div>

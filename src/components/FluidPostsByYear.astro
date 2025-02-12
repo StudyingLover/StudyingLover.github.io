@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import FluidPostItem from './FluidPostItem.astro';
+
+import {type FluidPost} from '@src/utils/blog'
+const { posts } = Astro.props;
+
+function groupPostsByYear(posts: FluidPost[]) {
+  const grouped = posts.reduce((acc, post) => {
+    const dateObj = new Date(post.data.date);
+    const year = dateObj.getFullYear();
+    if (!acc[year]) {
+      acc[year] = [];
+    }
+    acc[year].push(post);
+    return acc;
+  }, {} as Record<number, FluidPost[]>);
+
+  return Object.entries(grouped)
+    .sort(([a], [b]) => Number(b) - Number(a))
+    .map(([year, posts]) => ({
+      year: Number(year),
+      posts: posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()),
+    }));
+}
+
+const groupedPosts = groupPostsByYear(posts);
+
+
+---
+
+{groupedPosts.map(({ year, posts }) => (
+  <div class="mb-8">
+    <h2 class="text-2xl font-bold mb-4">{year}</h2>
+    <div>
+      {posts.map((post: FluidPost, i: number) => (
+        <FluidPostItem post={post} />
+      ))}
+    </div>
+  </div>
+))}

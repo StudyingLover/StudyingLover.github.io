@@ -2,6 +2,7 @@
 import HeaderLink from './HeaderLink.astro';
 import { Image } from 'astro:assets';
 import ThemeToggle from '@src/components/ThemeToggle.astro';
+import Ava from '@src/assets/img/favicon.png'
 
 const menu = [
   {
@@ -22,7 +23,6 @@ const menu = [
 	},
 ];
 
-const AvaLogo = "https://avatars.githubusercontent.com/u/68844494?v=4"
 ---
 
 <header
@@ -36,7 +36,7 @@ const AvaLogo = "https://avatars.githubusercontent.com/u/68844494?v=4"
 			<h2 class='m-0'>
 				<a href='/' class='flex gap-4 items-center text-xl font-black uppercase'>
 					<!-- You can use your site logo, rounded ava or simply your site name here-->
-		  <Image src={AvaLogo} alt='Your site name' width={44} height={44} class="rounded-full w-11 border-white border-2 shadow-lg"/> 
+		  <Image src={Ava} alt='Your site name' width={44} height={44} class="rounded-full w-11 border-white border-2 shadow-lg"/> 
 					<!-- {SITE_TITLE} -->
 				</a>
 			</h2>

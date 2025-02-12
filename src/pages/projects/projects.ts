@@ -1,4 +1,4 @@
-import { getRepositoryDetails } from '../../utils';
+import { getRepositoryDetails } from '../../utils/utils';
 
 export interface Project {
 	name: string;

@@ -6,7 +6,7 @@ import { Image } from 'astro:assets';
 import FormattedDate from '../../components/FormattedDate.astro';
 import AboutTheAuthor from '../../components/widgets/AboutTheAuthor.astro';
 import TableOfContent from '../../components/widgets/TableOfContent.astro';
-import { slugify } from '../../utils';
+import { slugify } from '../../utils/utils';
 import { loadEnv } from 'vite';
 
 const { GISCUS_REPO, GISCUS_REPO_ID, GISCUS_CATEGORY, GISCUS_CATEGORY_ID } = loadEnv(process.env.NODE_ENV || 'production', process.cwd(), '');

@@ -2,17 +2,18 @@
 import { slugify } from '../utils/utils';
 import FormattedDate from './FormattedDate.astro';
 import type { CollectionEntry } from 'astro:content';
-import {getFluidPostPath} from '../utils/blog';
-import {type BlogPost} from '../utils/utils'
-const { post }: Record<string, any> | { post: BlogPost }  = Astro.props
+import {getFluidPostPath} from '@src/utils/blog';
+import {type BlogPost, type FluidPost} from '@src/utils/blog'
+const { post }: Record<string, any> | { post: FluidPost }  = Astro.props
+const params = getFluidPostPath(post)
 
 ---
 <div class='flex flex-col sm:flex-row gap-2 sm:items-center  border-b py-2 mb-1 capitalize dark:border-b-zinc-700'>        
   <div class='text-zinc-700 text-sm w-24 dark:text-zinc-300 shrink-0'>
-    <FormattedDate date={new Date(post.data.pubDate)} />
+    <FormattedDate date={post.data.date} />
   </div>
   <h3 class='font-medium grow'>
-    <a href={`/blog/${post.slug}/`}>
+    <a href={`/${params.year}/${params.month}/${params.day}/${params.title}`}>
       {post.data.title}
     </a>
   </h3>

@@ -1,12 +1,12 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
-import BaseLayout from '../../../../layouts/BaseLayout.astro';
-import Prose from '../../../../components/Prose.astro';
+import BaseLayout from '@src/layouts/BaseLayout.astro';
+import Prose from '@src/components/Prose.astro';
 import { Image } from 'astro:assets';
-import FormattedDate from '../../../../components/FormattedDate.astro';
-import AboutTheAuthor from '../../../../components/widgets/AboutTheAuthor.astro';
-import TableOfContent from '../../../../components/widgets/TableOfContent.astro';
-import { getFluidPostPath, slugify } from '../../../../utils';
+import FormattedDate from '@src/components/FormattedDate.astro';
+import AboutTheAuthor from '@src/components/widgets/AboutTheAuthor.astro';
+import TableOfContent from '@src/components/widgets/TableOfContent.astro';
+import { getFluidPostPath } from '@src/utils/blog';
 import { loadEnv } from 'vite';
 
 const { GISCUS_REPO, GISCUS_REPO_ID, GISCUS_CATEGORY, GISCUS_CATEGORY_ID } = loadEnv(process.env.NODE_ENV || 'production', process.cwd(), '');

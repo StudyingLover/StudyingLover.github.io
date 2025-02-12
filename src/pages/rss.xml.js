@@ -9,6 +9,10 @@ export async function GET(context) {
 		title: SITE_TITLE,
 		description: SITE_DESCRIPTION,
 		site: context.site,
+		customData: `<follow_challenge>
+			<feedId>112445349335683072</feedId>
+			<userId>55935249401467904</userId>
+		</follow_challenge>`,
 		items: posts.map((post) => ({
 			...post.data,
 			link: post.postType == "blog"? `/blog/${post.slug}/` :`/${getFluidPostPath(post).year}/${getFluidPostPath(post).month}/${getFluidPostPath(post).day}/${getFluidPostPath(post).title}` ,

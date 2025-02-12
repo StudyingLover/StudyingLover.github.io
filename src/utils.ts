@@ -46,9 +46,9 @@ export const getFluidPostPath = (post: FluidPost) => {
 	const filename = post.id.split('/').pop()?.replace(/\.md$/, '') || post.slug;
 
 	const params = {
-		year: post.data.date.getUTCFullYear().toString(),
-		month: String(post.data.date.getUTCMonth() + 1).padStart(2, '0'),
-		day: String(post.data.date.getUTCDate()).padStart(2, '0'),
+		year: new Date(post.data.date).getUTCFullYear().toString(),
+		month: String(new Date(post.data.date).getUTCMonth() + 1).padStart(2, '0'),
+		day: String(new Date(post.data.date).getUTCDate()).padStart(2, '0'),
 		title: filename
 	};
 	return params;

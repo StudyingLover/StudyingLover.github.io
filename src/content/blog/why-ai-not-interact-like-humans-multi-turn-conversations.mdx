@@ -1,0 +1,59 @@
+---
+title: AI为什么不像人类一样进行多轮对话
+description: '为什么不将AI聊天机器人从僵化的单轮交互转变为自然的多轮对话，让AI真正模拟人类的交流方式。'
+pubDate: '2025-2-14'
+---
+import ChatHistory from '../../components/client/ChatHistory'
+
+
+夜半时分，四下无人，我打开手机，看到认识的一位大佬发了个朋友圈，我赶紧点开学习，抛开具体内容不谈，发现大佬发了一张图，其中提到human-human之间的interaction是我说几句你说几句，而human-ai之间的是我一句你一句。
+
+嘶，好像很对？好像从22年底ChatGPT爆火，我们接触的chatbot就是用户提一个问题，大模型开始疯狂的吐token来回答。现在如果我们跟ai说，帮我写一个ChatBot，ai会立刻给你用openai的接口给你写一个你一句我一句对话的chatbot出来。等等等，这是chatbot啊各位，这是chat吗？这怕不是命令行吧，人和人之间哪有这么交流的。
+
+人和人之间是怎么交流的？如图所示
+
+export const messages_human_human = [
+  { role: 'me', content: '在干嘛' },
+  { role: 'other', content: '看小说呢' },
+  { role: 'other', content: '咋地了' },
+  { role: 'me', content: '明天情人节' },
+  { role: 'me', content: '你有啥安排没' },
+  { role: 'other', content: '没' },
+  { role: 'other', content: '在家躺尸hhhh' },
+  { role: 'me', content: '我打算约人出去看个电影' },
+  { role: 'me', content: '你有啥推荐' },
+  { role: 'me', content: '躺尸挺好，没啥压力' },
+  { role: 'other', content: '哪吒当为首选' },
+  { role: 'other', content: '哦原来明天是情人节，太意外了' },
+];
+
+<ChatHistory messages={messages_human_human} client:visible/>
+
+
+哦你肯定想说面对面交流不是的，你说得对但我这里更想讨论社交软件上的交流。
+我们可以发现其实有几个特征，一个是你几句我几句的对话，一个是多个主题交替，并不是每次对话只说一个事情。
+
+我们再看看人与ai的对话
+
+export const messages_human_ai = [
+  { role: 'me', content: '翻译成英文：要偷偷努力，然后惊艳所有人' },
+  { role: 'ai', content: 'Work hard in secret, then amaze everyone.' },
+];
+
+<ChatHistory messages={messages_human_ai} client:visible/>
+
+不可谓不生硬
+
+那我们就得想想，可不可以让ai也这么输出呢？其实吧，我有一个朋友(真的是朋友)，正在构建一种可以直击人内心深处的AI助手，他们给我展示过一个demo
+
+![](https://cdn.studyinglover.com/pic/2025/02/356ad4eff78803b290932ae70a26973e.png)
+
+我们可以看到，虽然还有几分生硬，但已经初具感觉。
+
+那么古尔丹，我们还要做什么？
+	1. 在什么地方应用这个技术还有待讨论，什么情境下我们需要这样你几句我几句的对话呢？社交类，情感交流类的chatbot显然是这种对话方式的最佳应用场景，或者说本该如此。
+  可能用户内心深处还是渴求和自己聊天的是一个人，最起码，说话方式得和人差不多吧？如何找到最合适的应用场景并加以应用，用户对这种交互方式买不买账还有待探索。
+	2. 技术上还有一些问题有待解决，如何让模型稳定的输出多条消息，而不是把一段话按照句号拆分？如何让模型可以交叉多个主题聊天？如果回答已经开始生成，用户又发送了消息该如何是好，重新生成or附加回复？这还有很长一段路要走。
+
+我们相信AGI终会到来，但是以什么样的交互方式还不得而知，我们希望有一种更便捷的交互方式，让ai真正走进每个人的生活。
+

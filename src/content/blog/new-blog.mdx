@@ -1,7 +1,7 @@
 ---
 title: 新博客改造日记和功能测试
 description: '新博客改造日记和功能测试'
-pubDate: '2025-2-10'
+pubDate: '2025-1-9'
 ---
 
 ## 黑暗模式切换
@@ -66,3 +66,20 @@ graph TD
 `;
 
 <Mermaid code={mermaidCode2} client:visible/>
+
+## 对话框
+import ChatHistory from '../../components/client/ChatHistory'
+
+export const messages = [
+  { role: 'me', content: '你好！' },
+  { role: 'me', content: '你好，有什么可以帮助你的吗？' },
+  { role: 'me', content: '我想了解一下你们的产品。' },
+  { role: 'other', content: '当然，我们有很多产品，您对哪一类感兴趣？' },
+  { role: 'me', content: '你好！' },
+  { role: 'me', content: '你好，有什么可以帮助你的吗？' },
+  { role: 'me', content: '我想了解一下你们的产品。' },
+  { role: 'other', content: '当然，我们有很多产品，您对哪一类感兴趣？' },
+];
+
+
+<ChatHistory messages={messages} client:visible/>

@@ -2,22 +2,37 @@
 const today = new Date();
 ---
 
-<footer class='container mt-8'>
-  <div class="justify-center flex gap-4 py-8 prose dark:prose-invert text-sm">
-    <a href="mailto:studyinglover1@gmail.com">Newsletter</a>
-    <a href="/rss.xml">RSS</a>
+<footer class="container mt-8">
+  <!-- 顶部链接部分 -->
+  <div class="flex justify-center gap-6 py-6 text-sm text-zinc-600 dark:text-zinc-400">
+    <a href="mailto:studyinglover1@gmail.com" class="hover:text-zinc-800 dark:hover:text-zinc-100">Newsletter</a>
+    <a href="/rss.xml" class="hover:text-zinc-800 dark:hover:text-zinc-100">RSS</a>
   </div>
 
-  <div class="justify-center flex gap-4 py-4 prose dark:prose-invert text-sm text-zinc-500 dark:text-zinc-300">
-    <span>本站已创立 <span id="siteAge"></span></span>
-    <span>新版本投入使用 <span id="newVersionAge"></span></span>
-  </div>
+  <!-- 主要内容区域 -->
+  <div class="py-6 border-t dark:border-t-zinc-700">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+      <!-- 地图部分 -->
+      <div style="width: 120px; height: 120px; flex-shrink: 0; margin-top: 1rem;">
+        <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=bLcIH0Eh5s3UeoICvFfbZ3tHKvl8FJUjfBLHkJp-6sc&cl=ffffff&w=a"></script>
+      </div>
 
-  <div class='py-4 border-t dark:border-t-zinc-700'>
-    <a href="https://icp.gov.moe/?keyword=20259997" target="_blank">萌ICP备20259997号</a>
-    <div class="md:flex text-sm text-zinc-500 dark:text-zinc-300 prose dark:prose-invert justify-between">
-      <div>Copyright © {today.getFullYear()} Studyinglover.</div>
-      <div>修改自 <a href="https://devaradise.com" target="_blank" rel="nofollow noopener">Syakir @ Devaradise</a> 模板</div>
+      <!-- 站点信息部分 -->
+      <div class="flex flex-col items-center sm:items-start gap-2 text-sm text-zinc-600 dark:text-zinc-400">
+        <span>本站已创立 <span id="siteAge"></span></span>
+        <span>新版本投入使用 <span id="newVersionAge"></span></span>
+      </div>
+
+      <!-- 底部链接和版权信息 -->
+      <div class="flex flex-col items-center sm:items-start gap-2 text-sm text-zinc-500 dark:text-zinc-300">
+        <a href="https://icp.gov.moe/?keyword=20259997" target="_blank" class="hover:text-zinc-800 dark:hover:text-zinc-100">萌ICP备20259997号</a>
+        <div>Copyright © {today.getFullYear()} Studyinglover.</div>
+        <div>修改自 <a href="https://devaradise.com" target="_blank" rel="nofollow noopener" class="hover:text-zinc-800 dark:hover:text-zinc-100">Syakir @ Devaradise</a> 模板</div>
+        <div>
+          我的博客即将同步至
+          <a href="https://cloud.tencent.com/developer/support-plan?invite_code=1rveyza1u1lrt" target="_blank" class="hover:text-zinc-800 dark:hover:text-zinc-100">腾讯云开发者社区</a>
+        </div>
+      </div>
     </div>
   </div>
 </footer>

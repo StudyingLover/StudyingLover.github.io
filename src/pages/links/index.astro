@@ -7,8 +7,22 @@ import { friends } from '../../pages/links/links'; // 导入友链数据
 <BaseLayout>
   <div class='container'>
     <div class='w-full mb-10'>
-      <h1 class="text-4xl font-bold mb-4">Friends</h1>
+      <h2 class="text-4xl font-bold mb-4">Friends</h2>
       <FriendList friends={friends} />
+    </div>
+    <div class='w-full mb-10'>
+      <h2 class="text-4xl font-bold mb-4">萌国备案</h2>
+      <div class="flex justify-center items-center">
+      <a href="https://travel.moe/go.html" 
+        class="flex items-center gap-3 py-2 px-4 rounded-lg hover:bg-gray-100 transition-colors"
+        title="异次元之旅-跃迁-我们一起去萌站成员的星球旅行吧！" 
+        target="_blank">
+        <img src="https://travel.moe/images/icon/icon64orange.png" 
+        class="w-8 h-8" 
+        alt="异次元之旅图标">
+        <span class="text-lg">异次元之旅</span>
+      </a>
+      </div>
     </div>
   </div>
 </BaseLayout>

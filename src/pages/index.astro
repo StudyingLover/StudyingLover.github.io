@@ -1,18 +1,13 @@
 ---
 import { SITE_TITLE, SITE_TAGLINE, SITE_DESCRIPTION } from '../consts';
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
 import Prose from '../components/Prose.astro';
-import { projects } from './projects/projects';
-import ProjectList from '../components/ProjectList.astro'
 import PostItem from '../components/PostItem.astro';
 import FluidPostItem from '../components/FluidPostItem.astro';
 import { getAllPosts, getFluidPosts } from '@src/utils/blog';
 import Ava from '@src/assets/img/favicon.png'
 
-const top6Projects = projects.slice(0, 6);
 
 const allPosts = (await getAllPosts()).slice(0, 10);
 const allFluidPosts = (await getFluidPosts()).slice(0, 6);
@@ -27,7 +22,6 @@ const allFluidPosts = (await getFluidPosts()).slice(0, 6);
         <Prose>
           <div class="text-lg">
             <p>我是StudyingLover, 计算机科学与技术专业本科生。</p>
-            <p>我目前研究的方向是计算机视觉, 文字生成图片, 大语言模型, eBPF。</p>  
           </div>
         </Prose>
       </div>
@@ -66,15 +60,6 @@ const allFluidPosts = (await getFluidPosts()).slice(0, 6);
         <div class="text-right">
         </div>
       </div>
-
-      <div class="mb-8">
-        <div class="flex justify-between gap-2 mb-1">
-          <h2 class="text-lg font-bold mb-3">My Projects</h2>
-          <a href="/projects/" class="inline-block py-2 underline dark:prose-invert">All projects &raquo;</a>
-        </div>
-        <ProjectList projects={top6Projects}/>
-      </div>
-
       
 
 		</main>

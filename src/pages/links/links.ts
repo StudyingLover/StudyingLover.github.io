@@ -55,5 +55,11 @@ export const friends: Friend[] = [
 		avatar: 'https://cdn.studyinglover.com/pic/2024/11/861d4697655464863db52b25ea34d91b.png',
 		description: '新的理想型社区',
 		link: 'https://linux.do/?source=studyinglover_com'
+	},
+	{
+		name: 'Deep Router',
+		avatar: 'https://deeprouter.org/favicon.ico',
+		description: '',
+		link: 'https://deeprouter.org'
 	}
 ];

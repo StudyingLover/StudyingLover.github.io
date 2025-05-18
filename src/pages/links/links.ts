@@ -61,5 +61,11 @@ export const friends: Friend[] = [
 		avatar: 'https://deeprouter.org/favicon.ico',
 		description: '',
 		link: 'https://deeprouter.org'
+	},
+	{
+		name: 'Alive~o.0の观猹录',
+		avatar: 'https://pic1.imgdb.cn/item/66a088b2d9c307b7e9f0e792.jpg',
+		description: 'AI应用开发优质创作者',
+		link: 'https://alive0103.github.io/'
 	}
 ];

@@ -6,6 +6,7 @@ import { Image } from 'astro:assets';
 import FormattedDate from '../../components/FormattedDate.astro';
 import AboutTheAuthor from '../../components/widgets/AboutTheAuthor.astro';
 import TableOfContent from '../../components/widgets/TableOfContent.astro';
+import Adsense from '../../components/Adsense.astro';
 import { slugify } from '../../utils/utils';
 import { loadEnv } from 'vite';
 
@@ -65,6 +66,9 @@ const { Content, headings } = await post.render();
             {coverImage && <Image class='rounded-3xl w-full m-0 lg:mb-2' src={coverImage} alt={title} loading='eager' />}
           </div>
 					<Content />
+
+        <Adsense />
+        
 				</Prose>
         {
           GISCUS_REPO &&

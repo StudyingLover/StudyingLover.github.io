@@ -1,0 +1,13 @@
+---
+import WeatherTimeline from '@src/components/client/WeatherTimeline.jsx';
+import BaseLayout from '@src/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="我的天气日历">
+  <main class="container mx-auto px-4">
+    <h1 class="text-3xl font-bold text-center my-8">天气回溯与预测</h1>
+    
+    <WeatherTimeline client:load />
+    
+  </main>
+</BaseLayout>

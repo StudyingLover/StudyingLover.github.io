@@ -13,7 +13,10 @@ import react from '@astrojs/react';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.studyinglover.com',
-  integrations: [mdx(), sitemap(), tailwind({
+  integrations: [mdx({
+      remarkPlugins: [remarkMath],
+      rehypePlugins: [rehypeKatex]
+    }), sitemap(), tailwind({
     applyBaseStyles: false,
   }), partytown(), react()],
   markdown: {

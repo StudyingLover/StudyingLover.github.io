@@ -1,0 +1,122 @@
+---
+title: 最后一遍学习Transformer
+description: 'Transformer模型详解'
+pubDate: '2026-1-2'
+tags: ['NLP', 'Transformer', '模型']
+slug: 'transformer'
+---
+import TransformerDebugger from '@src/content/blog/transformer/TransformerExplainer'
+
+<TransformerDebugger client:visible />
+
+## 具体模块
+### self-attention
+对于一个输入x,先复制成3份$Q$,$K$,$V$ ，分别乘上$W_Q$,$W_K$,$W_V$矩阵，得到三个向量$Q$,$K$,$V$ 。
+
+$$
+Attention(Q,K,V)=\text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+$$
+
+$d_k$是$Q,K$矩阵的列数，即向量维度
+
+> 经典八股问题：为什么除以$d_k$
+> 根据论文，有三点考量
+> 1. 防止点积数值过大导致梯度极小：论文明确指出，当 $d_k$（键向量的维度）较大时，点积运算的结果在数量级上会变得非常大。这会将 Softmax 函数推向梯度极小的区域（即饱和区），导致在反向传播时梯度消失，难以训练。为了抵消这种效应，作者选择将点积除以 $\sqrt{d_k}$ 进行缩放。
+> 2. 数学统计上的方差控制：论文在脚注中提供了数学假设来解释为什么点积会变大：
+> 	- 假设 query 和 key 的分量是相互独立的随机变量，且均值（mean）为 0，方差（variance）为 1。
+> 	- 那么它们的点积 $q \cdot k = \sum_{i=1}^{d_{k}}q_{i}k_{i}$ 的均值仍为 0，但**方差会变成 $d_k$**。
+> 	- 除以 $\sqrt{d_k}$ 可以将方差重新缩放回 1，保持数值分布的稳定。
+> 3. 实验性能的考量：作者观察到，对于较小的 $d_k$ 值，加性注意力（additive attention）和点积注意力（dot-product attention）性能相似。但是，对于较大的 $d_k$ 值，如果不进行缩放，加性注意力的表现会优于点积注意力。缩放操作使得点积注意力在维度较高时也能保持良好的性能。
+
+$Q$乘以 $K^T$后，得到的矩阵行列数都为 n，n 为句子单词数，这个矩阵可以表示单词之间的 attention 强度。对矩阵的每一行进行 Softmax，即每一行的和都变为 1.得到 Softmax 矩阵之后可以和V相乘，得到最终的输出$Z$
+
+### Multi-Head Attention
+对于输入x,先通过不同的$W_Q$,$W_K$,$W_V$矩阵，然后进入不同的self attention,最后把结果拼在一起过一个线性层$W^O$得到最后结果
+
+$$\text{head}_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)$$
+$$\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, ..., \text{head}_h)W^O$$
+### Masked Multi-Head Attention
+输入矩阵包含 `<Begin> I have a cat` 五个单词的表示向量，Mask 是一个 $5*5$的  矩阵,不遮挡 = 0，遮挡 = 1,用于防止模型“看见”未来的 token,形如
+$$
+\begin{array}{cc}
+& \begin{matrix} 0 & 1 & 2 & 3 & 4 \end{matrix} \\
+\begin{matrix} 0 \\ 1 \\ 2 \\ 3 \\ 4 \end{matrix} &
+\left[
+\begin{matrix}
+0 & 1 & 1 & 1 & 1 \\
+0 & 0 & 1 & 1 & 1 \\
+0 & 0 & 0 & 1 & 1 \\
+0 & 0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0 & 0
+\end{matrix}
+\right]
+\end{array}
+$$
+
+$Q$乘以 $K^T$根据mask矩阵遮挡住每一个单词之后的信息，然后过softmax得到attention score
+### Add & Norm
+
+$$
+\mathrm{LayerNorm}\left(X+\text{MultiHeadAttention}(X)\right)
+$$
+
+$$
+\mathrm{LayerNorm}\left(X+\text{FeedForward}(X)\right)
+$$
+
+X表示 Multi-Head Attention 或者 Feed Forward 的输入，MultiHeadAttention(X) 和 FeedForward(X) 表示输出 (输出与输入 X 维度是一样的，所以可以相加)。
+
+Add指 X+MultiHeadAttention(X)，表示残差连接
+
+### Feed Forward
+一个两层的全连接层，第一层的激活函数为 Relu，第二层不使用激活函数
+
+$$
+max(0,XW_1+b_1)W_2+b_2
+$$
+
+## Encoder
+encoder是由多个encoder block组成的，第一个 Encoder block 的输入为句子单词的表示向量矩阵，后续 Encoder block 的输入是前一个 Encoder block 的输出，最后一个 Encoder block 输出矩阵C，这一矩阵后续会用到 Decoder 中。
+
+
+## Decoder
+
+这部分有两个Multi-Head Attention，第一个Multi-Head Attention 层采用了 Masked 操作。第二个 Multi-Head Attention 层的$Q$使用上一个 Decoder block 的输出计算，$K$, $V$矩阵使用 Encoder 的最终输出$C$，得到最后的输出$Z$
+
+最后的部分是利用 Softmax 预测下一个单词
+- 训练整个$Z$每行都要用上算loss然后反向传播
+- 我们的目标是求 $P(x_{t+1} | x_1, ..., x_t)$。这个概率分布正好就是由**包含前面所有信息的最后一个向量** $h_t$ 经过线性层（Linear Head）和 Softmax 得到的
+
+Decoder 输出的最后一行向量，维度其实是 `Hidden Size`，而不是词表大小 `Vocab Size`。所以中间还必须要经过一个线性层（Linear Layer），通常和最开始的“输入 Embedding 矩阵”是共享权重（Weight Tying）的。也就是说，把 token 变成向量的矩阵，和把向量变回 token 概率的矩阵，往往是互为转置的同一个矩阵
+
+## 极大似然估计理解Transformer
+Transformer 的 Decoder 最终输出的是一个概率分布。
+
+假设我们的模型参数为 $\theta$（也就是那堆 $W_Q, W_K, V, W_{Linear}$ 等矩阵）。对于一个序列 $x = (x_1, x_2, ..., x_T)$，Transformer 实际上是在建模这样一个条件概率：
+$$P_\theta(x) = \prod_{t=1}^{T} P_\theta(x_t | x_1, ..., x_{t-1})$$
+- **含义：** 整个句子出现的概率，等于“在给定前面所有词的情况下，下一个词出现的概率”的连乘积。
+- **实现：** 只取Decoder最后一行做 Softmax 得到的结果。
+- 
+极大似然估计的核心思想是：**既然我们已经在现实世界中观测到了这组训练数据（比如维基百科的文本），那么最合理的模型参数 $\theta$，应该是让这组数据出现的概率最大的那组参数。**
+
+假设我们的训练集 $D$ 包含 $N$ 个样本。我们要找到最优的 $\theta^*$：
+$$\theta^* = \operatorname*{argmax}_\theta P_\theta(D)$$
+因为样本是独立的，联合概率就是连乘：
+$$\theta^* = \operatorname*{argmax}_\theta \prod_{i=1}^{N} P_\theta(x^{(i)})$$
+连乘不好算（容易数值溢出且难以求导），所以我们在数学上通常取对数。因为 $\log$ 是单调递增函数，最大化 $P$ 等价于最大化 $\log P$。
+
+这就变成了最大化对数似然（Log-Likelihood）：
+$$\theta^* = \operatorname*{argmax}_\theta \sum_{i=1}^{N} \log P_\theta(x^{(i)})$$
+
+把 Transformer 的自回归性质代入进去：
+
+$$\theta^* = \operatorname*{argmax}_\theta \sum_{t=1}^{T} \log P_\theta(x_t | x_{<t})$$
+
+在深度学习里，我们习惯做最小化损失函数，而不是最大化目标。所以，我们在上面的公式前加一个负号，把 Maximizing 变成 Minimizing：
+$$\text{Loss} = - \sum_{t=1}^{T} \log P_\theta(x_t | x_{<t})$$
+这就是交叉熵损失函数（Cross-Entropy Loss）！
+
+> 注：对于 One-hot 编码的真实标签 $y$，交叉熵 $H(y, \hat{y}) = - \sum y_i \log \hat{y}_i$，因为真实标签 $y$ 只有对应词的位置是 1，其他是 0，所以就退化成了 $-\log P(\text{target\_token})$。
+
+这也解释了为什么大模型会产生“幻觉”——因为它只是在拟合概率上的最大似然，而不是在理解逻辑上的真理。如果训练数据里有很多错误信息，MLE 会忠实地让模型把这些错误当成高概率事件。
+

@@ -1,0 +1,171 @@
+---
+title: BPE演示
+description: 'BPE (Byte Pair Encoding) 是一种常用的文本分词算法，广泛应用于自然语言处理任务中。'
+pubDate: '2026-1-3'
+tags: ['NLP', 'BPE', '分词']
+slug: 'bpe-demo'
+---
+## 什么是BPE？
+Byte Pair Encoding，字节对编码
+
+基础单位不是 Unicode 字符（如中文“你”），而是 UTF-8 编码后的 **字节** (Byte)。通常 BPE 贪心地合并全局最高频
+
+- **准备语料：** 拿一段大量的文本。
+- **拆分字符：** 把所有单词拆成最小的字母，并在单词末尾加个结束符 `</w>`（用于区分单词边界）。
+- **统计频率：** 统计所有相邻字符对（Pair）出现的次数。
+- **合并 (Merge)：** 找到出现次数**最多**的那一对，把它变成一个新的 Token。
+- **循环：** 重复步骤 3 和 4，直到达到预设的词表大小（例如 GPT-4 的词表大概是 10 万个 Token）。
+
+## 流程示意图
+<div class="bpe-full-container" style="font-family: 'JetBrains Mono', Consolas, monospace; background-color: var(--background-primary); color: var(--text-normal); border: 1px solid var(--background-modifier-border); border-radius: 8px; max-width: 800px; margin: 0 auto;">
+
+    <div style="padding: 20px; border-bottom: 2px solid var(--interactive-accent); background: var(--background-secondary);">
+        <h2 style="margin: 0; font-size: 1.5em;">BPE 算法演示</h2>
+        <div style="margin-top: 5px; opacity: 0.7; font-size: 0.9em;">
+            <span style="margin-right: 15px;">📊 初始语料: hug(10), pug(5), pun(12), bun(4)</span>
+        </div>
+    </div>
+
+    <div class="iter-block" style="padding: 20px; border-bottom: 1px solid var(--background-modifier-border);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h3 style="margin: 0; color: var(--interactive-accent);">Step 0: 初始化阶段 (Initialization)</h3>
+            <span style="background: var(--background-modifier-form-field); padding: 4px 8px; border-radius: 4px; font-size: 0.8em;">当前词表: 7个基础字符</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+                <div style="font-weight: bold; margin-bottom: 8px; font-size: 0.9em; opacity: 0.8;">语料库物理状态</div>
+                <div style="background: var(--background-secondary); padding: 10px; border-radius: 6px; font-size: 0.85em; line-height: 1.6;">
+                    10: h u g &lt;/w&gt;<br />
+                    05: p u g &lt;/w&gt;<br />
+                    12: p u n &lt;/w&gt;<br />
+                    04: b u n &lt;/w&gt;
+                </div>
+            </div>
+
+            <div>
+                <div style="font-weight: bold; margin-bottom: 8px; font-size: 0.9em; opacity: 0.8;">相邻词对频次 (排名)</div>
+                <table style="width: 100%; font-size: 0.85em; border-collapse: collapse;">
+                    <tr style="border-bottom: 1px solid var(--background-modifier-border); text-align: left; opacity: 0.6;"><th>Pair</th><th>Count</th><th>来源构成</th></tr>
+                    <tr style="background: rgba(33, 150, 243, 0.15); font-weight: bold; color: #2196f3;">
+                        <td>p u</td><td>17</td><td>pug(5)+pun(12)</td>
+                    </tr>
+                    <tr><td>u n</td><td>16</td><td>pun(12)+bun(4)</td></tr>
+                    <tr><td>n &lt;/w&gt;</td><td>16</td><td>pun(12)+bun(4)</td></tr>
+                    <tr><td>u g</td><td>15</td><td>hug(10)+pug(5)</td></tr>
+                    <tr><td>g &lt;/w&gt;</td><td>15</td><td>hug(10)+pug(5)</td></tr>
+                    <tr><td>h u</td><td>10</td><td>hug(10)</td></tr>
+                    <tr><td>b u</td><td>4</td><td>bun(4)</td></tr>
+                </table>
+            </div>
+        </div>
+        
+        <div style="margin-top: 15px; padding: 10px; background: rgba(33, 150, 243, 0.1); border-left: 4px solid #2196f3; font-size: 0.9em;">
+            <strong>🚀 执行动作:</strong> 合并 <code>(p, u)</code> -> 生成新 Token <code>pu</code>
+        </div>
+    </div>
+
+    <div class="iter-block" style="padding: 20px; border-bottom: 1px solid var(--background-modifier-border);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h3 style="margin: 0; color: var(--interactive-accent);">Step 1: 第一次合并后</h3>
+            <span style="background: var(--background-modifier-form-field); padding: 4px 8px; border-radius: 4px; font-size: 0.8em;">新增 Token: [pu]</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+                <div style="font-weight: bold; margin-bottom: 8px; font-size: 0.9em; opacity: 0.8;">语料库更新情况</div>
+                <div style="background: var(--background-secondary); padding: 10px; border-radius: 6px; font-size: 0.85em; line-height: 1.6;">
+                    10: h u g &lt;/w&gt; <span style="opacity:0.5; font-size:0.8em;">(u未变)</span><br />
+                    05: <span style="color:#2196f3; font-weight:bold;">pu</span> g &lt;/w&gt;<br />
+                    12: <span style="color:#2196f3; font-weight:bold;">pu</span> n &lt;/w&gt;<br />
+                    04: b u n &lt;/w&gt; <span style="opacity:0.5; font-size:0.8em;">(u未变)</span>
+                </div>
+            </div>
+
+            <div>
+                <div style="font-weight: bold; margin-bottom: 8px; font-size: 0.9em; opacity: 0.8;">重新计算频次表</div>
+                <table style="width: 100%; font-size: 0.85em; border-collapse: collapse;">
+                    <tr style="border-bottom: 1px solid var(--background-modifier-border); text-align: left; opacity: 0.6;"><th>Pair</th><th>Count</th><th>变化说明</th></tr>
+                    
+                    <tr style="background: rgba(76, 175, 80, 0.15); font-weight: bold; color: #4caf50;">
+                        <td>n &lt;/w&gt;</td><td>16</td><td>-</td>
+                    </tr>
+                    
+                    <tr><td>g &lt;/w&gt;</td><td>15</td><td>-</td></tr>
+                    <tr><td>pu n</td><td>12</td><td><span style="color:#2196f3;">新出现!</span></td></tr>
+                    <tr><td>h u</td><td>10</td><td>-</td></tr>
+                    
+                    <tr>
+                        <td>u g</td>
+                        <td>10 <span style="color:#e53935; font-size:0.8em;">(📉原为15)</span></td>
+                        <td style="font-size:0.8em; color:#999;">pug贡献消失</td>
+                    </tr>
+                    <tr><td>pu g</td><td>5</td><td><span style="color:#2196f3;">新出现!</span></td></tr>
+                    
+                    <tr style="background: #ffebee;">
+                        <td style="color: #c62828; font-weight:bold;">u n</td>
+                        <td style="color: #c62828; font-weight:bold;">4 <span style="font-size:0.8em;">(📉原为16)</span></td>
+                        <td style="font-size:0.8em; color:#c62828;">pun贡献消失</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+         <div style="margin-top: 15px; padding: 10px; background: rgba(76, 175, 80, 0.1); border-left: 4px solid #4caf50; font-size: 0.9em;">
+            <strong>🚀 执行动作:</strong> 合并 <code>(n, &lt;/w&gt;)</code> -> 生成新 Token <code>n&lt;/w&gt;</code>
+        </div>
+    </div>
+
+    <div class="iter-block" style="padding: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h3 style="margin: 0; color: var(--interactive-accent);">Step 2: 第二次合并后</h3>
+            <span style="background: var(--background-modifier-form-field); padding: 4px 8px; border-radius: 4px; font-size: 0.8em;">新增 Token: [n&lt;/w&gt;]</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+                <div style="font-weight: bold; margin-bottom: 8px; font-size: 0.9em; opacity: 0.8;">语料库更新情况</div>
+                <div style="background: var(--background-secondary); padding: 10px; border-radius: 6px; font-size: 0.85em; line-height: 1.6;">
+                    10: h u g &lt;/w&gt;<br />
+                    05: <span style="color:#2196f3;">pu</span> g &lt;/w&gt;<br />
+                    12: <span style="color:#2196f3;">pu</span> <span style="color:#4caf50; font-weight:bold;">n&lt;/w&gt;</span><br />
+                    04: b u <span style="color:#4caf50; font-weight:bold;">n&lt;/w&gt;</span>
+                </div>
+            </div>
+
+            <div>
+                <div style="font-weight: bold; margin-bottom: 8px; font-size: 0.9em; opacity: 0.8;">重新计算频次表</div>
+                <table style="width: 100%; font-size: 0.85em; border-collapse: collapse;">
+                    <tr style="border-bottom: 1px solid var(--background-modifier-border); text-align: left; opacity: 0.6;"><th>Pair</th><th>Count</th><th>备注</th></tr>
+                    
+                    <tr style="background: rgba(255, 152, 0, 0.15); font-weight: bold; color: #f57c00;">
+                        <td>g &lt;/w&gt;</td><td>15</td><td>hug(10)+pug(5)</td>
+                    </tr>
+                    
+                    <tr><td>pu n&lt;/w&gt;</td><td>12</td><td><span style="color:#4caf50;">新出现!</span></td></tr>
+                    <tr><td>h u</td><td>10</td><td>-</td></tr>
+                    <tr><td>u g</td><td>10</td><td>-</td></tr>
+                    <tr><td>pu g</td><td>5</td><td>-</td></tr>
+                    <tr><td>u n&lt;/w&gt;</td><td>4</td><td><span style="color:#4caf50;">新出现!</span></td></tr>
+                </table>
+            </div>
+        </div>
+         <div style="margin-top: 15px; padding: 10px; background: rgba(255, 152, 0, 0.1); border-left: 4px solid #f57c00; font-size: 0.9em;">
+            <strong>🚀 执行动作:</strong> 合并 <code>(g, &lt;/w&gt;)</code> -> 生成新 Token <code>g&lt;/w&gt;</code>
+        </div>
+    </div>
+    
+    <div style="padding: 20px; background: var(--background-secondary); border-top: 1px solid var(--background-modifier-border);">
+        <h3 style="margin-top:0; font-size: 1em;">最终词表快照 (Vocab Snapshot)</h3>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; font-family: monospace; font-size: 0.9em;">
+            <span style="border:1px solid #666; padding:2px 6px; border-radius:4px;">pu</span>
+            <span style="border:1px solid #666; padding:2px 6px; border-radius:4px;">n&lt;/w&gt;</span>
+            <span style="border:1px solid #666; padding:2px 6px; border-radius:4px;">g&lt;/w&gt;</span>
+            <span style="border:1px solid #666; padding:2px 6px; border-radius:4px; opacity:0.5;">...剩余基础字符...</span>
+        </div>
+    </div>
+
+</div>
+## BPE算法步骤
+import BpePlayground from '@src/components/client/BPEDemo'
+
+<BpePlayground client:load/>

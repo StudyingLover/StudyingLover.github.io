@@ -1,0 +1,391 @@
+---
+title: YOLOv5 目标检测笔记
+description: 'YOLOv5 是一个流行的目标检测模型，具有高效、准确的特点，广泛应用于各种计算机视觉任务。'
+banner_img: https://cdn.studyinglover.com/pic/2026/01/32586af19e3bae796fb69ff93fa4c48b.png
+pubDate: '2026-1-3'
+tags: ['目标检测', 'YOLOv5']
+slug: 'yolov5-note'
+
+---
+import Mermaid from '../../components/client/Mermaid'
+
+![# YOLOv5 Architecture，图源：https://docs.ultralytics.com/yolov5/tutorials/architecture_description/](https://cdn.studyinglover.com/pic/2026/01/32586af19e3bae796fb69ff93fa4c48b.png)
+
+## 第一部分：Backbone (主干网络) —— 提取特征的“鹰眼”
+
+Backbone 的任务是把图片不断的**下采样（Downsample）**，让特征图越来越小，但包含的语义信息越来越丰富（从“这是线条”变成“这是车轮”再到“这是车”）。
+
+YOLOv5 的 Backbone 是 **CSPDarknet** 的改进版。
+
+### 1. Focus 层 (但在 v6.0 版本已被替换)
+
+* **注意：** 在你要学习的代码（v6.0/v6.1）中，原来的 `Focus` 模块已经被一个简单的 `Conv`（卷积核大小 6，步长 2）取代了。
+* **代码对应：** `models/yolov5s.yaml` 的第 0 层：`[-1, 1, Conv, [64, 6, 2, 2]]`。
+* **作用：** 这是一个 6x6 的卷积，步长为 2。它直接把图片的宽和高减半，通道数从 3 扩充到 64。这是效率极高的下采样。
+
+### 2. CBS 模块 (Conv-BatchNorm-SiLU)
+
+这是网络里最基本的“细胞”。你在 YAML 里看到的 `Conv` 其实不是 pytorch 原生的卷积，而是封装过的。
+
+* **代码对应：** `models/common.py` 中的 `class Conv`。
+* **构成：** `Conv2d` + `BatchNorm2d` + `SiLU` (Sigmoid Linear Unit 激活函数)。
+* **细节：** SiLU () 是这一代 YOLO 的标配，比 ReLU 更平滑，梯度传导更好。
+```python
+class Conv(nn.Module):
+    """Applies a convolution, batch normalization, and activation function to an input tensor in a neural network."""
+
+    default_act = nn.SiLU()  # default activation
+
+    def __init__(self, c1, c2, k=1, s=1, p=None, g=1, d=1, act=True):
+        """Initializes a standard convolution layer with optional batch normalization and activation."""
+        super().__init__()
+        self.conv = nn.Conv2d(c1, c2, k, s, autopad(k, p, d), groups=g, dilation=d, bias=False)
+        self.bn = nn.BatchNorm2d(c2)
+        self.act = self.default_act if act is True else act if isinstance(act, nn.Module) else nn.Identity()
+
+    def forward(self, x):
+        """Applies a convolution followed by batch normalization and an activation function to the input tensor `x`."""
+        return self.act(self.bn(self.conv(x)))
+
+    def forward_fuse(self, x):
+        """Applies a fused convolution and activation function to the input tensor `x`."""
+        return self.act(self.conv(x))
+```
+### 3. C3 模块 (CSP Bottleneck with 3 convolutions) —— 核心组件
+
+这是 YOLOv5 的灵魂，用来替换原来的 ResBlock。它的全称是 **CSPNet (Cross Stage Partial Network)** 结构。
+
+* **代码对应：** `models/common.py` 中的 `class C3`。
+* **原理（一定要看懂这个）：**
+输入信号进入 C3 后被**分流**成两条路：
+1. **主路：** 经过一系列残差组件（Bottlenecks）。
+2. **旁路：** 经过一个简单的卷积。
+3. **汇合：** 最后两路 `Concat`（拼接）在一起。
+```python
+class C3(nn.Module):
+    """Implements a CSP Bottleneck module with three convolutions for enhanced feature extraction in neural networks."""
+
+    def __init__(self, c1, c2, n=1, shortcut=True, g=1, e=0.5):
+        """Initializes C3 module with options for channel count, bottleneck repetition, shortcut usage, group
+        convolutions, and expansion.
+        """
+        super().__init__()
+        c_ = int(c2 * e)  # hidden channels
+        self.cv1 = Conv(c1, c_, 1, 1)
+        self.cv2 = Conv(c1, c_, 1, 1)
+        self.cv3 = Conv(2 * c_, c2, 1)  # optional act=FReLU(c2)
+        self.m = nn.Sequential(*(Bottleneck(c_, c_, shortcut, g, e=1.0) for _ in range(n)))
+
+    def forward(self, x):
+        """Performs forward propagation using concatenated outputs from two convolutions and a Bottleneck sequence."""
+        return self.cv3(torch.cat((self.m(self.cv1(x)), self.cv2(x)), 1))
+
+
+```
+
+<div style="background-color: #2e303e; padding: 20px; border-radius: 10px; font-family: sans-serif; color: #fff; max-width: 600px; margin: 0 auto; text-align: center;">
+    
+    <h3 style="margin-top: 0; color: #a9b7ff;">YOLOv5 C3 Module Structure</h3>
+    
+    <div style="margin-bottom: 20px;">
+        <span style="background: #444; padding: 5px 15px; border-radius: 5px; border: 1px solid #666;">Input x</span>
+    </div>
+
+    <div style="font-size: 20px; color: #888; margin-bottom: 10px;">↓</div>
+
+    <div style="display: flex; justify-content: space-around; align-items: stretch; position: relative;">
+        
+        <div style="background: rgba(255, 255, 255, 0.05); border: 1px dashed #666; border-radius: 8px; padding: 15px; width: 45%; display: flex; flex-direction: column; align-items: center;">
+            <strong style="color: #ff9e64; margin-bottom: 10px;">Path 1 (主路)</strong>
+            
+            <div style="background: #3e68d7; padding: 8px; border-radius: 4px; width: 80%; margin-bottom: 10px;">
+                Conv 1x1<br /><span style="font-size: 0.8em; opacity: 0.8;">(self.cv1)</span>
+            </div>
+            
+            <div style="font-size: 16px; color: #888; margin-bottom: 10px;">↓</div>
+
+            <div style="background: #2a2a2a; border: 1px solid #ff9e64; padding: 10px; border-radius: 4px; width: 80%;">
+                <div style="font-size: 0.9em;">Bottleneck x N</div>
+                <div style="font-size: 0.7em; color: #aaa; margin-top: 5px;">
+                    ResBlock: Conv 1x1 → Conv 3x3<br />
+                    (Shortcut + Residual)
+                </div>
+            </div>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.05); border: 1px dashed #666; border-radius: 8px; padding: 15px; width: 45%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
+            <strong style="color: #7dcfff; margin-bottom: 10px;">Path 2 (辅路)</strong>
+            
+            <div style="background: #3e68d7; padding: 8px; border-radius: 4px; width: 80%; margin-bottom: auto;">
+                Conv 1x1<br /><span style="font-size: 0.8em; opacity: 0.8;">(self.cv2)</span>
+            </div>
+            
+            <div style="height: 40px; border-left: 2px solid #555; margin: 10px 0;"></div>
+            <div style="font-size: 0.8em; color: #888; padding: 5px;">Feature Bypass</div>
+        </div>
+        
+    </div>
+
+    <div style="margin-top: 10px;">
+        <div style="display: flex; justify-content: center; gap: 40px; font-size: 20px; color: #888;">
+            <span>↓</span> <span>↓</span>
+        </div>
+    </div>
+
+    <div style="background: #9d7cd8; padding: 10px; border-radius: 5px; margin: 10px auto; width: 60%; font-weight: bold;">
+        Concat (拼接)<br />
+        <span style="font-size: 0.8em; font-weight: normal;">dim = 1</span>
+    </div>
+
+    <div style="font-size: 20px; color: #888; margin-bottom: 10px;">↓</div>
+
+    <div style="background: #f7768e; padding: 10px; border-radius: 5px; margin: 0 auto; width: 50%; color: #000; font-weight: bold;">
+        Conv 1x1 Output<br />
+        <span style="font-size: 0.8em; font-weight: normal;">(self.cv3)</span>
+    </div>
+
+</div>
+
+
+* **为什么这么做？**
+这让梯度在反向传播时有“高速公路”可以走（旁路），同时主路又能专心提取深层特征。它在减少参数量的同时，防止了网络太深导致的梯度消失。
+* **YAML 里的体现：** 比如 `[-1, 3, C3, [128]]`，意思是这一层有 3 个 Bottleneck 串联，输出通道是 128。
+
+### 4. SPPF (Spatial Pyramid Pooling - Fast)
+
+放在 Backbone 的最末端（第 9 层）。
+
+* **代码对应：** `models/common.py` 中的 `class SPPF`。
+* **结构：** 它不像以前的 SPP 并行跑 3 个不同大小的池化核，而是**串行**跑 3 次 5x5 的 MaxPool。
+* **公式：** Output = Concat(Input, Pool(Input), Pool(Pool(Input)), Pool(Pool(Pool(Input))))。
+* **作用：** 不管图片里物体是大是小，通过这种多次池化的融合，都能把特征提取出来（多尺度融合），而且速度飞快。
+
+```python
+class SPPF(nn.Module):
+    """Implements a fast Spatial Pyramid Pooling (SPPF) layer for efficient feature extraction in YOLOv5 models."""
+
+    def __init__(self, c1, c2, k=5):
+        """Initializes YOLOv5 SPPF layer with given channels and kernel size for YOLOv5 model, combining convolution and
+        max pooling.
+
+        Equivalent to SPP(k=(5, 9, 13)).
+        """
+        super().__init__()
+        c_ = c1 // 2  # hidden channels
+        self.cv1 = Conv(c1, c_, 1, 1)
+        self.cv2 = Conv(c_ * 4, c2, 1, 1)
+        self.m = nn.MaxPool2d(kernel_size=k, stride=1, padding=k // 2)
+
+    def forward(self, x):
+        """Processes input through a series of convolutions and max pooling operations for feature extraction."""
+        x = self.cv1(x)
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")  # suppress torch 1.9.0 max_pool2d() warning
+            y1 = self.m(x)
+            y2 = self.m(y1)
+            return self.cv2(torch.cat((x, y1, y2, self.m(y2)), 1))
+
+```
+
+<div style="background-color: #2e303e; padding: 20px; border-radius: 10px; font-family: sans-serif; color: #fff; max-width: 600px; margin: 0 auto; text-align: center;">
+    
+    <h3 style="margin-top: 0; color: #a9b7ff;">YOLOv5 SPPF Module Structure</h3>
+    <p style="color: #888; font-size: 0.9em; margin-bottom: 20px;">(Serial Pooling = Larger Receptive Field)</p>
+
+    <div style="margin-bottom: 10px;">
+        <span style="background: #444; padding: 5px 15px; border-radius: 5px; border: 1px solid #666;">Input x</span>
+    </div>
+
+    <div style="font-size: 20px; color: #888; margin-bottom: 10px;">↓</div>
+
+    <div style="background: #3e68d7; padding: 10px; border-radius: 5px; width: 50%; margin: 0 auto; margin-bottom: 20px;">
+        Conv 1x1 (cv1)<br />
+        <span style="font-size: 0.8em; opacity: 0.8;">Channel Halved (c_)</span>
+    </div>
+
+    <div style="background: rgba(255, 255, 255, 0.05); border: 2px dashed #ff9e64; border-radius: 8px; padding: 20px; position: relative;">
+        <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #2e303e; padding: 0 10px; color: #ff9e64; font-weight: bold; font-size: 0.9em;">
+            Serial MaxPool Pipeline
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-around; align-items: center; gap: 10px;">
+            
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="background: #444; color: #fff; padding: 10px; border-radius: 5px; min-width: 60px;">x</div>
+                <div style="font-size: 0.7em; color: #aaa; margin-top: 5px;">Field: 1x1</div>
+            </div>
+
+            <div style="font-size: 20px; color: #ff9e64;">→</div>
+
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="background: #ff9e64; color: #2a2a2a; padding: 10px; border-radius: 5px; min-width: 60px; font-weight: bold;">y1</div>
+                <div style="font-size: 0.8em; color: #ff9e64; margin-top: 3px;">m(x)</div>
+                <div style="font-size: 0.7em; color: #aaa; margin-top: 2px;">Field: 5x5</div>
+            </div>
+
+            <div style="font-size: 20px; color: #ff9e64;">→</div>
+
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="background: #ff9e64; color: #2a2a2a; padding: 10px; border-radius: 5px; min-width: 60px; font-weight: bold;">y2</div>
+                <div style="font-size: 0.8em; color: #ff9e64; margin-top: 3px;">m(y1)</div>
+                <div style="font-size: 0.7em; color: #aaa; margin-top: 2px;">Field: 9x9</div>
+            </div>
+
+            <div style="font-size: 20px; color: #ff9e64;">→</div>
+
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="background: #ff9e64; color: #2a2a2a; padding: 10px; border-radius: 5px; min-width: 60px; font-weight: bold;">y3</div>
+                <div style="font-size: 0.8em; color: #ff9e64; margin-top: 3px;">m(y2)</div>
+                <div style="font-size: 0.7em; color: #aaa; margin-top: 2px;">Field: 13x13</div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 15px; font-size: 0.8em; color: #888; font-style: italic;">
+            * Each step expands the receptive field by 4 (5x5 kernel)
+        </div>
+    </div>
+
+    <div style="margin-top: 10px;">
+        <div style="display: flex; justify-content: center; gap: 15px; font-size: 20px; color: #888;">
+            <span>↓</span> <span>↓</span> <span>↓</span> <span>↓</span>
+        </div>
+    </div>
+
+    <div style="background: #9d7cd8; padding: 10px; border-radius: 5px; margin: 10px auto; width: 70%; font-weight: bold; color: #fff;">
+        Concat ( x, y1, y2, y3 )<br />
+        <span style="font-size: 0.8em; font-weight: normal; opacity: 0.9;">dim = 1 (Channel Stacking)</span>
+    </div>
+
+    <div style="font-size: 20px; color: #888; margin-bottom: 10px;">↓</div>
+
+    <div style="background: #f7768e; padding: 12px; border-radius: 5px; margin: 0 auto; width: 50%; color: #000; font-weight: bold;">
+        Conv 1x1 Output (cv2)<br />
+        <span style="font-size: 0.8em; font-weight: normal; color: #333;">Fusion & Dim Reduction</span>
+    </div>
+
+</div>
+
+
+---
+
+## 第二部分：Neck (颈部) —— 特征融合的“集散地”
+
+如果 Backbone 只是负责看，Neck 就负责“把看到的各种细节拼起来”。YOLOv5 使用了 **FPN (Feature Pyramid Network) + PAN (Path Aggregation Network)** 结构。
+
+想象一下：
+
+* **P3 层**（浅层）：分辨率高，适合看小物体（细节多）。
+* **P5 层**（深层）：分辨率低，适合看大物体（语义强）。
+
+Neck 的工作就是让 P3 和 P5 互相交流。
+
+### 1. 自顶向下 (FPN 路径) —— 传达语义
+
+* **流程：** 1. 拿 Backbone 最后的输出（P5），先上采样（`Upsample`，变大）。
+2. 然后和上一层（P4）的特征进行 **Concat**（拼接）。
+3. 再经过 `C3` 融合。
+4. 继续上采样，和 P3 拼接。
+* **目的：** 让底层的特征图（看小物体用的）也能拥有高层的语义信息（知道“这是什么”）。
+
+### 2. 自底向上 (PAN 路径) —— 传达定位
+
+* **流程：** 1. 刚才融合好的浅层特征，再通过卷积（stride=2）下采样（变小）。
+2. 和深层特征再次 **Concat**。
+* **目的：** 让高层的特征图（看大物体用的）也能拥有底层的定位信息（知道“准确轮廓在哪”）。
+
+export const mermaidPAN = `
+graph TD
+    %% 定义样式
+    classDef backbone fill:#1e3a8a,stroke:#3b82f6,color:white;
+    classDef fpn fill:#451a03,stroke:#f59e0b,color:white;
+    classDef pan fill:#064e3b,stroke:#10b981,color:white;
+
+    subgraph Backbone ["1. 主干网络 (提取特征)"]
+        direction TB
+        B_P3[P3 层<br />小感受野]:::backbone
+        B_P4[P4 层<br />中感受野]:::backbone
+        B_P5[P5 层<br />大感受野]:::backbone
+        B_P3 --> B_P4 --> B_P5
+    end
+
+    subgraph FPN ["2. FPN (自顶向下 - 传语义)"]
+        direction TB
+        F_P5[FPN P5]:::fpn
+        F_P4[FPN P4]:::fpn
+        F_P3[FPN P3]:::fpn
+        
+        B_P5 -->|1x1 降维| F_P5
+        F_P5 -->|上采样| F_P4
+        F_P4 -->|上采样| F_P3
+    end
+
+    subgraph PAN ["3. PAN (自底向上 - 传定位)"]
+        direction TB
+        P_P4[PAN P4<br />输出中物体]:::pan
+        P_P5[PAN P5<br />输出大物体]:::pan
+        
+        F_P3 -->|下采样| P_P4
+        P_P4 -->|下采样| P_P5
+    end
+
+    %% 横向连接 (融合)
+    B_P4 -.->|拼接| F_P4
+    B_P3 -.->|拼接| F_P3
+    
+    F_P4 -.->|拼接| P_P4
+    F_P5 -.->|拼接| P_P5
+
+    %% 最终输出
+    F_P3 ==> Detect_Small[检测小物体]
+    P_P4 ==> Detect_Medium[检测中物体]
+    P_P5 ==> Detect_Large[检测大物体]
+`;
+
+<Mermaid code={mermaidPAN} client:visible/>
+
+
+
+
+---
+
+## 第三部分：Head (头部) —— 最终判决
+
+最后是 `Detect` 模块，它负责根据 Neck 提供的 3 张特征图（大、中、小）输出结果。
+
+* **代码对应：** `models/yolo.py` 中的 `class Detect`。
+* **输入：** 3 个特征图（P3, P4, P5）。
+* P3 (80x80): 负责检测小物体。
+* P4 (40x40): 负责检测中物体。
+* P5 (20x20): 负责检测大物体。
+*(注：假设输入图片是 640x640)*
+
+
+* **1x1 卷积：**
+每个特征图都会通过一个 `1x1` 卷积，将通道数调整为：
+
+
+* **Anchors (na):** 通常是 3（每个网格预设 3 个框）。
+* **5:** 代表 。
+* **Classes (nc):** 比如 COCO 数据集是 80。
+* 所以对于 COCO，输出通道是 $3 \times (5 + 80) = 255$。
+
+
+
+## 总结图谱 (Memory Map)
+
+为了方便记忆，你可以把整个流程浓缩成这一串动作：
+
+1. **图片进** (640x640x3)
+2. **切片** (Conv 6x6) -> 320x320
+3. **下采样与提炼** (Conv + C3) -> 160 -> 80 -> 40 -> 20 (这里就是 P3, P4, P5)
+4. **SPPF** (在 P5 处做多尺度增强)
+5. **FPN 上采样** (让 P3 看到 P5 的语义)
+6. **PAN 下采样** (让 P5 找回 P3 的定位)
+7. **Detect** (在 P3, P4, P5 三个层面上同时预测)
+
+
+## 后处理
+把 3 个头的输出拼在一起，运行NMS
+- 注意：训练模型的时候，是不需要 NMS 的。网络吐出 3 个头的预测结果后，直接拿着它们去和Labels 对比算误差（Loss），然后反向传播更新参数。
+
+

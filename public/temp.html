@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystic Tarot - Hand & Mouse</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #050505; font-family: 'Georgia', serif; color: #d4af37; }
+        #canvas-container { width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: 1; }
+        
+        /* UI Overlay */
+        #ui-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; }
+        
+        /* Loading */
+        #loader {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 24px; text-align: center; pointer-events: auto;
+            background: rgba(0,0,0,0.8); padding: 20px; border: 1px solid #d4af37;
+        }
+
+        /* History Panel */
+        #history-panel {
+            position: absolute; top: 20px; left: 20px; width: 300px; max-height: 80vh;
+            overflow-y: auto; pointer-events: auto;
+            background: rgba(10, 10, 15, 0.85); border-right: 2px solid #d4af37;
+            padding: 10px; display: flex; flex-direction: column; gap: 10px;
+            backdrop-filter: blur(5px);
+            scrollbar-width: thin; scrollbar-color: #d4af37 #1a1a1a;
+        }
+        .history-item {
+            border: 1px solid #444; padding: 10px; background: rgba(0,0,0,0.5);
+            animation: fadeIn 0.5s ease; display: flex; align-items: center; gap: 10px;
+        }
+        .history-thumb { width: 40px; height: 60px; background-size: cover; border: 1px solid #666; }
+        .history-text { font-size: 14px; }
+        .history-title { color: #fff; font-weight: bold; }
+        .history-meaning { color: #aaa; font-size: 12px; margin-top: 4px; }
+        .reversed-tag { color: #ff6b6b; font-size: 10px; border: 1px solid #ff6b6b; padding: 1px 3px; border-radius: 3px; }
+
+        /* Current Card Display */
+        #card-info {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            text-align: center; text-shadow: 0 0 10px black; opacity: 0; transition: opacity 0.5s;
+        }
+        #card-name { font-size: 32px; color: #fff; letter-spacing: 2px; }
+        #card-desc { font-size: 18px; color: #d4af37; max-width: 600px; margin-top: 10px; background: rgba(0,0,0,0.6); padding: 10px; border-radius: 5px;}
+
+        /* Controls */
+        #controls {
+            position: absolute; top: 20px; right: 20px; pointer-events: auto; display: flex; gap: 10px;
+        }
+        button {
+            background: rgba(0,0,0,0.7); color: #d4af37; border: 1px solid #d4af37;
+            padding: 8px 15px; cursor: pointer; font-family: 'Georgia', serif;
+            transition: all 0.3s;
+        }
+        button:hover { background: #d4af37; color: #000; }
+        
+        /* Camera Preview */
+        #webcam-preview {
+            position: absolute; bottom: 10px; right: 10px; width: 160px; height: 120px;
+            border: 1px solid #d4af37; opacity: 0.5; transform: scaleX(-1); /* Mirror */
+            display: none;
+        }
+
+        /* Status & Hints */
+        #status-bar {
+            position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+            background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 20px;
+            font-size: 14px; color: #ccc; pointer-events: none;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div id="loader">Initializing Oracle...<br><span style="font-size:14px; color:#888">Allows Camera for Gesture Mode</span></div>
+    
+    <div id="ui-layer">
+        <div id="history-panel">
+            <div style="text-align:center; border-bottom:1px solid #d4af37; padding-bottom:5px;">Reading History</div>
+        </div>
+        
+        <div id="status-bar">Waiting for Input...</div>
+
+        <div id="card-info">
+            <div id="card-name"></div>
+            <div id="card-desc"></div>
+        </div>
+
+        <div id="controls">
+            <button id="mode-toggle">Switch to Mouse</button>
+            <button onclick="location.reload()">Reset Deck</button>
+        </div>
+        
+        <video id="webcam-preview" playsinline></video>
+    </div>
+
+    <div id="canvas-container"></div>
+
+<script>
+/**
+ * Tarot Data (Sample of Major Arcana for demo purposes)
+ * Images sourced from Wikimedia Commons (Rider-Waite Public Domain)
+ */
+const TAROT_DATA = [
+    { id: 0, name: "The Fool", img: "https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg", 
+      upright: "Beginnings, innocence, spontaneity, a free spirit.", reversed: "Holding back, recklessness, risk-taking." },
+    { id: 1, name: "The Magician", img: "https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg", 
+      upright: "Manifestation, resourcefulness, power, inspired action.", reversed: "Manipulation, poor planning, untapped talents." },
+    { id: 2, name: "The High Priestess", img: "https://upload.wikimedia.org/wikipedia/commons/8/88/RWS_Tarot_02_High_Priestess.jpg", 
+      upright: "Intuition, sacred knowledge, divine feminine, the subconscious mind.", reversed: "Secrets, disconnected from intuition, withdrawal and silence." },
+    { id: 3, name: "The Empress", img: "https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_Empress.jpg", 
+      upright: "Femininity, beauty, nature, nurturing, abundance.", reversed: "Creative block, dependence on others." },
+    { id: 4, name: "The Emperor", img: "https://upload.wikimedia.org/wikipedia/commons/c/c3/RWS_Tarot_04_Emperor.jpg", 
+      upright: "Authority, establishment, structure, a father figure.", reversed: "Domination, excessive control, lack of discipline." },
+    { id: 5, name: "The Hierophant", img: "https://upload.wikimedia.org/wikipedia/commons/8/8d/RWS_Tarot_05_Hierophant.jpg", 
+      upright: "Spiritual wisdom, religious beliefs, conformity, tradition.", reversed: "Personal beliefs, freedom, challenging the status quo." },
+    { id: 6, name: "The Lovers", img: "https://upload.wikimedia.org/wikipedia/commons/3/3a/RWS_Tarot_06_Lovers.jpg", 
+      upright: "Love, harmony, relationships, values alignment, choices.", reversed: "Self-love, disharmony, imbalance, misalignment of values." },
+    { id: 9, name: "The Hermit", img: "https://upload.wikimedia.org/wikipedia/commons/4/4d/RWS_Tarot_09_Hermit.jpg", 
+      upright: "Soul-searching, introspection, being alone, inner guidance.", reversed: "Isolation, loneliness, withdrawal." },
+    { id: 13, name: "Death", img: "https://upload.wikimedia.org/wikipedia/commons/d/d7/RWS_Tarot_13_Death.jpg", 
+      upright: "Endings, change, transformation, transition.", reversed: "Resistance to change, personal transformation, unable to move on." }
+];
+
+// Fallback image for Card Back
+const CARD_BACK_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Tarot_Back_Design.jpg/430px-Tarot_Back_Design.jpg";
+
+/**
+ * App State & Configuration
+ */
+const CONFIG = {
+    cardWidth: 3,
+    cardHeight: 5,
+    cameraZ: 15,
+    pinchThreshold: 0.1, // MediaPipe distance
+    fistThreshold: 0.15  // Average finger tip distance to wrist
+};
+
+let state = {
+    mode: 'hand', // 'hand' or 'mouse'
+    deck: [...TAROT_DATA], // Clone data
+    currentCard: null, // Three.js Object
+    currentCardData: null,
+    isCardRevealed: false,
+    gesture: 'OPEN', // OPEN, PINCH, FIST
+    handPos: new THREE.Vector2(), // Normalized -1 to 1
+    particles: []
+};
+
+// Three.js Globals
+let scene, camera, renderer, raycaster;
+let cardMesh, cardGroup;
+let videoElement, hands;
+
+// --- INITIALIZATION ---
+async function init() {
+    // 1. Three.js Setup
+    scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x050505, 0.02);
+
+    camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = CONFIG.cameraZ;
+    camera.position.y = 2;
+
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.shadowMap.enabled = true;
+    document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+    // Lights
+    const ambientLight = new THREE.AmbientLight(0x404040, 1.5); // Soft white light
+    scene.add(ambientLight);
+
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+    dirLight.position.set(5, 10, 7);
+    dirLight.castShadow = true;
+    scene.add(dirLight);
+    
+    // Add point light for magical feel near card
+    const pointLight = new THREE.PointLight(0xd4af37, 1, 20);
+    pointLight.position.set(0, 2, 5);
+    scene.add(pointLight);
+
+    raycaster = new THREE.Raycaster();
+
+    // 2. Load Textures
+    spawnNewCard();
+
+    // 3. MediaPipe Setup
+    try {
+        videoElement = document.getElementById('webcam-preview');
+        hands = new Hands({locateFile: (file) => {
+            return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+        }});
+        
+        hands.setOptions({
+            maxNumHands: 1,
+            modelComplexity: 1,
+            minDetectionConfidence: 0.5,
+            minTrackingConfidence: 0.5
+        });
+
+        hands.onResults(onHandsResults);
+
+        const cameraUtils = new Camera(videoElement, {
+            onFrame: async () => {
+                await hands.send({image: videoElement});
+            },
+            width: 640,
+            height: 480
+        });
+        
+        await cameraUtils.start();
+        document.getElementById('webcam-preview').style.display = 'block';
+        document.getElementById('loader').style.display = 'none';
+        
+    } catch (e) {
+        console.warn("Camera failed, switching to mouse mode", e);
+        switchMode('mouse');
+        document.getElementById('loader').style.display = 'none';
+    }
+
+    // Event Listeners
+    window.addEventListener('resize', onWindowResize, false);
+    document.getElementById('mode-toggle').addEventListener('click', toggleMode);
+    
+    // Mouse fallback listeners
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mousedown', onMouseDown);
+    document.addEventListener('mouseup', onMouseUp);
+
+    animate();
+}
+
+// --- GAME LOGIC ---
+
+function spawnNewCard() {
+    if (state.deck.length === 0) {
+        alert("Deck is empty! Please reset.");
+        return;
+    }
+
+    // Clean up old
+    if (cardGroup) scene.remove(cardGroup);
+
+    // 1. Logic: Select Card
+    const index = Math.floor(Math.random() * state.deck.length);
+    const data = state.deck[index];
+    state.currentCardData = data; // Keep tracking but don't remove yet until confirmed
+    
+    // Logic: Orientation (50% chance)
+    const isReversed = Math.random() < 0.5;
+    state.currentCardData.isReversed = isReversed;
+
+    // 2. Visuals: Create Mesh
+    const geometry = new THREE.BoxGeometry(CONFIG.cardWidth, CONFIG.cardHeight, 0.05);
+    const textureLoader = new THREE.TextureLoader();
+    
+    // Materials
+    const matBack = new THREE.MeshStandardMaterial({ 
+        map: textureLoader.load(CARD_BACK_URL),
+        roughness: 0.7 
+    });
+    
+    // Use a placeholder or color while loading the real image
+    const matFront = new THREE.MeshStandardMaterial({ 
+        map: textureLoader.load(data.img), 
+        roughness: 0.5,
+        metalness: 0.1
+    });
+    const matSide = new THREE.MeshStandardMaterial({ color: 0x222222 });
+
+    // Order: Right, Left, Top, Bottom, Front, Back
+    // Standard Box mapping might vary, usually [0,1,2,3,4,5] = Right, Left, Top, Bottom, Front, Back
+    // We'll apply Back to all, then override Front.
+    const materials = [matSide, matSide, matSide, matSide, matFront, matBack];
+
+    cardMesh = new THREE.Mesh(geometry, materials);
+    cardMesh.castShadow = true;
+    
+    // Initial Position (Waiting state)
+    cardMesh.position.set(0, 0, 0);
+    // Face down initially (Back visible to camera)
+    cardMesh.rotation.y = Math.PI; 
+    
+    // Apply Reversed rotation if needed (Rotate Z)
+    // Note: If card is face down (Rot Y = PI), Rotating Z affects it differently when flipped.
+    // Let's set the "local" Z rotation.
+    if (isReversed) {
+        cardMesh.rotation.z = Math.PI;
+    }
+
+    cardGroup = new THREE.Group();
+    cardGroup.add(cardMesh);
+    
+    // Floating animation base position
+    cardGroup.position.set(0, -2, 0); 
+
+    scene.add(cardGroup);
+    
+    // Reset State
+    state.currentCard = cardGroup;
+    state.isCardRevealed = false;
+    state.isGrabbed = false;
+    
+    updateUI(null);
+}
+
+function confirmCard() {
+    if (!state.currentCard || !state.isCardRevealed) return; // Must reveal before confirming? 
+    // Actually, in this logic: Pinch reveals, Fist burns/confirms.
+
+    // 1. Generate Ash Effect
+    createAshEffect(state.currentCard.children[0]); // Pass the mesh
+
+    // 2. Remove Mesh
+    scene.remove(state.currentCard);
+    state.currentCard = null;
+
+    // 3. Update History
+    addToHistory(state.currentCardData);
+
+    // 4. Remove from Deck
+    state.deck = state.deck.filter(c => c.id !== state.currentCardData.id);
+
+    // 5. Spawn new after delay
+    setTimeout(() => {
+        spawnNewCard();
+    }, 2000);
+}
+
+// --- INTERACTION HANDLING ---
+
+function updateInteraction() {
+    if (!state.currentCard) return;
+
+    // Raycasting
+    raycaster.setFromCamera(state.handPos, camera);
+    const intersects = raycaster.intersectObject(cardMesh);
+    const isHovering = intersects.length > 0;
+
+    const statusBar = document.getElementById('status-bar');
+
+    // MOUSE MODE LOGIC (Simulation of gestures)
+    if (state.mode === 'mouse') {
+        // Mouse Down = Pinch (Grab)
+        // Right Click or Key = Fist (Confirm)? Let's stick to UI logic or simple mapping.
+        // Let's say: Click + Drag = Grab/Inspect. Double Click = Confirm?
+        // Let's map "Shift Key" pressed to FIST simulation.
+    }
+
+    // STATE MACHINE
+    // 1. GRAB (Pinch)
+    if (state.gesture === 'PINCH' && (isHovering || state.isGrabbed)) {
+        state.isGrabbed = true;
+        document.body.style.cursor = "grabbing";
+        statusBar.innerText = "Holding Card... Move to Inspect";
+        
+        // Move card towards camera and follow hand
+        const targetPos = new THREE.Vector3();
+        targetPos.x = state.handPos.x * 10; // Simple mapping
+        targetPos.y = state.handPos.y * 10;
+        targetPos.z = 8; // Closer to camera
+
+        // Lerp position
+        state.currentCard.position.lerp(targetPos, 0.1);
+        
+        // Flip card to reveal if grabbed
+        if (!state.isCardRevealed) {
+            // Smooth flip
+             const targetRotY = 0; // Face front
+             cardMesh.rotation.y = THREE.MathUtils.lerp(cardMesh.rotation.y, targetRotY, 0.1);
+             if (Math.abs(cardMesh.rotation.y) < 0.1) {
+                 state.isCardRevealed = true;
+                 updateUI(state.currentCardData);
+             }
+        } else {
+             // Keep upright (0) or reversed (PI) logic visual handled by Z rotation
+             cardMesh.rotation.y = THREE.MathUtils.lerp(cardMesh.rotation.y, 0, 0.1);
+        }
+
+    } 
+    // 2. CONFIRM (Fist)
+    else if (state.gesture === 'FIST' && state.isGrabbed) {
+         statusBar.innerText = "Confirming Selection...";
+         confirmCard();
+         state.isGrabbed = false;
+         state.gesture = 'OPEN'; // Force reset
+    }
+    // 3. HOVER / IDLE
+    else {
+        state.isGrabbed = false;
+        document.body.style.cursor = "default";
+        
+        if (isHovering) {
+             statusBar.innerText = "Gesture: PINCH to Pick Up";
+             // Hover effect
+             state.currentCard.scale.setScalar(1.1);
+        } else {
+             statusBar.innerText = "Move Hand/Mouse to Card";
+             state.currentCard.scale.setScalar(1.0);
+             
+             // Return to deck position logic
+             if (state.isCardRevealed) {
+                 // If revealed but dropped, float in center
+                 state.currentCard.position.lerp(new THREE.Vector3(0, 0, 5), 0.05);
+             } else {
+                 // Back to bottom
+                 state.currentCard.position.lerp(new THREE.Vector3(0, -2, 0), 0.05);
+             }
+        }
+    }
+}
+
+// --- VISUAL EFFECTS (ASH) ---
+function createAshEffect(mesh) {
+    const particleCount = 1500;
+    const geometry = new THREE.BufferGeometry();
+    const positions = [];
+    const velocities = [];
+    const sizes = [];
+
+    // Get world position of the card
+    const worldPos = new THREE.Vector3();
+    mesh.getWorldPosition(worldPos);
+    
+    // Bounds of the card
+    const halfW = CONFIG.cardWidth / 2;
+    const halfH = CONFIG.cardHeight / 2;
+
+    for (let i = 0; i < particleCount; i++) {
+        // Distribute particles across the card surface area initially
+        const x = worldPos.x + (Math.random() - 0.5) * CONFIG.cardWidth;
+        const y = worldPos.y + (Math.random() - 0.5) * CONFIG.cardHeight;
+        const z = worldPos.z + (Math.random() - 0.5) * 0.1;
+        
+        positions.push(x, y, z);
+        
+        // Velocity: Upward + noise
+        velocities.push(
+            (Math.random() - 0.5) * 0.05, // vx
+            Math.random() * 0.1 + 0.02,   // vy (up)
+            (Math.random() - 0.5) * 0.05  // vz
+        );
+        
+        sizes.push(Math.random() * 0.15);
+    }
+
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    geometry.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
+
+    const material = new THREE.PointsMaterial({
+        color: 0xffaa33,
+        size: 0.1,
+        transparent: true,
+        opacity: 1,
+        blending: THREE.AdditiveBlending
+    });
+
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    // Add to animation list
+    state.particles.push({
+        mesh: particles,
+        velocities: velocities,
+        age: 0,
+        maxAge: 100 // frames
+    });
+}
+
+function updateParticles() {
+    for (let i = state.particles.length - 1; i >= 0; i--) {
+        const p = state.particles[i];
+        p.age++;
+        
+        const positions = p.mesh.geometry.attributes.position.array;
+        
+        // Update positions
+        for (let j = 0; j < p.velocities.length / 3; j++) {
+            const idx = j * 3;
+            // Add velocity
+            positions[idx] += p.velocities[idx];
+            positions[idx + 1] += p.velocities[idx + 1];
+            positions[idx + 2] += p.velocities[idx + 2];
+            
+            // Turbulence
+            positions[idx] += Math.sin(p.age * 0.1 + j) * 0.002;
+        }
+        
+        p.mesh.geometry.attributes.position.needsUpdate = true;
+        
+        // Fade out
+        p.mesh.material.opacity = 1 - (p.age / p.maxAge);
+        
+        if (p.age >= p.maxAge) {
+            scene.remove(p.mesh);
+            p.mesh.geometry.dispose();
+            state.particles.splice(i, 1);
+        }
+    }
+}
+
+// --- MEDIAPIPE HANDLERS ---
+function onHandsResults(results) {
+    if (state.mode !== 'hand') return;
+
+    if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+        const landmarks = results.multiHandLandmarks[0];
+        
+        // 1. Get Position (Index Finger Tip is intuitive for pointing)
+        // MediaPipe coords are 0-1. 0,0 is top-left.
+        // Three.js Screen: -1 to 1. Y is up.
+        const indexTip = landmarks[8];
+        const x = (1 - indexTip.x) * 2 - 1; // Mirror X
+        const y = -(indexTip.y * 2 - 1); // Flip Y
+        state.handPos.set(x, y);
+
+        // 2. Recognize Gestures
+        const thumbTip = landmarks[4];
+        const middleTip = landmarks[12];
+        const ringTip = landmarks[16];
+        const pinkyTip = landmarks[20];
+        const wrist = landmarks[0];
+
+        // PINCH: Distance between Thumb (4) and Index (8)
+        const pinchDist = distance(thumbTip, indexTip);
+        
+        // FIST: Check if fingertips are close to wrist (simple approximation)
+        // Average distance of Middle, Ring, Pinky to Wrist
+        const fistDist = (distance(middleTip, wrist) + distance(ringTip, wrist) + distance(pinkyTip, wrist)) / 3;
+
+        if (fistDist < CONFIG.fistThreshold) {
+            state.gesture = 'FIST';
+        } else if (pinchDist < CONFIG.pinchThreshold) {
+            state.gesture = 'PINCH';
+        } else {
+            state.gesture = 'OPEN';
+        }
+
+    } else {
+        // No hand detected
+        state.gesture = 'OPEN';
+    }
+}
+
+function distance(p1, p2) {
+    return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+}
+
+// --- UTILS & UI ---
+
+function toggleMode() {
+    state.mode = state.mode === 'hand' ? 'mouse' : 'hand';
+    document.getElementById('mode-toggle').innerText = state.mode === 'hand' ? "Switch to Mouse" : "Switch to Camera";
+    
+    const cam = document.getElementById('webcam-preview');
+    if (state.mode === 'hand') {
+        cam.style.display = 'block';
+        // Reset mouse pos to avoid conflict
+    } else {
+        cam.style.display = 'none';
+    }
+}
+
+function switchMode(newMode) {
+    state.mode = newMode;
+    document.getElementById('mode-toggle').innerText = newMode === 'hand' ? "Switch to Mouse" : "Switch to Camera";
+}
+
+function onMouseMove(event) {
+    if (state.mode !== 'mouse') return;
+    state.handPos.x = (event.clientX / window.innerWidth) * 2 - 1;
+    state.handPos.y = -(event.clientY / window.innerHeight) * 2 + 1;
+}
+
+function onMouseDown(event) {
+    if (state.mode !== 'mouse') return;
+    if (event.button === 0) state.gesture = 'PINCH'; // Left click to grab
+}
+
+function onMouseUp(event) {
+    if (state.mode !== 'mouse') return;
+    // If we were pinching (grabbing), we release. 
+    // If we want to simulate FIST with mouse, we need a trigger.
+    // Let's create a UI rule: Release mouse = Release Pinch.
+    // Confirm logic for mouse: Wait for 2 seconds while holding? 
+    // OR: Use Spacebar for Fist.
+    state.gesture = 'OPEN';
+}
+
+// Add Keyboard listener for Mouse Mode Fist
+window.addEventListener('keydown', (e) => {
+    if (state.mode === 'mouse' && e.code === 'Space') {
+        state.gesture = 'FIST';
+    }
+});
+window.addEventListener('keyup', (e) => {
+    if (state.mode === 'mouse' && e.code === 'Space') {
+        state.gesture = state.gesture === 'FIST' ? 'PINCH' : 'OPEN'; // Revert to pinch if holding click, else open
+    }
+});
+
+
+function updateUI(data) {
+    const nameEl = document.getElementById('card-name');
+    const descEl = document.getElementById('card-desc');
+    const infoEl = document.getElementById('card-info');
+
+    if (!data) {
+        infoEl.style.opacity = 0;
+        return;
+    }
+
+    infoEl.style.opacity = 1;
+    let nameText = data.name;
+    let meaning = data.isReversed ? data.reversed : data.upright;
+    
+    if (data.isReversed) {
+        nameText += " (Reversed)";
+        nameEl.style.color = "#ff6b6b";
+    } else {
+        nameEl.style.color = "#fff";
+    }
+
+    nameEl.innerText = nameText;
+    descEl.innerText = meaning;
+}
+
+function addToHistory(data) {
+    const panel = document.getElementById('history-panel');
+    const item = document.createElement('div');
+    item.className = 'history-item';
+    
+    const revTag = data.isReversed ? `<div class="reversed-tag">REVERSED</div>` : "";
+    const meaning = data.isReversed ? data.reversed : data.upright;
+
+    item.innerHTML = `
+        <div class="history-thumb" style="background-image: url('${data.img}')"></div>
+        <div class="history-text">
+            <div class="history-title">${data.name} ${revTag}</div>
+            <div class="history-meaning">${meaning}</div>
+        </div>
+    `;
+    
+    panel.insertBefore(item, panel.children[1]); // Insert after title
+}
+
+function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+// --- MAIN LOOP ---
+function animate() {
+    requestAnimationFrame(animate);
+
+    updateInteraction();
+    updateParticles();
+
+    // Floating animation for card if idle
+    if (state.currentCard && !state.isGrabbed) {
+        state.currentCard.position.y += Math.sin(Date.now() * 0.002) * 0.002;
+        state.currentCard.rotation.y += 0.001; // Slow spin
+    }
+
+    renderer.render(scene, camera);
+}
+
+// Start
+init();
+
+</script>
+</body>
+</html>

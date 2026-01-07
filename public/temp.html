@@ -111,29 +111,66 @@
  * Images sourced from Wikimedia Commons (Rider-Waite Public Domain)
  */
 const TAROT_DATA = [
-    { id: 0, name: "The Fool", img: "https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg", 
-      upright: "Beginnings, innocence, spontaneity, a free spirit.", reversed: "Holding back, recklessness, risk-taking." },
-    { id: 1, name: "The Magician", img: "https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg", 
-      upright: "Manifestation, resourcefulness, power, inspired action.", reversed: "Manipulation, poor planning, untapped talents." },
-    { id: 2, name: "The High Priestess", img: "https://upload.wikimedia.org/wikipedia/commons/8/88/RWS_Tarot_02_High_Priestess.jpg", 
-      upright: "Intuition, sacred knowledge, divine feminine, the subconscious mind.", reversed: "Secrets, disconnected from intuition, withdrawal and silence." },
-    { id: 3, name: "The Empress", img: "https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_Empress.jpg", 
-      upright: "Femininity, beauty, nature, nurturing, abundance.", reversed: "Creative block, dependence on others." },
-    { id: 4, name: "The Emperor", img: "https://upload.wikimedia.org/wikipedia/commons/c/c3/RWS_Tarot_04_Emperor.jpg", 
-      upright: "Authority, establishment, structure, a father figure.", reversed: "Domination, excessive control, lack of discipline." },
-    { id: 5, name: "The Hierophant", img: "https://upload.wikimedia.org/wikipedia/commons/8/8d/RWS_Tarot_05_Hierophant.jpg", 
-      upright: "Spiritual wisdom, religious beliefs, conformity, tradition.", reversed: "Personal beliefs, freedom, challenging the status quo." },
-    { id: 6, name: "The Lovers", img: "https://upload.wikimedia.org/wikipedia/commons/3/3a/RWS_Tarot_06_Lovers.jpg", 
-      upright: "Love, harmony, relationships, values alignment, choices.", reversed: "Self-love, disharmony, imbalance, misalignment of values." },
-    { id: 9, name: "The Hermit", img: "https://upload.wikimedia.org/wikipedia/commons/4/4d/RWS_Tarot_09_Hermit.jpg", 
-      upright: "Soul-searching, introspection, being alone, inner guidance.", reversed: "Isolation, loneliness, withdrawal." },
-    { id: 13, name: "Death", img: "https://upload.wikimedia.org/wikipedia/commons/d/d7/RWS_Tarot_13_Death.jpg", 
-      upright: "Endings, change, transformation, transition.", reversed: "Resistance to change, personal transformation, unable to move on." }
+    { 
+        id: 0, 
+        name: "The Fool", 
+        // 愚人
+        img: "https://raw.githubusercontent.com/turtledove/tarot-images/master/cards/maj00.jpg", 
+        upright: "Beginnings, innocence, spontaneity, a free spirit.", 
+        reversed: "Holding back, recklessness, risk-taking." 
+    },
+    { 
+        id: 1, 
+        name: "The Magician", 
+        // 魔术师
+        img: "https://raw.githubusercontent.com/turtledove/tarot-images/master/cards/maj01.jpg", 
+        upright: "Manifestation, resourcefulness, power, inspired action.", 
+        reversed: "Manipulation, poor planning, untapped talents." 
+    },
+    { 
+        id: 2, 
+        name: "The High Priestess", 
+        // 女祭司
+        img: "https://raw.githubusercontent.com/turtledove/tarot-images/master/cards/maj02.jpg", 
+        upright: "Intuition, sacred knowledge, divine feminine, the subconscious mind.", 
+        reversed: "Secrets, disconnected from intuition, withdrawal and silence." 
+    },
+    { 
+        id: 3, 
+        name: "The Empress", 
+        // 皇后
+        img: "https://raw.githubusercontent.com/turtledove/tarot-images/master/cards/maj03.jpg", 
+        upright: "Femininity, beauty, nature, nurturing, abundance.", 
+        reversed: "Creative block, dependence on others." 
+    },
+    { 
+        id: 6, 
+        name: "The Lovers", 
+        // 恋人 (你之前报错的那张)
+        img: "https://raw.githubusercontent.com/turtledove/tarot-images/master/cards/maj06.jpg", 
+        upright: "Love, harmony, relationships, values alignment, choices.", 
+        reversed: "Self-love, disharmony, imbalance, misalignment of values." 
+    },
+    { 
+        id: 9, 
+        name: "The Hermit", 
+        // 隐士
+        img: "https://raw.githubusercontent.com/turtledove/tarot-images/master/cards/maj09.jpg", 
+        upright: "Soul-searching, introspection, being alone, inner guidance.", 
+        reversed: "Isolation, loneliness, withdrawal." 
+    },
+    { 
+        id: 13, 
+        name: "Death", 
+        // 死神
+        img: "https://raw.githubusercontent.com/turtledove/tarot-images/master/cards/maj13.jpg", 
+        upright: "Endings, change, transformation, transition.", 
+        reversed: "Resistance to change, personal transformation, unable to move on." 
+    }
 ];
 
 // Fallback image for Card Back
-const CARD_BACK_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Tarot_Back_Design.jpg/430px-Tarot_Back_Design.jpg";
-
+const CARD_BACK_URL = "https://cdn.studyinglover.com/pic/2026/01/0f07534008badfad92e87b2657b941dd.png";
 /**
  * App State & Configuration
  */
@@ -178,7 +215,7 @@ async function init() {
     document.getElementById('canvas-container').appendChild(renderer.domElement);
 
     // Lights
-    const ambientLight = new THREE.AmbientLight(0x404040, 1.5); // Soft white light
+    const ambientLight = new THREE.AmbientLight(0x404040, 2.5); // Soft white light
     scene.add(ambientLight);
 
     const dirLight = new THREE.DirectionalLight(0xffffff, 1);

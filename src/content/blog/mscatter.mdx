@@ -1,0 +1,89 @@
+---
+title: 解决 Matplotlib Scatter 不支持 Marker 列表的问题：mscatter 实现
+description: 'Matplotlib 的 scatter 方法原生不支持为不同点设置不同形状。本文整理了 GitHub Issue #11155 中的最佳解决方案，通过自定义 mscatter 函数，利用 PathCollection 暴力替换路径，实现列表化控制 Marker。'
+pubDate: '2024-6-13'
+tags: ["Matplotlib", "Python", "Scatter Plot", "Markers", "Visualization", "Data Analysis", "Issue 11155"]
+slug: 'matplotlib-custom-marker-list-workaround'
+---
+Matplotlib 的 standard `plt.scatter` 函数虽然允许传入列表来定义每个点的颜色 (`c`) 和大小 (`s`)，但原生**不支持**传入列表来定义形状 (`marker`)。尝试传入 `marker=['o', 'x', ...]` 会导致错误。
+
+这是 Matplotlib 长期存在的一个 Feature Request (参考 [Issue #11155](https://github.com/matplotlib/matplotlib/issues/11155))。
+
+## 解决方案
+
+使用自定义函数 `mscatter`。该函数通过直接替换底层 `PathCollection` 中的 `paths` 对象，暴力实现了为每个点指定不同几何形状的功能。
+
+## 代码实现
+
+```python
+import matplotlib.pyplot as plt
+import matplotlib.markers as mmarkers
+
+def mscatter(x, y, s, ax=None, m=None, **kw):
+    """
+    绘制散点图，支持为每个点指定不同的 marker 形状。
+    
+    参数:
+    x, y : array-like
+        数据点坐标
+    s : scalar or array-like
+        点的大小 (size)
+    ax : matplotlib.axes.Axes, optional
+        绘图坐标轴对象，默认为 plt.gca()
+    m : list
+        marker 形状列表，长度必须与 x 相同 (e.g. ['o', 'v', 'x', ...])
+    **kw : 
+        传递给 scatter 的其他参数 (如 c, alpha 等)
+    """
+    if not ax:
+        ax = plt.gca()
+        
+    # 1. 先调用标准 scatter
+    sc = ax.scatter(x, y, s, **kw)
+    
+    # 2. 如果传入了 marker 列表 m，则替换路径
+    if (m is not None) and (len(m) == len(x)):
+        paths = []
+        for marker in m:
+            if isinstance(marker, mmarkers.MarkerStyle):
+                marker_obj = marker
+            else:
+                marker_obj = mmarkers.MarkerStyle(marker)
+            
+            # 获取 marker 的路径并应用变换
+            path = marker_obj.get_path().transformed(marker_obj.get_transform())
+            paths.append(path)
+            
+        # 3. 核心 hack：设置 PathCollection 的路径
+        sc.set_paths(paths)
+        
+    return sc
+```
+
+## 使用示例
+
+```python
+import numpy as np
+
+# 生成测试数据
+N = 10
+x = np.random.rand(N)
+y = np.random.rand(N)
+s = np.random.randint(50, 200, size=N) # 随机大小
+c = np.random.rand(N)                  # 随机颜色
+
+# 定义不同的 marker 列表
+# 注意：长度必须与数据长度一致
+markers = ['o', 'v', '^', '<', '>', '1', '2', '3', '4', 's']
+
+# 绘图
+fig, ax = plt.subplots()
+mscatter(x, y, s=s, c=c, m=markers, ax=ax)
+
+plt.show()
+```
+
+## 注意事项
+
+1. **性能**：由于需要循环创建 Path 对象，如果数据量极大（例如几万个点），初始化速度可能会比原生 `scatter` 慢。
+2. **图例 (Legend)**：自动生成的 Legend 可能无法正确显示混合的形状。如果需要 Legend，可能需要手动构建 `Line2D` 对象作为 proxy artists。

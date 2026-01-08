@@ -1,0 +1,58 @@
+---
+title: Vision Mamba (Vim)笔记
+description: ''
+banner_img: https://cdn.studyinglover.com/pic/2026/01/32586af19e3bae796fb69ff93fa4c48b.png
+pubDate: '2026-1-8'
+tags: ['数据而', 'mamba', 'vim', 'vision mamba']
+slug: 'vision-mamba'
+---
+
+Vision Mamba(ViM)和Vision Transformer (ViT) 大体上都是相同的，只有部分细节不同
+
+## 双向机制的实现
+vit是天生全局可见的，而 vim 是天生单向的
+
+Mamba 本质上是像 RNN 一样“从左读到右”的，如果不做处理，它只能看到“之前”的像素，看不到“之后”的。
+
+为了解决这个问题，Vim 在代码中强制实现了**双向扫描**,最后直接相加。
+
+Vim 的 Mamba 层是成对设计的。假设模型有 24 层，它是把它们分成了 12 对（每对包含一个前向层和一个后向层）。
+
+假设我们有一张极小的 $2 \times 2$ 图片，切成了 4 个 Patch：
+
+$$\begin{matrix} \text{Patch}_0 & \text{Patch}_1 \\ \text{Patch}_2 & \text{Patch}_3 \end{matrix}$$
+- 展平 (Flatten):ViT/Vim 第一步是把图片“拉直”。通常是按**行**扫描（Row-Major）：
+	- 正向序列 (Forward): $[\text{Patch}_0, \text{Patch}_1, \text{Patch}_2, \text{Patch}_3]$,左上角**开始，一行行读到**右下角。
+    
+- 翻转 (Flip) 倒序序列, 这就是 `hidden_states.flip([1])` 做的事情：
+	- 倒序序列 (Backward): $[\text{Patch}_3, \text{Patch}_2, \text{Patch}_1, \text{Patch}_0]$,从右下角开始，倒着一行行读回左上角。
+
+ ```python
+for i in range(len(self.layers) // 2):
+    if self.if_rope:
+        hidden_states = self.rope(hidden_states)
+        if residual is not None and self.if_rope_residual:
+            residual = self.rope(residual)
+
+    hidden_states_f, residual_f = self.layers[i * 2](
+        hidden_states, residual, inference_params=inference_params
+    )
+    hidden_states_b, residual_b = self.layers[i * 2 + 1](
+        hidden_states.flip([1]), None if residual == None else residual.flip([1]), inference_params=inference_params
+    )
+    hidden_states = hidden_states_f + hidden_states_b.flip([1])
+    residual = residual_f + residual_b.flip([1])
+    ```
+
+## CLS处理
+
+CLS的处理vim也有所不同，有两种策略
+- 中间 CLS Token
+	- 输入时：把 `[CLS]` Token 插在序列的**正中间** (Index $N/2$)。
+	- 输出时：取中间那个向量。
+	- 放在中间是物理上接收前向信息流和后向信息流距离最短、最均衡的位置。如果放在头部，它离“从后向前”的信息流终点太远了。
+- 双 CLS Token
+	- 输入时：在**头部**和**尾部**各放一个 Token。
+    - 输出时：取这两个 Token 的**平均值**。
+    - 暴力解决递归模型的“遗忘”问题。前向扫描时，尾部 Token 拥有完整信息。后向扫描时，头部 Token 拥有完整信息。两者结合，确保万无一失。
+

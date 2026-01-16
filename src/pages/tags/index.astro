@@ -1,0 +1,52 @@
+---
+import BaseLayout from '@src/layouts/BaseLayout.astro';
+import { getAllTags } from '@src/utils/blog';
+
+const title = '标签';
+const description = '博客文章分类标签';
+
+const allTags = await getAllTags();
+
+---
+
+<BaseLayout
+	title={title}
+	description={description}
+>
+  <div class='container'>
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold mb-2">{title}</h1>
+      <p class="text-zinc-700 dark:text-zinc-300 text-lg">{description}</p>
+      <p class="text-zinc-600 dark:text-zinc-400 mt-2">
+        共 {allTags.length} 个标签，涵盖所有博客文章。
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {allTags.map(({ tag, count }) => (
+        <a
+          href={`/tags/${encodeURIComponent(tag)}/`}
+          class="group block p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-md transition-all duration-200"
+        >
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-lg font-semibold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              {tag}
+            </h3>
+            <span class="bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-sm font-medium px-2 py-1 rounded-full">
+              {count}
+            </span>
+          </div>
+          <p class="text-zinc-600 dark:text-zinc-400 text-sm">
+            查看所有相关文章
+          </p>
+        </a>
+      ))}
+    </div>
+
+    {allTags.length === 0 && (
+      <div class="text-center py-12">
+        <p class="text-zinc-500 dark:text-zinc-400 text-lg">暂无标签</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>

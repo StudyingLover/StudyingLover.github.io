@@ -1,0 +1,91 @@
+---
+import BaseLayout from '@src/layouts/BaseLayout.astro';
+import PostItem from '@src/components/PostItem.astro';
+import FluidPostItem from '@src/components/FluidPostItem.astro';
+import { getAllTags, getPostsByTag } from '@src/utils/blog';
+import type { CollectionEntry } from 'astro:content';
+
+type BlogPost = CollectionEntry<'blog'>;
+type FluidPost = CollectionEntry<'posts'>;
+
+export async function getStaticPaths() {
+  const allTags = await getAllTags();
+
+  return allTags.map(({ tag }) => ({
+    params: { tag },
+    props: { tag }
+  }));
+}
+
+const { tag } = Astro.params;
+const posts = await getPostsByTag(tag!);
+
+const title = `标签: ${tag}`;
+const description = `包含标签 "${tag}" 的所有文章`;
+
+// 分离blog posts和fluid posts以便不同样式显示
+const blogPosts: BlogPost[] = [];
+const fluidPosts: FluidPost[] = [];
+
+posts.forEach(post => {
+  if (post.collection === 'blog') {
+    blogPosts.push(post as BlogPost);
+  } else if (post.collection === 'posts') {
+    fluidPosts.push(post as FluidPost);
+  }
+});
+
+---
+
+<BaseLayout
+	title={title}
+	description={description}
+>
+  <div class='container'>
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold mb-2">{title}</h1>
+      <p class="text-zinc-700 dark:text-zinc-300 text-lg">{description}</p>
+      <p class="text-zinc-600 dark:text-zinc-400 mt-2">
+        共 {posts.length} 篇文章
+      </p>
+      <a href="/tags/" class="inline-block mt-4 text-blue-600 dark:text-blue-400 hover:underline">
+        &larr; 返回所有标签
+      </a>
+    </div>
+
+    {blogPosts.length > 0 && (
+      <div class='mt-6 mb-12'>
+        <div class="flex justify-between gap-2 border-b mb-1 dark:border-b-zinc-700">
+          <h2 class="text-lg font-bold mb-3">博客文章 ({blogPosts.length})</h2>
+        </div>
+        <div>
+          {blogPosts.map((post) => (
+            <PostItem post={post} />
+          ))}
+        </div>
+      </div>
+    )}
+
+    {fluidPosts.length > 0 && (
+      <div class='mt-6 mb-12'>
+        <div class="flex justify-between gap-2 border-b mb-1 dark:border-b-zinc-700">
+          <h2 class="text-lg font-bold mb-3">归档文章 ({fluidPosts.length})</h2>
+        </div>
+        <div>
+          {fluidPosts.map((post) => (
+            <FluidPostItem post={post} />
+          ))}
+        </div>
+      </div>
+    )}
+
+    {posts.length === 0 && (
+      <div class="text-center py-12">
+        <p class="text-zinc-500 dark:text-zinc-400 text-lg">该标签下暂无文章</p>
+        <a href="/tags/" class="inline-block mt-4 text-blue-600 dark:text-blue-400 hover:underline">
+          查看所有标签
+        </a>
+      </div>
+    )}
+  </div>
+</BaseLayout>

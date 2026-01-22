@@ -67,5 +67,11 @@ export const friends: Friend[] = [
 		avatar: 'https://pic1.imgdb.cn/item/66a088b2d9c307b7e9f0e792.jpg',
 		description: 'AI应用开发优质创作者',
 		link: 'https://alive0103.github.io/'
+	},
+	{
+		name: 'Xiaoman`s Ink',
+		avatar: 'https://static.yhdzz.cn/imgs/xiaoman1221/xiaoman1221-new.jpg',
+		description: '天上如是，地下亦然',
+		link: 'https://blog.yhdzz.cn'
 	}
 ];

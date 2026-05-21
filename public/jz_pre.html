@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>考研经验分享</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .slide-container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      display: none;
+      width: 90%;
+      max-width: 1200px;
+      height: 80vh;
+      background: #fff;
+      border-radius: 20px;
+      padding: 60px 80px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.08);
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .slide.active { display: flex; }
+
+    .section-label {
+      position: absolute;
+      top: 30px;
+      left: 40px;
+      font-size: 14px;
+      color: #e94560;
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+
+    .slide-title {
+      font-size: 56px;
+      font-weight: 700;
+      margin-bottom: 40px;
+      color: #1a1a1a;
+    }
+
+    .slide-content {
+      font-size: 28px;
+      line-height: 1.8;
+      color: #555;
+    }
+
+    .slide-content ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .slide-content li {
+      margin: 20px 0;
+      padding-left: 30px;
+      position: relative;
+    }
+
+    .slide-content li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #e94560;
+    }
+
+    .slide-content ul ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    .slide-content ul ul li {
+      margin: 12px 0;
+      font-size: 24px;
+    }
+
+    .slide-number {
+      position: fixed;
+      bottom: 30px;
+      right: 40px;
+      font-size: 18px;
+      color: #999;
+    }
+
+    .nav-dots {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+    }
+
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ddd;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .nav-dot.active { background: #e94560; transform: scale(1.2); }
+
+    .nav-arrows {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 30px;
+      pointer-events: none;
+    }
+
+    .nav-arrow {
+      width: 50px;
+      height: 50px;
+      border: 2px solid #ddd;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      pointer-events: auto;
+      font-size: 20px;
+      color: #aaa;
+    }
+
+    .nav-arrow:hover { border-color: #e94560; color: #e94560; }
+
+    .cover-slide {
+      text-align: center;
+      justify-content: center;
+    }
+
+    .cover-slide .slide-title {
+      font-size: 72px;
+      margin-bottom: 30px;
+    }
+
+    .cover-slide .subtitle {
+      font-size: 24px;
+      color: #888;
+      margin-top: 20px;
+    }
+
+    .section-header {
+      text-align: center;
+      justify-content: center;
+    }
+
+    .section-header .slide-title {
+      font-size: 64px;
+      margin-bottom: 0;
+    }
+
+    .highlight { color: #e94560; font-weight: 600; }
+    .red-center { font-size: 48px; color: #e94560; font-weight: 700; text-align: center; }
+    .small-text { font-size: 20px; color: #888; text-align: center; margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <!-- 1. 封面 -->
+    <div class="slide cover-slide active">
+      <h1 class="slide-title">经验分享</h1>
+      <p class="subtitle" style="margin-top: 40px; font-size: 20px;">赵嘉豪 · 3046308220@qq.com</p>
+    </div>
+
+    <!-- 2. 不要考研 -->
+    <div class="slide cover-slide">
+      <h2 class="red-center">不要考研</h2>
+      <p class="red-center" style="margin-top: 30px;">能保则保</p>
+    </div>
+
+    <!-- 3. 初试·过渡页 -->
+    <div class="slide section-header">
+      <h2 class="slide-title">壹 · 初试</h2>
+    </div>
+
+    <!-- 4. 政治·选择题 -->
+    <div class="slide">
+      <span class="section-label">壹 · 初试</span>
+      <h2 class="slide-title">政治 · 选择题</h2>
+      <div class="slide-content">
+        <ul>
+          <li>多体会马原原理</li>
+          <li>政治<span class="highlight">几乎没有时政题</span></li>
+          <li>时政题都是套着时政外壳的原理题和阅读理解题</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 5. 政治·大题 -->
+    <div class="slide">
+      <span class="section-label">壹 · 初试</span>
+      <h2 class="slide-title">政治 · 大题</h2>
+      <div class="slide-content">
+        <ul>
+          <li>背模板</li>
+          <li>推荐老师：张修齐、李丽双</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 6. 英语 -->
+    <div class="slide">
+      <span class="section-label">壹 · 初试</span>
+      <h2 class="slide-title">英语</h2>
+      <div class="slide-content">
+        <ul>
+          <li>多背单词、多背单词、多背单词</li>
+          <li>提前准备模板，背熟默熟</li>
+          <li>上了考场直接写</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 7. 数学 -->
+    <div class="slide">
+      <span class="section-label">壹 · 初试</span>
+      <h2 class="slide-title">数学</h2>
+      <div class="slide-content">
+        <ul>
+          <li>10年以来真题，要做到每一道题都能行云流水做下来</li>
+          <li><span class="highlight">暑假就要先做一遍真题</span></li>
+          <li>模拟卷：张宇四套卷、李林四套卷（10月往年，10月以后当年）</li>
+          <li>模拟题实在不会做可以只做往年真题</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 8. 408 -->
+    <div class="slide">
+      <span class="section-label">壹 · 初试</span>
+      <h2 class="slide-title">408</h2>
+      <div class="slide-content">
+        <ul>
+          <li>408所有真题，要做到每一道题都能行云流水做下来</li>
+          <li><span class="highlight">408的知识真的是太多了</span></li>
+          <li>一个知识点都不能放过</li>
+          <li>多理解、多做题、多回顾</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 9. 科研·过渡页 -->
+    <div class="slide section-header">
+      <h2 class="slide-title">贰 · 科研</h2>
+    </div>
+
+    <!-- 10. 科研·进组 -->
+    <div class="slide">
+      <span class="section-label">贰 · 科研</span>
+      <h2 class="slide-title">科研 · 进组</h2>
+      <div class="slide-content">
+        <ul>
+          <li>进组的最好时机是<span class="highlight">大一开学</span>，其次是<span class="highlight">现在</span></li>
+          <li>多与导师沟通，找准方向，狠下心来，多出成果</li>
+          <li>CCF &gt; SCI &gt; EI &gt; Workshop，先出成果再谈其他</li>
+          <li>实在不行挂 arxiv</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 11. 科研·AI方向 -->
+    <div class="slide">
+      <span class="section-label">贰 · 科研</span>
+      <h2 class="slide-title">科研 · AI方向</h2>
+      <div class="slide-content">
+        <ul>
+          <li><span class="highlight">善用AI</span></li>
+          <li>AI方向是很不错的科研方向</li>
+          <li>热点：大模型、Agent、具身智能、世界模型 etc.</li>
+          <li>好上手：目标检测、高光谱、遥感</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 12. 多发论文 -->
+    <div class="slide">
+      <span class="section-label">贰 · 科研</span>
+      <h2 class="red-center">多发论文</h2>
+      <p class="small-text">不要做横向</p>
+      <p class="small-text" style="margin-top: 40px;">其实科研不等于发论文，但……</p>
+    </div>
+
+    <!-- 13. 张口就能讲 -->
+    <div class="slide">
+      <span class="section-label">贰 · 科研</span>
+      <h2 class="red-center">要做到对自己的工作<br>张口就能讲</h2>
+    </div>
+
+    <!-- 14. 基金 -->
+    <div class="slide">
+      <span class="section-label">贰 · 科研</span>
+      <h2 class="slide-title">基金</h2>
+      <div class="slide-content">
+        <ul>
+          <li>大创、科技立项能报则报</li>
+          <li>导师纵向也可以参与</li>
+          <li>争取让你的名字出现在项目书</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 15. 项目/竞赛·过渡页 -->
+    <div class="slide section-header">
+      <h2 class="slide-title">叁 · 项目 / 竞赛</h2>
+    </div>
+
+    <!-- 16. 竞赛·两类 -->
+    <div class="slide">
+      <span class="section-label">叁 · 项目/竞赛</span>
+      <h2 class="slide-title">竞赛</h2>
+      <div class="slide-content">
+        <ul>
+          <li>两类竞赛：
+            <ul>
+              <li>国创赛、挑战杯……</li>
+              <li>ACM、电赛、数学建模……</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 17. 第一类竞赛 -->
+    <div class="slide">
+      <span class="section-label">叁 · 项目/竞赛</span>
+      <h2 class="slide-title">第一类竞赛</h2>
+      <div class="slide-content">
+        <ul>
+          <li>竞赛不是过程而是结果</li>
+          <li>正确流程：<span class="highlight">科研成果 → 竞赛 → 成果 → 竞赛</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 18. 第二类竞赛 -->
+    <div class="slide">
+      <span class="section-label">叁 · 项目/竞赛</span>
+      <h2 class="slide-title">第二类竞赛</h2>
+      <div class="slide-content">
+        <ul>
+          <li>打铁还需自身硬</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 19. 特例：robomaster -->
+    <div class="slide">
+      <span class="section-label">叁 · 项目/竞赛</span>
+      <h2 class="slide-title">特例：RoboMaster</h2>
+      <div class="slide-content">
+        <ul>
+          <li>98%的人在这里被打败</li>
+          <li>100%的人在这里收获成长</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 20. 复试·过渡页 -->
+    <div class="slide section-header">
+      <h2 class="slide-title">肆 · 复试</h2>
+    </div>
+
+    <!-- 21. 考研复试 -->
+    <div class="slide">
+      <span class="section-label">肆 · 复试</span>
+      <h2 class="slide-title">考研复试</h2>
+      <div class="slide-content">
+        <ul>
+          <li>当你做到上面这些，你的复试已经不是问题了</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 22. 杂项 -->
+    <div class="slide">
+      <span class="section-label">伍 · 杂项</span>
+      <h2 class="slide-title">杂项</h2>
+      <div class="slide-content">
+        <ul>
+          <li>个人知识库：Obsidian、Notion……</li>
+          <li>文献管理：Zotero</li>
+          <li>写论文：LaTeX（本地或 Overleaf）</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 23. Q&A -->
+    <div class="slide cover-slide">
+      <h1 class="slide-title" style="font-size: 64px;">Q&A</h1>
+      <p class="subtitle" style="margin-top: 30px;">提问最光荣</p>
+      <p class="subtitle" style="margin-top: 60px; font-size: 20px;">赵嘉豪 · 3046308220@qq.com</p>
+    </div>
+  </div>
+
+  <!-- 导航 -->
+  <div class="nav-dots">
+    <div class="nav-dot active" onclick="goTo(0)"></div>
+    <div class="nav-dot" onclick="goTo(1)"></div>
+    <div class="nav-dot" onclick="goTo(2)"></div>
+    <div class="nav-dot" onclick="goTo(3)"></div>
+    <div class="nav-dot" onclick="goTo(4)"></div>
+    <div class="nav-dot" onclick="goTo(5)"></div>
+    <div class="nav-dot" onclick="goTo(6)"></div>
+    <div class="nav-dot" onclick="goTo(7)"></div>
+    <div class="nav-dot" onclick="goTo(8)"></div>
+    <div class="nav-dot" onclick="goTo(9)"></div>
+    <div class="nav-dot" onclick="goTo(10)"></div>
+    <div class="nav-dot" onclick="goTo(11)"></div>
+    <div class="nav-dot" onclick="goTo(12)"></div>
+    <div class="nav-dot" onclick="goTo(13)"></div>
+    <div class="nav-dot" onclick="goTo(14)"></div>
+    <div class="nav-dot" onclick="goTo(15)"></div>
+    <div class="nav-dot" onclick="goTo(16)"></div>
+    <div class="nav-dot" onclick="goTo(17)"></div>
+    <div class="nav-dot" onclick="goTo(18)"></div>
+    <div class="nav-dot" onclick="goTo(19)"></div>
+    <div class="nav-dot" onclick="goTo(20)"></div>
+    <div class="nav-dot" onclick="goTo(21)"></div>
+    <div class="nav-dot" onclick="goTo(22)"></div>
+  </div>
+
+  <div class="nav-arrows">
+    <div class="nav-arrow" onclick="prevSlide()">‹</div>
+    <div class="nav-arrow" onclick="nextSlide()">›</div>
+  </div>
+
+  <div class="slide-number"><span id="current">1</span> / <span id="total">23</span></div>
+
+  <script>
+    let current = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.nav-dot');
+    const total = slides.length;
+
+    document.getElementById('total').textContent = total;
+
+    function updateSlide() {
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      document.getElementById('current').textContent = current + 1;
+    }
+
+    function nextSlide() { current = (current + 1) % total; updateSlide(); }
+    function prevSlide() { current = (current - 1 + total) % total; updateSlide(); }
+    function goTo(n) { current = n; updateSlide(); }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+  </script>
+</body>
+</html>
